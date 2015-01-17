@@ -1,0 +1,39 @@
+---
+layout: post
+title: poj2244
+category: chinese
+---
+<p>题意：约瑟夫问题变形，给定人数和最后存活的编号，问杀人间隔最少是多少。</p>
+<p>分析：从小到大枚举杀人间隔，然后用解约瑟夫问题的方法，求最后存活的人，如果恰好是要求的那个，则输出结果。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('8600dcfe-ef59-4b12-a95a-cf5c3986d051')"><img id="code_img_closed_8600dcfe-ef59-4b12-a95a-cf5c3986d051" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_8600dcfe-ef59-4b12-a95a-cf5c3986d051" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('8600dcfe-ef59-4b12-a95a-cf5c3986d051',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_8600dcfe-ef59-4b12-a95a-cf5c3986d051" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+
+</span><span style="color: #0000ff;">int</span> last(<span style="color: #0000ff;">int</span> n, <span style="color: #0000ff;">int</span><span style="color: #000000;"> m)
+{
+    </span><span style="color: #0000ff;">int</span> ret = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">2</span>; i &lt;= n; i++<span style="color: #000000;">)
+        ret </span>= (ret + m) %<span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n), n)
+    {
+        </span><span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span> (last(n - <span style="color: #800080;">1</span>, i) != <span style="color: #800080;">0</span><span style="color: #000000;">)
+            i</span>++<span style="color: #000000;">;
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, i);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj1328</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj1328</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 01 Feb 2011</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：平面上有一些点，现要求用一些圆心在x轴上的圆（雷达）来覆盖这些点，问最少需要多少雷达。</p>
+<p><span style="color: #000000;"><span style="font-family: verdana, Arial, Helvetica, sans-serif;"><span style="font-size: small;">分析：</span></span></span>我的解法是把点按横坐标排序，然后把每个点的雷达尽量往右放，然后每放一个雷达都要保证雷达左面的岛都被雷达所覆盖。所以我们可以按一个点靠右放完雷达后，再根据后面的在雷达位置左面的点，把雷达向左移。一个雷达经过了移的过程，就一定是能覆盖左面的岛。所以排好序后，只需O(n)。</p>
+<p>注意：unique函数的返回值是结尾指针，所以可以用被注释掉两行的方法来获得数组长度。</p>
+<p>标准方法是把每个点的放置雷达的区间求出，然后按照区间排序。排好序后，从左至右看，当发现下一个区间的起始点大于前面所有区间的最小结束点的时候，答案加一。忽视前面走过的所有点后，对后面进行相同的操作（从左至右看，当发现下一个区间的起始点大于左边未被忽视的所有区间的最小结束点的时候，答案加一）。直到结束。</p>
+<p>&nbsp;</p>
+<pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+const int maxn = 1001;
+
+struct Point
+{
+	int x, y;
+} point[maxn];
+
+int n, d, ans;
+bool ok;
+
+bool operator &lt; (const Point &amp;a, const Point &amp;b)
+{
+	return a.x &lt; b.x;
+}
+
+bool operator == (const Point &amp;a, const Point &amp;b)
+{
+	return ((a.x == b.x) &amp;&amp; (a.y == b.y));
+}
+
+void init()
+{
+	int i;
+
+	ok = true;
+	for (i = 0; i &lt; n; i++)
+	{
+		scanf("%d%d", &amp;point[i].x, &amp;point[i].y);
+		if (point[i].y &gt; d)
+			ok = false;
+	}
+}
+
+double getx(Point &amp;a)
+{
+	return a.x + sqrt(double(d * d - a.y * a.y));
+}
+
+void work()
+{
+	int	i;
+	double x=getx(point[0]);
+
+	ans = 1;
+	for (i = 1; i &lt; n; i++)
+	{
+		double	temp = getx(point[i]);
+		if (point[i].x &lt; x &amp;&amp; x &gt; temp)
+		{
+			x = temp;
+			continue;
+		}
+		if (point[i].y * point[i].y + (point[i].x - x) * (point[i].x - x) &lt;= d * d)
+			continue;
+		x = getx(point[i]);
+		ans++;
+	}
+}
+
+int main()
+{
+	int	casenum = 0;
+
+	//freopen("D:\\t.txt", "r", stdin);
+	while (cin &gt;&gt; n &gt;&gt; d &amp;&amp; !(n == 0 &amp;&amp; d == 0))
+	{
+		casenum++;
+		init();
+		if (!ok)
+		{
+			printf("Case %d: -1\n", casenum);
+			continue;
+		}
+		sort(point, point + n);
+//		Point *p = unique(point, point + n);
+//		n = (p - point);
+		work();
+		printf("Case %d: %d\n", casenum, ans);
+	}
+	return 0;
+}</pre>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

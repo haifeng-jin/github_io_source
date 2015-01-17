@@ -1,0 +1,31 @@
+---
+layout: post
+title: poj1455
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('16159e90-142e-47bc-ba16-4617cb4d9e34')"><img id="code_img_closed_16159e90-142e-47bc-ba16-4617cb4d9e34" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_16159e90-142e-47bc-ba16-4617cb4d9e34" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('16159e90-142e-47bc-ba16-4617cb4d9e34',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_16159e90-142e-47bc-ba16-4617cb4d9e34" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+        </span><span style="color: #0000ff;">int</span> ans = (<span style="color: #800080;">1</span> + n / <span style="color: #800080;">2</span> - <span style="color: #800080;">1</span>) * (n / <span style="color: #800080;">2</span> - <span style="color: #800080;">1</span>) / <span style="color: #800080;">2</span> * <span style="color: #800080;">2</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (n &amp; <span style="color: #800080;">1</span><span style="color: #000000;">)
+            ans </span>+= n / <span style="color: #800080;">2</span><span style="color: #000000;">;
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    }
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

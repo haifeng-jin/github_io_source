@@ -1,0 +1,57 @@
+---
+layout: post
+title: poj3186
+category: chinese
+---
+<p>dp</p>
+<p>f[i][j] = max(f[i + 1][j] + sum(i + 1,j) + v[i],f[i][j - 1] + sum(i,j - 1) + v[j])</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0b3cbcd0-0e16-482a-8894-5998985bf6d3')"><img id="code_img_closed_0b3cbcd0-0e16-482a-8894-5998985bf6d3" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0b3cbcd0-0e16-482a-8894-5998985bf6d3" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0b3cbcd0-0e16-482a-8894-5998985bf6d3',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_0b3cbcd0-0e16-482a-8894-5998985bf6d3" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 2005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn][maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> sum[maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">v[i]);
+    v[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    sum[</span><span style="color: #800080;">0</span>] = v[<span style="color: #800080;">0</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+        sum[i] </span>= sum[i - <span style="color: #800080;">1</span>] +<span style="color: #000000;"> v[i];
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+        f[i][i] </span>=<span style="color: #000000;"> v[i];
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> k = <span style="color: #800080;">1</span>; k &lt; n; k++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= n - k; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span> j = i +<span style="color: #000000;"> k;
+            f[i][j] </span>= max(f[i + <span style="color: #800080;">1</span>][j] + (sum[j] - sum[i]) + v[i],f[i][j - <span style="color: #800080;">1</span>] + (sum[j - <span style="color: #800080;">1</span>] - sum[i - <span style="color: #800080;">1</span>]) +<span style="color: #000000;"> v[j]);
+        }
+    }
+    </span><span style="color: #0000ff;">return</span> f[<span style="color: #800080;">1</span><span style="color: #000000;">][n];
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

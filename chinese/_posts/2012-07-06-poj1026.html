@@ -1,0 +1,87 @@
+---
+layout: post
+title: poj1026
+category: chinese
+---
+<p>模拟题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4f4637c7-3412-40de-beff-74b16ace2084')"><img id="code_img_closed_4f4637c7-3412-40de-beff-74b16ace2084" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4f4637c7-3412-40de-beff-74b16ace2084" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4f4637c7-3412-40de-beff-74b16ace2084',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_4f4637c7-3412-40de-beff-74b16ace2084" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 205
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m, len;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn];
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> st[maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> circle_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> circle[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> circle_length[maxn];
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> ans[maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make()
+{
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    circle_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">vis[i])
+        {
+            </span><span style="color: #0000ff;">int</span> num = <span style="color: #800080;">0</span>, temp =<span style="color: #000000;"> i;
+            </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">vis[temp])
+            {
+                vis[temp] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+                circle[temp] </span>=<span style="color: #000000;"> circle_num;
+                num</span>++<span style="color: #000000;">;
+                temp </span>=<span style="color: #000000;"> f[temp];
+            }
+            circle_length[circle_num</span>++] =<span style="color: #000000;"> num;
+</span><span style="color: #008000;">//</span><span style="color: #008000;">            printf("%d\n", num);</span>
+<span style="color: #000000;">        }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">f[i]);
+        f[i]</span>--<span style="color: #000000;">;
+    }
+    make();
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">m), m)
+    {
+        getchar();
+        len </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        gets(st);
+        len </span>=<span style="color: #000000;"> strlen(st);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = len; i &lt; n; i++<span style="color: #000000;">)
+            st[i] </span>= <span style="color: #800000;">'</span> <span style="color: #800000;">'</span><span style="color: #000000;">;
+        st[n] </span>= <span style="color: #800000;">'</span><span style="color: #800000;">\0</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span> j = m %<span style="color: #000000;"> circle_length[circle[i]];
+            </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> i;
+            </span><span style="color: #0000ff;">while</span> (j--<span style="color: #000000;">)
+                temp </span>=<span style="color: #000000;"> f[temp];
+            ans[temp] </span>=<span style="color: #000000;"> st[i];
+        }
+        ans[n] </span>= <span style="color: #800000;">'</span><span style="color: #800000;">\0</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n), n)
+    {
+        input();
+        putchar(</span><span style="color: #800000;">'</span><span style="color: #800000;">\n</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

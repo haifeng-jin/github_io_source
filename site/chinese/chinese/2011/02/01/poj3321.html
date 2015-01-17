@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj3321</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj3321</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 01 Feb 2011</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>树状数组</p>
+<p>题意：给定一棵树，某些节点上有苹果，多次询问各子树上的节点数，并且在询问的中途随时可能新增和删除苹果。</p>
+<p>分析：dfs遍历树的同时，对每个点标注时间，每个点有一个开始时间和一个结束时间，把这两个时间当做下标，该点的苹果个数（1或0）填入数组的两个对应位。子树中结点的时间段一定是根节点时间段的子段，所以求子树苹果数，只需求数组某区间的和即可。用树状数组比较快。</p>
+<p>&nbsp;</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush: csharp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+#define maxn  200005
+
+struct sedge
+{
+	int v, next;
+}edge[maxn];
+
+struct sfork
+{
+	int s, e;
+}fork[maxn];
+
+int edgenum, head[maxn], xtime, ar[maxn * 2], apple[maxn], N;
+
+void addedge(int a, int b)
+{
+	edge[edgenum].v = b;
+	edge[edgenum].next = head[a];
+	head[a] = edgenum;
+	edgenum++;
+}
+
+void dfs(int a)
+{
+	fork[a].s = xtime;
+	xtime++;
+	for (int i = head[a]; i != -1; i = edge[i].next)
+			dfs(edge[i].v);
+	fork[a].e = xtime;
+	xtime++;
+}
+
+int lowbit(int t)
+{
+	return t &amp;(-t);
+}
+
+void add(int i, int v)
+{
+	for (; i &lt; N; ar[i] += v, i += lowbit(i));
+}
+
+int sum(int i)
+{
+	int s = 0;
+	for (; i &gt; 0; s += ar[i], i-=lowbit(i));
+	return s;
+}
+int main()
+{
+	//freopen("D:\\t.txt", "r", stdin);
+	edgenum = 0;
+	xtime = 1;
+	memset(head, -1, sizeof(head));
+	int n;
+	scanf("%d", &amp;n);
+	for (int i = 0; i &lt; n - 1; i++)
+	{
+		int a, b;
+		scanf("%d%d", &amp;a, &amp;b);
+		addedge(a, b);
+	}
+	dfs(1);
+	memset(ar, 0, sizeof(ar));
+	N = n * 2;
+	for (int i = 1; i &lt;= N; i++)
+		ar[i] = (i) - (i - lowbit(i));
+	for (int i = 1; i &lt;= n; i++)
+		apple[i] = 1;
+	int q;
+	scanf("%d", &amp;q);
+	getchar();
+	for (int i = 0; i &lt; q; i++)
+	{
+		char ch;
+		int num;
+		scanf("%c%d", &amp;ch, &amp;num);
+		getchar();
+		if (ch == 'C')
+		{
+			int temp;
+			if (apple[num] == 1)
+				temp = -1;
+			else
+				temp = 1;
+			add(fork[num].s, temp);
+			add(fork[num].e, temp);
+			apple[num] += temp;
+		}
+		else
+			printf("%d\n", (sum(fork[num].e) - sum(fork[num].s))/2 + apple[num]);
+	}
+	return 0;
+}
+
+</pre>
+</div>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

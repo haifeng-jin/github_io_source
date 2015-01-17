@@ -1,0 +1,111 @@
+---
+layout: post
+title: poj1011
+category: chinese
+---
+<p>题意：给出一些木棒，已知这些木棒是由原来的一些等长的木棒切割而成，问原木棒最小可能长度是多少。</p>
+<p>分析：dfs。从小到大枚举原木棒长度，然后对于每次枚举进行深搜。深搜过程就是用输入的小木棒来填充原来的一根根木棒的过程。如果我们现将一根小木棒是放在原木棒中的第一根小木棒，那么如果还不能匹配成功，则说明该小木棒无法匹配，故该原木棒长度不行。如果一根小木棒是填充一根原木棒时用的最后一根小木棒，且后面填充其他原木棒是出现了不匹配的现象回溯到这一跟小木棒的时候，不需要再尝试将这跟小木棒换掉然后用一些更小的小木棒来填充这个小木棒的长度，因为那些更小的小木棒具有更好的灵活性，他们都不能完成后面的任务，更不用说这根长度等于他们长度和的灵活性较低的小木棒了。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2dc590a9-8e7f-4f08-b1dd-6e22a0684e2f')"><img id="code_img_closed_2dc590a9-8e7f-4f08-b1dd-6e22a0684e2f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2dc590a9-8e7f-4f08-b1dd-6e22a0684e2f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2dc590a9-8e7f-4f08-b1dd-6e22a0684e2f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_2dc590a9-8e7f-4f08-b1dd-6e22a0684e2f" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxn = <span style="color: #800080;">64</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        t, n, stick[maxn], each, ok, total, num;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    used[maxn];
+
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    total </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">stick[i]);
+        total </span>+=<span style="color: #000000;"> stick[i];
+    }
+    ok </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    memset(used, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(used));
+}
+
+</span><span style="color: #0000ff;">void</span> dfs(<span style="color: #0000ff;">int</span> length, <span style="color: #0000ff;">int</span><span style="color: #000000;"> start)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (length &gt;=<span style="color: #000000;"> total)
+    {
+        ok </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (length % each == <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        i </span>=<span style="color: #000000;"> start;
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (used[i])
+            i</span>++<span style="color: #000000;">;
+        used[i] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        dfs(length </span>+ stick[i], i + <span style="color: #800080;">1</span><span style="color: #000000;">);
+        used[i] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (i = start; i &lt; n; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (used[i])
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (stick[i] + length &lt; length / each * each +<span style="color: #000000;"> each)
+        {
+            used[i] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            dfs(length </span>+ stick[i], i + <span style="color: #800080;">1</span><span style="color: #000000;">);
+            used[i] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok)
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }</span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (stick[i] + length == length / each * each +<span style="color: #000000;"> each)
+        {
+            used[i] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            dfs(length </span>+ stick[i], <span style="color: #800080;">0</span><span style="color: #000000;">);
+            used[i] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, t, ans;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (cin &gt;&gt; n &amp;&amp; n != <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        init();
+        sort(stick, stick </span>+<span style="color: #000000;"> n);
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n / <span style="color: #800080;">2</span>; i++<span style="color: #000000;">)
+        {
+            t </span>=<span style="color: #000000;"> stick[i];
+            stick[i] </span>= stick[n - i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+            stick[n </span>- i - <span style="color: #800080;">1</span>] =<span style="color: #000000;"> t;
+        }
+        </span><span style="color: #0000ff;">for</span> (i = stick[<span style="color: #800080;">0</span>]; i &lt; total; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (total % i ==<span style="color: #800080;">0</span><span style="color: #000000;">)
+            {
+                each </span>=<span style="color: #000000;"> i;
+                num </span>= total /<span style="color: #000000;"> i;
+                dfs(</span><span style="color: #800080;">0</span>, <span style="color: #800080;">0</span><span style="color: #000000;">);
+                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok)
+                {
+                    ans </span>=<span style="color: #000000;"> each;                
+                    </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                }
+            }
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">ok)
+            ans </span>=<span style="color: #000000;"> total;
+        cout </span>&lt;&lt; ans &lt;&lt;<span style="color: #000000;"> endl;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

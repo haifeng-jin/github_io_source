@@ -1,0 +1,47 @@
+---
+layout: post
+title: poj1207
+category: chinese
+---
+<p>简单题，只要对所有的数字求出cycle number即可</p>  <p>&#160;</p>  <pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+int getcycle(int a)
+{
+	int r = 1;
+
+	while (a != 1)
+	{
+		if (a % 2 == 1)
+			a = a * 3 + 1;
+		else
+			a /= 2;
+		r++;
+	}
+	return r;
+}
+
+int main()
+{
+	int a, b;
+	//freopen(&quot;D:\\t.txt&quot;, &quot;r&quot;, stdin);
+	while (scanf(&quot;%d%d&quot;, &amp;a, &amp;b) != EOF)
+	{
+		int s = a;
+		int e = b;
+		if (s &gt; e)
+			swap(s, e);
+		int ans = 0;
+		for (int i = s; i &lt;=e; i++)
+		{
+			int temp = getcycle(i);
+			if (temp &gt; ans)
+				ans = temp;
+		}
+		printf(&quot;%d %d %d\n&quot;, a, b, ans);
+	}
+	return 0;
+}</pre>

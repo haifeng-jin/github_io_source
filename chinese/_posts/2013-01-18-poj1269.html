@@ -1,0 +1,114 @@
+---
+layout: post
+title: poj1269
+category: chinese
+---
+<p>基础计算几何</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('7451e995-2c06-442e-90e9-6684250009c8')"><img id="code_img_closed_7451e995-2c06-442e-90e9-6684250009c8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_7451e995-2c06-442e-90e9-6684250009c8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('7451e995-2c06-442e-90e9-6684250009c8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_7451e995-2c06-442e-90e9-6684250009c8" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">zju1280</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Point
+{
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;">    x,y;
+};
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Line
+{
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+    Point    pointa,pointb,pointk;
+    </span><span style="color: #0000ff;">void</span><span style="color: #000000;">    makeline(Point pointa,Point pointb);
+};
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> Line::makeline(Point a,Point b)
+{
+    pointa</span>=<span style="color: #000000;">a;
+    pointb</span>=<span style="color: #000000;">b;
+    pointk.x</span>=pointa.x-<span style="color: #000000;">pointb.x;
+    pointk.y</span>=pointa.y-<span style="color: #000000;">pointb.y;
+    </span><span style="color: #0000ff;">if</span> (pointk.x&lt;<span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        pointk.x</span>=-<span style="color: #000000;">pointk.x;
+        pointk.y</span>=-<span style="color: #000000;">pointk.y;
+    }
+}
+
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        T;
+Line    line1,line2;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    Point    a,b;
+
+    cin</span>&gt;&gt;a.x&gt;&gt;a.y&gt;&gt;b.x&gt;&gt;<span style="color: #000000;">b.y;
+    line1.makeline(a,b);
+    cin</span>&gt;&gt;a.x&gt;&gt;a.y&gt;&gt;b.x&gt;&gt;<span style="color: #000000;">b.y;
+    line2.makeline(a,b);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">    cross(Line line1,Line line2)
+{
+    </span><span style="color: #0000ff;">if</span> (!(line1.pointk.x*line2.pointk.y==line1.pointk.y*<span style="color: #000000;">line2.pointk.x))
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span>;                                                                                            <span style="color: #008000;">//</span><span style="color: #008000;">相交</span>
+    <span style="color: #0000ff;">if</span> (line1.pointk.y*(line2.pointb.x-line1.pointb.x)==(line2.pointb.y-line1.pointb.y)*<span style="color: #000000;">line1.pointk.x)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">1</span>;                                                                                            <span style="color: #008000;">//</span><span style="color: #008000;">重合</span>
+    <span style="color: #0000ff;">return</span> <span style="color: #800080;">2</span>;                                                                                                <span style="color: #008000;">//</span><span style="color: #008000;">平行</span>
+<span style="color: #000000;">}
+
+
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> xmulti(Point p0, Point p1, Point p2)
+{
+    </span><span style="color: #0000ff;">return</span> ((p1.x - p0.x) * (p2.y - p0.y) - (p2.x - p0.x) * (p1.y -<span style="color: #000000;"> p0.y));
+}
+
+Point crosspoint(Line line1,Line line2)
+{
+    </span><span style="color: #0000ff;">double</span> s1 =<span style="color: #000000;"> xmulti(line1.pointa, line1.pointb, line2.pointa);
+    </span><span style="color: #0000ff;">double</span> s2 =<span style="color: #000000;"> xmulti(line1.pointa, line1.pointb, line2.pointb);
+    Point ret;
+    ret.x </span>= (s1 * line2.pointb.x - s2 * line2.pointa.x) / (s1 -<span style="color: #000000;"> s2);
+    ret.y </span>= (s1 * line2.pointb.y - s2 * line2.pointa.y) / (s1 -<span style="color: #000000;"> s2);
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        ans;
+    Point    pointans;
+
+    ans</span>=<span style="color: #000000;">cross(line1,line2);
+    </span><span style="color: #0000ff;">switch</span><span style="color: #000000;"> (ans)
+    {
+    </span><span style="color: #0000ff;">case</span>    <span style="color: #800080;">0</span><span style="color: #000000;">    :
+        pointans</span>=<span style="color: #000000;">crosspoint(line1,line2);
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">POINT %.2f %.2f\n</span><span style="color: #800000;">"</span><span style="color: #000000;">,pointans.x,pointans.y);
+        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">case</span>    <span style="color: #800080;">1</span><span style="color: #000000;">    :
+        cout</span>&lt;&lt;<span style="color: #800000;">"</span><span style="color: #800000;">LINE\n</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">case</span>    <span style="color: #800080;">2</span><span style="color: #000000;">    :
+        cout</span>&lt;&lt;<span style="color: #800000;">"</span><span style="color: #800000;">NONE\n</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt","r",stdin);</span>
+    cin&gt;&gt;<span style="color: #000000;">T;
+    cout</span>&lt;&lt;<span style="color: #800000;">"</span><span style="color: #800000;">INTERSECTING LINES OUTPUT\n</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (T--<span style="color: #000000;">)
+    {
+        init();
+        work();
+    }
+    cout</span>&lt;&lt;<span style="color: #800000;">"</span><span style="color: #800000;">END OF OUTPUT\n</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

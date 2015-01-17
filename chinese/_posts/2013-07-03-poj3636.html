@@ -1,0 +1,81 @@
+---
+layout: post
+title: poj3636
+category: chinese
+---
+<p>题意：每个物品有两个属性：长和宽（长宽不可互换）。如果一个物品的长和宽均大于另一个物品，则这个物品可以罩住另一个物品，用这种罩住物品的方法将物品分组，一组之内的物品可以一个罩住一个的全部罩起来。问最少分成几组？</p>
+<p>分析：通常这种问题是问物品最多的一组有多少个，这个问题则稍有不同。有人说要用到Dilworth定理，个人认为没什么关系。我们的做法是将物品先按照长从小到大排序。还有一个数组，用来存储当前每个分组的罩在最外层的长和宽，开始该数组为空。然后从小到大每次取出所有长度相等的物品，扣在当前的分组数组中的物品上，更新数组中存储的长宽值。这样长度相等的一起扣，在判断能不能扣的上的时候就不需要考虑长度了，之前扣好的都是长度小于当前物品的。在扣的过程中要注意发挥每个物品的最大能力，即让每个物品扣住刚好比它小一点点的物品。因为假设如果物品X不去扣比它小一点的那个物品A，而去扣比它小很多的那个物品B。而另一个物品Y，本来只能扣B不能扣A，又因为B已经被X扣了，Y只能单成一组，造成组数增加。在实际操作中是先拿当前长度的那个宽度最大的，发挥其最大作用，然后宽度次大的&hellip;&hellip;为了程序实现起来简便，我们可以直接将所有物品按长度升序，宽度降序来排序，这样每次取出一个物品加入到分组中，就相当与我们刚才的操作了。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('89fd480f-e119-42ca-86c6-5732f8485c31')"><img id="code_img_closed_89fd480f-e119-42ca-86c6-5732f8485c31" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_89fd480f-e119-42ca-86c6-5732f8485c31" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('89fd480f-e119-42ca-86c6-5732f8485c31',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_89fd480f-e119-42ca-86c6-5732f8485c31" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_DOLL_NUM 20004
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Doll
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> width, height;
+}doll[MAX_DOLL_NUM], chain[MAX_DOLL_NUM];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> doll_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> chain_cnt;
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> &lt; (<span style="color: #0000ff;">const</span> Doll &amp;a, <span style="color: #0000ff;">const</span> Doll &amp;<span style="color: #000000;">b)
+{
+    </span><span style="color: #0000ff;">if</span> (a.width ==<span style="color: #000000;"> b.width)
+        </span><span style="color: #0000ff;">return</span> a.height &gt;<span style="color: #000000;"> b.height;
+    </span><span style="color: #0000ff;">return</span> a.width &lt;<span style="color: #000000;"> b.width;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">doll_num);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; doll_num; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;doll[i].width, &amp;<span style="color: #000000;">doll[i].height);
+}
+
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> fit(Doll a, Doll b)
+{
+    </span><span style="color: #0000ff;">return</span> a.width &gt; b.width &amp;&amp; a.height &gt;<span style="color: #000000;"> b.height;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    chain_cnt </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; doll_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">bool</span> fitted = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; chain_cnt; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (fit(doll[i], chain[j]))
+            {
+                fitted </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+                chain[j] </span>=<span style="color: #000000;"> doll[i];
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">printf("%d %d\n", i, j);
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">printf("%d %d %d %d\n", doll[i].width, doll[i].height, chain[i].width, chain[i].height);</span>
+                <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            }
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">fitted)
+        {
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">printf("%d %d\n", doll[i].width, doll[i].height);</span>
+            chain[chain_cnt++] =<span style="color: #000000;"> doll[i];
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        input();
+        sort(doll, doll </span>+<span style="color: #000000;"> doll_num);
+        work();
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, chain_cnt);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

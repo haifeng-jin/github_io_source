@@ -1,0 +1,96 @@
+---
+layout: post
+title: poj1008
+category: chinese
+---
+<p>简单模拟</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('16278de2-07f6-4c4c-819f-2820217185dc')"><img id="code_img_closed_16278de2-07f6-4c4c-819f-2820217185dc" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_16278de2-07f6-4c4c-819f-2820217185dc" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('16278de2-07f6-4c4c-819f-2820217185dc',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_16278de2-07f6-4c4c-819f-2820217185dc" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">poj1008</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        n, days;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        day, year, month;
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    mon;
+
+    cin </span>&gt;&gt;<span style="color: #000000;"> day;
+    getchar();
+    getchar();
+    cin </span>&gt;&gt;<span style="color: #000000;"> mon;
+    cin </span>&gt;&gt;<span style="color: #000000;"> year;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">pop</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">no</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">2</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">zip</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">3</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">zotz</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">4</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">tzec</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">5</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">xul</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">6</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">yoxkin</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">7</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">mol</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">8</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">chen</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">9</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">yax</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">10</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">zac</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">11</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">ceh</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">12</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">mac</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">13</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">kankin</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">14</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">muan</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">15</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">pax</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">16</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">koyab</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">17</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">cumhu</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">18</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (mon == <span style="color: #800000;">"</span><span style="color: #800000;">uayet</span><span style="color: #800000;">"</span>)month = <span style="color: #800080;">19</span><span style="color: #000000;">;
+    days </span>= day + (month - <span style="color: #800080;">1</span>) * <span style="color: #800080;">20</span> + year * <span style="color: #800080;">365</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        year, month, day;
+
+    year </span>= days / <span style="color: #800080;">260</span><span style="color: #000000;">;
+    month </span>= days % <span style="color: #800080;">260</span> % <span style="color: #800080;">20</span> + <span style="color: #800080;">1</span><span style="color: #000000;">;
+    day </span>= days % <span style="color: #800080;">260</span> % <span style="color: #800080;">13</span> + <span style="color: #800080;">1</span><span style="color: #000000;">;
+    cout </span>&lt;&lt; day &lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">switch</span><span style="color: #000000;">(month)
+    {
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">1</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">imix</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">2</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">ik</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">3</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">akbal</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">4</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">kan</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">5</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">chicchan</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">6</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">cimi</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">7</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">manik</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">8</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">lamat</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">9</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">muluk</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">10</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">ok</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">11</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">chuen</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">12</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">eb</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">13</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">ben</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">14</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">ix</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">15</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">mem</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">16</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">cib</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">17</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">caban</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">18</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">eznab</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">19</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">canac</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800080;">20</span>: cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">ahau</span><span style="color: #800000;">"</span>;<span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    }
+    cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span> &lt;&lt; year &lt;&lt;<span style="color: #000000;"> endl;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    cin &gt;&gt;<span style="color: #000000;"> n;
+    cout </span>&lt;&lt; n &lt;&lt;<span style="color: #000000;"> endl;
+    </span><span style="color: #0000ff;">while</span> (n--<span style="color: #000000;">)
+    {
+        init();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

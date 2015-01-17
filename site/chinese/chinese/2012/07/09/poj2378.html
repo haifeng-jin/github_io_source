@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj2378</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj2378</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 09 Jul 2012</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：给一棵n个节点的无根树，问去掉那一点可以使各连通分支中的节点数均&lt;=n/2。</p>
+<p>分析：任意选定一个根，用自底向上的方法记录每棵子树的节点数。这样对于每个节点就可以通过它子树的节点数量迅速地判断它是否符合条件，别忘了还要判断它上面那个它祖宗所在的连通分支（节点数为n减去其各个子树的连通分支数再减1）。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('57870756-4a07-4c82-81b6-c739032ded4a')"><img id="code_img_closed_57870756-4a07-4c82-81b6-c739032ded4a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_57870756-4a07-4c82-81b6-c739032ded4a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('57870756-4a07-4c82-81b6-c739032ded4a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_57870756-4a07-4c82-81b6-c739032ded4a" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 10005
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Edge
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v, next;
+} edge[maxn </span>* <span style="color: #800080;">2</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Point
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> id, degree;
+} point[maxn];
+;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, ncount;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> layer[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> head[maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> q[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> num[maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> ans[maxn];
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> &lt;(<span style="color: #0000ff;">const</span> Point &amp;a, <span style="color: #0000ff;">const</span> Point &amp;<span style="color: #000000;">b)
+{
+    </span><span style="color: #0000ff;">return</span> a.degree &gt;<span style="color: #000000;"> b.degree;
+}
+
+</span><span style="color: #0000ff;">void</span> addedge(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span><span style="color: #000000;"> b)
+{
+    edge[ncount].v </span>=<span style="color: #000000;"> b;
+    edge[ncount].next </span>=<span style="color: #000000;"> head[a];
+    head[a] </span>= ncount++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+    memset(head, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n - <span style="color: #800080;">1</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;a, &amp;<span style="color: #000000;">b);
+        a</span>--<span style="color: #000000;">;
+        b</span>--<span style="color: #000000;">;
+        addedge(a, b);
+        addedge(b, a);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> bfs()
+{
+    </span><span style="color: #0000ff;">int</span> front = <span style="color: #800080;">0</span>, rear = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    q[rear</span>++] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    vis[</span><span style="color: #800080;">0</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    layer[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (front !=<span style="color: #000000;"> rear)
+    {
+        </span><span style="color: #0000ff;">int</span> u = q[front++<span style="color: #000000;">];
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = head[u]; ~i; i =<span style="color: #000000;"> edge[i].next)
+        {
+            </span><span style="color: #0000ff;">int</span> v =<span style="color: #000000;"> edge[i].v;
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (vis[v])
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            q[rear</span>++] =<span style="color: #000000;"> v;
+            layer[v] </span>= layer[u] + <span style="color: #800080;">1</span><span style="color: #000000;">;
+            vis[v] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        point[i].id </span>=<span style="color: #000000;"> i;
+        point[i].degree </span>=<span style="color: #000000;"> layer[i];
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    memset(ans, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(ans));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> u =<span style="color: #000000;"> point[i].id;
+        </span><span style="color: #0000ff;">bool</span> ok = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        num[u] </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = head[u]; ~j; j =<span style="color: #000000;"> edge[j].next)
+        {
+            </span><span style="color: #0000ff;">int</span> v =<span style="color: #000000;"> edge[j].v;
+            </span><span style="color: #0000ff;">if</span> (layer[v] &gt;=<span style="color: #000000;"> layer[u])
+            {
+                num[u] </span>+=<span style="color: #000000;"> num[v];
+                </span><span style="color: #0000ff;">if</span> (num[v] &gt; n / <span style="color: #800080;">2</span><span style="color: #000000;">)
+                    ok </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            }
+        }
+        </span><span style="color: #0000ff;">if</span> (n - num[u] &gt; n / <span style="color: #800080;">2</span><span style="color: #000000;">)
+            ok </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        ans[u] </span>=<span style="color: #000000;"> ok;
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ans[i])
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span>, i + <span style="color: #800080;">1</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    bfs();
+    make();
+    sort(point, point </span>+<span style="color: #000000;"> n);
+    work();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

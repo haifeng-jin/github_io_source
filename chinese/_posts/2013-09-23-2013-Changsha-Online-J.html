@@ -1,0 +1,140 @@
+---
+layout: post
+title: 2013 ACM/ICPC 长沙网络赛J题
+category: chinese
+---
+<p>题意：一个数列，给出这个数列中的某些位置的数，给出所有相邻的三个数字的和，数列头和尾处给出相邻两个数字的和。有若干次询问，每次问某一位置的数字的最大值。</p>
+<p>分析：设数列为a1～an。首先通过相邻三个数字的和我们可以求出a3,a6,a9&hellip;&hellip;是多少。a3=sum(a1,a2,a3)-sum(a1,a2)。a6=sum(a4,a5,a6)-sum(a3,a4,a5)。后面依次类推。</p>
+<p>推到了数列的最右面，如果恰好知道了an或者a(n-1)中的一个，那么可以通过sum(an,a(n-1))减去它来求得另一个。</p>
+<p>这个题还有个性质就是，只要知道数列中连续的两位就可以通过不断向两侧延伸的方法得到整个数列。因为任意相邻三个的和都知道，知道其中两个数自然可以得到第三个。</p>
+<p>所以我们如果知道了最后两位则一定可以知道整个数列。同样如果根据已知的数列中的数和推出的数能得知两个已知的相邻的数的话，也可推出整个数列。</p>
+<p>唯一一种无法确定该数列的情况就是我们，没有推出最后的两个数（即n%3==2的情况），且数列中已知给出的数也没有提供任何推出信息以外的信息。</p>
+<p>这时我们就获得了一个不确定的数列，将数列中的数字ai按照i%3结果的不同分成三组，得0则已知。</p>
+<p>得1的数之间互相是同增同减的，因为他们互相之间的差是一样的。a1-a4=sum(a1,a2,a3)-sum(a2,a3,a4)。得2的同理。所以这些同增同减的数字会同时取得最大值或最小值。</p>
+<p>得1和得2的之间是此消彼涨的，因为他们互相之间的和是一样的。a1+a2=sum(a1,a2) &nbsp; &nbsp;a2+a4=sum(a2,a3,a4)-a3 &nbsp; &nbsp;a4+a5=sum(a3,a4,a5)-a3 所以得1的取得最小值则得2的取得最大值，反之亦然。</p>
+<p>在符合了这些和与差的条件之后，唯一会导致数列不合法的情况就是出现负数。我们只需要先对得1的随意娶个值，并推出整个数列后，根据最小数值调整所有得1的取值，使最小的那个数恰好为0。</p>
+<p>这样就可以使得1的取最小值，即让得2的取得最大值。</p>
+<p>同理可以求得得1的最大值。</p>
+<p>存储好各种最大值之后按题目中的询问输出即可。计算最大值需要O(n)，每次询问需要O(1)，共m次询问，总复杂度为O(n + m)。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('668bb7c1-4ba4-4f02-babd-2487e4521972')"><img id="code_img_closed_668bb7c1-4ba4-4f02-babd-2487e4521972" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_668bb7c1-4ba4-4f02-babd-2487e4521972" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('668bb7c1-4ba4-4f02-babd-2487e4521972',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_668bb7c1-4ba4-4f02-babd-2487e4521972" class="cnblogs_code_hide">
+<pre>#include &lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_NUM 100005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> array[MAX_NUM], array1[MAX_NUM], array2[MAX_NUM];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> sum[MAX_NUM];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> query_num;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> filled;
+
+</span><span style="color: #0000ff;">void</span> cal_left(<span style="color: #0000ff;">int</span> pos, <span style="color: #0000ff;">int</span><span style="color: #000000;"> array[])
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = pos - <span style="color: #800080;">2</span>; i &gt; <span style="color: #800080;">0</span>; i--<span style="color: #000000;">)
+        array[i] </span>= sum[i + <span style="color: #800080;">1</span>] - array[i + <span style="color: #800080;">1</span>] - array[i + <span style="color: #800080;">2</span><span style="color: #000000;">];
+}
+
+</span><span style="color: #0000ff;">void</span> cal_right(<span style="color: #0000ff;">int</span> pos, <span style="color: #0000ff;">int</span><span style="color: #000000;"> array[])
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = pos + <span style="color: #800080;">2</span>; i &lt;= num; i++<span style="color: #000000;">)
+        array[i] </span>= sum[i - <span style="color: #800080;">1</span>] - array[i - <span style="color: #800080;">1</span>] - array[i - <span style="color: #800080;">2</span><span style="color: #000000;">];
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">int</span> pos = -<span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= num; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">array[i]);
+        </span><span style="color: #0000ff;">if</span> (i % <span style="color: #800080;">3</span> != <span style="color: #800080;">0</span> &amp;&amp; array[i] != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+            pos </span>=<span style="color: #000000;"> i;
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= num; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">sum[i]);
+    array[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">3</span>; i &lt;= num; i += <span style="color: #800080;">3</span><span style="color: #000000;">)
+        array[i] </span>= sum[i - <span style="color: #800080;">1</span>] - (sum[i - <span style="color: #800080;">2</span>] - array[i - <span style="color: #800080;">3</span><span style="color: #000000;">]);
+    </span><span style="color: #0000ff;">if</span> (num % <span style="color: #800080;">3</span> == <span style="color: #800080;">2</span> &amp;&amp; pos == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    filled </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (array[num] != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+        array[num </span>- <span style="color: #800080;">1</span>] = sum[num] -<span style="color: #000000;"> array[num];
+    </span><span style="color: #0000ff;">if</span> (array[num - <span style="color: #800080;">1</span>] != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+        array[num] </span>= sum[num] - array[num - <span style="color: #800080;">1</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">if</span> (array[num] != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+        cal_left(num, array);
+    array[num </span>+ <span style="color: #800080;">1</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (pos != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (array[pos - <span style="color: #800080;">1</span>] != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+            pos</span>--<span style="color: #000000;">;
+        cal_left(pos </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">, array);
+        cal_right(pos, array);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">query_num);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; query_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">a);
+        a</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (filled)
+        {
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, array[a]);
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (a % <span style="color: #800080;">3</span> == <span style="color: #800080;">1</span><span style="color: #000000;">)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, array1[a]);
+        </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (a % <span style="color: #800080;">3</span> == <span style="color: #800080;">2</span><span style="color: #000000;">)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, array2[a]);
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, array[a]);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make2()
+{
+    memcpy(array2, array, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(array2));
+    array2[</span><span style="color: #800080;">1</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    array2[</span><span style="color: #800080;">2</span>] = sum[<span style="color: #800080;">1</span>] - array2[<span style="color: #800080;">1</span><span style="color: #000000;">];
+    cal_right(</span><span style="color: #800080;">1</span><span style="color: #000000;">, array2);
+    array2[</span><span style="color: #800080;">1</span>] -= *min_element(array2 + <span style="color: #800080;">1</span>, array2 + num + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    array2[</span><span style="color: #800080;">2</span>] = sum[<span style="color: #800080;">1</span>] - array2[<span style="color: #800080;">1</span><span style="color: #000000;">];
+    cal_right(</span><span style="color: #800080;">1</span><span style="color: #000000;">, array2);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make1()
+{
+    memcpy(array1, array, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(array1));
+    array1[num] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    array1[num </span>- <span style="color: #800080;">1</span>] = sum[num] -<span style="color: #000000;"> array1[num];
+    cal_left(num, array1);
+    array1[num] </span>-= *min_element(array1 + <span style="color: #800080;">1</span>, array1 + num + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    array1[num </span>- <span style="color: #800080;">1</span>] = sum[num] -<span style="color: #000000;"> array1[num];
+    cal_left(num, array1);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;num) !=<span style="color: #000000;"> EOF)
+    {
+        filled </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        input();
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">filled)
+        {
+            make2();
+            make1();
+        }
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

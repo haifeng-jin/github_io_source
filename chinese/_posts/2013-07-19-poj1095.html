@@ -1,0 +1,104 @@
+---
+layout: post
+title: poj1095
+category: chinese
+---
+<p>题意：给出n，要求输出第n个二叉树，二叉树编号规则如下图所示：</p>
+<p><img src="http://poj.org/images/1095/1095_1.gif" alt="" /></p>
+<p>分析：g[i]表示有i个节点的二叉树，有多少种。f[i][j]表示有i个节点，且左子树有j个节点的树有多少种。</p>
+<p>sumg[i]表示g数组前i个的和。sumf[i][j]表示f[i]数组前j项的和。</p>
+<p>有g[i]=sum(f[i][j])，f[i][j]=g[j]*g[i - 1 - j]。</p>
+<p>对于一个输入的n，我们先通过对sumg进行二分查找以确定节点数量，然后递归求解。</p>
+<p>递归包含两个参数：1、当前子树节点数量tot。2、要求第num个具有这些节点的子树。</p>
+<p>接下来在sumf[tot]中对num进行二分查找，即可确定其左子树节点个数x，从而确定其右子树的节点个数y。</p>
+<p>通过g[y]（右子树的变化数）可以判定左子树处于第几个形态。计算公式为(num - sumf[tot][x - 1]) / g[y];</p>
+<p>同样可以确定右子树处于哪一种形态。计算公式为(num - sumf[tot][x - 1]) % g[y];</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4ca8d71a-694c-4ee2-a8fb-6af871c93ee8')"><img id="code_img_closed_4ca8d71a-694c-4ee2-a8fb-6af871c93ee8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4ca8d71a-694c-4ee2-a8fb-6af871c93ee8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4ca8d71a-694c-4ee2-a8fb-6af871c93ee8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4ca8d71a-694c-4ee2-a8fb-6af871c93ee8" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span>    maxx = <span style="color: #800080;">30</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;">        f[maxx][maxx], g[maxx], sumg[maxx], sumf[maxx][maxx], n;
+
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> binarysearch(<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> *array, <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> start, <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> end, <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> goal)
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;">        l, r, mid;
+
+    l </span>=<span style="color: #000000;"> start;
+    r </span>=<span style="color: #000000;"> end;
+    </span><span style="color: #0000ff;">while</span> (l &lt;<span style="color: #000000;"> r)
+    {
+        mid </span>= (l + r) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (array[mid] &lt;<span style="color: #000000;"> goal)
+            l </span>= mid + <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            r </span>=<span style="color: #000000;"> mid;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> l;
+}
+
+</span><span style="color: #0000ff;">void</span> dfs(<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> tot, <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> num)
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span>        x = binarysearch(sumf[tot], <span style="color: #800080;">0</span>, tot - <span style="color: #800080;">1</span><span style="color: #000000;">, num), a, b;
+
+    </span><span style="color: #0000ff;">if</span> (x &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        a </span>= (num - sumf[tot][x - <span style="color: #800080;">1</span>]) / g[tot - x - <span style="color: #800080;">1</span><span style="color: #000000;">];
+        b </span>= (num - sumf[tot][x - <span style="color: #800080;">1</span>]) % g[tot - x - <span style="color: #800080;">1</span><span style="color: #000000;">];
+        </span><span style="color: #0000ff;">if</span> (b == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            b </span>= g[tot - x - <span style="color: #800080;">1</span><span style="color: #000000;">];
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            a</span>++<span style="color: #000000;">;
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">(</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        dfs(x, a);
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">)</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        num </span>=<span style="color: #000000;"> b;
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">X</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">if</span> (tot - <span style="color: #800080;">1</span> - x &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">(</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        dfs(tot </span>- x - <span style="color: #800080;">1</span><span style="color: #000000;">, num);
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">)</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;">        num;
+
+    num </span>= binarysearch(sumg, <span style="color: #800080;">0</span><span style="color: #000000;">, maxx, n);
+    n </span>-= sumg[num - <span style="color: #800080;">1</span><span style="color: #000000;">];
+    dfs(num, n);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;">        i, j;
+    
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    f[<span style="color: #800080;">1</span>][<span style="color: #800080;">0</span>] = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    g[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    sumg[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    g[</span><span style="color: #800080;">1</span>] = sumg[<span style="color: #800080;">1</span>] = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">2</span>; i &lt; maxx; i++<span style="color: #000000;">)
+    {
+        g[i] </span>= sumf[i][<span style="color: #800080;">0</span>] = f[i][<span style="color: #800080;">0</span>] = g[i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">1</span>; j &lt; i; j++<span style="color: #000000;">)
+        {
+            f[i][j] </span>= g[j] * g[i - <span style="color: #800080;">1</span> -<span style="color: #000000;"> j];
+            g[i] </span>+=<span style="color: #000000;"> f[i][j];
+            sumf[i][j] </span>= sumf[i][j - <span style="color: #800080;">1</span>] +<span style="color: #000000;"> f[i][j];
+        }
+        sumg[i] </span>= g[i] + sumg[i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+    }
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;n) != EOF &amp;&amp; n != <span style="color: #800080;">0</span><span style="color: #000000;">)
+        work();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

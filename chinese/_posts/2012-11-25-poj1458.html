@@ -1,0 +1,52 @@
+---
+layout: post
+title: poj1458
+category: chinese
+---
+<p>最长公共子序列</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a954c910-48d7-4b08-8e1f-a973fb931a77')"><img id="code_img_closed_a954c910-48d7-4b08-8e1f-a973fb931a77" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a954c910-48d7-4b08-8e1f-a973fb931a77" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a954c910-48d7-4b08-8e1f-a973fb931a77',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_a954c910-48d7-4b08-8e1f-a973fb931a77" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxn = <span style="color: #800080;">1000</span>, maxm = <span style="color: #800080;">1000</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">            n, m, f[maxn][maxm];
+</span><span style="color: #0000ff;">string</span><span style="color: #000000;">        a, b;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, j;
+
+    f[</span><span style="color: #800080;">0</span>][<span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+        f[i][</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= m; i++<span style="color: #000000;">)
+        f[</span><span style="color: #800080;">0</span>][i] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">1</span>; j &lt;= m; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (a[i - <span style="color: #800080;">1</span>] == b[j - <span style="color: #800080;">1</span><span style="color: #000000;">])
+                f[i][j] </span>= f[i - <span style="color: #800080;">1</span>][j - <span style="color: #800080;">1</span>] + <span style="color: #800080;">1</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            {
+                f[i][j] </span>= f[i - <span style="color: #800080;">1</span><span style="color: #000000;">][j];
+                </span><span style="color: #0000ff;">if</span> (f[i][j - <span style="color: #800080;">1</span>] &gt;<span style="color: #000000;"> f[i][j])
+                    f[i][j] </span>= f[i][j - <span style="color: #800080;">1</span><span style="color: #000000;">];
+            }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span>(cin &gt;&gt; a &gt;&gt;<span style="color: #000000;"> b)
+    {
+        n </span>=<span style="color: #000000;"> a.length();
+        m </span>=<span style="color: #000000;"> b.length();
+        work();
+        cout </span>&lt;&lt; f[n][m] &lt;&lt;<span style="color: #000000;"> endl;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+} </span></pre>
+</div>
+</div>

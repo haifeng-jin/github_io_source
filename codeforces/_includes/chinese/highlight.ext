@@ -1,0 +1,13 @@
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}/{{site.rooturl}}/chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}/{{site.rooturl}}/chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+

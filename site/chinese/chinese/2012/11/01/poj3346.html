@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj3346</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj3346</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 01 Nov 2012</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：给出一张地图矩阵，上面有些墙和石头，在空地上行走不需要时间，墙不可穿越，石头可以慢慢打破也可以用工具打破，用工具打破不需要时间，慢慢打破需要相应的时间。每个入口对应不同的携带工具的数量，且只能从一个入口进入，再不能去别的入口。问要拿到宝藏需要的最少时间。</p>
+<p>分析：带堆优化的最短路。建图比较复杂，图中每个节点对应矩阵中的一个格的一种工具状态，矩阵中走到每个格身上可能剩余的工具数量为0～26个，因此矩阵中每个格对应最短路图中的27个节点，每个节点有两个属性一个是地图中的位置，一个是剩余工具的数量。下面向图中加边，矩阵中a,b两格相邻，如果a是石头，那么我们由节点(a,k)向节点(b,k)引边（k=0~26）,权值为破坏a石头需要消耗的时间。我们再由节点(a,k+1)向节点(b,k)引边，权值为0。如果a不是石头那么我们由节点(a,k)向节点(b,k)引边（k=0~26）,权值为0。要对矩阵中所有不是墙的相邻点进行加边操作，包括入口。然后我们加入一个超级源，由超级源向各个入口对应的相应节点引边。例如：入口a有x个工具，那么我们由超级源向边(a,x)引一条权值为0的边。然后我们只需要用带有堆优化dijkstra来求超级源到宝藏的最短距离即可。这样建图相当于把在遇到一个石头时候的两种选择，变成了两条岔路，两条路也分别对应了不同选择所需要消耗的时间。相当于我们把矩阵看成一个三维空间，一座大楼，前两维就是原矩阵的两维，而第三维是高度，对应了改格剩余的工具数量。然后从每块石头的位置可以不花时间走到其下一层的四方向相邻格，也可以花费一定的时间走到同层的相邻格。超级源是在地面的一个跳板，可以跳到各个入口对应的大楼的隔间中，我们的目的是从超级源用最快的速度走入大楼的宝藏对应的柱状空间中。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a339a1a6-3f1c-47f7-a0f3-7ac5fd465073')"><img id="code_img_closed_a339a1a6-3f1c-47f7-a0f3-7ac5fd465073" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a339a1a6-3f1c-47f7-a0f3-7ac5fd465073" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a339a1a6-3f1c-47f7-a0f3-7ac5fd465073',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_a339a1a6-3f1c-47f7-a0f3-7ac5fd465073" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;<span style="color: #000000;">
+#include </span>&lt;queue&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 105
+<span style="color: #0000ff;">#define</span> inf 0x3f3f3f3f
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Point
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y;
+    Point()
+    {
+    }
+    Point(</span><span style="color: #0000ff;">int</span> xx, <span style="color: #0000ff;">int</span><span style="color: #000000;"> yy) :
+            x(xx), y(yy)
+    {
+    }
+} q[maxn </span>* maxn], point[maxn *<span style="color: #000000;"> maxn];
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Edge
+{
+    Point v;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> next, w;
+} edge[maxn </span>* maxn * maxn * <span style="color: #800080;">10</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Elem
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> w;
+    Point v;
+    Elem()
+    {
+    }
+    Elem(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ww, Point pp) :
+            w(ww), v(pp)
+    {
+    }
+};
+
+priority_queue</span>&lt;Elem&gt;<span style="color: #000000;"> pq;
+
+</span><span style="color: #0000ff;">int</span> dist[maxn * maxn][<span style="color: #800080;">30</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> map[maxn][maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">bool</span> vis1[maxn * maxn][<span style="color: #800080;">30</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span> head[maxn * maxn][<span style="color: #800080;">30</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> cnt, idcnt;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> id[maxn][maxn];
+</span><span style="color: #0000ff;">int</span> dir[<span style="color: #800080;">4</span>][<span style="color: #800080;">2</span>] =<span style="color: #000000;">
+{
+{ </span><span style="color: #800080;">1</span>, <span style="color: #800080;">0</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">0</span>, <span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">1</span>, <span style="color: #800080;">0</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">0</span>, -<span style="color: #800080;">1</span><span style="color: #000000;"> } };
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> &lt;(<span style="color: #0000ff;">const</span> Elem &amp;a, <span style="color: #0000ff;">const</span> Elem &amp;<span style="color: #000000;">b)
+{
+    </span><span style="color: #0000ff;">return</span> a.w &gt;<span style="color: #000000;"> b.w;
+}
+
+</span><span style="color: #0000ff;">int</span> wall(Point &amp;<span style="color: #000000;">a)
+{
+    </span><span style="color: #0000ff;">if</span> (map[a.x][a.y] &lt;= <span style="color: #800000;">'</span><span style="color: #800000;">9</span><span style="color: #800000;">'</span> &amp;&amp; map[a.x][a.y] &gt;= <span style="color: #800000;">'</span><span style="color: #800000;">1</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> map[a.x][a.y] - <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span> packnum(<span style="color: #0000ff;">char</span><span style="color: #000000;"> ch)
+{
+    </span><span style="color: #0000ff;">if</span> (ch == <span style="color: #800000;">'</span><span style="color: #800000;">#</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (isupper(ch))
+        </span><span style="color: #0000ff;">return</span> ch - <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span> + <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> -<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">bool</span> ok(Point &amp;<span style="color: #000000;">a)
+{
+    </span><span style="color: #0000ff;">if</span> (a.x &lt; <span style="color: #800080;">0</span> || a.y &lt; <span style="color: #800080;">0</span> || a.x &gt;= n || a.y &gt;=<span style="color: #000000;"> m)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (map[a.x][a.y] == <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (packnum(map[a.x][a.y]) != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> addedge1(Point a, Point b, <span style="color: #0000ff;">int</span><span style="color: #000000;"> w)
+{
+    edge[cnt].v </span>=<span style="color: #000000;"> b;
+    edge[cnt].w </span>=<span style="color: #000000;"> w;
+    edge[cnt].next </span>=<span style="color: #000000;"> head[a.x][a.y];
+    head[a.x][a.y] </span>= cnt++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> getid(Point a)
+{
+    </span><span style="color: #0000ff;">if</span> (~<span style="color: #000000;">id[a.x][a.y])
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> id[a.x][a.y];
+    id[a.x][a.y] </span>= idcnt++<span style="color: #000000;">;
+    point[id[a.x][a.y]] </span>=<span style="color: #000000;"> a;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> id[a.x][a.y];
+}
+
+</span><span style="color: #0000ff;">void</span> addedge(Point &amp;a, Point &amp;<span style="color: #000000;">b)
+{
+    </span><span style="color: #0000ff;">int</span> x =<span style="color: #000000;"> getid(a);
+    </span><span style="color: #0000ff;">int</span> y =<span style="color: #000000;"> getid(b);
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (wall(a))
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">26</span>; i++<span style="color: #000000;">)
+            addedge1(Point(x, i </span>+ <span style="color: #800080;">1</span>), Point(y, i), <span style="color: #800080;">0</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt;= <span style="color: #800080;">26</span>; i++<span style="color: #000000;">)
+        addedge1(Point(x, i), Point(y, i), wall(a));
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> bfs(Point a)
+{
+    getid(a);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">4</span>; i++<span style="color: #000000;">)
+    {
+        Point b(a.x </span>+ dir[i][<span style="color: #800080;">0</span>], a.y + dir[i][<span style="color: #800080;">1</span><span style="color: #000000;">]);
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok(b))
+            addedge(a, b);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make_graph()
+{
+    memset(head, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));
+    memset(id, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(id));
+    cnt </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    idcnt </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; m; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (map[i][j] != <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            {
+                bfs(Point(i, j));
+                </span><span style="color: #0000ff;">if</span> (~<span style="color: #000000;">packnum(map[i][j]))
+                    addedge1(Point(</span><span style="color: #800080;">0</span>, <span style="color: #800080;">0</span><span style="color: #000000;">),
+                            Point(getid(Point(i, j)), packnum(map[i][j])), </span><span style="color: #800080;">0</span><span style="color: #000000;">);
+            }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> dijkstra()
+{
+    memset(vis1, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis1));
+    memset(dist, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(dist));
+    dist[</span><span style="color: #800080;">0</span>][<span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    pq.push(Elem(</span><span style="color: #800080;">0</span>, Point(<span style="color: #800080;">0</span>, <span style="color: #800080;">0</span><span style="color: #000000;">)));
+    </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">pq.empty())
+    {
+        Elem x;
+        </span><span style="color: #0000ff;">do</span><span style="color: #000000;">
+        {
+            x </span>=<span style="color: #000000;"> pq.top();
+            pq.pop();
+        } </span><span style="color: #0000ff;">while</span> (!pq.empty() &amp;&amp;<span style="color: #000000;"> vis1[x.v.x][x.v.y]);
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (vis1[x.v.x][x.v.y])
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        Point u </span>=<span style="color: #000000;"> x.v;
+        vis1[u.x][u.y] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = head[u.x][u.y]; ~i; i =<span style="color: #000000;"> edge[i].next)
+        {
+            Point v </span>=<span style="color: #000000;"> edge[i].v;
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (vis1[v.x][v.y])
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span> (dist[v.x][v.y] == -<span style="color: #800080;">1</span>
+                    || dist[v.x][v.y] &gt; dist[u.x][u.y] +<span style="color: #000000;"> edge[i].w)
+            {
+                dist[v.x][v.y] </span>= dist[u.x][u.y] +<span style="color: #000000;"> edge[i].w;
+                pq.push(Elem(dist[v.x][v.y], v));
+            }
+        }
+    }
+    </span><span style="color: #0000ff;">int</span> ans =<span style="color: #000000;"> inf;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; m; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (map[i][j] == <span style="color: #800000;">'</span><span style="color: #800000;">$</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            {
+                </span><span style="color: #0000ff;">int</span> x =<span style="color: #000000;"> id[i][j];
+                </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> k = <span style="color: #800080;">0</span>; k &lt;= <span style="color: #800080;">26</span>; k++<span style="color: #000000;">)
+                    </span><span style="color: #0000ff;">if</span> (~<span style="color: #000000;">dist[x][k])
+                        ans </span>=<span style="color: #000000;"> min(ans, dist[x][k]);
+            }
+    </span><span style="color: #0000ff;">if</span> (ans ==<span style="color: #000000;"> inf)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">IMPOSSIBLE\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (gets(map[<span style="color: #800080;">0</span>]), strcmp(map[<span style="color: #800080;">0</span>], <span style="color: #800000;">"</span><span style="color: #800000;">--</span><span style="color: #800000;">"</span><span style="color: #000000;">))
+    {
+        </span><span style="color: #0000ff;">int</span> x = <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span> (gets(map[x]), map[x][<span style="color: #800080;">0</span><span style="color: #000000;">])
+            x</span>++<span style="color: #000000;">;
+        n </span>=<span style="color: #000000;"> x;
+        m </span>= strlen(map[<span style="color: #800080;">0</span><span style="color: #000000;">]);
+        make_graph();
+        dijkstra();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

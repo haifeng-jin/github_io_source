@@ -1,0 +1,46 @@
+---
+layout: post
+title: poj3438
+category: chinese
+---
+<p>字符串水题</p> <p>&nbsp;</p> <div class="cnblogs_Highlighter"> <pre class="brush: csharp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+void work()
+{
+	string st;
+
+	cin &gt;&gt; st;
+	int length = st.length();
+	int l = 1;
+	for (int i = 1; i &lt; length; i++)
+	{
+		if (st[i] != st[i - 1])
+		{
+			printf("%d%c", l, st[i - 1]);
+			l = 1;
+		}
+		else
+			l++;
+	}
+	printf("%d%c", l, st[length - 1]);
+	cout &lt;&lt; endl;
+}
+
+int main()
+{
+	//freopen("D:\\t.txt", "r", stdin);
+	int t;
+	scanf("%d", &amp;t);
+	while (t--)
+	{
+		work();
+	}
+	return 0;
+}
+
+</pre>
+</div>

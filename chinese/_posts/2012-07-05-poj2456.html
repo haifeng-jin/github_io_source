@@ -1,0 +1,70 @@
+---
+layout: post
+title: poj2456
+category: chinese
+---
+<p>二分法</p>
+<p>有些能用动态规划求解但是超时的题目，可以考虑二分法。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ce2bcdf3-22c5-4c7e-b706-6c43890abc73')"><img id="code_img_closed_ce2bcdf3-22c5-4c7e-b706-6c43890abc73" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ce2bcdf3-22c5-4c7e-b706-6c43890abc73" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ce2bcdf3-22c5-4c7e-b706-6c43890abc73',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_ce2bcdf3-22c5-4c7e-b706-6c43890abc73" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 100005
+<span style="color: #0000ff;">#define</span> inf 0x3f3f3f3f
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, cow;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> pos[maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;<span style="color: #000000;">cow);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">pos[i]);
+}
+
+</span><span style="color: #0000ff;">bool</span> ok(<span style="color: #0000ff;">int</span><span style="color: #000000;"> len)
+{
+    </span><span style="color: #0000ff;">int</span> l = <span style="color: #800080;">0</span>, r = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; cow; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">while</span> (r &lt; n &amp;&amp; pos[r] - pos[l] &lt;<span style="color: #000000;"> len)
+            r</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (r &gt;=<span style="color: #000000;"> n)
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        l </span>=<span style="color: #000000;"> r;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> binary_search()
+{
+    </span><span style="color: #0000ff;">int</span> l =<span style="color: #000000;"> inf;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; n; i++<span style="color: #000000;">)
+        l </span>= min(l, pos[i] - pos[i - <span style="color: #800080;">1</span><span style="color: #000000;">]);
+    </span><span style="color: #0000ff;">int</span> r = (pos[n - <span style="color: #800080;">1</span>] - pos[<span style="color: #800080;">0</span>]) / (cow - <span style="color: #800080;">1</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">while</span> (l &lt;<span style="color: #000000;"> r)
+    {
+        </span><span style="color: #0000ff;">int</span> mid = (l + r) / <span style="color: #800080;">2</span> + ((l + r) &amp; <span style="color: #800080;">1</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">ok(mid))
+            r </span>= mid - <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            l </span>=<span style="color: #000000;"> mid;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> l;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    sort(pos, pos </span>+<span style="color: #000000;"> n);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, binary_search());
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

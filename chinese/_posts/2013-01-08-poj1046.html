@@ -1,0 +1,50 @@
+---
+layout: post
+title: poj1046
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('f621ec0d-92aa-4077-bb18-ae7be10a7d59')"><img id="code_img_closed_f621ec0d-92aa-4077-bb18-ae7be10a7d59" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_f621ec0d-92aa-4077-bb18-ae7be10a7d59" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('f621ec0d-92aa-4077-bb18-ae7be10a7d59',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_f621ec0d-92aa-4077-bb18-ae7be10a7d59" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 20
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Point
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y, z;
+} point[maxn], s;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> dist(Point a, Point b)
+{
+    Point v;
+    v.x </span>= a.x -<span style="color: #000000;"> b.x;
+    v.y </span>= a.y -<span style="color: #000000;"> b.y;
+    v.z </span>= a.z -<span style="color: #000000;"> b.z;
+    </span><span style="color: #0000ff;">return</span> v.x * v.x + v.y * v.y + v.z *<span style="color: #000000;"> v.z;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">16</span>; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;point[i].x, &amp;point[i].y, &amp;<span style="color: #000000;">point[i].z);
+    </span><span style="color: #0000ff;">while</span> (~scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;s.x, &amp;s.y, &amp;<span style="color: #000000;">s.z))
+    {
+        </span><span style="color: #0000ff;">if</span> (s.x == -<span style="color: #800080;">1</span> &amp;&amp; s.y == -<span style="color: #800080;">1</span> &amp;&amp; s.z == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> temp = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; <span style="color: #800080;">16</span>; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (dist(s, point[i]) &lt;<span style="color: #000000;"> dist(s, point[temp]))
+                temp </span>=<span style="color: #000000;"> i;
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">(%d,%d,%d) maps to (%d,%d,%d)\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, s.x, s.y, s.z, point[temp].x, point[temp].y, point[temp].z);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

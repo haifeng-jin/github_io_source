@@ -1,0 +1,61 @@
+---
+layout: post
+title: poj3091
+category: chinese
+---
+<p>题意：给一个三脚阵，第i行有i个点。皇后可以攻击三脚阵中六方向上的所有点，给定三脚阵的边长n，已知最多可以放floor((n * 2 + 1) / 3)个互不冲突的皇后，要求给出一种方案。</p>
+<p><img src="http://poj.org/images/3091_1.png" alt="" /></p>
+<p>分析：根据题中数据找规律，进行构造，n&lt;3的是特殊情况，每个点坐标用两个值表示，[i,j]表示第i行的第j个点，我们发现把这(n * 2 + 1) / 3个放皇后的坐标，从右往左看，发现i是从n开始每次递减1。从左往右看j的变化规律是1,3,5,7&hellip;&hellip;2,4,6,8&hellip;&hellip;，先奇数从1递增，然后偶数从2递增，那么分界线在哪呢？就是i&gt;=j的时候是奇数，i增长慢但起点高，j增长快但起点底，j必然在某一点超越i，在超越之前j是奇数，超越之后j是偶数。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('aedff19d-7a15-42ed-b57f-2d44783ce3a8')"><img id="code_img_closed_aedff19d-7a15-42ed-b57f-2d44783ce3a8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_aedff19d-7a15-42ed-b57f-2d44783ce3a8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('aedff19d-7a15-42ed-b57f-2d44783ce3a8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_aedff19d-7a15-42ed-b57f-2d44783ce3a8" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; t; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+        </span><span style="color: #0000ff;">int</span> cnt = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+        </span><span style="color: #0000ff;">if</span> (n &lt; <span style="color: #800080;">3</span><span style="color: #000000;">)
+        {
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d 1\n[1,1]\n\n</span><span style="color: #800000;">"</span>, i + <span style="color: #800080;">1</span><span style="color: #000000;">, n);
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        }
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d %d\n</span><span style="color: #800000;">"</span>, i + <span style="color: #800080;">1</span>, n, (<span style="color: #800080;">2</span> * n + <span style="color: #800080;">1</span>) / <span style="color: #800080;">3</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">int</span> a = n - (<span style="color: #800080;">2</span> * n + <span style="color: #800080;">1</span>) / <span style="color: #800080;">3</span> + <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> b = <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span> (b &lt;=<span style="color: #000000;"> a)
+        {
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">[%d,%d] </span><span style="color: #800000;">"</span><span style="color: #000000;">, a, b);
+            cnt</span>++<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span> (cnt % <span style="color: #800080;">8</span> == <span style="color: #800080;">0</span><span style="color: #000000;">)
+                puts(</span><span style="color: #800000;">""</span><span style="color: #000000;">);
+            b </span>+= <span style="color: #800080;">2</span><span style="color: #000000;">;
+            a</span>++<span style="color: #000000;">;
+        }
+        b </span>= <span style="color: #800080;">2</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span> (a &lt;=<span style="color: #000000;"> n)
+        {
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">[%d,%d] </span><span style="color: #800000;">"</span><span style="color: #000000;">, a, b);
+            cnt</span>++<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span> (cnt % <span style="color: #800080;">8</span> == <span style="color: #800080;">0</span><span style="color: #000000;">)
+                puts(</span><span style="color: #800000;">""</span><span style="color: #000000;">);
+            b </span>+= <span style="color: #800080;">2</span><span style="color: #000000;">;
+            a</span>++<span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (cnt % <span style="color: #800080;">8</span><span style="color: #000000;">)
+            puts(</span><span style="color: #800000;">""</span><span style="color: #000000;">);
+        puts(</span><span style="color: #800000;">""</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

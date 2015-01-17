@@ -1,0 +1,66 @@
+---
+layout: post
+title: poj1276
+category: chinese
+---
+<p>多重背包，但由于是bool型，可以使用特殊方法优化效率使得效率与01背包相同</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('80f24cf9-f126-46f6-9ee5-945f367eef01')"><img id="code_img_closed_80f24cf9-f126-46f6-9ee5-945f367eef01" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_80f24cf9-f126-46f6-9ee5-945f367eef01" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('80f24cf9-f126-46f6-9ee5-945f367eef01',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_80f24cf9-f126-46f6-9ee5-945f367eef01" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 15
+<span style="color: #0000ff;">#define</span> maxc 100005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> cash;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> num[maxn], denomination[maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> f[maxc];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> used[maxc];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;num[i], &amp;<span style="color: #000000;">denomination[i]);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    memset(f, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(f));
+    f[</span><span style="color: #800080;">0</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        memset(used, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(used));
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = denomination[i]; j &lt;= cash; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (f[j - denomination[i]] &amp;&amp; !f[j] &amp;&amp; used[j - denomination[i]] &lt;<span style="color: #000000;"> num[i])
+            {
+                f[j] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+                used[j] </span>= used[j - denomination[i]] + <span style="color: #800080;">1</span><span style="color: #000000;">;
+            } 
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (~scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">cash))
+    {
+        input();
+        work();
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = cash; i &gt;= <span style="color: #800080;">0</span>; i--<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (f[i])
+            {
+                printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, i);
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            }
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

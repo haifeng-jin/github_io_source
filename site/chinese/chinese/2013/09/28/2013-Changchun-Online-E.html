@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>2013 ACM/ICPC 长春网络赛E题</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>2013 ACM/ICPC 长春网络赛E题</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 28 Sep 2013</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：给出一个字符串，要从头、尾和中间找出三个完全相等的子串，这些串覆盖的区间互相不能有重叠部分。头、尾的串即为整个字符串的前缀和后缀。问这个相同的子串的最大长度是多少。</p>
+<p>分析：利用KMP算法中的next数组。next数组有一个性质，如果next[b]指向a。a&lt;b。那么 以a作为结尾的原串前缀 是 以b作为结尾的原串前缀 的后缀。</p>
+<p>那么如果b是原串的最后一位，那么以b结尾的前缀就是原串，则a结尾的前缀与一个原串的后缀相等。</p>
+<p>我们既然找到了一个相等的前缀和后缀，只需要再判断中间是否有相同的子串即可。即判断是否存在next[c]==a，或者next[next[c]]==a，或者&hellip;&hellip;</p>
+<p>如果没有我们就缩短前缀的长度，方法就是让a=next[next[b]]，a=next[next[next[b]]]，这样不断迭代。每次这样判断，直到找到一个中间存在相等串的为止。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4a1d819d-fb61-4ea2-ae6d-c895c8d39b85')"><img id="code_img_closed_4a1d819d-fb61-4ea2-ae6d-c895c8d39b85" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4a1d819d-fb61-4ea2-ae6d-c895c8d39b85" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4a1d819d-fb61-4ea2-ae6d-c895c8d39b85',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4a1d819d-fb61-4ea2-ae6d-c895c8d39b85" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_SONG_LEN 1000005
+
+<span style="color: #0000ff;">char</span><span style="color: #000000;"> song[MAX_SONG_LEN];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> left_link[MAX_SONG_LEN];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> song_len;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span>, (song + <span style="color: #800080;">1</span><span style="color: #000000;">));
+    song_len </span>= strlen(song + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    song[</span><span style="color: #800080;">0</span>] = -<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> kmp(<span style="color: #0000ff;">char</span> st[], <span style="color: #0000ff;">int</span> next[], <span style="color: #0000ff;">int</span><span style="color: #000000;"> len)
+{
+    next[</span><span style="color: #800080;">1</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    next[</span><span style="color: #800080;">0</span>] = -<span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">2</span>; i &lt;= len; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> temp = next[i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+        </span><span style="color: #0000ff;">while</span> (temp &gt;= <span style="color: #800080;">0</span> &amp;&amp; st[i] != st[temp + <span style="color: #800080;">1</span><span style="color: #000000;">])
+            temp </span>=<span style="color: #000000;"> next[temp];
+        next[i] </span>= temp + <span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span> reach(<span style="color: #0000ff;">int</span> l, <span style="color: #0000ff;">int</span><span style="color: #000000;"> r)
+{
+    </span><span style="color: #0000ff;">while</span> (r &gt;<span style="color: #000000;"> l)
+        r </span>=<span style="color: #000000;"> left_link[r];
+    </span><span style="color: #0000ff;">return</span> r ==<span style="color: #000000;"> l;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> prefix_end =<span style="color: #000000;"> song_len;
+    </span><span style="color: #0000ff;">while</span> (prefix_end &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (prefix_end &gt; song_len / <span style="color: #800080;">2</span><span style="color: #000000;">)
+        {
+            prefix_end </span>=<span style="color: #000000;"> left_link[prefix_end];
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">int</span> theme_len =<span style="color: #000000;"> prefix_end;
+        </span><span style="color: #0000ff;">int</span> suffix_begin = song_len - theme_len + <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> mid_end =<span style="color: #000000;"> prefix_end;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = prefix_end + <span style="color: #800080;">1</span>; i &lt; suffix_begin; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (reach(prefix_end, i) &amp;&amp; i - prefix_end &gt;=<span style="color: #000000;"> theme_len)
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> theme_len;
+        prefix_end </span>=<span style="color: #000000;"> left_link[prefix_end];
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> case_num;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">case_num);
+    </span><span style="color: #0000ff;">while</span> (case_num--<span style="color: #000000;">)
+    {
+        input();
+        kmp(song, left_link, song_len);
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

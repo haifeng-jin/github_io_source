@@ -1,0 +1,37 @@
+---
+layout: post
+title: poj3671
+category: chinese
+---
+<p>枚举分界线的位置，不要忘了最左侧的分界线</p>  <p>&#160;</p>  <p>&#160;</p>  <pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+const int maxn = 30005;
+
+int main()
+{
+	//freopen(&quot;D:\\t.txt&quot;, &quot;r&quot;, stdin);
+	int n;
+	scanf(&quot;%d&quot;, &amp;n);
+	int tot1 = 0;
+	int left1[maxn];
+	for (int i = 0; i &lt; n; i++)
+	{
+		int a;
+		scanf(&quot;%d&quot;, &amp;a);
+		if (a == 1)
+			tot1++;
+		left1[i] = tot1;
+	}
+	int ans = tot1;
+	for (int i = 0; i &lt; n; i++)
+	{
+		if (ans &gt; i + 1 - left1[i] + tot1 - left1[i])
+			ans = i + 1 - left1[i] + tot1 - left1[i];
+	}
+	printf(&quot;%d\n&quot;, ans);
+	return 0;
+}</pre>

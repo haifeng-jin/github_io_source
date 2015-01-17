@@ -1,0 +1,76 @@
+---
+layout: post
+title: poj2056
+category: chinese
+---
+<p>寻找向左凸的地方，每个左凸能让S数量-2。上边或下边如果是半个左凸的话则各对应-1</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0b6d1a04-5d79-48dd-b901-26575f1b5b5f')"><img id="code_img_closed_0b6d1a04-5d79-48dd-b901-26575f1b5b5f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0b6d1a04-5d79-48dd-b901-26575f1b5b5f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0b6d1a04-5d79-48dd-b901-26575f1b5b5f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_0b6d1a04-5d79-48dd-b901-26575f1b5b5f" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_ROW 205
+<span style="color: #0000ff;">#define</span> MAX_COLUMN MAX_ROW
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> row, column;
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> grid[MAX_ROW][MAX_COLUMN];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    memset(grid, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(grid));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; row; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, grid[i]);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> direction = -<span style="color: #800080;">1</span>;    <span style="color: #008000;">//</span><span style="color: #008000;">1 is right, 0 is left</span>
+    <span style="color: #0000ff;">int</span> s_cnt = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> x = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> y = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (grid[x][y] != <span style="color: #800000;">'</span><span style="color: #800000;">S</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        y</span>++<span style="color: #000000;">;
+    s_cnt</span>++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (x &lt;<span style="color: #000000;"> row)
+    {
+        </span><span style="color: #0000ff;">if</span> (y != <span style="color: #800080;">0</span> &amp;&amp; grid[x][y - <span style="color: #800080;">1</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">S</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        {
+            direction </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">while</span> (y &gt; <span style="color: #800080;">0</span> &amp;&amp; grid[x][y - <span style="color: #800080;">1</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">S</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                y</span>--, s_cnt++<span style="color: #000000;">;
+            x</span>++, s_cnt++<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (y + <span style="color: #800080;">1</span> &lt; column &amp;&amp; grid[x][y + <span style="color: #800080;">1</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">S</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (direction == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+                s_cnt</span>--<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span> (direction == <span style="color: #800080;">0</span><span style="color: #000000;">)
+                s_cnt </span>-= <span style="color: #800080;">2</span><span style="color: #000000;">;
+            direction </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">while</span> (y + <span style="color: #800080;">1</span> &lt; column &amp;&amp; grid[x][y + <span style="color: #800080;">1</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">S</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                y</span>++, s_cnt++<span style="color: #000000;">;
+            x</span>++, s_cnt++<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        }
+        x</span>++, s_cnt++<span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (direction == <span style="color: #800080;">0</span><span style="color: #000000;">)
+        s_cnt</span>--<span style="color: #000000;">;
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span>, s_cnt - <span style="color: #800080;">1</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;row, &amp;column), row |<span style="color: #000000;"> column)
+    {
+        input();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

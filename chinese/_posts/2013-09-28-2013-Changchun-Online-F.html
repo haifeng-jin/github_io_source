@@ -1,0 +1,33 @@
+---
+layout: post
+title: 2013 ACM/ICPC 长春网络赛F题
+category: chinese
+---
+<p>题意：两个人轮流说数字，第一个人可以说区间[1~k]中的一个，之后每次每人都可以说一个比前一个人所说数字大一点的数字，相邻两次数字只差在区间[1~k]。谁先&gt;=N，谁输。问最后是第一个人赢还是第二个人赢。</p>
+<p>分析：必胜策略是这样的，想方设法抢到N-1,这样下一个人必然会&gt;=N。</p>
+<p>第一个人抢到N-1的方法，就是先说一个数字与N-1的差是k+1的整数倍。</p>
+<p>因为在这之后另一个人无论说几，第一个人只要把数字补齐到与N-1差k+1的整数倍即可。</p>
+<p>例如另一个人让数字增加a，那么第一个人则让数字增加k+1-a。这样就必然可以抢到N-1。</p>
+<p>也有一种情况是第一个采取这种策略，如果N-1本来就是k+1的倍数，那么第一个人无论说几都无法达到与N-1差k+1的整数倍，这样第二个人就可以采取我们刚才说的补齐策略来抢到N-1。则第二个人获胜。</p>
+<p>综上，如果(N-1)%(k+1)==0则第二个人赢，否则第一个人赢。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ccd0ea59-8851-4196-b148-0034f402cd43')"><img id="code_img_closed_ccd0ea59-8851-4196-b148-0034f402cd43" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ccd0ea59-8851-4196-b148-0034f402cd43" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ccd0ea59-8851-4196-b148-0034f402cd43',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_ccd0ea59-8851-4196-b148-0034f402cd43" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> N, k;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;N, &amp;k), N |<span style="color: #000000;"> k)
+    {
+        </span><span style="color: #0000ff;">if</span> ((N - <span style="color: #800080;">1</span>) % (k + <span style="color: #800080;">1</span>) == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Jiang\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Tang\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

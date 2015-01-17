@@ -1,0 +1,124 @@
+---
+layout: post
+title: poj1860
+category: chinese
+---
+<p>题意：有若干种货币，某些币种之间可兑换，给出各种兑换时的汇率和手续费，任何兑换都是双向的，但是两个方向的汇率和手续费可能不同，并告知你现在拥有的货币种类（只拥有一种）及数量，问是否可以通过货币建兑换最后回到本币种后钱数有所增加。</p>
+<p>分析：普通的货币兑换一般都是用floyd。但是本题除了汇率还多出一个条件&mdash;&mdash;手续费，所以不能简单地使用floyd。我用的是spfa求最长路，检查是否有环路。从自己的币种出发，如果发现正环，那么则可以不停地走环路以增加自己手中的价值，又因为所有的路都是双向的，所以当手中的价值增加的足够多之后是一定可以回到自己原有的币种的。又因为正环能使价值达到正无穷，所以回去之后价值一定增加。所以本题转化为判断是否有正环。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('20f704da-edd9-4b33-9084-60383caffc50')"><img id="code_img_closed_20f704da-edd9-4b33-9084-60383caffc50" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_20f704da-edd9-4b33-9084-60383caffc50" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('20f704da-edd9-4b33-9084-60383caffc50',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_20f704da-edd9-4b33-9084-60383caffc50" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxm 105
+<span style="color: #0000ff;">#define</span> maxn 105
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Edge
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v, next;
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;"> rate, commission;
+}edge[maxm </span>* <span style="color: #800080;">2</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> s;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> head[maxn];
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> v;
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> dist[maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> in_queue[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> push_cnt[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> q[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> edge_cnt;
+
+</span><span style="color: #0000ff;">void</span> addedge(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span> b, <span style="color: #0000ff;">double</span> r, <span style="color: #0000ff;">double</span><span style="color: #000000;"> c)
+{
+    edge[edge_cnt].v </span>=<span style="color: #000000;"> b;
+    edge[edge_cnt].next </span>=<span style="color: #000000;"> head[a];
+    edge[edge_cnt].rate </span>=<span style="color: #000000;"> r;
+    edge[edge_cnt].commission </span>=<span style="color: #000000;"> c;
+    head[a] </span>= edge_cnt++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    edge_cnt </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    memset(head, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d%lf</span><span style="color: #800000;">"</span>, &amp;n, &amp;m, &amp;s, &amp;<span style="color: #000000;">v);
+    s</span>--<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;
+        </span><span style="color: #0000ff;">double</span><span style="color: #000000;"> r, c;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;a, &amp;<span style="color: #000000;">b);
+        a</span>--<span style="color: #000000;">;
+        b</span>--<span style="color: #000000;">;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%lf%lf</span><span style="color: #800000;">"</span>, &amp;r, &amp;<span style="color: #000000;">c);
+        addedge(a, b, r, c);
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%lf%lf</span><span style="color: #800000;">"</span>, &amp;r, &amp;<span style="color: #000000;">c);
+        addedge(b, a, r, c);
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span> spfa(<span style="color: #0000ff;">int</span><span style="color: #000000;"> s)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        dist[i] </span>= -<span style="color: #800080;">1</span><span style="color: #000000;">;
+    dist[s] </span>=<span style="color: #000000;"> v;
+    memset(in_queue, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(in_queue));
+    memset(push_cnt, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(push_cnt));
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> front, rear;
+    front </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    rear </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    q[rear</span>++] =<span style="color: #000000;"> s;
+    in_queue[s] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    push_cnt[s] </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+    
+    </span><span style="color: #0000ff;">while</span> (front !=<span style="color: #000000;"> rear)
+    {
+        </span><span style="color: #0000ff;">int</span> u = q[front++<span style="color: #000000;">];
+        </span><span style="color: #0000ff;">if</span> (front ==<span style="color: #000000;"> maxn)
+            front </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        in_queue[u] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">double</span> cur =<span style="color: #000000;"> dist[u];
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = head[u]; ~i; i =<span style="color: #000000;"> edge[i].next)
+        {
+            </span><span style="color: #0000ff;">int</span> v =<span style="color: #000000;"> edge[i].v;
+            </span><span style="color: #0000ff;">double</span> r =<span style="color: #000000;"> edge[i].rate;
+            </span><span style="color: #0000ff;">double</span> c =<span style="color: #000000;"> edge[i].commission;
+            </span><span style="color: #0000ff;">double</span> temp = (cur - c) *<span style="color: #000000;"> r;
+            </span><span style="color: #0000ff;">if</span> (temp &gt;<span style="color: #000000;"> dist[v])
+            {
+                dist[v] </span>=<span style="color: #000000;"> temp;
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">printf("%d %.2f\n", v, dist[v]);</span>
+                <span style="color: #0000ff;">if</span><span style="color: #000000;"> (in_queue[v])
+                    </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+                q[rear</span>++] =<span style="color: #000000;"> v;
+                </span><span style="color: #0000ff;">if</span> (rear ==<span style="color: #000000;"> maxn)
+                    rear </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+                in_queue[v] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+                push_cnt[v]</span>++<span style="color: #000000;">;
+                </span><span style="color: #0000ff;">if</span> (push_cnt[v] &gt;<span style="color: #000000;"> n)
+                    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            }
+        }
+        </span><span style="color: #0000ff;">if</span> (dist[s] &gt;<span style="color: #000000;"> v)
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    }        
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (spfa(s))
+        puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">YES</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">NO</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,129 @@
+---
+layout: post
+title: poj1292
+category: chinese
+---
+<p>prim，把每个墙看成一个节点，从起点用prim求最小生成树，直到覆盖到终点为止，输出最小生成树中的最大边</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('bc521584-aa55-4d89-bf1e-3bee7a87ad57')"><img id="code_img_closed_bc521584-aa55-4d89-bf1e-3bee7a87ad57" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_bc521584-aa55-4d89-bf1e-3bee7a87ad57" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('bc521584-aa55-4d89-bf1e-3bee7a87ad57',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_bc521584-aa55-4d89-bf1e-3bee7a87ad57" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cmath&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_WALL_NUM 1005
+<span style="color: #0000ff;">#define</span> INF 0x3f3f3f3f
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Wall
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> s, e, pos;
+    </span><span style="color: #0000ff;">bool</span> h;        <span style="color: #008000;">//</span><span style="color: #008000;">direction: is horizental</span>
+<span style="color: #000000;">}wall[MAX_WALL_NUM];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> wall_num;
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> graph[MAX_WALL_NUM][MAX_WALL_NUM];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; wall_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y, l;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;x, &amp;y, &amp;<span style="color: #000000;">l);
+        </span><span style="color: #0000ff;">if</span> (l &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+        {
+            wall[i].h </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            swap(x, y);
+        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            wall[i].h </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        wall[i].s </span>=<span style="color: #000000;"> x;
+        wall[i].e </span>= x +<span style="color: #000000;"> abs(l);
+        wall[i].pos </span>=<span style="color: #000000;"> y;
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> overlap(Wall a, Wall b)
+{
+    </span><span style="color: #0000ff;">if</span> (a.s &gt; b.e || a.e &lt;<span style="color: #000000;"> b.s)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> cal(Wall a, Wall b)
+{
+    </span><span style="color: #0000ff;">if</span> (a.h ==<span style="color: #000000;"> b.h)
+    {
+        </span><span style="color: #0000ff;">int</span> dist1 = abs(a.pos -<span style="color: #000000;"> b.pos);
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (overlap(a, b))
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> dist1;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        {
+            </span><span style="color: #0000ff;">int</span> dist2 = min(abs(a.s - b.e), abs(a.e -<span style="color: #000000;"> b.s));
+            </span><span style="color: #0000ff;">return</span> sqrt(dist1 * dist1 + dist2 *<span style="color: #000000;"> dist2);
+        }
+    }
+    </span><span style="color: #0000ff;">if</span> (a.s &lt;= b.pos &amp;&amp; a.e &gt;= b.pos &amp;&amp; b.s &lt;= a.pos &amp;&amp; b.e &gt;=<span style="color: #000000;"> a.pos)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (a.s &lt;= b.pos &amp;&amp; a.e &gt;=<span style="color: #000000;"> b.pos)
+        </span><span style="color: #0000ff;">return</span> min(abs(b.s - a.pos), abs(b.e -<span style="color: #000000;"> a.pos));
+    </span><span style="color: #0000ff;">if</span> (b.s &lt;= a.pos &amp;&amp; b.e &gt;=<span style="color: #000000;"> a.pos)
+        </span><span style="color: #0000ff;">return</span> min(abs(a.s - b.pos), abs(a.e -<span style="color: #000000;"> b.pos));
+    </span><span style="color: #0000ff;">int</span> dist1 = min(abs(a.s - b.pos), abs(a.e -<span style="color: #000000;"> b.pos));
+    </span><span style="color: #0000ff;">int</span> dist2 = min(abs(b.s - a.pos), abs(b.e -<span style="color: #000000;"> a.pos));
+    </span><span style="color: #0000ff;">return</span> sqrt(dist1 * dist1 + dist2 *<span style="color: #000000;"> dist2);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> calculate_graph()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; wall_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = i + <span style="color: #800080;">1</span>; j &lt; wall_num; j++<span style="color: #000000;">)
+        {
+            graph[i][j] </span>= graph[j][i] =<span style="color: #000000;"> cal(wall[i], wall[j]);
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> prim()
+{
+    </span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[MAX_WALL_NUM];
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;"> dist[MAX_WALL_NUM];
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    fill(dist, dist </span>+<span style="color: #000000;"> wall_num, INF);
+    dist[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">double</span> ret = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (!vis[<span style="color: #800080;">1</span><span style="color: #000000;">])
+    {
+        </span><span style="color: #0000ff;">double</span> min_dist =<span style="color: #000000;"> INF;
+        </span><span style="color: #0000ff;">int</span> temp = -<span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; wall_num; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (!vis[i] &amp;&amp; dist[i] &lt;<span style="color: #000000;"> min_dist)
+            {
+                temp </span>=<span style="color: #000000;"> i;
+                min_dist </span>=<span style="color: #000000;"> dist[i];
+            }
+        </span><span style="color: #0000ff;">if</span> (temp == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">return</span> -<span style="color: #800080;">1</span><span style="color: #000000;">;
+        vis[temp] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        dist[temp] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        ret </span>=<span style="color: #000000;"> max(ret, min_dist);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; wall_num; i++<span style="color: #000000;">)
+            dist[i] </span>= min(dist[i], dist[temp] +<span style="color: #000000;"> graph[temp][i]);
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">wall_num), wall_num)
+    {
+        input();
+        calculate_graph();
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%.2f\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, prim());
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

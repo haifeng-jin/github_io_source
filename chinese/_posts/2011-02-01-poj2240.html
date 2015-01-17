@@ -1,0 +1,97 @@
+---
+layout: post
+title: poj2240
+category: chinese
+---
+<p>题意：给定一些货币之间的单向汇率，问一笔钱能否经过若干次对换而增值。</p>
+<p>分析：根据输入建立有向图，不能使用dijaskra,因为增值的方法不一定是优先选择最小的路径，并不是贪心所能解决的。所以要用以动态规划为基本思想的floyd来做。</p>
+<pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+const    int        maxn = 31;
+
+struct edge
+{
+    int        x;
+    double    l;
+    edge(int xx, double ll):x(xx),l(ll)
+    {}
+};
+
+string    names[maxn];
+int        n, m;
+double    map[maxn][maxn];
+bool    found;
+
+int getid(string &amp;a)
+{
+    int        i;
+
+    for (i = 0; i &lt; n; i++)
+        if (a == names[i])
+            return i;
+    return 0;
+}
+
+void init()
+{
+    int        i;
+    string    name1, name2;
+    double    l;
+
+    getchar();
+    for (i = 0; i &lt; n; i++)
+    {
+        cin &gt;&gt; names[i];
+        map[i][i] = 1;
+        getchar();
+    }
+    scanf("%d", &amp;m);
+    getchar();
+    for (i = 0; i &lt; m; i++)
+    {
+        cin &gt;&gt; name1;
+        cin &gt;&gt; l;
+        cin &gt;&gt; name2;
+        map[getid(name1)][getid(name2)]=l;
+    }
+}
+
+void floyd()
+{
+    int        i, j, k;
+
+    found = false;
+    for (k = 0; k &lt; n; k++)
+        for (i = 0; i &lt; n; i++)
+            for (j = 0; j &lt; n; j++)
+                if (map[i][j] &lt; map[i][k] * map[k][j])
+                    map[i][j] = map[i][k] * map[k][j];
+    for (i = 0; i &lt; n; i++)
+        if (map[i][i] &gt; 1)
+        {
+            found = true;
+            break;
+        }
+}
+
+int main()
+{
+    int        t = 0;
+
+    //freopen("t.txt", "r", stdin);
+    while (cin &gt;&gt; n &amp;&amp; n != 0)
+    {
+        init();
+        found = false;
+        printf("Case %d: ", ++t);
+        floyd();
+        if (found)
+            printf("Yes\n");
+        else
+            printf("No\n");
+    }
+    return 0;
+}</pre>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj3226</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj3226</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 13 Oct 2011</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>高精度组合数学</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c4973117-c85d-4c2f-834f-d68216e76fff')"><img id="code_img_closed_c4973117-c85d-4c2f-834f-d68216e76fff" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" /><img style="display: none;" id="code_img_opened_c4973117-c85d-4c2f-834f-d68216e76fff" class="code_img_opened" onclick="cnblogs_code_hide('c4973117-c85d-4c2f-834f-d68216e76fff',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_c4973117-c85d-4c2f-834f-d68216e76fff" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span> java.io.*;<br /><span style="color: #0000ff;">import</span> java.util.*;<br /><span style="color: #0000ff;">import</span> java.math.*;<br /><br /><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Main {<br />    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span> FileNotFoundException<br />    {<br />        Scanner cin = <span style="color: #0000ff;">new</span> Scanner(<span style="color: #0000ff;">new</span> BufferedInputStream(System.in));<br />        <span style="color: #008000;">//</span><span style="color: #008000;">Scanner cin = new Scanner(new FileInputStream("t.txt"));</span><span style="color: #008000;"><br /></span>        <span style="color: #0000ff;">int</span> n = cin.nextInt();<br />        <span style="color: #0000ff;">while</span> (n != 0)<br />        {<br />            String st = cin.next();<br />            BigInteger a = <span style="color: #0000ff;">new</span> BigInteger("1");<br />            BigInteger ans = <span style="color: #0000ff;">new</span> BigInteger("0");<br />            <span style="color: #0000ff;">int</span>[] f = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">int</span>[30];<br />            <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; n; i++)<br />                f[i] = st.charAt(i) - 'A';<br />            <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = n - 1; i &gt;= 0; i--)<br />            {<br />                <span style="color: #0000ff;">int</span> x = 0;<br />                <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = 0; j &lt; i; j++)<br />                    <span style="color: #0000ff;">if</span> (f[j] &lt; f[i])<br />                        x++;<br />                f[i] -= x;<br />            }<br />            <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = n - 1; i &gt;= 0; i--)<br />            {<br />                <span style="color: #0000ff;">int</span> x = f[i];<br />                ans = ans.add(BigInteger.valueOf(x).multiply(a));<br />                a = a.multiply(BigInteger.valueOf(26 - i));<br />            }<br />            System.out.println(ans);<br />            n = cin.nextInt();<br />        }<br />    }<br />}</pre>
+</div>
+</div>
+<p></p>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

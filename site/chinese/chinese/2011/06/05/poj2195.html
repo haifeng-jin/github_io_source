@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj2195</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj2195</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 05 Jun 2011</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：有一个矩阵，某些格有人，某些格有房子，每个人可以上下左右移动，问给每个人进一个房子，所有人需要走的距离之和最小是多少。</p>
+<p>分析：最小费用最大流每个人一个点，每个房子一个点，每个人到所有房子加容量为1费用为二者距离的边，源到所有人加容量为1费用为0的边，所有房子到汇加容量为1费用为0的边。因为没有初始化ne，wa了两次。渐渐开始理解网络流的题型了，是一种可以自由分配，求最优分配方案的题。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9303702b-f1dc-45aa-a73c-fff04a366677')"><img id="code_img_closed_9303702b-f1dc-45aa-a73c-fff04a366677" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9303702b-f1dc-45aa-a73c-fff04a366677" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9303702b-f1dc-45aa-a73c-fff04a366677',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_9303702b-f1dc-45aa-a73c-fff04a366677" class="cnblogs_code_hide">
+<div><span style="color: #000000;">#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">iostream</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdlib</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstring</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdio</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cmath</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000ff;">using</span><span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;<br /><br /></span><span style="color: #0000ff;">#define</span><span style="color: #000000;"> inf 0x3f3f3f3f</span><span style="color: #000000;"><br /></span><span style="color: #0000ff;">#define</span><span style="color: #000000;"> N 205</span><span style="color: #000000;"><br /></span><span style="color: #0000ff;">#define</span><span style="color: #000000;"> E 40000</span><span style="color: #000000;"><br /><br /></span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> XPoint<br />{<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y;<br />}house[N], man[N];<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;<br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> hcount, mcount;<br /><br /></span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> network<br />{<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> nv, ne, pnt[E], nxt[E];<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> vis[N], que[N], head[N], pv[N], pe[N];<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> flow, cap[E];<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> cost, dis[E], d[N];<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> src, sink;<br />    </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> addedge(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> u, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> c, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> w)<br />    {<br />        pnt[ne] </span><span style="color: #000000;">=</span><span style="color: #000000;"> v;<br />        cap[ne] </span><span style="color: #000000;">=</span><span style="color: #000000;"> c;<br />        dis[ne] </span><span style="color: #000000;">=</span><span style="color: #000000;">+</span><span style="color: #000000;">w;<br />        nxt[ne] </span><span style="color: #000000;">=</span><span style="color: #000000;"> head[u];<br />        head[u] </span><span style="color: #000000;">=</span><span style="color: #000000;"> (ne</span><span style="color: #000000;">++</span><span style="color: #000000;">);<br />        pnt[ne] </span><span style="color: #000000;">=</span><span style="color: #000000;"> u;<br />        cap[ne] </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />        dis[ne] </span><span style="color: #000000;">=</span><span style="color: #000000;">-</span><span style="color: #000000;">w;<br />        nxt[ne] </span><span style="color: #000000;">=</span><span style="color: #000000;"> head[v];<br />        head[v] </span><span style="color: #000000;">=</span><span style="color: #000000;"> (ne</span><span style="color: #000000;">++</span><span style="color: #000000;">);<br />    }<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> mincost()<br />    {<br />        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i, k, f, r;<br />        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> mxf;<br />        </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (flow </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">, cost </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;;)<br />        {<br />            memset(pv, </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(pv));<br />            memset(vis, </span><span style="color: #800080;">0</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));<br />            </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (i </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> nv; </span><span style="color: #000000;">++</span><span style="color: #000000;">i)<br />                d[i] </span><span style="color: #000000;">=</span><span style="color: #000000;"> inf;<br />            d[src] </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />            pv[src] </span><span style="color: #000000;">=</span><span style="color: #000000;"> src;<br />            vis[src] </span><span style="color: #000000;">=</span><span style="color: #800080;">1</span><span style="color: #000000;">;<br /><br />            </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (f </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">, r </span><span style="color: #000000;">=</span><span style="color: #800080;">1</span><span style="color: #000000;">, que[</span><span style="color: #800080;">0</span><span style="color: #000000;">] </span><span style="color: #000000;">=</span><span style="color: #000000;"> src; r </span><span style="color: #000000;">!=</span><span style="color: #000000;"> f;)<br />            {<br />                i </span><span style="color: #000000;">=</span><span style="color: #000000;"> que[f</span><span style="color: #000000;">++</span><span style="color: #000000;">];<br />                vis[i] </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (N </span><span style="color: #000000;">==</span><span style="color: #000000;"> f)<br />                    f </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />                </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (k </span><span style="color: #000000;">=</span><span style="color: #000000;"> head[i]; k </span><span style="color: #000000;">!=</span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">; k </span><span style="color: #000000;">=</span><span style="color: #000000;"> nxt[k])<br />                    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (cap[k] </span><span style="color: #000000;">&amp;&amp;</span><span style="color: #000000;"> dis[k] </span><span style="color: #000000;">+</span><span style="color: #000000;"> d[i] </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> d[pnt[k]])<br />                    {<br />                        d[pnt[k]] </span><span style="color: #000000;">=</span><span style="color: #000000;"> dis[k] </span><span style="color: #000000;">+</span><span style="color: #000000;"> d[i];<br />                        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (</span><span style="color: #800080;">0</span><span style="color: #000000;">==</span><span style="color: #000000;"> vis[pnt[k]])<br />                        {<br />                            vis[pnt[k]] </span><span style="color: #000000;">=</span><span style="color: #800080;">1</span><span style="color: #000000;">;<br />                            que[r</span><span style="color: #000000;">++</span><span style="color: #000000;">] </span><span style="color: #000000;">=</span><span style="color: #000000;"> pnt[k];<br />                            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (N </span><span style="color: #000000;">==</span><span style="color: #000000;"> r)<br />                                r </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />                        }<br />                        pv[pnt[k]] </span><span style="color: #000000;">=</span><span style="color: #000000;"> i;<br />                        pe[pnt[k]] </span><span style="color: #000000;">=</span><span style="color: #000000;"> k;<br />                    }<br />            }<br />            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (</span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">==</span><span style="color: #000000;"> pv[sink])<br />                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;<br />            </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (k </span><span style="color: #000000;">=</span><span style="color: #000000;"> sink, mxf </span><span style="color: #000000;">=</span><span style="color: #000000;"> inf; k </span><span style="color: #000000;">!=</span><span style="color: #000000;"> src; k </span><span style="color: #000000;">=</span><span style="color: #000000;"> pv[k])<br />                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (cap[pe[k]] </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> mxf)<br />                    mxf </span><span style="color: #000000;">=</span><span style="color: #000000;"> cap[pe[k]];<br />            flow </span><span style="color: #000000;">+=</span><span style="color: #000000;"> mxf;<br />            cost </span><span style="color: #000000;">+=</span><span style="color: #000000;"> d[sink] </span><span style="color: #000000;">*</span><span style="color: #000000;"> mxf;<br />            </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (k </span><span style="color: #000000;">=</span><span style="color: #000000;"> sink; k </span><span style="color: #000000;">!=</span><span style="color: #000000;"> src; k </span><span style="color: #000000;">=</span><span style="color: #000000;"> pv[k])<br />            {<br />                cap[pe[k]] </span><span style="color: #000000;">-=</span><span style="color: #000000;"> mxf;<br />                cap[pe[k] </span><span style="color: #000000;">^</span><span style="color: #800080;">1</span><span style="color: #000000;">] </span><span style="color: #000000;">+=</span><span style="color: #000000;"> mxf;<br />            }<br />        }<br />        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> cost;<br />    }<br />    </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> build()<br />    {<br />        hcount </span><span style="color: #000000;">=</span><span style="color: #000000;"> mcount </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />        </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> n; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />        {<br />            </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> j </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; j </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> m; j</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />            {<br />                </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> ch </span><span style="color: #000000;">=</span><span style="color: #000000;"> getchar();<br />                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ch </span><span style="color: #000000;">==</span><span style="color: #800000;">'</span><span style="color: #800000;">H</span><span style="color: #800000;">'</span><span style="color: #000000;">)<br />                {<br />                    house[hcount].x </span><span style="color: #000000;">=</span><span style="color: #000000;"> i;<br />                    house[hcount].y </span><span style="color: #000000;">=</span><span style="color: #000000;"> j;<br />                    hcount</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />                }<br />                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ch </span><span style="color: #000000;">==</span><span style="color: #800000;">'</span><span style="color: #800000;">m</span><span style="color: #800000;">'</span><span style="color: #000000;">)<br />                {<br />                    man[mcount].x </span><span style="color: #000000;">=</span><span style="color: #000000;"> i;<br />                    man[mcount].y </span><span style="color: #000000;">=</span><span style="color: #000000;"> j;<br />                    mcount</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />                }<br />            }<br />            getchar();<br />        }<br />        nv </span><span style="color: #000000;">=</span><span style="color: #000000;"> hcount </span><span style="color: #000000;">*</span><span style="color: #800080;">2</span><span style="color: #000000;">+</span><span style="color: #800080;">2</span><span style="color: #000000;">;<br />        ne </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />        memset(head, </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));<br />        </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> mcount; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />            </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> j </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; j </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> hcount; j</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />                addedge(i, j </span><span style="color: #000000;">+</span><span style="color: #000000;"> mcount, </span><span style="color: #800080;">1</span><span style="color: #000000;">, abs(man[i].x </span><span style="color: #000000;">-</span><span style="color: #000000;"> house[j].x) </span><span style="color: #000000;">+</span><span style="color: #000000;"> abs(man[i].y </span><span style="color: #000000;">-</span><span style="color: #000000;"> house[j].y));<br />        src </span><span style="color: #000000;">=</span><span style="color: #000000;"> nv </span><span style="color: #000000;">-</span><span style="color: #800080;">2</span><span style="color: #000000;">;<br />        sink </span><span style="color: #000000;">=</span><span style="color: #000000;"> nv </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">;<br />        </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> mcount; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />            addedge(src, i, </span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #800080;">0</span><span style="color: #000000;">);<br />        </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> hcount; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />            addedge(i </span><span style="color: #000000;">+</span><span style="color: #000000;"> mcount, sink, </span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #800080;">0</span><span style="color: #000000;">);<br />    }<br />}g;<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()<br />{<br />    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span><span style="color: #008000;"><br /></span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">n, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">m), n </span><span style="color: #000000;">|</span><span style="color: #000000;"> m)<br />    {<br />        getchar();<br />        g.build();<br />        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ans </span><span style="color: #000000;">=</span><span style="color: #000000;"> g.mincost();<br />        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);<br />    }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />}</span></div>
+
+</div>
+
+</div>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

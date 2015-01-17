@@ -1,0 +1,40 @@
+---
+layout: post
+title: poj1504
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('87aa2dfd-f6f9-46ed-b51d-efb708fbd46c')"><img id="code_img_closed_87aa2dfd-f6f9-46ed-b51d-efb708fbd46c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_87aa2dfd-f6f9-46ed-b51d-efb708fbd46c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('87aa2dfd-f6f9-46ed-b51d-efb708fbd46c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_87aa2dfd-f6f9-46ed-b51d-efb708fbd46c" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span> reverse_num(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">char</span> st[<span style="color: #800080;">50</span><span style="color: #000000;">];
+    sprintf(st, </span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, a);
+    reverse(st, st </span>+<span style="color: #000000;"> strlen(st));
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ret;
+    sscanf(st, </span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">ret);
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;a, &amp;<span style="color: #000000;">b);
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span>, reverse_num(reverse_num(a) +<span style="color: #000000;"> reverse_num(b)));
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

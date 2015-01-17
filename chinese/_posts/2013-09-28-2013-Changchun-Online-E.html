@@ -1,0 +1,86 @@
+---
+layout: post
+title: 2013 ACM/ICPC 长春网络赛E题
+category: chinese
+---
+<p>题意：给出一个字符串，要从头、尾和中间找出三个完全相等的子串，这些串覆盖的区间互相不能有重叠部分。头、尾的串即为整个字符串的前缀和后缀。问这个相同的子串的最大长度是多少。</p>
+<p>分析：利用KMP算法中的next数组。next数组有一个性质，如果next[b]指向a。a&lt;b。那么 以a作为结尾的原串前缀 是 以b作为结尾的原串前缀 的后缀。</p>
+<p>那么如果b是原串的最后一位，那么以b结尾的前缀就是原串，则a结尾的前缀与一个原串的后缀相等。</p>
+<p>我们既然找到了一个相等的前缀和后缀，只需要再判断中间是否有相同的子串即可。即判断是否存在next[c]==a，或者next[next[c]]==a，或者&hellip;&hellip;</p>
+<p>如果没有我们就缩短前缀的长度，方法就是让a=next[next[b]]，a=next[next[next[b]]]，这样不断迭代。每次这样判断，直到找到一个中间存在相等串的为止。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4a1d819d-fb61-4ea2-ae6d-c895c8d39b85')"><img id="code_img_closed_4a1d819d-fb61-4ea2-ae6d-c895c8d39b85" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4a1d819d-fb61-4ea2-ae6d-c895c8d39b85" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4a1d819d-fb61-4ea2-ae6d-c895c8d39b85',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4a1d819d-fb61-4ea2-ae6d-c895c8d39b85" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_SONG_LEN 1000005
+
+<span style="color: #0000ff;">char</span><span style="color: #000000;"> song[MAX_SONG_LEN];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> left_link[MAX_SONG_LEN];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> song_len;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span>, (song + <span style="color: #800080;">1</span><span style="color: #000000;">));
+    song_len </span>= strlen(song + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    song[</span><span style="color: #800080;">0</span>] = -<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> kmp(<span style="color: #0000ff;">char</span> st[], <span style="color: #0000ff;">int</span> next[], <span style="color: #0000ff;">int</span><span style="color: #000000;"> len)
+{
+    next[</span><span style="color: #800080;">1</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    next[</span><span style="color: #800080;">0</span>] = -<span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">2</span>; i &lt;= len; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> temp = next[i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+        </span><span style="color: #0000ff;">while</span> (temp &gt;= <span style="color: #800080;">0</span> &amp;&amp; st[i] != st[temp + <span style="color: #800080;">1</span><span style="color: #000000;">])
+            temp </span>=<span style="color: #000000;"> next[temp];
+        next[i] </span>= temp + <span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span> reach(<span style="color: #0000ff;">int</span> l, <span style="color: #0000ff;">int</span><span style="color: #000000;"> r)
+{
+    </span><span style="color: #0000ff;">while</span> (r &gt;<span style="color: #000000;"> l)
+        r </span>=<span style="color: #000000;"> left_link[r];
+    </span><span style="color: #0000ff;">return</span> r ==<span style="color: #000000;"> l;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> prefix_end =<span style="color: #000000;"> song_len;
+    </span><span style="color: #0000ff;">while</span> (prefix_end &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (prefix_end &gt; song_len / <span style="color: #800080;">2</span><span style="color: #000000;">)
+        {
+            prefix_end </span>=<span style="color: #000000;"> left_link[prefix_end];
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">int</span> theme_len =<span style="color: #000000;"> prefix_end;
+        </span><span style="color: #0000ff;">int</span> suffix_begin = song_len - theme_len + <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> mid_end =<span style="color: #000000;"> prefix_end;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = prefix_end + <span style="color: #800080;">1</span>; i &lt; suffix_begin; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (reach(prefix_end, i) &amp;&amp; i - prefix_end &gt;=<span style="color: #000000;"> theme_len)
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> theme_len;
+        prefix_end </span>=<span style="color: #000000;"> left_link[prefix_end];
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> case_num;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">case_num);
+    </span><span style="color: #0000ff;">while</span> (case_num--<span style="color: #000000;">)
+    {
+        input();
+        kmp(song, left_link, song_len);
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

@@ -1,0 +1,76 @@
+---
+layout: post
+title: poj3200
+category: chinese
+---
+<p>题意：给出一些圆盘，质量和面积成正比，把他们一层一层的按照规定的坐标罗起来，问到哪一层会不稳定。不稳定的意思就是说中间存在某一个圆盘，它上面的所有圆盘的质心在它的面积范围之外。题目对输出中的哪一层的k描述有误，实际输出的层号比题中描述的小1。</p>
+<p>分析：利用质心公式</p>
+<p>X=(X1*M1+X2*M2+ ... ... +Xn*Mn)/(M1+M2+ ... ... +Mn) ,<br />Y=(Y1*M1+Y2*M2+......+Yn*Mn)/(M1+M2+......+Mn)</p>
+<p>用n^2的效率判断即可。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('950080f1-5465-4c64-8a85-284f45b5d6d4')"><img id="code_img_closed_950080f1-5465-4c64-8a85-284f45b5d6d4" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_950080f1-5465-4c64-8a85-284f45b5d6d4" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('950080f1-5465-4c64-8a85-284f45b5d6d4',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_950080f1-5465-4c64-8a85-284f45b5d6d4" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 1005
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Elem
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> x, y, r;
+} block[maxn];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%lld%lld%lld</span><span style="color: #800000;">"</span>, &amp;block[i].x, &amp;block[i].y, &amp;<span style="color: #000000;">block[i].r);
+}
+
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> unstable(Elem a, Elem b, Elem c)
+{
+    </span><span style="color: #0000ff;">double</span> bx = b.x * <span style="color: #800080;">1.0</span> /<span style="color: #000000;"> c.x;
+    </span><span style="color: #0000ff;">double</span> by = b.y * <span style="color: #800080;">1.0</span> /<span style="color: #000000;"> c.y;
+    </span><span style="color: #0000ff;">double</span> xx = a.x -<span style="color: #000000;"> bx;
+    </span><span style="color: #0000ff;">double</span> yy = a.y -<span style="color: #000000;"> by;
+    </span><span style="color: #0000ff;">return</span> xx * xx + yy * yy &gt;= a.r *<span style="color: #000000;"> a.r;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n), n)
+    {
+        input();
+        </span><span style="color: #0000ff;">bool</span> ok = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; n; i++<span style="color: #000000;">)
+        {
+            Elem b, c;
+            b.x </span>= b.y = <span style="color: #800080;">0</span><span style="color: #000000;">;
+            c.x </span>= c.y = <span style="color: #800080;">0</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = i; j &gt; <span style="color: #800080;">0</span>; j--<span style="color: #000000;">)
+            {
+                b.x </span>+= block[j].x * block[j].r *<span style="color: #000000;"> block[j].r;
+                c.x </span>+= block[j].r *<span style="color: #000000;"> block[j].r;
+                b.y </span>+= block[j].y * block[j].r *<span style="color: #000000;"> block[j].r;
+                c.y </span>+= block[j].r *<span style="color: #000000;"> block[j].r;
+                </span><span style="color: #0000ff;">if</span> (unstable(block[j - <span style="color: #800080;">1</span><span style="color: #000000;">], b, c))
+                {
+                    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Unfeasible %d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, i);
+                    ok </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+                    </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                }
+            }
+            </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">ok)
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Feasible\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj2996</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj2996</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 01 Feb 2011</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>本题是简单的模拟，使用双层vector嵌套存储棋子的位置和种类，然后分别对每个vector进行排序</p>  <p>注意：排序方法为sort(piece[i].begin(), piece[i].end(), cmpWhite);   <br />当然，cmpWhite是比较函数，可以不加比较函数，只用用前两个参数。</p>  <p>&#160;</p>  <pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+
+const int maxn = 9;
+
+int getid[150];
+
+struct Piece
+{
+	int x, y, d;
+	Piece()
+	{
+	}
+	Piece(int xx, int yy, char dd) :
+		x(xx), y(yy), d(dd)
+	{
+	}
+};
+
+vector&lt;vector&lt;Piece&gt; &gt; piece(12);
+
+void init()
+{
+	string st;
+
+	memset(getid, -1, sizeof(getid));
+	getid[int('K')] = 0;
+	getid[int('Q')] = 1;
+	getid[int('R')] = 2;
+	getid[int('B')] = 3;
+	getid[int('N')] = 4;
+	getid[int('P')] = 5;
+	getid[int('k')] = 6;
+	getid[int('q')] = 7;
+	getid[int('r')] = 8;
+	getid[int('b')] = 9;
+	getid[int('n')] = 10;
+	getid[int('p')] = 11;
+	for (int i = 1; i &lt; maxn; i++)
+	{
+		getline(cin, st);
+		for (int j = 1; j &lt; maxn; j++)
+		{
+			char ch;
+			getchar();
+			getchar();
+			cin &gt;&gt; ch;
+			getchar();
+			if (getid[int(ch)] != -1)
+				piece[getid[int(ch)]].push_back(Piece(9 - i, j, ch));
+		}
+		getline(cin, st);
+	}
+}
+
+bool cmpWhite(const Piece &amp;a, const Piece &amp;b)
+{
+	if (a.x == b.x)
+		return a.y &lt; b.y;
+	return a.x &lt; b.x;
+}
+
+bool cmpBlack(const Piece &amp;a, const Piece &amp;b)
+{
+	if (a.x == b.x)
+		return a.y &lt; b.y;
+	return a.x &gt; b.x;
+}
+
+void sortout()
+{
+	for (int i = 0; i &lt; 6; i++)
+		sort(piece[i].begin(), piece[i].end(), cmpWhite);
+	for (int i = 6; i &lt; 12; i++)
+		sort(piece[i].begin(), piece[i].end(), cmpBlack);
+}
+
+void output()
+{
+	bool first = true;
+
+	cout &lt;&lt; &quot;White: &quot;;
+	for (int i = 0; i &lt; 6; i++)
+	{
+		for (unsigned int j = 0; j &lt; piece[i].size(); j++)
+		{
+			if (first)
+				first = false;
+			else
+				cout &lt;&lt; &quot;,&quot;;
+			if (piece[i][j].d != 'P')
+				cout &lt;&lt; char(piece[i][j].d);
+			cout &lt;&lt; char(piece[i][j].y + 'a' - 1) &lt;&lt; piece[i][j].x;
+		}
+	}
+
+	cout &lt;&lt; endl;
+	first = true;
+	cout &lt;&lt; &quot;Black: &quot;;
+	for (int i = 6; i &lt; 12; i++)
+	{
+		for (unsigned int j = 0; j &lt; piece[i].size(); j++)
+		{
+			if (first)
+				first = false;
+			else
+				cout &lt;&lt; &quot;,&quot;;
+			if (piece[i][j].d != 'p')
+				cout &lt;&lt; char(piece[i][j].d - 'a' + 'A');
+			cout &lt;&lt; char(piece[i][j].y + 'a' - 1) &lt;&lt; piece[i][j].x;
+		}
+	}
+}
+
+int main()
+{
+	//freopen(&quot;D:\\t.txt&quot;, &quot;r&quot;, stdin);
+	init();
+	sortout();
+	output();
+	return 0;
+}</pre>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

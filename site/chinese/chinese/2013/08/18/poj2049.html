@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj2049</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj2049</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 18 Aug 2013</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>优先队列广搜，有人说用SPFA，不知道怎么做的</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('25d8c7b0-5ce6-494f-bfa6-b2249e0ccf80')"><img id="code_img_closed_25d8c7b0-5ce6-494f-bfa6-b2249e0ccf80" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_25d8c7b0-5ce6-494f-bfa6-b2249e0ccf80" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('25d8c7b0-5ce6-494f-bfa6-b2249e0ccf80',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_25d8c7b0-5ce6-494f-bfa6-b2249e0ccf80" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;queue&gt;<span style="color: #000000;">
+#include </span>&lt;cmath&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_COORDINATE 205
+<span style="color: #0000ff;">#define</span> inf 0x3f3f3f3f
+<span style="color: #0000ff;">#define</span> EDGE 200
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Grid
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> left, right, up, down;
+}grid[MAX_COORDINATE][MAX_COORDINATE]; </span><span style="color: #008000;">//</span><span style="color: #008000;"> using down-left coner point to present a gird</span>
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Point
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> door_cnt;
+    Point()
+    {}
+    Point(</span><span style="color: #0000ff;">int</span> xx, <span style="color: #0000ff;">int</span> yy, <span style="color: #0000ff;">int</span><span style="color: #000000;"> dd):x(xx), y(yy), door_cnt(dd)
+    {}
+}nemo;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> wall_num, door_num;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[MAX_COORDINATE][MAX_COORDINATE];
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> &lt; (<span style="color: #0000ff;">const</span> Point &amp;a, <span style="color: #0000ff;">const</span> Point &amp;<span style="color: #000000;">b)
+{
+    </span><span style="color: #0000ff;">return</span> a.door_cnt &gt;<span style="color: #000000;"> b.door_cnt;
+}
+
+</span><span style="color: #0000ff;">void</span> make_grids(<span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span> y, <span style="color: #0000ff;">int</span> direction, <span style="color: #0000ff;">int</span><span style="color: #000000;"> value)
+{
+    </span><span style="color: #0000ff;">if</span> (direction == <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        grid[x][y].down </span>=<span style="color: #000000;"> value;
+        grid[x][y </span>- <span style="color: #800080;">1</span>].up =<span style="color: #000000;"> value;
+    }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+    {
+        grid[x][y].left </span>=<span style="color: #000000;"> value;
+        grid[x </span>- <span style="color: #800080;">1</span>][y].right =<span style="color: #000000;"> value;
+    }
+}            
+
+</span><span style="color: #0000ff;">void</span> build_wall(<span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span> y, <span style="color: #0000ff;">int</span> direction, <span style="color: #0000ff;">int</span><span style="color: #000000;"> length)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; length; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> current_x =<span style="color: #000000;"> x;
+        </span><span style="color: #0000ff;">int</span> current_y =<span style="color: #000000;"> y;
+        </span><span style="color: #0000ff;">if</span> (direction == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            current_x </span>+=<span style="color: #000000;"> i;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            current_y </span>+=<span style="color: #000000;"> i;
+        make_grids(current_x, current_y, direction, inf);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init_grids()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; EDGE; i++<span style="color: #000000;">)
+    {
+        grid[i][</span><span style="color: #800080;">0</span>].down =<span style="color: #000000;"> inf;
+        grid[i][EDGE </span>- <span style="color: #800080;">1</span>].up =<span style="color: #000000;"> inf;
+        grid[</span><span style="color: #800080;">0</span>][i].left =<span style="color: #000000;"> inf;
+        grid[EDGE </span>- <span style="color: #800080;">1</span>][i].right =<span style="color: #000000;"> inf;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    memset(grid, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(grid));
+    init_grids();
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; wall_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y, direction, length;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d%d</span><span style="color: #800000;">"</span>, &amp;x, &amp;y, &amp;direction, &amp;<span style="color: #000000;">length);
+        build_wall(x, y, direction, length);
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; door_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y, direction;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;x, &amp;y, &amp;<span style="color: #000000;">direction);
+        make_grids(x, y, direction, </span><span style="color: #800080;">1</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;"> x, y;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%lf%lf</span><span style="color: #800000;">"</span>, &amp;x, &amp;<span style="color: #000000;">y);
+    nemo.x </span>=<span style="color: #000000;"> floor(x);
+    nemo.y </span>=<span style="color: #000000;"> floor(y);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">if</span> (nemo.x &lt; <span style="color: #800080;">0</span> || nemo.x &gt;= EDGE || nemo.y &lt; <span style="color: #800080;">0</span> || nemo.y &gt;=<span style="color: #000000;"> EDGE)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    priority_queue</span>&lt;Point&gt;<span style="color: #000000;"> pq;
+    pq.push(Point(</span><span style="color: #800080;">0</span>, <span style="color: #800080;">0</span>, <span style="color: #800080;">0</span><span style="color: #000000;">));
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    vis[</span><span style="color: #800080;">0</span>][<span style="color: #800080;">0</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">pq.empty())
+    {
+        Point u </span>=<span style="color: #000000;"> pq.top();
+        </span><span style="color: #0000ff;">if</span> (u.x == nemo.x &amp;&amp; u.y ==<span style="color: #000000;"> nemo.y)
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> u.door_cnt;
+        pq.pop();
+        </span><span style="color: #0000ff;">if</span> (grid[u.x][u.y].up != inf &amp;&amp; !vis[u.x][u.y + <span style="color: #800080;">1</span><span style="color: #000000;">])
+        {
+            pq.push(Point(u.x, u.y </span>+ <span style="color: #800080;">1</span>, u.door_cnt +<span style="color: #000000;"> grid[u.x][u.y].up));
+            vis[u.x][u.y </span>+ <span style="color: #800080;">1</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (grid[u.x][u.y].down != inf &amp;&amp; !vis[u.x][u.y - <span style="color: #800080;">1</span><span style="color: #000000;">])
+        {
+            pq.push(Point(u.x, u.y </span>- <span style="color: #800080;">1</span>, u.door_cnt +<span style="color: #000000;"> grid[u.x][u.y].down));
+            vis[u.x][u.y </span>- <span style="color: #800080;">1</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (grid[u.x][u.y].left != inf &amp;&amp; !vis[u.x - <span style="color: #800080;">1</span><span style="color: #000000;">][u.y])
+        {
+            pq.push(Point(u.x </span>- <span style="color: #800080;">1</span>, u.y, u.door_cnt +<span style="color: #000000;"> grid[u.x][u.y].left));
+            vis[u.x </span>- <span style="color: #800080;">1</span>][u.y] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (grid[u.x][u.y].right != inf &amp;&amp; !vis[u.x + <span style="color: #800080;">1</span><span style="color: #000000;">][u.y])
+        {
+            pq.push(Point(u.x </span>+ <span style="color: #800080;">1</span>, u.y, u.door_cnt +<span style="color: #000000;"> grid[u.x][u.y].right));
+            vis[u.x </span>+ <span style="color: #800080;">1</span>][u.y] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+    }
+    </span><span style="color: #0000ff;">return</span> -<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;wall_num, &amp;door_num), !(wall_num == -<span style="color: #800080;">1</span> &amp;&amp; door_num == -<span style="color: #800080;">1</span><span style="color: #000000;">))
+    {
+        input();
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

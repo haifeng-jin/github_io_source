@@ -1,0 +1,72 @@
+---
+layout: post
+title: poj1088
+category: chinese
+---
+<p>题意：有一个矩阵，要求在矩阵上找到一个四方向行走的路线，使得每走一步走到的格子中的数字都比上一步的要小，问路线最长有多长。</p>
+<p>分析：先将所有格子按数字大小排序。然后从最大的开始，每次看其四周是否有能走的格子，并更新四周格子的路线长度（每个格子中有一个变量记录以该格子为终点的最长路线长度）。</p>
+<p>当然，除了上述方法，还可以用记忆化搜索</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a9dfc94b-e3cc-42d3-ac1a-d9dd796ef0f3')"><img id="code_img_closed_a9dfc94b-e3cc-42d3-ac1a-d9dd796ef0f3" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a9dfc94b-e3cc-42d3-ac1a-d9dd796ef0f3" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a9dfc94b-e3cc-42d3-ac1a-d9dd796ef0f3',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a9dfc94b-e3cc-42d3-ac1a-d9dd796ef0f3" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxr = <span style="color: #800080;">102</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> cpoint
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        x, y, height;
+}f[maxr </span>*<span style="color: #000000;"> maxr];
+
+</span><span style="color: #0000ff;">int</span>        r, c, total, map[maxr][maxr], pos[maxr][maxr], dir[<span style="color: #800080;">4</span>][<span style="color: #800080;">2</span>] = {<span style="color: #800080;">0</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">0</span>, -<span style="color: #800080;">1</span>, <span style="color: #800080;">0</span>, <span style="color: #800080;">0</span>, -<span style="color: #800080;">1</span><span style="color: #000000;">};
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span>&lt;<span style="color: #000000;"> (cpoint a, cpoint b)
+{
+    </span><span style="color: #0000ff;">return</span> a.height &gt;<span style="color: #000000;"> b.height;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, j;
+
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;r, &amp;<span style="color: #000000;">c);
+    total </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= r; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">1</span>; j &lt;= c; j++<span style="color: #000000;">)
+        {
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">f[total].height);
+            map[i][j] </span>=<span style="color: #000000;"> f[total].height;
+            pos[i][j] </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            f[total].x </span>=<span style="color: #000000;"> i;
+            f[total].y </span>=<span style="color: #000000;"> j;
+            total</span>++<span style="color: #000000;">;
+        }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span>        i, j, ans = <span style="color: #800080;">1</span><span style="color: #000000;">;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; total; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; <span style="color: #800080;">4</span>; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (map[f[i].x][f[i].y] &lt; map[f[i].x + dir[j][<span style="color: #800080;">0</span>]][f[i].y + dir[j][<span style="color: #800080;">1</span>]] &amp;&amp; pos[f[i].x][f[i].y] &lt; pos[f[i].x + dir[j][<span style="color: #800080;">0</span>]][f[i].y + dir[j][<span style="color: #800080;">1</span>]] + <span style="color: #800080;">1</span><span style="color: #000000;">)
+            {
+                pos[f[i].x][f[i].y] </span>= pos[f[i].x + dir[j][<span style="color: #800080;">0</span>]][f[i].y + dir[j][<span style="color: #800080;">1</span>]] + <span style="color: #800080;">1</span><span style="color: #000000;">;
+                </span><span style="color: #0000ff;">if</span> (pos[f[i].x][f[i].y] &gt;<span style="color: #000000;"> ans)
+                    ans </span>=<span style="color: #000000;"> pos[f[i].x][f[i].y];
+            }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    init();
+    sort(f, f </span>+ r *<span style="color: #000000;"> c);
+    work();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

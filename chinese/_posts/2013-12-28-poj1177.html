@@ -1,0 +1,223 @@
+---
+layout: post
+title: poj1177
+category: chinese
+---
+<p>题意：在平面直角坐标系内给出一些与坐标轴平行的矩形，将这些矩形覆盖的区域求交集，然后问这个区域的周长是多少。</p>
+<p>分析：线段树。曾经做过类似的求矩形覆盖的总面积的题。这道题同样要使用扫描线算法。属于线保留型线段树。</p>
+<p>我们先领扫描线与y轴平行。</p>
+<p>线段树内每个节点除了要记录该区间被覆盖了几层之外，还要记录当前状态下扫描线在该区间内与多少条与x轴平行的边相交。</p>
+<p>暂时不判断区间两端点是否是为交点。节点上还有两个bool型变量，记录该区间内（包括子树）线段覆盖是否接触到该区间的起始和结束点。</p>
+<p>在父节点再对子区间的起始和结束点进行特殊判断，判断子区间的端点是否是交点。</p>
+<p>这样就得知了每段与x轴平行的距离内有多少条线段需要计算，距离乘以数量即可。这样就计算出了所有与x轴平行的周长上的边的总长度。</p>
+<p>之后让扫描线与x轴平行即可计算出与y轴平行的所有周长上的边的总长度。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('455ab36e-563f-44b1-8a7d-32480fc3a477')"><img id="code_img_closed_455ab36e-563f-44b1-8a7d-32480fc3a477" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_455ab36e-563f-44b1-8a7d-32480fc3a477" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('455ab36e-563f-44b1-8a7d-32480fc3a477',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_455ab36e-563f-44b1-8a7d-32480fc3a477" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+</span><span style="color: #008000;">//</span><span style="color: #008000;">scanning from left to right
+</span><span style="color: #008000;">//</span><span style="color: #008000;">discretionize Ys</span>
+<span style="color: #0000ff;">#define</span> MAX_REC_NUM 5005
+<span style="color: #0000ff;">#define</span> MAX_INTERVAL MAX_REC_NUM * 2
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Node
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">    l, r;
+    Node    </span>*pleft, *<span style="color: #000000;">pright;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">    num;
+    </span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    to_left, to_right;    
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">    edge_num;
+};
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">    node_cnt;
+Node    tree[MAX_INTERVAL </span>* <span style="color: #800080;">3</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Interval
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> start, end;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> pos;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> value;
+    Interval()
+    {}
+    Interval(</span><span style="color: #0000ff;">int</span> start, <span style="color: #0000ff;">int</span> end, <span style="color: #0000ff;">int</span> pos, <span style="color: #0000ff;">int</span><span style="color: #000000;"> value):start(start), end(end), pos(pos), value(value)
+    {}
+    </span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> &lt; (<span style="color: #0000ff;">const</span> Interval &amp;a)<span style="color: #0000ff;">const</span><span style="color: #000000;">
+    {
+        </span><span style="color: #0000ff;">if</span> (pos !=<span style="color: #000000;"> a.pos)
+            </span><span style="color: #0000ff;">return</span> pos &lt;<span style="color: #000000;"> a.pos;
+        </span><span style="color: #0000ff;">return</span> value &gt;<span style="color: #000000;"> a.value;
+    }
+}interval[MAX_REC_NUM </span>* <span style="color: #800080;">2</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Rectangle
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> l, d, u, r;
+}rec[MAX_REC_NUM];
+
+</span><span style="color: #0000ff;">int</span> discrete[MAX_REC_NUM * <span style="color: #800080;">2</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> discrete_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> rec_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> interval_num;
+
+</span><span style="color: #0000ff;">int</span> get_index(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">return</span> lower_bound(discrete, discrete + discrete_num, a) -<span style="color: #000000;"> discrete;
+}
+
+</span><span style="color: #0000ff;">void</span> discretization(<span style="color: #0000ff;">int</span> discrete[], <span style="color: #0000ff;">int</span> &amp;<span style="color: #000000;">discrete_num)
+{
+    sort(discrete, discrete </span>+<span style="color: #000000;"> discrete_num);
+    discrete_num </span>= unique(discrete, discrete + discrete_num) -<span style="color: #000000;"> discrete;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">rec_num);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; rec_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> l, d, r, u;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d%d</span><span style="color: #800000;">"</span>, &amp;l, &amp;d, &amp;r, &amp;<span style="color: #000000;">u);
+        rec[i].l </span>=<span style="color: #000000;"> l;
+        rec[i].r </span>=<span style="color: #000000;"> r;
+        rec[i].u </span>=<span style="color: #000000;"> u;
+        rec[i].d </span>=<span style="color: #000000;"> d;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make_xscan()
+{
+    discrete_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    interval_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; rec_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> l, d, r, u;
+        l </span>=<span style="color: #000000;"> rec[i].l;
+        r </span>=<span style="color: #000000;"> rec[i].r;
+        u </span>=<span style="color: #000000;"> rec[i].u;
+        d </span>=<span style="color: #000000;"> rec[i].d;
+        interval[interval_num</span>++] = Interval(d, u, l, <span style="color: #800080;">1</span><span style="color: #000000;">);
+        interval[interval_num</span>++] = Interval(d, u, r, -<span style="color: #800080;">1</span><span style="color: #000000;">);
+        discrete[discrete_num</span>++] =<span style="color: #000000;"> u;
+        discrete[discrete_num</span>++] =<span style="color: #000000;"> d;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make_yscan()
+{
+    discrete_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    interval_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; rec_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> l, d, r, u;
+        l </span>=<span style="color: #000000;"> rec[i].l;
+        r </span>=<span style="color: #000000;"> rec[i].r;
+        u </span>=<span style="color: #000000;"> rec[i].u;
+        d </span>=<span style="color: #000000;"> rec[i].d;
+        interval[interval_num</span>++] = Interval(l, r, d, <span style="color: #800080;">1</span><span style="color: #000000;">);
+        interval[interval_num</span>++] = Interval(l, r, u, -<span style="color: #800080;">1</span><span style="color: #000000;">);
+        discrete[discrete_num</span>++] =<span style="color: #000000;"> l;
+        discrete[discrete_num</span>++] =<span style="color: #000000;"> r;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> buildtree(Node *proot, <span style="color: #0000ff;">int</span> s, <span style="color: #0000ff;">int</span><span style="color: #000000;"> e)
+{
+    proot</span>-&gt;l =<span style="color: #000000;"> s;
+    proot</span>-&gt;r =<span style="color: #000000;"> e;
+    proot</span>-&gt;to_left = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    proot</span>-&gt;to_right = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    proot</span>-&gt;num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    proot</span>-&gt;edge_num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (s ==<span style="color: #000000;"> e)
+    {
+        proot</span>-&gt;pleft = proot-&gt;pright =<span style="color: #000000;"> NULL;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    node_cnt</span>++<span style="color: #000000;">;
+    proot</span>-&gt;pleft = tree +<span style="color: #000000;"> node_cnt;
+    node_cnt</span>++<span style="color: #000000;">;
+    proot</span>-&gt;pright = tree +<span style="color: #000000;"> node_cnt;
+    buildtree(proot</span>-&gt;pleft, s, (s + e) / <span style="color: #800080;">2</span><span style="color: #000000;">);
+    buildtree(proot</span>-&gt;pright, (s + e) / <span style="color: #800080;">2</span> + <span style="color: #800080;">1</span><span style="color: #000000;">, e);
+}
+
+</span><span style="color: #0000ff;">void</span> recount(Node *<span style="color: #000000;">p)
+{
+    </span><span style="color: #0000ff;">if</span> (p-&gt;num &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        p</span>-&gt;edge_num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        p</span>-&gt;to_right = p-&gt;to_left = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (p-&gt;pleft == NULL || p-&gt;pright ==<span style="color: #000000;"> NULL)
+    {
+        p</span>-&gt;edge_num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        p</span>-&gt;to_right = p-&gt;to_left = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    p</span>-&gt;to_left = p-&gt;pleft-&gt;<span style="color: #000000;">to_left;
+    p</span>-&gt;to_right = p-&gt;pright-&gt;<span style="color: #000000;">to_right;
+    p</span>-&gt;edge_num = p-&gt;pleft-&gt;edge_num + p-&gt;pright-&gt;<span style="color: #000000;">edge_num;
+    </span><span style="color: #0000ff;">if</span> (p-&gt;pleft-&gt;to_right != p-&gt;pright-&gt;<span style="color: #000000;">to_left)
+        p</span>-&gt;edge_num++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> insert(Node *proot, <span style="color: #0000ff;">int</span> s, <span style="color: #0000ff;">int</span> e, <span style="color: #0000ff;">int</span><span style="color: #000000;"> value)
+{
+    </span><span style="color: #0000ff;">if</span> (s &gt; proot-&gt;r || e &lt; proot-&gt;<span style="color: #000000;">l)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    s </span>= max(s, proot-&gt;<span style="color: #000000;">l);
+    e </span>= min(e, proot-&gt;<span style="color: #000000;">r);
+    </span><span style="color: #0000ff;">if</span> (s == proot-&gt;l &amp;&amp; e == proot-&gt;<span style="color: #000000;">r)
+    {
+        proot</span>-&gt;num +=<span style="color: #000000;"> value;
+        recount(proot);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    insert(proot</span>-&gt;<span style="color: #000000;">pleft, s, e, value);
+    insert(proot</span>-&gt;<span style="color: #000000;">pright, s, e, value);
+    recount(proot);
+}
+
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; interval_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> s =<span style="color: #000000;"> get_index(interval[i].start);
+        </span><span style="color: #0000ff;">int</span> e = get_index(interval[i].end) - <span style="color: #800080;">1</span><span style="color: #000000;">;
+        insert(tree, s, e, interval[i].value);
+        </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> line_num = tree-&gt;<span style="color: #000000;">edge_num;
+        </span><span style="color: #0000ff;">if</span> (tree-&gt;<span style="color: #000000;">to_left)
+            line_num</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (tree-&gt;<span style="color: #000000;">to_right)
+            line_num</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (i != interval_num - <span style="color: #800080;">1</span><span style="color: #000000;">)
+            ans </span>+= (interval[i + <span style="color: #800080;">1</span>].pos - interval[i].pos) *<span style="color: #000000;"> line_num;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ans;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    input();
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    make_xscan();
+    sort(interval, interval </span>+<span style="color: #000000;"> interval_num);
+    discretization(discrete, discrete_num);
+    buildtree(tree, </span><span style="color: #800080;">0</span><span style="color: #000000;">, discrete_num);
+    ans </span>+=<span style="color: #000000;"> work();
+
+    make_yscan();
+    sort(interval, interval </span>+<span style="color: #000000;"> interval_num);
+    discretization(discrete, discrete_num);
+    buildtree(tree, </span><span style="color: #800080;">0</span><span style="color: #000000;">, discrete_num);
+    ans </span>+=<span style="color: #000000;"> work();
+
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%lld\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

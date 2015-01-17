@@ -1,0 +1,136 @@
+---
+layout: post
+title: poj3469
+category: chinese
+---
+<p>网络流的最小割问题，看到分配成两部分的题，就要想到网络流最小割，割值是一部分指向另一部分的边的初始容量的总和，不加上另一部分指向本部分的边的容量。而对于最小割来说，最大流流量就是最小割的容量。而划分方法，就是将最大流后残余网络中s可以走到的点划为s集合，其余点划为t集合，注意，不是可以走到t的点，因为有可能有一条线上的多条边都流满的情况，这种情况下有些点就无法走到t，而且s也走不到它。</p> <p>&nbsp;</p> <div class="cnblogs_Highlighter"> <pre class="brush: csharp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+#define N 20005
+#define M 500005
+#define typec int
+const typec inf = 0x3f3f3f3f;
+
+struct edge
+{
+	int x, y, nxt;
+	typec c;
+} bf[M];
+int ne, head[N], cur[N], ps[N], dep[N];
+
+void addedge(int x, int y, typec c)
+{
+	bf[ne].x = x;
+	bf[ne].y = y;
+	bf[ne].c = c;
+	bf[ne].nxt = head[x];
+	head[x] = ne++;
+	bf[ne].x = y;
+	bf[ne].y = x;
+	bf[ne].c = 0;
+	bf[ne].nxt = head[y];
+	head[y] = ne++;
+}
+void addedge1(int x, int y, typec c)
+{
+	bf[ne].x = x;
+	bf[ne].y = y;
+	bf[ne].c = c;
+	bf[ne].nxt = head[x];
+	head[x] = ne++;
+	bf[ne].x = y;
+	bf[ne].y = x;
+	bf[ne].c = c;
+	bf[ne].nxt = head[y];
+	head[y] = ne++;
+}
+
+typec flow(int n, int s, int t)
+{
+	typec tr, res = 0;
+	int i, j, k, f, r, top;
+	while (1)
+	{
+		memset(dep, -1, n * sizeof(int));
+		for (f = dep[ps[0] = s] = 0, r = 1; f != r;)
+		{
+			for (i = ps[f++], j = head[i]; j; j = bf[j].nxt)
+			{
+				if (bf[j].c &amp;&amp; -1 == dep[k = bf[j].y])
+				{
+					dep[k] = dep[i] + 1;
+					ps[r++] = k;
+					if (k == t)
+					{
+						f = r;
+						break;
+					}
+				}
+			}
+		}
+		if (-1 == dep[t])
+			break;
+
+		memcpy(cur, head, n * sizeof(int));
+		for (i = s, top = 0;;)
+		{
+			if (i == t)
+			{
+				for (k = 0, tr = inf; k &lt; top; ++k)
+					if (bf[ps[k]].c &lt; tr)
+						tr = bf[ps[f = k]].c;
+				for (k = 0; k &lt; top; ++k)
+					bf[ps[k]].c -= tr, bf[ps[k] ^ 1].c += tr;
+				res += tr;
+				i = bf[ps[top = f]].x;
+			}
+			for (j = cur[i]; cur[i]; j = cur[i] = bf[cur[i]].nxt)
+				if (bf[j].c &amp;&amp; dep[i] + 1 == dep[bf[j].y])
+					break;
+			if (cur[i])
+			{
+				ps[top++] = cur[i];
+				i = bf[cur[i]].y;
+			}
+			else
+			{
+				if (0 == top)
+					break;
+				dep[i] = -1;
+				i = bf[ps[--top]].x;
+			}
+		}
+	}
+	return res;
+}
+int main()
+{
+	//freopen("D:\\t.txt", "r", stdin);
+	int n, m;
+	scanf("%d%d", &amp;n, &amp;m);
+	ne = 2;
+	memset(head, 0, sizeof(head));
+	n += 2;
+	int s = 0;
+	int t = 1;
+	for (int i = 2; i &lt; n; i++)
+	{
+		int a, b;
+		scanf("%d%d", &amp;a, &amp;b);
+		addedge(s, i, a);
+		addedge(i, t, b);
+	}
+	for (int i = 0; i &lt; m; i++)
+	{
+		int x, y, c;
+		scanf("%d%d%d", &amp;x, &amp;y, &amp;c);
+		addedge1(x + 1, y + 1, c);
+	}
+	printf("%d\n", flow(n, s, t));
+	return 0;
+}
+
+</pre>
+</div>

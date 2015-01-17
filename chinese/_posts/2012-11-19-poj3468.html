@@ -1,0 +1,114 @@
+---
+layout: post
+title: poj3468
+category: chinese
+---
+<p>题意：一个数列，每次操作可以是将某区间数字都加上一个相同的整数，也可以是询问一个区间中所有数字的和。（这里区间指的是数列中连续的若干个数）对每次询问给出结果。</p>
+<p>分析：线保留型线段树，线段树中每个节点有两个变量：增量与和，一个记录当前节点对应区间被整体增加了几，另一个记录该区间的真子区间被增加了之后的和是多少。（该区间数字当前和=和+增量&times;区间长度）</p>
+<p>修改时更新路线上不完整覆盖的节点的和变量以及恰好完整覆盖的节点的增量变量。询问可以通过回溯过程通过各节点两变量值求得。</p>
+<p>&nbsp;</p>
+<p>三种线段树，参见：<a href="http://www.cnblogs.com/rainydays/archive/2011/09/06/2169082.html">http://www.cnblogs.com/rainydays/archive/2011/09/06/2169082.html</a></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('eab2aa0c-2ba7-4934-a9f0-088c97d56406')"><img id="code_img_closed_eab2aa0c-2ba7-4934-a9f0-088c97d56406" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_eab2aa0c-2ba7-4934-a9f0-088c97d56406" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('eab2aa0c-2ba7-4934-a9f0-088c97d56406',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_eab2aa0c-2ba7-4934-a9f0-088c97d56406" class="cnblogs_code_hide">
+<pre>#include &lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;iostream&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxn = <span style="color: #800080;">100001</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> cnode
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        l, r;
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> nsum, inc;
+    cnode    </span>*pleft, *<span style="color: #000000;">pright;
+};
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        n, q, ncount;
+cnode    tree[maxn </span>* <span style="color: #800080;">3</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">void</span> buildtree(cnode *proot, <span style="color: #0000ff;">int</span> s, <span style="color: #0000ff;">int</span><span style="color: #000000;"> e)
+{
+    proot</span>-&gt;l =<span style="color: #000000;"> s;
+    proot</span>-&gt;r =<span style="color: #000000;"> e;
+    proot</span>-&gt;inc = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    proot</span>-&gt;nsum = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (s !=<span style="color: #000000;"> e)
+    {
+        ncount</span>++<span style="color: #000000;">;
+        proot</span>-&gt;pleft = tree +<span style="color: #000000;"> ncount;
+        ncount</span>++<span style="color: #000000;">;
+        proot</span>-&gt;pright = tree +<span style="color: #000000;"> ncount;
+        buildtree(proot</span>-&gt;pleft, s, (s + e) / <span style="color: #800080;">2</span><span style="color: #000000;">);
+        buildtree(proot</span>-&gt;pright, (s + e) / <span style="color: #800080;">2</span> + <span style="color: #800080;">1</span><span style="color: #000000;">, e);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> insert(cnode *proot, <span style="color: #0000ff;">int</span> s, <span style="color: #0000ff;">int</span> e, <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> increase)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        mid;
+
+    </span><span style="color: #0000ff;">if</span> (s &gt; proot-&gt;r || e &lt; proot-&gt;<span style="color: #000000;">l)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    s </span>= max(s, proot-&gt;<span style="color: #000000;">l);
+    e </span>= min(e, proot-&gt;<span style="color: #000000;">r);
+    mid </span>= (proot-&gt;l + proot-&gt;r) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (s == proot-&gt;l &amp;&amp; e == proot-&gt;<span style="color: #000000;">r)
+    {
+        proot</span>-&gt;inc +=<span style="color: #000000;"> increase;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    proot</span>-&gt;nsum += (e - s + <span style="color: #800080;">1</span>) *<span style="color: #000000;"> increase;
+    insert(proot</span>-&gt;<span style="color: #000000;">pleft, s, e, increase);
+    insert(proot</span>-&gt;<span style="color: #000000;">pright, s, e, increase);
+}
+
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> query(cnode *proot, <span style="color: #0000ff;">int</span> s, <span style="color: #0000ff;">int</span><span style="color: #000000;"> e)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        mid;
+
+    </span><span style="color: #0000ff;">if</span> (s &gt; proot-&gt;r || e &lt; proot-&gt;<span style="color: #000000;">l)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    s </span>= max(s, proot-&gt;<span style="color: #000000;">l);
+    e </span>= min(e, proot-&gt;<span style="color: #000000;">r);
+    mid </span>= (proot-&gt;l + proot-&gt;r) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (proot-&gt;l == s &amp;&amp; proot-&gt;r ==<span style="color: #000000;"> e)
+        </span><span style="color: #0000ff;">return</span> proot-&gt;nsum + proot-&gt;inc * (proot-&gt;r - proot-&gt;l + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> inc_value = proot-&gt;inc * (e - s + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> query(proot-&gt;pleft, s, e) + query(proot-&gt;pright, s, e) +<span style="color: #000000;"> inc_value;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, h, s, e;
+    </span><span style="color: #0000ff;">char</span><span style="color: #000000;">    ch;
+
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;<span style="color: #000000;">q);
+    ncount </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    buildtree(tree, </span><span style="color: #800080;">1</span><span style="color: #000000;">, n);
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">h);
+        insert(tree, i </span>+ <span style="color: #800080;">1</span>, i + <span style="color: #800080;">1</span><span style="color: #000000;">, h);
+    }
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; q; i++<span style="color: #000000;">)
+    {
+        getchar();
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%c</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">ch);
+        </span><span style="color: #0000ff;">if</span> (ch == <span style="color: #800000;">'</span><span style="color: #800000;">C</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        {
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;s, &amp;e, &amp;<span style="color: #000000;">h);
+            insert(tree, s, e, h);
+        }
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        {
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;s, &amp;<span style="color: #000000;">e);
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%lld\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, query(tree, s, e));
+        }
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

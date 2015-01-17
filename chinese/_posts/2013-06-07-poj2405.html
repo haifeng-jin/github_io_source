@@ -1,0 +1,30 @@
+---
+layout: post
+title: poj2405
+category: chinese
+---
+<p>几何公式</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('60cc74df-fa24-4a39-98ab-ff6c6615f730')"><img id="code_img_closed_60cc74df-fa24-4a39-98ab-ff6c6615f730" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_60cc74df-fa24-4a39-98ab-ff6c6615f730" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('60cc74df-fa24-4a39-98ab-ff6c6615f730',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_60cc74df-fa24-4a39-98ab-ff6c6615f730" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cmath&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> pi acos(-1)
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> D, V;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;D, &amp;V), D |<span style="color: #000000;"> V)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%.3f\n</span><span style="color: #800000;">"</span>, pow(D * D * D - <span style="color: #800080;">6</span> * V / pi, <span style="color: #800080;">1.0</span> / <span style="color: #800080;">3</span><span style="color: #000000;">));
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

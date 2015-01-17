@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>449B</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/codeforces.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Codeforces</h1>
+                        <hr class="small">
+                        <span class="subheading">The Art of Competitive Programming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>449B</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 07 Dec 2014</span>
+
+		<div class="pull-right">
+			
+			<span class="label label-default">shortest path</span>
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<h3 id="description">Description</h3>
+<p><br />
+The first node of a undirected graph is the capital,
+whose edges are normal roads.
+In addition, there are some train routes connecting the capital and other cities.
+Output how many train routes can be closed without affecting the shortest distance between the capital and each city.
+There are <script type="math/tex">n</script> cities (<script type="math/tex">1 \leq n \leq 10^5) and </script>m<script type="math/tex"> roads (</script>1 \leq m \leq 3 \times 10^5).
+<br /></p>
+
+<h3 id="tutorial">Tutorial</h3>
+<p><br />
+We initially set the shortest distance to each city by its train route.
+Then start the Dijkstra algorithm.
+When updating the distance of a node, if the new distance is less than or equal to the original distance, it means that the train route to that node is not necessary (we find another shortest path other than the train route).</p>
+
+<p>I learned how to define a graph by vector.</p>
+
+<pre><code>vector&lt;pair&lt;int, int&gt; &gt; edge[MAX_NODE_NUM];
+edge[u].push_back(make_pair(v, w));
+</code></pre>
+
+<p>I also updated the template for Dijkstra.
+<br /></p>
+
+<h3 id="solution">Solution</h3>
+<p><br /></p>
+
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+#define MAX_EDGE_NUM 300005 * 2
+#define MAX_NODE_NUM 100005
+#define INF (1LL &lt;&lt; 60)
+#define D(x) 
+
+int node_num, edge_num, route_num;
+long long dist[MAX_NODE_NUM];
+bool train[MAX_NODE_NUM];
+vector&lt;pair&lt;int, int&gt; &gt; edge[MAX_NODE_NUM];
+
+void input()
+{
+	scanf("%d%d", &amp;node_num, &amp;edge_num);
+	scanf("%d", &amp;route_num);
+	for (int i = 0; i &lt; edge_num; i++)
+	{
+		int u, v, w;
+		scanf("%d%d%d", &amp;u, &amp;v, &amp;w);
+		v--;
+		u--;
+		edge[u].push_back(make_pair(v, w));
+		edge[v].push_back(make_pair(u, w));
+	}
+	fill(dist, dist + node_num, INF);
+	fill(train, train + node_num, false);
+	for (int i = 0; i &lt; route_num; i++)
+	{
+		int v, w;
+		scanf("%d%d", &amp;v, &amp;w);
+		v--;
+		dist[v] = min(dist[v], (long long)w);
+		train[v] = true;
+	}
+}
+
+priority_queue&lt;pair&lt;long long, int&gt; &gt; pq;
+
+void dijkstra(int source)
+{
+	dist[source] = 0;
+	pq.push(make_pair(0LL, 0));
+	for (int i = 0; i &lt; node_num; i++)
+		if (train[i])
+		{
+			pq.push(make_pair(-dist[i], i));
+		}
+	while (!pq.empty())
+	{
+		int u = pq.top().second;
+		long long w = -pq.top().first;
+		pq.pop();
+		if (dist[u] != w)
+			continue;
+		for (int i = 0; i &lt; (int)edge[u].size(); i++)
+		{
+			int v = edge[u][i].first;
+			long long new_w = edge[u][i].second + w;
+			if (dist[v] &gt;= new_w &amp;&amp; train[v])
+			{
+				train[v] = false;
+			}
+			if (dist[v] &gt; new_w)
+			{
+				dist[v] = new_w;
+				pq.push(make_pair(-dist[v], v));
+			}
+		}
+	}
+}
+
+int work()
+{
+	int ret = route_num;
+	for (int i = 0; i &lt; node_num; i++)
+	{
+		if (train[i])
+		{
+			ret--;
+		}
+	}
+	return ret;
+}
+
+int main()
+{
+	input();
+	dijkstra(0);
+	printf("%d\n", work());
+	return 0;
+}
+</code></pre>
+
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are some write-ups for the problems I solved on Codeforces.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+	<div class="panel-heading"><big>Tasks</big></div>
+	<div class="panel-body">
+		<div class="text-center">100 Problems.</div>
+		<div class="progress">
+			<div class="progress-bar" style="width: 29%;"></div>
+		</div>
+		<div class="text-center">10 Problems.</div>
+		<div class="progress">
+			<div class="progress-bar" style="width: 100%;"></div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

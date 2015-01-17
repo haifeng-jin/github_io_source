@@ -1,0 +1,42 @@
+---
+layout: post
+title: poj1546
+category: chinese
+---
+<p>进制转换，java做</p>
+<p>StringBuffer 的方法中setCharAt(int,char)可以改变其某位的字符</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a72bb5af-1318-4c9a-9fa8-98a8a19d1b2c')"><img id="code_img_closed_a72bb5af-1318-4c9a-9fa8-98a8a19d1b2c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a72bb5af-1318-4c9a-9fa8-98a8a19d1b2c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a72bb5af-1318-4c9a-9fa8-98a8a19d1b2c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_a72bb5af-1318-4c9a-9fa8-98a8a19d1b2c" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span> java.io.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> java.util.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> java.math.*<span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Main {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args)
+    {
+        Scanner cin </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Scanner(System.in);
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (cin.hasNext())
+        {
+            String st </span>=<span style="color: #000000;"> cin.next();
+            </span><span style="color: #0000ff;">int</span> a =<span style="color: #000000;"> cin.nextInt();
+            </span><span style="color: #0000ff;">int</span> b =<span style="color: #000000;"> cin.nextInt();
+            BigInteger bigA </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> BigInteger(st, a);
+            StringBuffer ans </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> StringBuffer(bigA.toString(b));
+            </span><span style="color: #0000ff;">if</span> (ans.length() &gt; 7<span style="color: #000000;">)
+            {
+                System.out.println(</span>"  ERROR"<span style="color: #000000;">);
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            }
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; ans.length(); i++<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">if</span> (ans.charAt(i) &lt;= 'z' &amp;&amp; ans.charAt(i) &gt;= 'a'<span style="color: #000000;">)
+                    ans.setCharAt(i, (</span><span style="color: #0000ff;">char</span>)('A' - 'a' +<span style="color: #000000;"> ans.charAt(i)));
+            </span><span style="color: #0000ff;">int</span> len =<span style="color: #000000;"> ans.length();
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = len; i &lt; 7; i++<span style="color: #000000;">)
+                ans.insert(</span>0,  ' '<span style="color: #000000;">);
+            System.out.println(ans.toString());
+        }
+    }
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj1204</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj1204</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 11 Jul 2012</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>dfa，ac自动机。</p>
+<p>题意：给定一些单词，给定一个矩阵，在矩阵内8方向找每个单词是否出现过。输出每个单词的出现位置和方向。</p>
+<p>分析：分别以位于矩阵四周的点作为起点，每个起点找向8个方向最长的字符串，分别加入自动机。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('95caa394-ca74-47af-9c1b-34a3e171b323')"><img id="code_img_closed_95caa394-ca74-47af-9c1b-34a3e171b323" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_95caa394-ca74-47af-9c1b-34a3e171b323" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('95caa394-ca74-47af-9c1b-34a3e171b323',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_95caa394-ca74-47af-9c1b-34a3e171b323" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">int</span> kind = <span style="color: #800080;">26</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> node
+{
+    node </span>*fail; <span style="color: #008000;">//</span><span style="color: #008000;">失败指针</span>
+    node *next[kind]; <span style="color: #008000;">//</span><span style="color: #008000;">Tire每个节点的26个子节点（最多26个字母）</span>
+    <span style="color: #0000ff;">int</span> id; <span style="color: #008000;">//</span><span style="color: #008000;">是否为该单词的最后一个节点</span>
+<span style="color: #000000;">    node()
+    { </span><span style="color: #008000;">//</span><span style="color: #008000;">构造函数初始化</span>
+        fail =<span style="color: #000000;"> NULL;
+        id </span>= -<span style="color: #800080;">1</span><span style="color: #000000;">;
+        memset(next, (</span><span style="color: #0000ff;">int</span>) NULL, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(next));
+    }
+}</span>*q[<span style="color: #800080;">500001</span>], *root; <span style="color: #008000;">//</span><span style="color: #008000;">队列，方便用于bfs构造失败指针</span>
+<span style="color: #0000ff;">char</span> str[<span style="color: #800080;">1005</span>]; <span style="color: #008000;">//</span><span style="color: #008000;">模式串</span>
+
+<span style="color: #0000ff;">#define</span> maxn 1005
+<span style="color: #0000ff;">#define</span> maxl 305
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> l, c, w;
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> map[maxn][maxn];
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> word[maxn][maxl];
+</span><span style="color: #0000ff;">int</span> dir[<span style="color: #800080;">8</span>][<span style="color: #800080;">2</span>] =<span style="color: #000000;">
+{
+{ </span>-<span style="color: #800080;">1</span>, <span style="color: #800080;">0</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">1</span>, <span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">0</span>, <span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">1</span>, <span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">1</span>, <span style="color: #800080;">0</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">1</span>, -<span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">0</span>, -<span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">1</span>, -<span style="color: #800080;">1</span><span style="color: #000000;"> } };
+</span><span style="color: #0000ff;">int</span> ans[maxn][<span style="color: #800080;">3</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> nowx, nowy, nowd;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> len[maxn];
+
+</span><span style="color: #0000ff;">void</span> insert(<span style="color: #0000ff;">char</span> *str, node *root, <span style="color: #0000ff;">int</span><span style="color: #000000;"> id)
+{
+    node </span>*p =<span style="color: #000000;"> root;
+    </span><span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span><span style="color: #000000;">, index;
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (str[i])
+    {
+        index </span>= str[i] - <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (p-&gt;next[index] ==<span style="color: #000000;"> NULL)
+            p</span>-&gt;next[index] = <span style="color: #0000ff;">new</span><span style="color: #000000;"> node();
+        p </span>= p-&gt;<span style="color: #000000;">next[index];
+        i</span>++<span style="color: #000000;">;
+    }
+    p</span>-&gt;id =<span style="color: #000000;"> id;
+}
+</span><span style="color: #0000ff;">void</span> build_ac_automation(node *<span style="color: #000000;">root)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">int</span> head, tail; <span style="color: #008000;">//</span><span style="color: #008000;">队列的头尾指针</span>
+    head = tail = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    root</span>-&gt;fail =<span style="color: #000000;"> NULL;
+    q[head</span>++] =<span style="color: #000000;"> root;
+    </span><span style="color: #0000ff;">while</span> (head !=<span style="color: #000000;"> tail)
+    {
+        node </span>*temp = q[tail++<span style="color: #000000;">];
+        node </span>*p =<span style="color: #000000;"> NULL;
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">26</span>; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (temp-&gt;next[i] !=<span style="color: #000000;"> NULL)
+            {
+                p </span>= temp-&gt;<span style="color: #000000;">fail;
+                </span><span style="color: #0000ff;">while</span> (p != NULL &amp;&amp; p-&gt;next[i] ==<span style="color: #000000;"> NULL)
+                    p </span>= p-&gt;<span style="color: #000000;">fail;
+                </span><span style="color: #0000ff;">if</span> (p ==<span style="color: #000000;"> NULL)
+                    temp</span>-&gt;next[i]-&gt;fail =<span style="color: #000000;"> root;
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                    temp</span>-&gt;next[i]-&gt;fail = p-&gt;<span style="color: #000000;">next[i];
+                q[head</span>++] = temp-&gt;<span style="color: #000000;">next[i];
+            }
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> makeans(<span style="color: #0000ff;">int</span> id, <span style="color: #0000ff;">int</span><span style="color: #000000;"> pos)
+{
+    vis[id] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    ans[id][</span><span style="color: #800080;">0</span>] = nowx + dir[nowd][<span style="color: #800080;">0</span>] * (pos - len[id] + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    ans[id][</span><span style="color: #800080;">1</span>] = nowy + dir[nowd][<span style="color: #800080;">1</span>] * (pos - len[id] + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    ans[id][</span><span style="color: #800080;">2</span>] =<span style="color: #000000;"> nowd;
+}
+
+</span><span style="color: #0000ff;">int</span> query(node *root, <span style="color: #0000ff;">char</span>*<span style="color: #000000;"> str)
+{
+    </span><span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>, cnt = <span style="color: #800080;">0</span><span style="color: #000000;">, index;
+    node </span>*p =<span style="color: #000000;"> root;
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (str[i])
+    {
+        index </span>= str[i] - <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span> (p-&gt;next[index] == NULL &amp;&amp; p !=<span style="color: #000000;"> root)
+            p </span>= p-&gt;<span style="color: #000000;">fail;
+        p </span>= p-&gt;<span style="color: #000000;">next[index];
+        p </span>= (p == NULL) ?<span style="color: #000000;"> root : p;
+        node </span>*temp =<span style="color: #000000;"> p;
+        </span><span style="color: #0000ff;">while</span> (temp !=<span style="color: #000000;"> root)
+        {
+            </span><span style="color: #0000ff;">if</span> (temp-&gt;id != -<span style="color: #800080;">1</span> &amp;&amp; !vis[temp-&gt;<span style="color: #000000;">id])
+                makeans(temp</span>-&gt;<span style="color: #000000;">id, i);
+            temp </span>= temp-&gt;<span style="color: #000000;">fail;
+        }
+        i</span>++<span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> cnt;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;l, &amp;c, &amp;<span style="color: #000000;">w);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; l; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, map[i]);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; w; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, word[i]);
+        insert(word[i], root, i);
+        len[i] </span>=<span style="color: #000000;"> strlen(word[i]);
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span> ok(<span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span><span style="color: #000000;"> y)
+{
+    </span><span style="color: #0000ff;">return</span> x &gt;= <span style="color: #800080;">0</span> &amp;&amp; y &gt;= <span style="color: #800080;">0</span> &amp;&amp; x &lt; l &amp;&amp; y &lt;<span style="color: #000000;"> c;
+}
+
+</span><span style="color: #0000ff;">void</span> make(<span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span> y, <span style="color: #0000ff;">int</span><span style="color: #000000;"> d)
+{
+    </span><span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    nowx </span>=<span style="color: #000000;"> x;
+    nowy </span>=<span style="color: #000000;"> y;
+    nowd </span>=<span style="color: #000000;"> d;
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (ok(x, y))
+    {
+        str[i</span>++] =<span style="color: #000000;"> map[x][y];
+        x </span>+= dir[d][<span style="color: #800080;">0</span><span style="color: #000000;">];
+        y </span>+= dir[d][<span style="color: #800080;">1</span><span style="color: #000000;">];
+    }
+    str[i] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    query(root, str);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    build_ac_automation(root);
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; l; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; <span style="color: #800080;">8</span>; j++<span style="color: #000000;">)
+        {
+            make(i, </span><span style="color: #800080;">0</span><span style="color: #000000;">, j);
+            make(i, c </span>- <span style="color: #800080;">1</span><span style="color: #000000;">, j);
+        }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; c; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; <span style="color: #800080;">8</span>; j++<span style="color: #000000;">)
+        {
+            make(</span><span style="color: #800080;">0</span><span style="color: #000000;">, i, j);
+            make(l </span>- <span style="color: #800080;">1</span><span style="color: #000000;">, i, j);
+        }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; w; i++<span style="color: #000000;">)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d %c\n</span><span style="color: #800000;">"</span>, ans[i][<span style="color: #800080;">0</span>], ans[i][<span style="color: #800080;">1</span>], (<span style="color: #0000ff;">char</span>) (ans[i][<span style="color: #800080;">2</span>] + <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span><span style="color: #000000;">));
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    root = <span style="color: #0000ff;">new</span><span style="color: #000000;"> node();
+    input();
+    work();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

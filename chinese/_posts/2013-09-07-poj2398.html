@@ -1,0 +1,102 @@
+---
+layout: post
+title: poj2398
+category: chinese
+---
+<p>同2318</p>
+<p>在其基础上，输入需要排序，输出稍复杂</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5d0a06e9-31e4-4649-b795-53bb8c3cb6d8')"><img id="code_img_closed_5d0a06e9-31e4-4649-b795-53bb8c3cb6d8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5d0a06e9-31e4-4649-b795-53bb8c3cb6d8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5d0a06e9-31e4-4649-b795-53bb8c3cb6d8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5d0a06e9-31e4-4649-b795-53bb8c3cb6d8" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 5005
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Elem
+{
+    </span><span style="color: #0000ff;">int</span> cnt; <span style="color: #008000;">//</span><span style="color: #008000;">point count</span>
+    <span style="color: #0000ff;">int</span> num; <span style="color: #008000;">//</span><span style="color: #008000;">box num</span>
+    <span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> &lt; (<span style="color: #0000ff;">const</span> Elem &amp;a) <span style="color: #0000ff;">const</span><span style="color: #000000;">
+    {
+        </span><span style="color: #0000ff;">return</span> cnt &lt;<span style="color: #000000;"> a.cnt;
+    }
+}elem[maxn];
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Line
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> u, d;
+    </span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> &lt; (<span style="color: #0000ff;">const</span> Line &amp;a) <span style="color: #0000ff;">const</span><span style="color: #000000;">
+    {
+        </span><span style="color: #0000ff;">return</span> u &lt;<span style="color: #000000;"> a.u;
+    }
+} line[maxn];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m, x1, x2, y1, y2;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> toy[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> box_cnt[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> elem_num;
+
+</span><span style="color: #0000ff;">bool</span> left(<span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span><span style="color: #000000;"> y, Line a)
+{
+    </span><span style="color: #0000ff;">if</span> (x &lt; a.d + (y - y2) * (a.u - a.d) * <span style="color: #800080;">1.0</span> / (y1 -<span style="color: #000000;"> y2))
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span> binarysearch(<span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span><span style="color: #000000;"> y)
+{
+    </span><span style="color: #0000ff;">int</span> l = <span style="color: #800080;">0</span>, r =<span style="color: #000000;"> n;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> mid;
+
+    </span><span style="color: #0000ff;">while</span> (l &lt;<span style="color: #000000;"> r)
+    {
+        mid </span>= (l + r) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (left(x, y, line[mid]))
+            r </span>=<span style="color: #000000;"> mid;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            l </span>= mid + <span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> l;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;n), n != <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        memset(toy, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(toy));
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d%d%d</span><span style="color: #800000;">"</span>, &amp;m, &amp;x1, &amp;y1, &amp;x2, &amp;<span style="color: #000000;">y2);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;line[i].u, &amp;<span style="color: #000000;">line[i].d);
+        sort(line, line </span>+<span style="color: #000000;"> n);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y;
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;x, &amp;<span style="color: #000000;">y);
+            toy[binarysearch(x, y)]</span>++<span style="color: #000000;">;
+        }
+        memset(box_cnt, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(box_cnt));
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt;= n; i++<span style="color: #000000;">)
+            box_cnt[toy[i]]</span>++<span style="color: #000000;">;
+        elem_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (box_cnt[i] &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+            {
+                elem[elem_num].cnt </span>=<span style="color: #000000;"> i;
+                elem[elem_num].num </span>=<span style="color: #000000;"> box_cnt[i];
+                elem_num</span>++<span style="color: #000000;">;
+            }    
+        sort(elem, elem </span>+<span style="color: #000000;"> elem_num);
+        puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">Box</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; elem_num; i++<span style="color: #000000;">)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d: %d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, elem[i].cnt, elem[i].num);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

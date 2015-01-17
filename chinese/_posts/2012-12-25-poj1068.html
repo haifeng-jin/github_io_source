@@ -1,0 +1,52 @@
+---
+layout: post
+title: poj1068
+category: chinese
+---
+<p>简单模拟</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d500a758-77d5-4313-b2d9-de98626335e4')"><img id="code_img_closed_d500a758-77d5-4313-b2d9-de98626335e4" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d500a758-77d5-4313-b2d9-de98626335e4" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d500a758-77d5-4313-b2d9-de98626335e4',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_d500a758-77d5-4313-b2d9-de98626335e4" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxn=<span style="color: #800080;">22</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        n,N,p[maxn],le[maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    first;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i,j;
+
+    cin</span>&gt;&gt;<span style="color: #000000;">n;
+    first</span>=<span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;=n;i++<span style="color: #000000;">)
+    {
+        cin</span>&gt;&gt;<span style="color: #000000;">p[i];
+        le[i]</span>=p[i]-p[i-<span style="color: #800080;">1</span><span style="color: #000000;">];
+        j</span>=<span style="color: #000000;">i;
+        </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">le[j])
+            j</span>--<span style="color: #000000;">;
+        le[j]</span>--<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">first)
+            cout</span>&lt;&lt;<span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            first</span>=<span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        cout</span>&lt;&lt;i-j+<span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt","r",stdin);</span>
+    cin&gt;&gt;<span style="color: #000000;">N;
+    </span><span style="color: #0000ff;">while</span> (N--<span style="color: #000000;">)
+    {
+        init();
+        cout</span>&lt;&lt;<span style="color: #000000;">endl;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,73 @@
+---
+layout: post
+title: poj2553
+category: chinese
+---
+<p>题意：求出度为0的强连通分支。</p>
+<p>分析：采用邻接阵的强连通分支tarjan模板。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('aa8e0d6a-a894-4797-ab92-1b812787cb9c')"><img id="code_img_closed_aa8e0d6a-a894-4797-ab92-1b812787cb9c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_aa8e0d6a-a894-4797-ab92-1b812787cb9c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('aa8e0d6a-a894-4797-ab92-1b812787cb9c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_aa8e0d6a-a894-4797-ab92-1b812787cb9c" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">int</span> maxn = <span style="color: #800080;">5005</span>, maxm = <span style="color: #800080;">100005</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Edge
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v, next;
+}edge[maxm];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m, ncount, idx;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> head[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> dfn[maxn], low[maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn], instk[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> stk[maxn], top, cpn_num, cpn[maxn];
+</span><span style="color: #0000ff;">int</span> <span style="color: #0000ff;">out</span><span style="color: #000000;">[maxn];
+
+</span><span style="color: #0000ff;">void</span> addedge(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span><span style="color: #000000;"> b)
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">printf("%d %d\n", a, b);</span>
+    edge[ncount].v =<span style="color: #000000;"> b;
+    edge[ncount].next </span>=<span style="color: #000000;"> head[a];
+    head[a] </span>= ncount++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> tarjan(<span style="color: #0000ff;">int</span><span style="color: #000000;"> u)
+{
+    vis[u] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    stk[top</span>++] =<span style="color: #000000;"> u;
+    instk[u] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    dfn[u] </span>= low[u] = idx++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = head[u]; ~i; i =<span style="color: #000000;"> edge[i].next)
+    {
+        </span><span style="color: #0000ff;">int</span> v =<span style="color: #000000;"> edge[i].v;
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">vis[v])
+        {
+            tarjan(v);
+            low[u] </span>=<span style="color: #000000;"> min(low[u], low[v]);
+        }</span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span><span style="color: #000000;"> (instk[v])
+            low[u] </span>=<span style="color: #000000;"> min(low[u], dfn[v]);
+    }
+    </span><span style="color: #0000ff;">if</span> (dfn[u] !=<span style="color: #000000;"> low[u])
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v;
+    </span><span style="color: #0000ff;">do</span><span style="color: #000000;">
+    {
+        v </span>= stk[--<span style="color: #000000;">top];
+        instk[v] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        cpn[v] </span>=<span style="color: #000000;"> cpn_num;
+    }</span><span style="color: #0000ff;">while</span>(u !=<span style="color: #000000;"> v);
+    cpn_num</span>++<span style="color: #000000;">;
+}
+
+CALL:
+        memset(head, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));
+        memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+        memset(instk, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(instk));
+        memset(</span><span style="color: #0000ff;">out</span>, <span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">out</span><span style="color: #000000;">));
+        input();
+        idx </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        top </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        cpn_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">vis[i])
+                tarjan(i);</span></pre>
+</div>
+</div>

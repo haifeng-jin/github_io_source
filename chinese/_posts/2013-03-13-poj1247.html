@@ -1,0 +1,63 @@
+---
+layout: post
+title: poj1247
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('41a2e6b6-9f0e-4d42-8454-f01fd7f638a7')"><img id="code_img_closed_41a2e6b6-9f0e-4d42-8454-f01fd7f638a7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_41a2e6b6-9f0e-4d42-8454-f01fd7f638a7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('41a2e6b6-9f0e-4d42-8454-f01fd7f638a7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_41a2e6b6-9f0e-4d42-8454-f01fd7f638a7" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 40
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> sum;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">f[i]);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    sum </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        sum </span>+=<span style="color: #000000;"> f[i];
+    </span><span style="color: #0000ff;">if</span> (sum &amp; <span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">No equal partitioning.</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> temp = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (temp &lt; sum / <span style="color: #800080;">2</span><span style="color: #000000;">)
+    {
+        temp </span>+=<span style="color: #000000;"> f[i];
+        i</span>++<span style="color: #000000;">;
+    }
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">printf("%d %d\n", temp, sum / 2);</span>
+    <span style="color: #0000ff;">if</span> (temp == sum / <span style="color: #800080;">2</span><span style="color: #000000;">)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Sam stops at position %d and Ella stops at position %d.\n</span><span style="color: #800000;">"</span>, i, i + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">No equal partitioning.</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n), n)
+    {
+        input();
+        work();    
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

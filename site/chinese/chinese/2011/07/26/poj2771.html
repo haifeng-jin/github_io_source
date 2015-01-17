@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj2771</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj2771</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 26 Jul 2011</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：人和人之间如果满足4个条件的任意一条就不会成为夫妻，给定一些人，问从中最多能选多少人且保证任意两人不可能成为夫妻。</p>
+<p>分析：由于条件之一是性别相同则不能成为夫妻。我们根据性别把人划分为两个集合，每个人是一个结点构成二分图，若两个人可能成为夫妻则连一条边。（同性之间不能成为夫妻，所以同集合内无边，此图必定为二分图）。题目要求是选出最多的人，且任意两人之间无边。这就是求二分图的最大独立集。只要用总人数－最大匹配数即可。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a36f7c5f-af63-4ba6-88c2-27e38caa2e98')"><img src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" class="code_img_closed" id="code_img_closed_a36f7c5f-af63-4ba6-88c2-27e38caa2e98" /><img src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" class="code_img_opened" id="code_img_opened_a36f7c5f-af63-4ba6-88c2-27e38caa2e98" onclick="cnblogs_code_hide('a36f7c5f-af63-4ba6-88c2-27e38caa2e98',event)" style="display: none;" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_a36f7c5f-af63-4ba6-88c2-27e38caa2e98" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">iostream</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdio</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdlib</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstring</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000ff;">using</span><span style="color: #000000;"> </span><span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;<br /><br /></span><span style="color: #0000ff;">#define</span><span style="color: #000000;"> maxn 505</span><span style="color: #000000;"><br /></span><span style="color: #0000ff;">#define</span><span style="color: #000000;"> maxl 106</span><span style="color: #000000;"><br /><br /></span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Person<br />{<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> h;<br />    </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> music[maxl];<br />    </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> sport[maxl];<br />} male[maxn], female[maxn];<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> uN, vN, n;<br /></span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> g[maxn][maxn];<br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> xM[maxn], yM[maxn];<br /></span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> chk[maxn];<br /></span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> SearchPath(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> u)<br />{<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v;<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (v </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">; v </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> vN; v</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (g[u][v] </span><span style="color: #000000;">&amp;&amp;</span><span style="color: #000000;"> </span><span style="color: #000000;">!</span><span style="color: #000000;">chk[v])<br />        {<br />            chk[v] </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">true</span><span style="color: #000000;">;<br />            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (yM[v] </span><span style="color: #000000;">==</span><span style="color: #000000;"> </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;"> </span><span style="color: #000000;">||</span><span style="color: #000000;"> SearchPath(yM[v]))<br />            {<br />                yM[v] </span><span style="color: #000000;">=</span><span style="color: #000000;"> u;<br />                xM[u] </span><span style="color: #000000;">=</span><span style="color: #000000;"> v;<br />                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> </span><span style="color: #0000ff;">true</span><span style="color: #000000;">;<br />            }<br />        }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> </span><span style="color: #0000ff;">false</span><span style="color: #000000;">;<br />}<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> MaxMatch()<br />{<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> u, ret </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />    memset(xM, </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(xM));<br />    memset(yM, </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(yM));<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (u </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">; u </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> uN; u</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (xM[u] </span><span style="color: #000000;">==</span><span style="color: #000000;"> </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">)<br />        {<br />            memset(chk, </span><span style="color: #0000ff;">false</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(chk));<br />            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (SearchPath(u))<br />                ret</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />        }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;<br />}<br /><br /></span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()<br />{<br />    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">n);<br />    uN </span><span style="color: #000000;">=</span><span style="color: #000000;"> vN </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> n; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />    {<br />        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a;<br />        </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> sex[</span><span style="color: #800080;">3</span><span style="color: #000000;">];<br />        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">a, sex);<br />        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (sex[</span><span style="color: #800080;">0</span><span style="color: #000000;">] </span><span style="color: #000000;">==</span><span style="color: #000000;"> </span><span style="color: #800000;">'</span><span style="color: #800000;">M</span><span style="color: #800000;">'</span><span style="color: #000000;">)<br />        {<br />            male[uN].h </span><span style="color: #000000;">=</span><span style="color: #000000;"> a;<br />            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, male[uN].music, male[uN].sport);<br />            uN</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />        }<br />        </span><span style="color: #0000ff;">else</span><span style="color: #000000;"><br />        {<br />            female[vN].h </span><span style="color: #000000;">=</span><span style="color: #000000;"> a;<br />            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, female[vN].music, female[vN].sport);<br />            vN</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />        }<br />    }<br />}<br /><br /></span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> couple(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> b)<br />{<br />    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (abs(male[a].h </span><span style="color: #000000;">-</span><span style="color: #000000;"> female[b].h) </span><span style="color: #000000;">&gt;</span><span style="color: #000000;"> </span><span style="color: #800080;">40</span><span style="color: #000000;">)<br />        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> </span><span style="color: #0000ff;">false</span><span style="color: #000000;">;<br />    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (strcmp(male[a].music, female[b].music))<br />        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> </span><span style="color: #0000ff;">false</span><span style="color: #000000;">;<br />    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (strcmp(male[a].sport, female[b].sport) </span><span style="color: #000000;">==</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">)<br />        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> </span><span style="color: #0000ff;">false</span><span style="color: #000000;">;<br />    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> </span><span style="color: #0000ff;">true</span><span style="color: #000000;">;<br />}<br /><br /></span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make()<br />{<br />    memset(g, </span><span style="color: #800080;">0</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(g));<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> uN; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />        </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> j </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">; j </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> vN; j</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (couple(i, j))<br />                g[i][j] </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">true</span><span style="color: #000000;">;<br />}<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()<br />{<br />    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span><span style="color: #008000;"><br /></span><span style="color: #000000;">    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;<br />    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">t);<br />    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (t</span><span style="color: #000000;">--</span><span style="color: #000000;">)<br />    {<br />        input();<br />        make();<br />        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, n </span><span style="color: #000000;">-</span><span style="color: #000000;"> MaxMatch());<br />    }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />}</span></pre>
+</div>
+</div>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+---
+layout: post
+title: poj4012
+category: chinese
+---
+<p>简单题</p>
+<p>判断的情况稍微有点复杂，注意判断整行都是&ldquo;.&rdquo;的情况</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b1ead193-98d7-47eb-bd98-a5d71960bae9')"><img id="code_img_closed_b1ead193-98d7-47eb-bd98-a5d71960bae9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b1ead193-98d7-47eb-bd98-a5d71960bae9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b1ead193-98d7-47eb-bd98-a5d71960bae9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_b1ead193-98d7-47eb-bd98-a5d71960bae9" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 5005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m, s, k;
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> st[maxn];
+
+</span><span style="color: #0000ff;">int</span> cal(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">if</span> (a &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> a;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d%d</span><span style="color: #800000;">"</span>, &amp;m, &amp;n, &amp;s, &amp;<span style="color: #000000;">k);
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+    </span><span style="color: #0000ff;">int</span> pos = find(st, st + n, <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span>) -<span style="color: #000000;"> st;
+    </span><span style="color: #0000ff;">if</span> (pos ==<span style="color: #000000;"> n)
+    {
+        </span><span style="color: #0000ff;">if</span> (k &lt; s + <span style="color: #800080;">1</span> &amp;&amp; m - k &lt;<span style="color: #000000;"> s)
+        {
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Impossible\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+            </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (n &gt; s || cal(k - s) + cal(m - k - s + <span style="color: #800080;">1</span>) &gt; <span style="color: #800080;">1</span><span style="color: #000000;">)
+        {
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Ambiguous\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+            </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+        }
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Unique\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (pos + s &gt;<span style="color: #000000;"> n)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Impossible\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">int</span> pos1 = find(st + pos, st + pos + s, <span style="color: #800000;">'</span><span style="color: #800000;">.</span><span style="color: #800000;">'</span>) - (st +<span style="color: #000000;"> pos);
+    </span><span style="color: #0000ff;">if</span> (pos1 !=<span style="color: #000000;"> s)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Impossible\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">int</span> pos2 = find(st + pos + s, st + n, <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span>) -<span style="color: #000000;"> st;
+    </span><span style="color: #0000ff;">if</span> (pos2 !=<span style="color: #000000;"> n)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Impossible\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (k == <span style="color: #800080;">1</span> || k == m || s == <span style="color: #800080;">1</span> || s ==<span style="color: #000000;"> m)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Unique\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Ambiguous\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

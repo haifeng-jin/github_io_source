@@ -1,0 +1,57 @@
+---
+layout: post
+title: poj2356
+category: chinese
+---
+<p>题意：给定n个数，从中选出连续的若干个，使得和为n的倍数。多解时输出任意解。</p>
+<p>分析：设sum[0]=0，sum[i]表示数列中第1～i个数的和对n取余的结果。那么现在有sum[0~n]，n&nbsp;+&nbsp;1个整数，分布在区间[0,&nbsp;n-1]上的n个整数点上，则至少有两个数会分布在同一个整数点，即存在sum[i]==sum[j]且i!=j。这样以来第i+1~j个数即为所求。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('eab2d78f-c4c2-460b-99e6-bdfe083b6e67')"><img id="code_img_closed_eab2d78f-c4c2-460b-99e6-bdfe083b6e67" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_eab2d78f-c4c2-460b-99e6-bdfe083b6e67" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('eab2d78f-c4c2-460b-99e6-bdfe083b6e67',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_eab2d78f-c4c2-460b-99e6-bdfe083b6e67" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 10005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> sum[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> pos[maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">f[i]);
+    sum[</span><span style="color: #800080;">0</span>] = f[<span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+        sum[i] </span>= (sum[i - <span style="color: #800080;">1</span>] + f[i]) %<span style="color: #000000;"> n;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    memset(pos, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(pos));
+    pos[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (pos[sum[i]] == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+            pos[sum[i]] </span>=<span style="color: #000000;"> i;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        {
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span>, i -<span style="color: #000000;"> pos[sum[i]]);
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = pos[sum[i]] + <span style="color: #800080;">1</span>; j &lt;= i; j++<span style="color: #000000;">)
+                printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, f[j]);
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    work();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

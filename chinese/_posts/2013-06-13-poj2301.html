@@ -1,0 +1,30 @@
+---
+layout: post
+title: poj2301
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9d09999f-8164-4ea2-983d-8a069f75509d')"><img id="code_img_closed_9d09999f-8164-4ea2-983d-8a069f75509d" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9d09999f-8164-4ea2-983d-8a069f75509d" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9d09999f-8164-4ea2-983d-8a069f75509d',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_9d09999f-8164-4ea2-983d-8a069f75509d" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b, c, d;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;a, &amp;<span style="color: #000000;">b);
+        c </span>= (a + b) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+        d </span>= (a - b) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (a == c + d &amp;&amp; b == c - d &amp;&amp; c &gt;= <span style="color: #800080;">0</span> &amp;&amp; d &gt;= <span style="color: #800080;">0</span><span style="color: #000000;">)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, c, d);
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">impossible\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

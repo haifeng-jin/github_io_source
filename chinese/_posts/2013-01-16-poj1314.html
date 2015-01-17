@@ -1,0 +1,125 @@
+---
+layout: post
+title: poj1314
+category: chinese
+---
+<p>枚举</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c436ce3f-035c-43fb-8848-57470ce72971')"><img id="code_img_closed_c436ce3f-035c-43fb-8848-57470ce72971" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c436ce3f-035c-43fb-8848-57470ce72971" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c436ce3f-035c-43fb-8848-57470ce72971',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_c436ce3f-035c-43fb-8848-57470ce72971" class="cnblogs_code_hide">
+<pre>#include&lt;iostream&gt;<span style="color: #000000;">
+#include</span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> point
+{
+    </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> ss;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y;
+};
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> direction
+{
+    </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> ul, ur, lr, ll;
+};
+
+direction dir[</span><span style="color: #800080;">100</span><span style="color: #000000;">];
+point p[</span><span style="color: #800080;">30</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> sum;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> cmp(point a, point b)
+{
+    </span><span style="color: #0000ff;">if</span> (a.x !=<span style="color: #000000;"> b.x)
+        </span><span style="color: #0000ff;">return</span> a.x &lt;<span style="color: #000000;"> b.x;
+    </span><span style="color: #0000ff;">else</span>
+        <span style="color: #0000ff;">return</span> a.y &lt;<span style="color: #000000;"> b.y;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> cmp_re(direction a, direction b)
+{
+    </span><span style="color: #0000ff;">if</span> (a.ul !=<span style="color: #000000;"> b.ul)
+        </span><span style="color: #0000ff;">return</span> a.ul &lt;<span style="color: #000000;"> b.ul;
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+    {
+        </span><span style="color: #0000ff;">if</span> (a.ur !=<span style="color: #000000;"> b.ur)
+            </span><span style="color: #0000ff;">return</span> a.ur &lt;<span style="color: #000000;"> b.ur;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        {
+            </span><span style="color: #0000ff;">if</span> (a.lr !=<span style="color: #000000;"> b.lr)
+                </span><span style="color: #0000ff;">return</span> a.lr &lt;<span style="color: #000000;"> b.lr;
+            </span><span style="color: #0000ff;">else</span>
+                <span style="color: #0000ff;">return</span> a.ll &lt;<span style="color: #000000;"> b.ll;
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span> work(<span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i, j, k, l;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; ++<span style="color: #000000;">i)
+    {
+        </span><span style="color: #0000ff;">for</span> (j = i + <span style="color: #800080;">1</span>; j &lt; n; ++<span style="color: #000000;">j)
+        {
+            </span><span style="color: #0000ff;">if</span> (p[i].x ==<span style="color: #000000;"> p[j].x)
+            {
+                </span><span style="color: #0000ff;">for</span> (k = j + <span style="color: #800080;">1</span>; k &lt; n; ++<span style="color: #000000;">k)
+                {
+                    </span><span style="color: #0000ff;">if</span> (p[i].y ==<span style="color: #000000;"> p[k].y)
+                    {
+                        </span><span style="color: #0000ff;">for</span> (l = k + <span style="color: #800080;">1</span>; l &lt; n; ++<span style="color: #000000;">l)
+                        {
+                            </span><span style="color: #0000ff;">if</span> (p[j].y - p[i].y == p[l].y -<span style="color: #000000;"> p[k].y
+
+                            </span>&amp;&amp; p[k].x - p[i].x == p[l].x -<span style="color: #000000;"> p[j].x)
+                            {
+                                dir[sum].ul </span>=<span style="color: #000000;"> p[j].ss, dir
+
+                                [sum].ur </span>=<span style="color: #000000;"> p[l].ss;
+                                dir[sum].lr </span>=<span style="color: #000000;"> p[k].ss, dir
+
+                                [sum].ll </span>=<span style="color: #000000;"> p[i].ss;
+                                sum</span>++<span style="color: #000000;">;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">sum)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">else</span>
+        <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> i, n, cas = <span style="color: #800080;">1</span><span style="color: #000000;">;
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> freopen("t.txt","r",stdin);
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> freopen("out.txt","w",stdout);</span>
+    <span style="color: #0000ff;">while</span> (cin &gt;&gt; n &amp;&amp;<span style="color: #000000;"> n)
+    {
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; ++<span style="color: #000000;">i)
+            cin </span>&gt;&gt; p[i].ss &gt;&gt; p[i].x &gt;&gt;<span style="color: #000000;"> p[i].y;
+        sort(p, p </span>+<span style="color: #000000;"> n, cmp);
+        sum </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">Point set </span><span style="color: #800000;">"</span> &lt;&lt; cas++ &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">:</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">work(n))
+            cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;"> No rectangles</span><span style="color: #800000;">"</span> &lt;&lt;<span style="color: #000000;"> endl;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        {
+
+            cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+            sort(dir, dir </span>+<span style="color: #000000;"> sum, cmp_re);
+            </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; sum; ++<span style="color: #000000;">i)
+            {
+                cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span> &lt;&lt; dir[i].ul &lt;&lt; dir[i].ur &lt;&lt; dir[i].lr &lt;&lt;<span style="color: #000000;"> dir[i].ll;
+                </span><span style="color: #0000ff;">if</span> ((i + <span style="color: #800080;">1</span>) % <span style="color: #800080;">10</span> == <span style="color: #800080;">0</span> &amp;&amp; i + <span style="color: #800080;">1</span> &lt;<span style="color: #000000;"> sum)
+                    cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+            }
+            cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+        }
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

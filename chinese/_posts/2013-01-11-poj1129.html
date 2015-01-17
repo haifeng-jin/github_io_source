@@ -1,0 +1,100 @@
+---
+layout: post
+title: poj1129
+category: chinese
+---
+<p>题意：平面内最多26个点，给出一些点与点之间的矛盾关系，问最少使用多少颜色才能给这些点染色，并保证矛盾点之间不同色。</p>
+<p>分析：深搜，对于每个点先尝试已经给别的点染过的颜色，如果不行再尝试染新的颜色，注意新的颜色只需要尝试一次即可，因为各种新的颜色对于当前状态来说是等价的。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('933bd177-0506-42ad-b1ce-516aba6ab599')"><img id="code_img_closed_933bd177-0506-42ad-b1ce-516aba6ab599" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_933bd177-0506-42ad-b1ce-516aba6ab599" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('933bd177-0506-42ad-b1ce-516aba6ab599',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_933bd177-0506-42ad-b1ce-516aba6ab599" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 30
+<span style="color: #0000ff;">#define</span> maxm maxn * maxn
+<span style="color: #0000ff;">#define</span> maxl maxn + 2
+<span style="color: #0000ff;">#define</span> inf 0x3f3f3f3f
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Edge
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v, next;
+}edge[maxm];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> head[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> color[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> edge_cnt;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ans;
+
+</span><span style="color: #0000ff;">void</span> addedge(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span><span style="color: #000000;"> b)
+{
+    edge[edge_cnt].v </span>=<span style="color: #000000;"> b;
+    edge[edge_cnt].next </span>=<span style="color: #000000;"> head[a];
+    head[a] </span>= edge_cnt++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    edge_cnt </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    memset(head, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));
+    </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> st[maxl];
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+        </span><span style="color: #0000ff;">int</span> len =<span style="color: #000000;"> strlen(st);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">2</span>; j &lt; len; j++<span style="color: #000000;">)
+        {
+            addedge(i, st[j] </span>- <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            addedge(st[j] </span>- <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span><span style="color: #000000;">, i);
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span> ok(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = head[a]; ~i; i =<span style="color: #000000;"> edge[i].next)
+        </span><span style="color: #0000ff;">if</span> (color[a] ==<span style="color: #000000;"> color[edge[i].v])
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> dfs(<span style="color: #0000ff;">int</span> color_num, <span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">if</span> (a ==<span style="color: #000000;"> n)
+    {
+        ans </span>=<span style="color: #000000;"> min(ans, color_num);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; color_num; i++<span style="color: #000000;">)
+    {
+        color[a] </span>=<span style="color: #000000;"> i;
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok(a))
+            dfs(color_num, a </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">);
+    }
+    color[a] </span>=<span style="color: #000000;"> color_num;
+    dfs(color_num </span>+ <span style="color: #800080;">1</span>, a + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    color[a] </span>= -<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n), n)
+    {
+        input();
+        ans </span>=<span style="color: #000000;"> inf;
+        memset(color, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(color));
+        dfs(</span><span style="color: #800080;">0</span>, <span style="color: #800080;">0</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">if</span> (ans == <span style="color: #800080;">1</span><span style="color: #000000;">)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">1 channel needed.\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d channels needed.\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,103 @@
+---
+layout: post
+title: poj1964
+category: chinese
+---
+<p>题意：给出一个格子矩阵，格子分为两种&mdash;&mdash;可用和不可用。要求在画一个矩形，矩形所覆盖的格子全都是可用的，并且要求矩形的面积最大。</p>
+<p>分析：dp。O(n^2)的效率。先说一种低效的方法，依次枚举每个格子， 从该格子向上走直到遇到不可用点为止，将这段路程对应的线段，向左平移直到遇到不可用的格子为止，再向右平移直到遇到不可用的格子为止。这个想段所覆盖过的面积是一个矩形，计算这个矩形面积并更新结果。这样做一定可以找到正确答案，因为对于最大的那个矩形一定有一个挡住它向上延伸的不可用的格子，当我们从这个格子正下方的那个矩形下边缘上的格子出发向上走进行上述操作即可获得这个矩形。对于这种低效的方法如果获取每个格子能向上走的距离的效率是O(1)的，获取这个线段左右平移的距离的效率也是O(1)的，那么总体效率就是O(n^2)的，因为只有n^2个格子。显然每个格子可以向上走多远，是可以通过简单的每列由上向下的递推得到的。而在已知一行所有格子向上走的线段的高度的条件下，是可以通过单调栈的方式来确定每个线段左侧距离最近的比它短的线段在哪里的。单调栈可以以O(n)的效率计算出n个线段的结果，相当于每个线段O(1)。右侧同理。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a78358cb-e45c-4f4c-81e0-7f256c093318')"><img id="code_img_closed_a78358cb-e45c-4f4c-81e0-7f256c093318" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a78358cb-e45c-4f4c-81e0-7f256c093318" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a78358cb-e45c-4f4c-81e0-7f256c093318',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a78358cb-e45c-4f4c-81e0-7f256c093318" class="cnblogs_code_hide">
+<pre>#include &lt;stack&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_WIDTH 1005
+<span style="color: #0000ff;">#define</span> MAX_HEIGHT 1005
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Elem
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> pos, value;
+    Elem()
+    {}
+    Elem(</span><span style="color: #0000ff;">int</span> pos, <span style="color: #0000ff;">int</span><span style="color: #000000;"> value):pos(pos), value(value)
+    {}
+};
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> height, width;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> area[MAX_HEIGHT][MAX_WIDTH];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> max_height[MAX_WIDTH];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> left[MAX_WIDTH], right[MAX_WIDTH];
+
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> next_ch()
+{
+    </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> ch;
+    </span><span style="color: #0000ff;">do</span><span style="color: #000000;">
+        ch </span>=<span style="color: #000000;"> getchar();
+    </span><span style="color: #0000ff;">while</span> (ch != <span style="color: #800000;">'</span><span style="color: #800000;">F</span><span style="color: #800000;">'</span> &amp;&amp; ch != <span style="color: #800000;">'</span><span style="color: #800000;">R</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ch;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;height, &amp;<span style="color: #000000;">width);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; height; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; width; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (next_ch() == <span style="color: #800000;">'</span><span style="color: #800000;">F</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                area[i][j] </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                area[i][j] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    stack</span>&lt;Elem&gt;<span style="color: #000000;"> stk;
+    memset(max_height, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(max_height));
+    </span><span style="color: #0000ff;">int</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; height; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; width; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (area[i][j])
+                max_height[j]</span>++<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                max_height[j] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        stk.push(Elem(</span>-<span style="color: #800080;">1</span>, -<span style="color: #800080;">1</span><span style="color: #000000;">));
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; width; j++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">while</span> (stk.top().value &gt;=<span style="color: #000000;"> max_height[j])
+                stk.pop();
+            left[j] </span>= j -<span style="color: #000000;"> stk.top().pos;
+            stk.push(Elem(j, max_height[j]));
+        }
+        </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">stk.empty())
+            stk.pop();
+        stk.push(Elem(width, </span>-<span style="color: #800080;">1</span><span style="color: #000000;">));
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = width - <span style="color: #800080;">1</span>; j &gt;= <span style="color: #800080;">0</span>; j--<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">while</span> (stk.top().value &gt;=<span style="color: #000000;"> max_height[j])
+                stk.pop();
+            right[j] </span>= stk.top().pos -<span style="color: #000000;"> j;
+            stk.push(Elem(j, max_height[j]));
+        }
+        </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">stk.empty())
+            stk.pop();
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; width; j++<span style="color: #000000;">)
+            ans </span>= max(ans, max_height[j] * (left[j] + right[j] - <span style="color: #800080;">1</span><span style="color: #000000;">));
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span>, ans * <span style="color: #800080;">3</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        input();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

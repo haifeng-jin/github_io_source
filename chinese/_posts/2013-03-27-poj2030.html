@@ -1,0 +1,57 @@
+---
+layout: post
+title: poj2030
+category: chinese
+---
+<p>递推</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('847c2b09-cd52-47b2-a1b6-285e75113ec7')"><img id="code_img_closed_847c2b09-cd52-47b2-a1b6-285e75113ec7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_847c2b09-cd52-47b2-a1b6-285e75113ec7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('847c2b09-cd52-47b2-a1b6-285e75113ec7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_847c2b09-cd52-47b2-a1b6-285e75113ec7" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.math.BigInteger;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Scanner;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Main {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        Scanner cin </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Scanner(System.in);
+        </span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">) {
+            </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+            m </span>=<span style="color: #000000;"> cin.nextInt();
+            n </span>=<span style="color: #000000;"> cin.nextInt();
+            </span><span style="color: #0000ff;">if</span> (n == 0 &amp;&amp; m == 0<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+            String[] map </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> String[n];
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; n; i++<span style="color: #000000;">)
+                map[i] </span>=<span style="color: #000000;"> cin.next();
+            BigInteger[][] f </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> BigInteger[n][m];
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; n; i++<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = 0; j &lt; m; j++<span style="color: #000000;">)
+                    </span><span style="color: #0000ff;">if</span> (map[i].charAt(j) &gt;= '0' &amp;&amp; map[i].charAt(j) &lt;= '9'<span style="color: #000000;">) {
+                        BigInteger temp </span>= BigInteger.valueOf((<span style="color: #0000ff;">int</span><span style="color: #000000;">) (map[i]
+                                .charAt(j) </span>- '0'<span style="color: #000000;">));
+                        f[i][j] </span>=<span style="color: #000000;"> temp;
+                        </span><span style="color: #0000ff;">if</span> (j - 1 &gt;= 0<span style="color: #000000;">) {
+                            BigInteger a </span>= f[i][j - 1<span style="color: #000000;">].multiply(
+                                    BigInteger.valueOf(</span>10<span style="color: #000000;">)).add(temp);
+                            </span><span style="color: #0000ff;">if</span> (f[i][j].compareTo(a) &lt; 0<span style="color: #000000;">)
+                                f[i][j] </span>=<span style="color: #000000;"> a;
+                        }
+                        </span><span style="color: #0000ff;">if</span> (i - 1 &gt;= 0<span style="color: #000000;">) {
+                            BigInteger a </span>= f[i - 1][j].multiply(BigInteger.valueOf(10<span style="color: #000000;">))
+                                    .add(temp);
+                            </span><span style="color: #0000ff;">if</span> (f[i][j].compareTo(a) &lt; 0<span style="color: #000000;">)
+                                f[i][j] </span>=<span style="color: #000000;"> a;
+                        }
+</span><span style="color: #008000;">//</span><span style="color: #008000;">                        System.out.println(i + " " + j + " " + f[i][j]);</span>
+                    } <span style="color: #0000ff;">else</span><span style="color: #000000;">
+                        f[i][j] </span>=<span style="color: #000000;"> BigInteger.ZERO;
+            BigInteger ans </span>=<span style="color: #000000;"> BigInteger.ZERO;
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; n; i++<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = 0; j &lt; m; j++<span style="color: #000000;">)
+                    </span><span style="color: #0000ff;">if</span> (ans.compareTo(f[i][j]) &lt; 0<span style="color: #000000;">)
+                        ans </span>=<span style="color: #000000;"> f[i][j];
+            System.out.println(ans);
+        }
+    }
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

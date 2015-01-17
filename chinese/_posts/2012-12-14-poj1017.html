@@ -1,0 +1,46 @@
+---
+layout: post
+title: poj1017
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('124d1768-74ab-4bd3-ad5c-c244eb0b8bd2')"><img id="code_img_closed_124d1768-74ab-4bd3-ad5c-c244eb0b8bd2" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_124d1768-74ab-4bd3-ad5c-c244eb0b8bd2" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('124d1768-74ab-4bd3-ad5c-c244eb0b8bd2',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_124d1768-74ab-4bd3-ad5c-c244eb0b8bd2" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span>        num[<span style="color: #800080;">7</span>], space3[]= {<span style="color: #800080;">0</span>, <span style="color: #800080;">5</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">1</span><span style="color: #000000;">};
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span>        i, sum = <span style="color: #800080;">0</span><span style="color: #000000;">, ans, left2, left1;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= <span style="color: #800080;">6</span>; i++<span style="color: #000000;">)
+    {
+        cin </span>&gt;&gt;<span style="color: #000000;"> num[i];
+        sum </span>+=<span style="color: #000000;"> num[i];
+    }
+    </span><span style="color: #0000ff;">if</span> (sum == <span style="color: #800080;">0</span><span style="color: #000000;">)
+        exit(</span><span style="color: #800080;">0</span><span style="color: #000000;">);
+    ans </span>= num[<span style="color: #800080;">6</span>] + num[<span style="color: #800080;">5</span>] + num[<span style="color: #800080;">4</span>] + (num[<span style="color: #800080;">3</span>] + <span style="color: #800080;">3</span>) / <span style="color: #800080;">4</span><span style="color: #000000;">;
+    left2 </span>= num[<span style="color: #800080;">4</span>] * <span style="color: #800080;">5</span> + space3[num[<span style="color: #800080;">3</span>] % <span style="color: #800080;">4</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">if</span> (num[<span style="color: #800080;">2</span>] &gt;<span style="color: #000000;"> left2)
+        ans </span>+= (num[<span style="color: #800080;">2</span>] - left2 + <span style="color: #800080;">8</span>) / <span style="color: #800080;">9</span><span style="color: #000000;">;
+    left1 </span>= ans * <span style="color: #800080;">6</span> * <span style="color: #800080;">6</span> - num[<span style="color: #800080;">6</span>] * <span style="color: #800080;">36</span> - num[<span style="color: #800080;">5</span>] * <span style="color: #800080;">25</span> - num[<span style="color: #800080;">4</span>] * <span style="color: #800080;">16</span> - num[<span style="color: #800080;">3</span>] * <span style="color: #800080;">9</span> - num[<span style="color: #800080;">2</span>] * <span style="color: #800080;">4</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (num[<span style="color: #800080;">1</span>] &gt;<span style="color: #000000;"> left1)
+        ans </span>+= (num[<span style="color: #800080;">1</span>] - left1 + <span style="color: #800080;">35</span>) / <span style="color: #800080;">36</span><span style="color: #000000;">;
+    cout </span>&lt;&lt; ans &lt;&lt;<span style="color: #000000;"> endl;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">)
+    {
+        init();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

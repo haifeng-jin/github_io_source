@@ -1,0 +1,43 @@
+---
+layout: post
+title: poj1852
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0d8d9ab0-7c6a-47cc-b61c-7cea48d0b22a')"><img id="code_img_closed_0d8d9ab0-7c6a-47cc-b61c-7cea48d0b22a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0d8d9ab0-7c6a-47cc-b61c-7cea48d0b22a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0d8d9ab0-7c6a-47cc-b61c-7cea48d0b22a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_0d8d9ab0-7c6a-47cc-b61c-7cea48d0b22a" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> l, n;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> earliest, latest;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;l, &amp;<span style="color: #000000;">n);
+    latest </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    earliest </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">a);
+        earliest </span>= max(earliest, min(a, l -<span style="color: #000000;"> a));
+        latest </span>= max(latest, max(a, l-<span style="color: #000000;"> a));
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, earliest, latest);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        input();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

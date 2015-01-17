@@ -1,0 +1,95 @@
+---
+layout: post
+title: poj1033
+category: chinese
+---
+<p>模拟题，注意不需要移动的情况要特殊输出</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e6d4f1bb-32de-490c-8355-c2049c2ff9ee')"><img id="code_img_closed_e6d4f1bb-32de-490c-8355-c2049c2ff9ee" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e6d4f1bb-32de-490c-8355-c2049c2ff9ee" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e6d4f1bb-32de-490c-8355-c2049c2ff9ee',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e6d4f1bb-32de-490c-8355-c2049c2ff9ee" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_CLUSTER_NUM 10005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> cluster_num, file_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> link[MAX_CLUSTER_NUM];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> is_free[MAX_CLUSTER_NUM];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> total_length;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> optimized;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    memset(link, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(link));
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;cluster_num, &amp;<span style="color: #000000;">file_num);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; cluster_num; i++<span style="color: #000000;">)
+        is_free[i] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> target_pos = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    total_length </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; file_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> file_part_num;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">file_part_num);
+        total_length </span>+=<span style="color: #000000;"> file_part_num;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; file_part_num; j++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> original_pos;
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">original_pos);
+            original_pos</span>--<span style="color: #000000;">;
+            link[target_pos] </span>=<span style="color: #000000;"> original_pos;
+            target_pos</span>++<span style="color: #000000;">;
+            is_free[original_pos] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span> drag(<span style="color: #0000ff;">int</span> start_point, <span style="color: #0000ff;">int</span><span style="color: #000000;"> end_pos)
+{
+    optimized </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> next_point;
+    </span><span style="color: #0000ff;">while</span> (link[start_point] !=<span style="color: #000000;"> end_pos)
+    {
+        next_point </span>=<span style="color: #000000;"> link[start_point];
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d\n</span><span style="color: #800000;">"</span>, next_point + <span style="color: #800080;">1</span>, start_point + <span style="color: #800080;">1</span><span style="color: #000000;">);
+        link[start_point] </span>= -<span style="color: #800080;">1</span><span style="color: #000000;">;
+        is_free[start_point] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        is_free[next_point] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        start_point </span>=<span style="color: #000000;"> next_point;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> start_point;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    optimized </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; total_length; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (is_free[i])
+            drag(i, </span>-<span style="color: #800080;">1</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; total_length; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (link[i] != -<span style="color: #800080;">1</span> &amp;&amp; link[i] !=<span style="color: #000000;"> i)
+        {
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d\n</span><span style="color: #800000;">"</span>, i + <span style="color: #800080;">1</span>, total_length + <span style="color: #800080;">1</span><span style="color: #000000;">);
+            is_free[i] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            is_free[total_length </span>- <span style="color: #800080;">1</span>] = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">int</span> last_pos =<span style="color: #000000;"> drag(i, i);
+            link[last_pos] </span>= -<span style="color: #800080;">1</span><span style="color: #000000;">;
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d\n</span><span style="color: #800000;">"</span>, total_length + <span style="color: #800080;">1</span>, last_pos + <span style="color: #800080;">1</span><span style="color: #000000;">);
+            is_free[last_pos] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            is_free[total_length </span>- <span style="color: #800080;">1</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+    }
+    </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">optimized)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">No optimization needed\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    input();
+    work();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

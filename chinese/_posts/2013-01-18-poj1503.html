@@ -1,0 +1,28 @@
+---
+layout: post
+title: poj1503
+category: chinese
+---
+<p>高精度</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('543937a6-ee6c-4c77-b2aa-931b79f16465')"><img id="code_img_closed_543937a6-ee6c-4c77-b2aa-931b79f16465" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_543937a6-ee6c-4c77-b2aa-931b79f16465" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('543937a6-ee6c-4c77-b2aa-931b79f16465',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_543937a6-ee6c-4c77-b2aa-931b79f16465" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span> java.util.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> java.math.*<span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Main {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args)
+    {
+        Scanner cin </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Scanner(System.in);
+        BigInteger a </span>=<span style="color: #000000;"> cin.nextBigInteger();
+        BigInteger sum </span>=<span style="color: #000000;"> BigInteger.ZERO;
+        </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">a.equals(BigInteger.ZERO))
+        {
+            sum </span>=<span style="color: #000000;"> sum.add(a);
+            a </span>=<span style="color: #000000;"> cin.nextBigInteger();
+        }
+        System.out.println(sum);
+    }
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,86 @@
+---
+layout: post
+title: poj1061
+category: chinese
+---
+<p>题意：两个青蛙在赤道上跳跃，走环路。起始位置分别为x，y。每次跳跃距离分别为m，n。赤道长度为L。两青蛙跳跃方向与次数相同的情况下，问两青蛙是否有方法跳跃到同一点。输出最少跳跃次数。</p>
+<p>分析：扩展欧几里德。设两青蛙跳了s步。有方程：(x+n*s)-(y+m*s)=k*L。整理得：(n-m)*s+L*(-k)=y-x</p>
+<p>此时方程已经符合扩展欧几里德的形式:a*x+b*y=gcd(a,b)了。按要求求解即可。</p>
+<p>扩展欧几里德算法：</p>
+<p>扩展欧几里德算法我们可以简单的理解为求关于x，y的方程a*x+b*y=gcd(a,b)的一组整数解。用算法模板只能求出一组解，而此方程有数穷多解。设其一组特解为x0,y0。则其通解形式为：x=x0-t*b/g，y=y0+t*a/g。</p>
+<p>其中g表示gcd(a,b)。t是一个用来协调x和y同步变化的变量。</p>
+<p>该算法同样可用于求解a*x+b*y=c的形式的方程。方法是先求解a*x+b*y=gcd(a,b)。然后两端同时除以gcd(a,b)再乘以c即可整理出原方程的解。即a*(x*c/g)+b*(y*c/g)=c。该方程有解的条件是c能被gcd(a,b)整除。</p>
+<p>扩展欧几里德是在欧几里德算法基础上加入了一些东西。gcd(a,b)=gcd(b,a%b) =&gt; a*x1+b*y1 = b*x2 + a%b*y2 =&gt;&nbsp;<span>x1=y2; y1=x2-[a/b]*y2;</span></p>
+<p><span>也就是原来的欧几里德在递归过程中值削减方程右侧，而扩展欧几里德要同时对左侧进行变化以求解。递归到最底层时有：<span>b=0,gcd(a,b)=a; x=1,y=0;</span></span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('816da0dd-3a0e-4171-8506-a1a2043ae58e')"><img id="code_img_closed_816da0dd-3a0e-4171-8506-a1a2043ae58e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_816da0dd-3a0e-4171-8506-a1a2043ae58e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('816da0dd-3a0e-4171-8506-a1a2043ae58e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_816da0dd-3a0e-4171-8506-a1a2043ae58e" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> abs(<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">if</span> (a &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> -<span style="color: #000000;">a;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> a;
+}
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> gcd(<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> a, <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> b)
+{
+    </span><span style="color: #0000ff;">if</span> (b != <span style="color: #800080;">0</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> gcd(b, a %<span style="color: #000000;"> b);
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> a;
+}
+
+</span><span style="color: #0000ff;">void</span> gcdExtend(<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> a,<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> b,<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> d,<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> &amp;x,<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> &amp;<span style="color: #000000;">y)
+{
+     </span><span style="color: #0000ff;">if</span>(!b) {d=a;x=<span style="color: #800080;">1</span>;y=<span style="color: #800080;">0</span>;<span style="color: #0000ff;">return</span><span style="color: #000000;">;}
+     gcdExtend(b,a</span>%<span style="color: #000000;">b,d,y,x);
+     y</span>-=a/b*<span style="color: #000000;">x;
+}
+
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> work(<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> a, <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> b, <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;">        d, minx, x1, y1;
+
+    d </span>=<span style="color: #000000;"> gcd(a,b);
+    </span><span style="color: #0000ff;">if</span> (n % d != <span style="color: #800080;">0</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> -<span style="color: #800080;">1</span><span style="color: #000000;">;
+    gcdExtend(a, b, d, x1, y1);
+    minx </span>= (n * x1 / d) % (b /<span style="color: #000000;"> d);
+    </span><span style="color: #0000ff;">if</span> (minx &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+        minx </span>+= (b /<span style="color: #000000;"> d);
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> minx;
+}
+
+</span><span style="color: #0000ff;">void</span> swap(<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> &amp;x, <span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> &amp;<span style="color: #000000;">y)
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;">        t;
+
+    t </span>=<span style="color: #000000;"> x;
+    x </span>=<span style="color: #000000;"> y;
+    y </span>=<span style="color: #000000;"> t;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;">        x, y, m, n, L, ans, a;
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);</span>
+    scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%I64d%I64d%I64d%I64d%I64d</span><span style="color: #800000;">"</span>,&amp;x,&amp;y,&amp;m,&amp;n,&amp;<span style="color: #000000;">L);
+    </span><span style="color: #0000ff;">if</span> (m &lt;<span style="color: #000000;"> n)
+    {    
+        swap(m, n);
+        swap(x, y);
+    }
+    a </span>= y -<span style="color: #000000;"> x;
+    </span><span style="color: #0000ff;">if</span> (a &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+        a </span>+=<span style="color: #000000;"> L;
+    ans </span>= work(m -<span style="color: #000000;"> n, L, a);
+    </span><span style="color: #0000ff;">if</span> (ans == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Impossible\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

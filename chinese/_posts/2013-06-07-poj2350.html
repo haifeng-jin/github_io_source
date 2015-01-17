@@ -1,0 +1,55 @@
+---
+layout: post
+title: poj2350
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6a52edb4-974c-47f0-86c2-a6c31a2870f5')"><img id="code_img_closed_6a52edb4-974c-47f0-86c2-a6c31a2870f5" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6a52edb4-974c-47f0-86c2-a6c31a2870f5" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6a52edb4-974c-47f0-86c2-a6c31a2870f5',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6a52edb4-974c-47f0-86c2-a6c31a2870f5" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 1005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn];
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> average;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">int</span> sum = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">f[i]);
+        sum </span>+=<span style="color: #000000;"> f[i];
+    }
+    average </span>= sum * <span style="color: #800080;">1.0</span> /<span style="color: #000000;"> n;
+}
+
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (f[i] &gt;<span style="color: #000000;"> average)
+            num</span>++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> num * <span style="color: #800080;">100.0</span> /<span style="color: #000000;"> n;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        input();
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%.3f%%\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

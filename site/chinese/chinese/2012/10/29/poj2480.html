@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj2480</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj2480</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 29 Oct 2012</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：给出n（2^31），求<span>&sum;gcd(i, n) 1&lt;=i &lt;=n。</span></p>
+<p><span>分析：首先所有与n互质的数字x都满足gcd(x,n)=1。我们先计算这种等于1的情况，恰好是n的欧拉函数phi(n)。我们可以将上述情况视为跟n最大公约数为1的情况，现在我们将其推广至最大公约数为p的情况。对于对于所有满足gcd(x,n)=p（p为常数）的x，他们与n拥有相同的gcd，那么他们同时除以p之后，就会变得和n/p互质，这种数字x有phi(n/p)个，这些x的和为p*phi(n/p)个。所以我们要计算&sum;gcd(i, n) 1&lt;=i &lt;=n，只需要根据gcd的值不同，分类进行计算即可，总结成公式：&sum;p*phi(n/p)（p是n的约数）</span></p>
+<p><span>对于这个公式我们有一个快速计算的方法，我们先想，若要计算&sum;p，我们可以用公式(x1^0+x1^1+...+x1^c1)*(x2^0+x2^1+...+x2^c2)*...*(xm^0+xm^1+...+xm^cm)。xi是n的质因数，ci是n中含有xi的个数。同理，根据欧拉函数的公式，每个欧拉函数值也和各个质因子有关，求&sum;phi(n/p)=&sum;phi(p)=(1 + x1^0 * (x1 - 1) + x1^1 * (x1- 1) + ...+x1^(c1-1) * (x1- 1))*...*(...)。然后由于二者都是质因子幂相乘的形式，所以可以把两者综合起来，对于每个括号里的每一项，都是约数因式和欧拉函数因式的乘积的形式，即p的因式要乘以phi(n/p)的因式，两因式的质因子指数是互补的，最终公式变为(x1^(c1-1)*(c1-1) + x1^c1)*...。</span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('3eb1ff69-7bde-41a9-93bd-d974690bfabe')"><img id="code_img_closed_3eb1ff69-7bde-41a9-93bd-d974690bfabe" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_3eb1ff69-7bde-41a9-93bd-d974690bfabe" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('3eb1ff69-7bde-41a9-93bd-d974690bfabe',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_3eb1ff69-7bde-41a9-93bd-d974690bfabe" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cmath&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">is</span>[(<span style="color: #800080;">1</span> &lt;&lt; <span style="color: #800080;">16</span>) + <span style="color: #800080;">5</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span> prm[(<span style="color: #800080;">1</span> &lt;&lt; <span style="color: #800080;">16</span>) + <span style="color: #800080;">5</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">int</span> getprm(<span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">int</span> i, j, k = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> s, e = (<span style="color: #0000ff;">int</span>) (sqrt(<span style="color: #800080;">0.0</span> + n) + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    memset(</span><span style="color: #0000ff;">is</span>, <span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">is</span><span style="color: #000000;">));
+    prm[k</span>++] = <span style="color: #800080;">2</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">is</span>[<span style="color: #800080;">0</span>] = <span style="color: #0000ff;">is</span>[<span style="color: #800080;">1</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">4</span>; i &lt; n; i += <span style="color: #800080;">2</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">is</span>[i] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">3</span>; i &lt; e; i += <span style="color: #800080;">2</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">is</span><span style="color: #000000;">[i])
+        {
+            prm[k</span>++] =<span style="color: #000000;"> i;
+            </span><span style="color: #0000ff;">for</span> (s = i * <span style="color: #800080;">2</span>, j = i * i; j &lt; n; j +=<span style="color: #000000;"> s)
+                </span><span style="color: #0000ff;">is</span>[j] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        }
+    </span><span style="color: #0000ff;">for</span> (; i &lt; n; i += <span style="color: #800080;">2</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">is</span><span style="color: #000000;">[i])
+            prm[k</span>++] =<span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> k;
+}
+
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> power(<span style="color: #0000ff;">int</span> p, <span style="color: #0000ff;">int</span><span style="color: #000000;"> cnt)
+{
+    </span><span style="color: #0000ff;">if</span> (cnt &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> ret = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> temp =<span style="color: #000000;"> p;
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (cnt)
+    {
+        </span><span style="color: #0000ff;">if</span> (cnt &amp; <span style="color: #800080;">1</span><span style="color: #000000;">)
+            ret </span>*=<span style="color: #000000;"> temp;
+        cnt </span>&gt;&gt;= <span style="color: #800080;">1</span><span style="color: #000000;">;
+        temp </span>= temp *<span style="color: #000000;"> temp;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> cal(<span style="color: #0000ff;">int</span> p, <span style="color: #0000ff;">int</span><span style="color: #000000;"> cnt)
+{
+    </span><span style="color: #0000ff;">return</span> power(p, cnt - <span style="color: #800080;">1</span>) * cnt * (p - <span style="color: #800080;">1</span>) +<span style="color: #000000;"> power(p, cnt);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">int</span> m = getprm(<span style="color: #800080;">1</span> &lt;&lt; <span style="color: #800080;">16</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> ans;
+    </span><span style="color: #0000ff;">while</span> (~scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n))
+    {
+        ans </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m &amp;&amp; prm[i] * prm[i] &lt;= n; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span> cnt = <span style="color: #800080;">0</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">while</span> (n % prm[i] == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            {
+                n </span>/=<span style="color: #000000;"> prm[i];
+                cnt</span>++<span style="color: #000000;">;
+            }
+            ans </span>*=<span style="color: #000000;"> cal(prm[i], cnt);
+        }
+        </span><span style="color: #0000ff;">if</span> (n != <span style="color: #800080;">1</span><span style="color: #000000;">)
+            ans </span>*= cal(n, <span style="color: #800080;">1</span><span style="color: #000000;">);
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%lld\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><span>&nbsp;</span></p>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

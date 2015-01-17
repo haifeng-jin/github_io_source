@@ -1,0 +1,32 @@
+---
+layout: post
+title: poj1003
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a3771698-eab3-4d73-88d0-422c950cbd6b')"><img id="code_img_closed_a3771698-eab3-4d73-88d0-422c950cbd6b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a3771698-eab3-4d73-88d0-422c950cbd6b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a3771698-eab3-4d73-88d0-422c950cbd6b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_a3771698-eab3-4d73-88d0-422c950cbd6b" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;">    now, c;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (cin &gt;&gt; c &amp;&amp; c != <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        now </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        i </span>= <span style="color: #800080;">2</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span> (now &lt;<span style="color: #000000;"> c)
+        {
+            now </span>+= <span style="color: #800080;">1.0</span> /<span style="color: #000000;"> i;
+            i</span>++<span style="color: #000000;">;
+        }
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d card(s)\n</span><span style="color: #800000;">"</span>, i - <span style="color: #800080;">2</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

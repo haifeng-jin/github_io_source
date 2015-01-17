@@ -1,0 +1,94 @@
+---
+layout: post
+title: poj3620
+category: chinese
+---
+<p>这是一道简单题，但是我错了n次。</p>  <p>开数组的时候一定要注意范围，不要直接maxn;</p>  <p>&#160;</p>  <pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+const int maxn = 101;
+
+struct point
+{
+	int x, y;
+}cell[maxn * maxn];
+
+int n, m, k;
+int dir[4][2] = { {1, 0},{-1, 0},{0, 1},{0, -1} };
+int map[maxn][maxn];
+bool vis[maxn * maxn];
+
+void init()
+{
+	memset(map, -1, sizeof(map));
+	memset(vis, 0, sizeof(vis));
+	for (int i = 0; i &lt; k; i++)
+	{
+		scanf(&quot;%d%d&quot;, &amp;cell[i].x, &amp;cell[i].y);
+		cell[i].x--;
+		cell[i].y--;
+		map[cell[i].x][cell[i].y] = i;
+	}
+}
+
+bool ok(point &amp;a)
+{
+	if (a.x &lt; 0 || a.y &lt; 0 || a.y &gt;= m || a.x &gt;=n)
+		return false;
+	if (map[a.x][a.y] == -1)
+		return false;
+	if (vis[map[a.x][a.y]])
+		return false;
+	return true;
+}
+
+int bfs(point &amp;s)
+{
+	int front = 0, rear = 0;
+	point q[maxn * maxn];
+	int r = 1;
+
+	vis[map[s.x][s.y]] = true;
+	q[front++] = s;
+	while (front != rear)
+	{
+		point b = q[rear++];
+		if (rear == maxn * maxn)
+			rear = 0;
+		for (int i = 0; i &lt; 4; i++)
+		{
+			point a;
+			a.x = b.x + dir[i][0];
+			a.y = b.y + dir[i][1];
+			if (ok(a))
+			{
+				q[front++] = a;
+				if (front == maxn * maxn)
+					front = 0;
+				r++;
+				vis[map[a.x][a.y]] = true;
+			}
+		}
+	}
+	return r;
+}
+
+int main()
+{
+	int ans = 0;
+	//freopen(&quot;D:\\t.txt&quot;, &quot;r&quot;, stdin);
+	scanf(&quot;%d%d%d&quot;, &amp;n, &amp;m, &amp;k);
+	init();
+	for (int i = 0; i &lt; k; i++)
+		if (!vis[i])
+		{
+			int temp = bfs(cell[i]);
+			if (ans &lt; temp)
+				ans = temp;
+		}
+	printf(&quot;%d\n&quot;, ans);
+	return 0;
+}</pre>

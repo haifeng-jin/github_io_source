@@ -1,0 +1,51 @@
+---
+layout: post
+title: poj3302
+category: chinese
+---
+<p>字符串处理简单题，注意reverse()的使用，这个函数要包含"algorithm"</p> <div class="cnblogs_Highlighter"> <pre class="brush: csharp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+bool work(string &amp;st1, string st2)
+{
+	int i = 0, j = 0;
+	while (st1[i] != '\0' &amp;&amp; st2[j] != '\0')
+	{
+		if (st1[i] == st2[j])
+			j++;
+		i++;
+	}
+	if (j &lt; st2.length())
+		return false;
+	return true;
+}
+
+int main()
+{
+	//freopen("D:\\t.txt", "r", stdin);
+	int t;
+	scanf("%d", &amp;t);
+	while (t--)
+	{
+		string st1, st2;
+		cin &gt;&gt; st1 &gt;&gt; st2;
+		if (work(st1, st2))
+		{
+			printf("YES\n");
+			continue;
+		}
+		reverse(st2.begin(), st2.end());
+		if (work(st1, st2))
+			printf("YES\n");
+		else
+			printf("NO\n");
+	}
+	return 0;
+}
+
+</pre>
+</div>

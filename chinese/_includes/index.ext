@@ -1,0 +1,25 @@
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+		<table class="table table-striped table-hover ">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for post in paginator.posts %}
+		<tr>
+			<td>
+				<a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}{{ post.url}}">{{ post.title }}</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on {{ post.date | date_to_string }}</td>
+			</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="text-center">
+			{% include pagination.ext %}
+		</div>
+           </div>
+

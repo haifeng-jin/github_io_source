@@ -1,0 +1,85 @@
+---
+layout: post
+title: poj1577
+category: chinese
+---
+<p>排序二叉树</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('51860765-527b-4588-9291-7f72cc4d1ab2')"><img id="code_img_closed_51860765-527b-4588-9291-7f72cc4d1ab2" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_51860765-527b-4588-9291-7f72cc4d1ab2" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('51860765-527b-4588-9291-7f72cc4d1ab2',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_51860765-527b-4588-9291-7f72cc4d1ab2" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 105
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Node
+{
+    Node </span>*left, *<span style="color: #000000;">right;
+    </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> letter;
+}tree[maxn];
+
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> st[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> node_cnt;
+
+</span><span style="color: #0000ff;">void</span> insert(Node * &amp;proot, <span style="color: #0000ff;">char</span><span style="color: #000000;"> ch)
+{
+    </span><span style="color: #0000ff;">if</span> (proot ==<span style="color: #000000;"> NULL)
+    {
+        proot </span>= &amp;tree[node_cnt++<span style="color: #000000;">];
+        proot</span>-&gt;left =<span style="color: #000000;"> NULL;
+        proot</span>-&gt;right =<span style="color: #000000;"> NULL;
+        proot</span>-&gt;letter =<span style="color: #000000;"> ch;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (ch &gt; proot-&gt;<span style="color: #000000;">letter)
+        insert(proot</span>-&gt;<span style="color: #000000;">right, ch);
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        insert(proot</span>-&gt;<span style="color: #000000;">left, ch);
+
+}
+
+</span><span style="color: #0000ff;">void</span> output(Node *<span style="color: #000000;">proot)
+{
+    putchar(proot</span>-&gt;<span style="color: #000000;">letter);
+    </span><span style="color: #0000ff;">if</span> (proot-&gt;<span style="color: #000000;">left)
+        output(proot</span>-&gt;<span style="color: #000000;">left);
+    </span><span style="color: #0000ff;">if</span> (proot-&gt;<span style="color: #000000;">right)
+        output(proot</span>-&gt;<span style="color: #000000;">right);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">char</span> *p =<span style="color: #000000;"> st;
+    </span><span style="color: #0000ff;">while</span> (<span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, p);
+        </span><span style="color: #0000ff;">if</span> (*p == <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (*p == <span style="color: #800000;">'</span><span style="color: #800000;">$</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        p </span>= st +<span style="color: #000000;"> strlen(st);    
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (<span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        input();
+        Node </span>*proot =<span style="color: #000000;"> NULL;
+        node_cnt </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = strlen(st) - <span style="color: #800080;">2</span>; i &gt;= <span style="color: #800080;">0</span>; i--<span style="color: #000000;">)
+            insert(proot, st[i]);
+        output(proot);
+        putchar(</span><span style="color: #800000;">'</span><span style="color: #800000;">\n</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">if</span> (st[strlen(st) - <span style="color: #800080;">1</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">$</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

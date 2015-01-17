@@ -1,0 +1,43 @@
+---
+layout: post
+title: poj1517
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a484ccd1-008d-416e-a251-476d2392f96e')"><img id="code_img_closed_a484ccd1-008d-416e-a251-476d2392f96e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a484ccd1-008d-416e-a251-476d2392f96e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a484ccd1-008d-416e-a251-476d2392f96e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_a484ccd1-008d-416e-a251-476d2392f96e" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">double</span> cal(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">int</span> temp = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">double</span> ret = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= a; i++<span style="color: #000000;">)
+    {
+        temp </span>*=<span style="color: #000000;"> i;
+        ret </span>+= <span style="color: #800080;">1.0</span> /<span style="color: #000000;"> temp;
+    }
+    </span><span style="color: #0000ff;">return</span> ret + <span style="color: #800080;">1</span><span style="color: #000000;">; 
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    freopen(</span><span style="color: #800000;">"</span><span style="color: #800000;">t.txt</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">r</span><span style="color: #800000;">"</span><span style="color: #000000;">, stdin);
+    puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">n e</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">- -----------</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">0 1</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">1 2</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">2 2.5</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">3 2.666666667</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">4 2.708333333</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">5</span>; i &lt;= <span style="color: #800080;">9</span>; i++<span style="color: #000000;">)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %.9f\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, i, cal(i));
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

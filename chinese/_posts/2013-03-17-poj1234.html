@@ -1,0 +1,83 @@
+---
+layout: post
+title: poj1234
+category: chinese
+---
+<p>模拟，注意1号第一次投出球后其thinking方向不改变。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('91b1d13b-36bc-44ec-8550-9a857f22fb7a')"><img id="code_img_closed_91b1d13b-36bc-44ec-8550-9a857f22fb7a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_91b1d13b-36bc-44ec-8550-9a857f22fb7a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('91b1d13b-36bc-44ec-8550-9a857f22fb7a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_91b1d13b-36bc-44ec-8550-9a857f22fb7a" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 35
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> d[maxn];
+</span><span style="color: #0000ff;">int</span> dir[<span style="color: #800080;">2</span>] = {-<span style="color: #800080;">1</span>, <span style="color: #800080;">1</span><span style="color: #000000;">};
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">char</span> st[<span style="color: #800080;">5</span><span style="color: #000000;">];
+
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">m);
+    m</span>--<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+        </span><span style="color: #0000ff;">if</span> (st[<span style="color: #800080;">0</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">R</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            d[i] </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            d[i] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">int</span> unify(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">return</span> (a + n) %<span style="color: #000000;"> n;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> s =<span style="color: #000000;"> m;
+    </span><span style="color: #0000ff;">int</span> t = unify(<span style="color: #800080;">0</span> +<span style="color: #000000;"> dir[d[m]]);
+    </span><span style="color: #0000ff;">if</span> (t ==<span style="color: #000000;"> m)
+        t </span>= unify(t +<span style="color: #000000;"> dir[d[m]]);
+    </span><span style="color: #0000ff;">int</span> cnt = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> ret = <span style="color: #800080;">1</span><span style="color: #000000;">;
+
+    vis[m] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    </span><span style="color: #0000ff;">while</span> (cnt &lt;<span style="color: #000000;"> n)
+    {
+</span><span style="color: #008000;">//</span><span style="color: #008000;">        printf("%d to %d\n", s + 1, t + 1);</span>
+        vis[s] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        d[s] </span>= <span style="color: #800080;">1</span> -<span style="color: #000000;"> d[s];
+        ret</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">vis[t])
+            cnt</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> temp = unify(s +<span style="color: #000000;"> dir[d[t]]);
+        </span><span style="color: #0000ff;">if</span> (temp ==<span style="color: #000000;"> t)
+            temp </span>= unify(temp +<span style="color: #000000;"> dir[d[t]]);
+        s </span>=<span style="color: #000000;"> t;
+        t </span>=<span style="color: #000000;"> temp;
+    } 
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Classmate %d got the ball last after %d tosses.\n</span><span style="color: #800000;">"</span>, s + <span style="color: #800080;">1</span><span style="color: #000000;">, ret);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n), n)
+    {
+        input();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

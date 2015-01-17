@@ -1,0 +1,117 @@
+---
+layout: post
+title: poj3261
+category: chinese
+---
+<p>后缀数组+单调队列</p>
+<p>注意：后缀数组的所有后缀中包括空串，因此有strlen(s)+1个后缀。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9153b5f8-7df4-4ce1-b76e-8a122fb73d67')"><img id="code_img_closed_9153b5f8-7df4-4ce1-b76e-8a122fb73d67" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9153b5f8-7df4-4ce1-b76e-8a122fb73d67" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9153b5f8-7df4-4ce1-b76e-8a122fb73d67',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_9153b5f8-7df4-4ce1-b76e-8a122fb73d67" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> N 20005
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Elem
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> pos, value;
+    Elem()
+    {}
+    Elem(</span><span style="color: #0000ff;">int</span> pp, <span style="color: #0000ff;">int</span><span style="color: #000000;"> vv): pos(pp), value(vv)
+    {}
+}q[N];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> s[N];
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> N &gt; 256</span>
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> sa[N], height[N], rank[N], tmp[N], top[N];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;<span style="color: #000000;">m);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">s[i]);
+}
+
+</span><span style="color: #0000ff;">void</span> makesa(<span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> O(N * log N)</span>
+    <span style="color: #0000ff;">int</span><span style="color: #000000;"> i, j, len, na;
+    na </span>= (n &lt; <span style="color: #800080;">256</span> ? <span style="color: #800080;">256</span><span style="color: #000000;"> : n);
+    memset(top, </span><span style="color: #800080;">0</span>, na * <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">));
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        top[rank[i] </span>= s[i] &amp; <span style="color: #800080;">0xff</span>]++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt; na; i++<span style="color: #000000;">)
+        top[i] </span>+= top[i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        sa[</span>--top[rank[i]]] =<span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">for</span> (len = <span style="color: #800080;">1</span>; len &lt; n; len &lt;&lt;= <span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        {
+            j </span>= sa[i] -<span style="color: #000000;"> len;
+            </span><span style="color: #0000ff;">if</span> (j &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+                j </span>+=<span style="color: #000000;"> n;
+            tmp[top[rank[j]]</span>++] =<span style="color: #000000;"> j;
+        }
+        sa[tmp[top[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span>]] = j = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt; n; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (rank[tmp[i]] != rank[tmp[i - <span style="color: #800080;">1</span>]] || rank[tmp[i] +<span style="color: #000000;"> len]
+                    </span>!= rank[tmp[i - <span style="color: #800080;">1</span>] +<span style="color: #000000;"> len])
+                top[</span>++j] =<span style="color: #000000;"> i;
+            sa[tmp[i]] </span>=<span style="color: #000000;"> j;
+        }
+        memcpy(rank, sa, n </span>* <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">));
+        memcpy(sa, tmp, n </span>* <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">));
+        </span><span style="color: #0000ff;">if</span> (j &gt;= n - <span style="color: #800080;">1</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> lcp(<span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> O(4 * N)</span>
+    <span style="color: #0000ff;">int</span><span style="color: #000000;"> i, j, k;
+    </span><span style="color: #0000ff;">for</span> (j = rank[height[i = k = <span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span>]; i &lt; n - <span style="color: #800080;">1</span>; i++, k++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">while</span> (k &gt;= <span style="color: #800080;">0</span> &amp;&amp; s[i] != s[sa[j - <span style="color: #800080;">1</span>] +<span style="color: #000000;"> k])
+            height[j] </span>= (k--), j = rank[sa[j] + <span style="color: #800080;">1</span><span style="color: #000000;">];
+}
+
+</span><span style="color: #0000ff;">void</span> push(Elem a, <span style="color: #0000ff;">int</span> front, <span style="color: #0000ff;">int</span> &amp;<span style="color: #000000;">rear)
+{
+    </span><span style="color: #0000ff;">while</span> (rear &gt; front &amp;&amp; a.value &lt;= q[rear - <span style="color: #800080;">1</span><span style="color: #000000;">].value)
+        rear</span>--<span style="color: #000000;">;
+    q[rear</span>++] =<span style="color: #000000;"> a;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> front = <span style="color: #800080;">0</span>, rear = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; m; i++<span style="color: #000000;">)
+        push(Elem(i, height[i]), front, rear);
+    </span><span style="color: #0000ff;">int</span> ret =<span style="color: #000000;"> q[front].value;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = m; i &lt;= n; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">while</span> (front != rear &amp;&amp; q[front].pos &lt;= i - m + <span style="color: #800080;">1</span><span style="color: #000000;">)
+            front</span>++<span style="color: #000000;">;
+        push(Elem(i, height[i]), front, rear);
+        ret </span>=<span style="color: #000000;"> max(ret, q[front].value);
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    makesa(n </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">);
+    lcp(n </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

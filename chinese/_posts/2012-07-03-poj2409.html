@@ -1,0 +1,49 @@
+---
+layout: post
+title: poj2409
+category: chinese
+---
+<p>题意：给定颜色种数和环上的珠子总数，问有多少种染色方案（通过旋转和翻转相同的算同一种）。</p>
+<p>分析：polya定理。在这里只谈一下polya定理是如何应用的。对于排成一排的带编号的小球，按照某一种方案改变其中一些球的放置顺序，可以称之为置换。每一种置换方法可以用两排数字來表示，第一排数字和第二排数字一一对应，第一排数字表示小球的原来位置（1～n），第二排数字表示小球交换后的位置。现在我们有n个小球，m种颜色。有k种置换方法，我们认为能通过置换方法交换位置后变成同一种染色情况（颜色的排列状况相同，忽略小球编号），则我们认为这些互相通过置换能达到的状态为同一种染色方法。我们现在要求总共有多少种染色方法。要计算方法数，我们先要计算k种置换方法中每种置换方法中含有的环数，即建立一个图，有n个点，把每个置换方法两排数字中的上下一一对应的数字对看成边的起点和终点，计算这个图中有几个环。我们设环数分别为c1~ck。那么染色方法数为(m^c1+m^c2+...+m^ck)/k。以上就是polya定理，这里要注意的是置换方法集合必须是群，需要满足封闭性，即如果把通过该集合中的若干个方法连续进行置换压缩成一个置换方法（用两排数子表示），那么这种新的置换方法也必须属于该集合。</p>
+<p>这道题可以这样以来就是一道赤裸裸的polya定理题了。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('389c598c-2a14-4294-bfe9-87c3f2b7c8c1')"><img id="code_img_closed_389c598c-2a14-4294-bfe9-87c3f2b7c8c1" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_389c598c-2a14-4294-bfe9-87c3f2b7c8c1" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('389c598c-2a14-4294-bfe9-87c3f2b7c8c1',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_389c598c-2a14-4294-bfe9-87c3f2b7c8c1" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cmath&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+
+</span><span style="color: #0000ff;">int</span> gcd(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span><span style="color: #000000;"> b)
+{
+    b </span>= b %<span style="color: #000000;"> a;
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (b)
+    {
+        a </span>= a %<span style="color: #000000;"> b;
+        swap(a, b);
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> a;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;m), n |<span style="color: #000000;"> m)
+    {
+        </span><span style="color: #0000ff;">int</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= m; i++<span style="color: #000000;">)
+            ans </span>+=<span style="color: #000000;"> pow(n, gcd(i, m));
+        </span><span style="color: #0000ff;">if</span> (m &amp; <span style="color: #800080;">1</span><span style="color: #000000;">)
+            ans </span>+= m * pow(n, m / <span style="color: #800080;">2</span> + <span style="color: #800080;">1</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            ans </span>+= m / <span style="color: #800080;">2</span> * pow(n, m / <span style="color: #800080;">2</span>) + m / <span style="color: #800080;">2</span> * pow(n, m / <span style="color: #800080;">2</span> + <span style="color: #800080;">1</span><span style="color: #000000;">);
+        ans </span>/= m * <span style="color: #800080;">2</span><span style="color: #000000;">;
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

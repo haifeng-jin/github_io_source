@@ -1,0 +1,81 @@
+---
+layout: post
+title: poj3254
+category: chinese
+---
+<p>状态压缩dp，数据弱，本程序时间效率O(12 * (2^24))</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ea38473e-22fe-48f4-81ab-897b3e7f5865')"><img id="code_img_closed_ea38473e-22fe-48f4-81ab-897b3e7f5865" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ea38473e-22fe-48f4-81ab-897b3e7f5865" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ea38473e-22fe-48f4-81ab-897b3e7f5865',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_ea38473e-22fe-48f4-81ab-897b3e7f5865" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 13
+<span style="color: #0000ff;">#define</span> mod 100000000
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> row, column;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> filter[maxn];
+</span><span style="color: #0000ff;">int</span> f[maxn][<span style="color: #800080;">1</span> &lt;&lt;<span style="color: #000000;"> maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;row, &amp;<span style="color: #000000;">column);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= row; i++<span style="color: #000000;">)
+    {
+        filter[i] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; column; j++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a;
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">a);
+            filter[i] </span>= (filter[i] &lt;&lt; <span style="color: #800080;">1</span>) +<span style="color: #000000;"> a;
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span> ok(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span><span style="color: #000000;"> b)
+{
+    </span><span style="color: #0000ff;">if</span> ((a &amp; filter[b]) !=<span style="color: #000000;"> a)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> x = <span style="color: #800080;">3</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; column - <span style="color: #800080;">1</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> ((a &amp; x) ==<span style="color: #000000;"> x)
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        x </span>= x &lt;&lt; <span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    memset(f, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(f));
+    </span><span style="color: #0000ff;">int</span> n = <span style="color: #800080;">1</span> &lt;&lt;<span style="color: #000000;"> column;
+    f[</span><span style="color: #800080;">0</span>][<span style="color: #800080;">0</span>] = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= row; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; n; j++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">ok(j, i))
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> k = <span style="color: #800080;">0</span>; k &lt; n; k++<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">if</span> ((k &amp; j) == <span style="color: #800080;">0</span><span style="color: #000000;">)
+                    f[i][j] </span>= (f[i][j] + f[i - <span style="color: #800080;">1</span>][k]) %<span style="color: #000000;"> mod;
+        }
+    }
+    </span><span style="color: #0000ff;">int</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        ans </span>= (ans + f[row][i]) %<span style="color: #000000;"> mod;
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    work();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>442B</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/codeforces.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Codeforces</h1>
+                        <hr class="small">
+                        <span class="subheading">The Art of Competitive Programming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>442B</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 08 Dec 2014</span>
+
+		<div class="pull-right">
+			
+			<span class="label label-default">math</span>
+			
+			<span class="label label-default">probabilities</span>
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<h3 id="description">Description</h3>
+<p><br />
+Give the probabilities of each one in <script type="math/tex">n</script> friends to come up with exactly one problem.
+We should invite a group of friends so that
+the probability for them to up exactly one problem in total is maximized.
+<br /></p>
+
+<h3 id="tutorial">Tutorial</h3>
+<p><br />
+The math deduction process is very complex.
+The easiest way to find the solution to this problem is to use brute force for to discover the patterns in the answer,
+if you cannot discover the pattern by hand.
+The pattern is as follows.
+We should sort the friends by their probabilites from the lowest to the highest.
+The group we choose is always the suffix of this probability array.</p>
+
+<p>By the way, the formula for the probability for a group to come up with exactly one problem is <script type="math/tex">P=(\prod\limits_{i=1}^{n}(1-p_i))\times(\sum\limits_{i=1}^{n}\frac{p_i}{1-p_i})</script>.
+<br /></p>
+
+<h3 id="solution">Solution</h3>
+<p><br /></p>
+
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+const int MAX_N = 105;
+
+int n;
+double f[MAX_N];
+
+void input()
+{
+	scanf("%d", &amp;n);
+	for (int i = 0; i &lt; n; i++)
+	{
+		scanf("%lf", &amp;f[i]);
+	}
+}
+
+void work()
+{
+	double ans = 0;
+	double sum = 0;
+	double product = 1;
+	for (int i = 0; i &lt; n; i++)
+	{
+		sum *= 1 - f[i];
+		sum += product * f[i];
+		product *= 1 - f[i];
+		if (sum &gt; ans)
+		{
+			ans = sum;
+		}
+	}
+	printf("%.12f\n", ans);
+}
+
+int main()
+{
+	input();
+	sort(f, f + n);
+	reverse(f, f + n);
+	work();
+	return 0;
+}
+</code></pre>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are some write-ups for the problems I solved on Codeforces.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+	<div class="panel-heading"><big>Tasks</big></div>
+	<div class="panel-body">
+		<div class="text-center">100 Problems.</div>
+		<div class="progress">
+			<div class="progress-bar" style="width: 29%;"></div>
+		</div>
+		<div class="text-center">10 Problems.</div>
+		<div class="progress">
+			<div class="progress-bar" style="width: 100%;"></div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

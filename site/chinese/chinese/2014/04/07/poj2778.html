@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj2778</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj2778</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 07 Apr 2014</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：给出字符串长度n(&lt;=2000000000)，给出不可以包含的序列，最多10个，每个长度最大是10。问长度为n的合法序列有多少个？序列中只可能包含ACTG四个字符。</p>
+<p>分析：AC自动机(DFA)+矩阵快速幂</p>
+<p><span>ac自动机上的等价态：</span></p>
+<p>等价态即用fail指针连接的点，在行走fail指针时匹配的字符数量并没有发生变化，因此这些点可以看成是相同的匹配状态。</p>
+<p>通常有两种方法处理等价态，第一是互为等价态的点各自记录各自的信息。匹配的时候需要遍历所有等价态以判断是否匹配成功。next指针可能为空，需要匹配时进行判断是否需要走fail指针。</p>
+<p>第二是所有等价态中的点记录本身以及所有比它浅的点的信息总和（匹配成功的单词总数），匹配时不需要走等价态以判断匹配成功与否。next指针不为空，直接指向本应通过fail指针寻找到的那个状态。</p>
+<p>&nbsp;</p>
+<p>ac自动机与矩阵：</p>
+<p><span style="line-height: 1.5;">在ac自动机上，每一个从根出发并在自动机上行走的任意长度的路径都代表了一个字符串。</span></p>
+<p><span style="line-height: 1.5;">把ac自动机看成一个有向图的话我们可以提取它的邻接矩阵（可达矩阵），matrix[i][j]表示i和j是否相邻。</span></p>
+<p><span style="line-height: 1.5;">这个矩阵的n次幂matrix^n[i][j]表示从i恰好走n步到达j的路径有几条。</span></p>
+<p><span style="line-height: 1.5;">那可达矩阵对等价态是怎么处理的呢？如果考虑等价态，一个状态的可到达状态实在是太多了。因此我们这里认为的可达只是用地二中方法处理等价态时，next指针直接指向的被认为可达。</span></p>
+<p>&nbsp;</p>
+<p>本题其实就是在ac自动机上找出 从根出发的 长度为n的 不经过任何匹配成功态的 路径数量。</p>
+<p>这个只需要用矩阵快速幂来计算即可，一个状态是否是匹配成功态的。注意判断成功态和等价态的问题。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6fd7ac5f-a38a-4229-b1c7-982ce3f285a8')"><img id="code_img_closed_6fd7ac5f-a38a-4229-b1c7-982ce3f285a8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6fd7ac5f-a38a-4229-b1c7-982ce3f285a8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6fd7ac5f-a38a-4229-b1c7-982ce3f285a8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6fd7ac5f-a38a-4229-b1c7-982ce3f285a8" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;queue&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> D(x) 
+
+<span style="color: #0000ff;">#define</span> MAX_LEN 20
+<span style="color: #0000ff;">#define</span> MAX_CHILD_NUM 4
+<span style="color: #0000ff;">#define</span> MAX_NODE_NUM 100005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> st_num, len;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> matrix_size;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> node_cnt;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> node
+{
+    node </span>*<span style="color: #000000;">fail;
+    node </span>*<span style="color: #000000;">next[MAX_CHILD_NUM];
+    </span><span style="color: #0000ff;">int</span> count; <span style="color: #008000;">//</span><span style="color: #008000;">how many words are matched when reach this node</span>
+}trie[MAX_NODE_NUM], *root =<span style="color: #000000;"> trie;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> ac_init()
+{
+    memset(trie, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(trie));
+    node_cnt </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span> get_id(<span style="color: #0000ff;">char</span><span style="color: #000000;"> ch)
+{
+    </span><span style="color: #0000ff;">if</span> (ch == <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (ch == <span style="color: #800000;">'</span><span style="color: #800000;">C</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (ch == <span style="color: #800000;">'</span><span style="color: #800000;">T</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">2</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">3</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> insert(node *root, <span style="color: #0000ff;">char</span> *<span style="color: #000000;">str)
+{
+    node </span>*p =<span style="color: #000000;"> root;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> index;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; str[i]; i++<span style="color: #000000;">)
+    {
+        index </span>=<span style="color: #000000;"> get_id(str[i]);
+        </span><span style="color: #0000ff;">if</span> (p-&gt;next[index] ==<span style="color: #000000;"> NULL)
+        {
+            p</span>-&gt;next[index] = trie +<span style="color: #000000;"> node_cnt;
+            node_cnt</span>++<span style="color: #000000;">;
+        }
+        p </span>= p-&gt;<span style="color: #000000;">next[index];
+    }
+    p</span>-&gt;count++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> build_ac_automation(node *<span style="color: #000000;">root)
+{
+    queue</span>&lt;node*&gt;<span style="color: #000000;"> q;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i;
+    root</span>-&gt;fail =<span style="color: #000000;"> NULL;
+    q.push(root);
+    </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">q.empty())
+    {
+        node </span>*temp =<span style="color: #000000;"> q.front();
+        q.pop();
+        node </span>*p =<span style="color: #000000;"> NULL;
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; MAX_CHILD_NUM; i++<span style="color: #000000;">)
+        {
+            p </span>= temp-&gt;<span style="color: #000000;">fail;
+            </span><span style="color: #0000ff;">while</span> (p != NULL &amp;&amp; p-&gt;next[i] ==<span style="color: #000000;"> NULL)
+                p </span>= p-&gt;<span style="color: #000000;">fail;
+            </span><span style="color: #0000ff;">if</span> (temp-&gt;next[i] !=<span style="color: #000000;"> NULL)
+            {
+                </span><span style="color: #0000ff;">if</span> (p ==<span style="color: #000000;"> NULL)
+                    temp</span>-&gt;next[i]-&gt;fail =<span style="color: #000000;"> root;
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                {
+                    temp</span>-&gt;next[i]-&gt;fail = p-&gt;<span style="color: #000000;">next[i];
+                    temp</span>-&gt;next[i]-&gt;count += p-&gt;next[i]-&gt;<span style="color: #000000;">count;
+                }
+                q.push(temp</span>-&gt;<span style="color: #000000;">next[i]);
+            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            {
+                </span><span style="color: #0000ff;">if</span> (p ==<span style="color: #000000;"> NULL)
+                    temp</span>-&gt;next[i] =<span style="color: #000000;"> root;
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                    temp</span>-&gt;next[i] = p-&gt;<span style="color: #000000;">next[i];
+            }
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span> query(node *root, <span style="color: #0000ff;">char</span>*<span style="color: #000000;"> str)
+{
+    </span><span style="color: #0000ff;">int</span> cnt = <span style="color: #800080;">0</span><span style="color: #000000;">, index;
+    node </span>*p =<span style="color: #000000;"> root;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; str[i]; i++<span style="color: #000000;">)
+    {
+        index </span>=<span style="color: #000000;"> get_id(str[i]);
+        p </span>= p-&gt;<span style="color: #000000;">next[index];
+        p </span>= (p == NULL) ?<span style="color: #000000;"> root : p;
+        node </span>*temp =<span style="color: #000000;"> p;
+        cnt </span>+= temp-&gt;<span style="color: #000000;">count;
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">marks count as -1 to prevent from matching again</span>
+        <span style="color: #0000ff;">while</span> (temp != root &amp;&amp; temp-&gt;count != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+        {
+            temp</span>-&gt;count = -<span style="color: #800080;">1</span><span style="color: #000000;">;
+            temp </span>= temp-&gt;<span style="color: #000000;">fail;
+        }
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> cnt;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;st_num, &amp;<span style="color: #000000;">len);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; st_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> st[MAX_LEN];
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+        insert(root, st);
+    }
+}
+
+</span><span style="color: #0000ff;">#define</span> MAX_MATRIX_SIZE 101
+<span style="color: #0000ff;">#define</span> MOD 100000
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Matrix
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> order;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> num[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
+
+    Matrix()
+    {}
+
+    Matrix(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ord)
+    {
+        order </span>=<span style="color: #000000;"> ord;
+    }
+
+    </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; order; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; order; j++<span style="color: #000000;">)
+            {
+                num[i][j] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+            }
+        }
+    }
+    </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> output()
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; order; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; order; j++<span style="color: #000000;">)
+            {
+                printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, num[i][j]);
+            }
+            puts(</span><span style="color: #800000;">""</span><span style="color: #000000;">);
+        }
+    }
+};
+
+Matrix </span><span style="color: #0000ff;">operator</span>*<span style="color: #000000;">(Matrix ma, Matrix mb)
+{
+    </span><span style="color: #0000ff;">int</span> ord =<span style="color: #000000;"> ma.order;
+    Matrix numc(ord);
+    numc.init();
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i, j, k;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; ord; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (k = <span style="color: #800080;">0</span>; k &lt; ord; k++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (ma.num[i][k] == <span style="color: #800080;">0</span><span style="color: #000000;">)
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; ord; j++<span style="color: #000000;">)
+            {
+                </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> temp = ma.num[i][k] * (<span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;">)mb.num[k][j];
+                temp </span>%=<span style="color: #000000;"> MOD;
+                numc.num[i][j] </span>+=<span style="color: #000000;"> temp;
+                numc.num[i][j] </span>%=<span style="color: #000000;"> MOD;
+                D(printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d %d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, i, j, numc.num[i][j]);)
+            }
+        }
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> numc;
+}
+
+Matrix matrix_power(Matrix ma, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x)
+{
+    </span><span style="color: #0000ff;">int</span> ord =<span style="color: #000000;"> ma.order;
+    Matrix numc(ord);
+    numc.init();
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; ord; i++<span style="color: #000000;">)
+    {
+        numc.num[i][i] </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (; x; x &gt;&gt;= <span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (x &amp; <span style="color: #800080;">1</span><span style="color: #000000;">)
+        {
+            numc </span>= numc *<span style="color: #000000;"> ma;
+        }
+        ma </span>= ma *<span style="color: #000000;"> ma;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> numc;
+}
+
+</span><span style="color: #0000ff;">void</span> extract_matrix(Matrix &amp;<span style="color: #000000;">matrix)
+{
+    matrix.order </span>=<span style="color: #000000;"> node_cnt;
+    matrix.init();
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; node_cnt; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; MAX_CHILD_NUM; j++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (trie[i].next[j] ==<span style="color: #000000;"> NULL)
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">int</span> temp = trie[i].next[j] -<span style="color: #000000;"> trie;
+            </span><span style="color: #0000ff;">if</span> (trie[temp].count == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            {
+                matrix.num[i][temp] </span>+= <span style="color: #800080;">1</span><span style="color: #000000;">;
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">D(printf("%d %d\n", i, temp);)</span>
+<span style="color: #000000;">            }
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    ac_init();
+    input();
+    build_ac_automation(root);
+    Matrix matrix;
+    extract_matrix(matrix);
+    D(matrix.output();)
+    Matrix power </span>=<span style="color: #000000;"> matrix_power(matrix, len);
+    </span><span style="color: #0000ff;">int</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; node_cnt; i++<span style="color: #000000;">)
+        ans </span>= (ans + power.num[<span style="color: #800080;">0</span>][i]) %<span style="color: #000000;"> MOD;
+    D(power.output();)
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>&nbsp;</p>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

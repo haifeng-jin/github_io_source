@@ -1,0 +1,59 @@
+---
+layout: post
+title: poj2575
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('790974c1-7cf9-4d50-b726-85ec14c18096')"><img id="code_img_closed_790974c1-7cf9-4d50-b726-85ec14c18096" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_790974c1-7cf9-4d50-b726-85ec14c18096" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('790974c1-7cf9-4d50-b726-85ec14c18096',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_790974c1-7cf9-4d50-b726-85ec14c18096" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 3005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn];
+
+</span><span style="color: #0000ff;">bool</span> ok(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">if</span> (a &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+        a </span>= -<span style="color: #000000;">a;
+    </span><span style="color: #0000ff;">if</span> (a &gt;= n || a &lt; <span style="color: #800080;">1</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (vis[a])
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    vis[a] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">bool</span> ret = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">a);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">b);
+        </span><span style="color: #0000ff;">if</span> (ret &amp;&amp; !ok(b -<span style="color: #000000;"> a))
+            ret </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        a </span>=<span style="color: #000000;"> b;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;n) !=<span style="color: #000000;"> EOF)
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (work())
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Jolly\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Not jolly\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

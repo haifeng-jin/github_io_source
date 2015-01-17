@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>438B</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/codeforces.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Codeforces</h1>
+                        <hr class="small">
+                        <span class="subheading">The Art of Competitive Programming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>438B</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 09 Dec 2014</span>
+
+		<div class="pull-right">
+			
+			<span class="label label-default">disjoint sets</span>
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<h3 id="description">Description</h3>
+<p><br />
+Here is a undirected graph with <script type="math/tex">n</script> nodes and <script type="math/tex">m</script> edges.
+(<script type="math/tex">2 \leq n, m \leq 10^5</script>)
+Each node has a weight <script type="math/tex">a_i</script>.
+<script type="math/tex">f(p, q)</script> defines the simple route from <script type="math/tex">p</script> to <script type="math/tex">q</script> with the largest <script type="math/tex">g(x_1~x_t)</script>.
+<script type="math/tex">g(x_1~x_t)</script> defines the weight of the node with the least weight on that simple route.
+Output the average of <script type="math/tex">f(p,q)</script> of all possible pairs of nodes on the graph.
+<br /></p>
+
+<h3 id="tutorial">Tutorial</h3>
+<p><br />
+Sort the nodes with their weights in decreasing order.
+Starting from an empty graph, add the nodes to the graph one by one.
+Each time some components may become connected by the new node added.
+<script type="math/tex">f(p, q)</script> where <script type="math/tex">p</script> and <script type="math/tex">q</script> are in two different components that to be connected by the new node, equals to the weight of the new node.
+Use disjoint sets to work it out.
+Join the components to that new node one by one.
+Add the sum of the <script type="math/tex">f(p,q)</script>s to the answer during each joint.
+<br /></p>
+
+<h3 id="solution">Solution</h3>
+<p><br /></p>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+const int MAX_N = int(1e5) + 10;
+
+int n, m;
+vector&lt;int&gt; edge[MAX_N];
+pair&lt;int, int&gt; animal[MAX_N];
+bool vis[MAX_N];
+
+struct Disjoint_sets
+{
+	int father[MAX_N];
+	int num[MAX_N];
+
+	Disjoint_sets()
+	{}
+
+	Disjoint_sets(int n)
+	{
+		for (int i = 0; i &lt; n; i++)
+		{
+			father[i] = i;
+			num[i] = 1;
+		}
+	}
+
+	int root(int a)
+	{
+		int ret = a;
+		while (father[ret] != ret)
+			ret = father[ret];
+		while (father[a] != a)
+		{
+			int b = a;
+			a = father[a];
+			father[b] = ret;
+		}
+		return ret;
+	}
+
+	void join(int a, int b) // b is the root then
+	{
+		int num_a = num[root(a)];
+		father[root(a)] = father[root(b)];
+		num[root(b)] += num_a;
+	}
+};
+
+
+int main()
+{
+	//input
+	scanf("%d%d", &amp;n, &amp;m);
+	for (int i = 0; i &lt; n; i++)
+	{
+		int a;
+		scanf("%d", &amp;a);
+		animal[i] = make_pair(a, i);
+	}
+	for (int i = 0; i &lt; m; i++)
+	{
+		int a, b;
+		scanf("%d%d", &amp;a, &amp;b);
+		a--;
+		b--;
+		edge[a].push_back(b);
+		edge[b].push_back(a);
+	}
+
+	//work
+	Disjoint_sets d_sets(n);
+	fill(vis, vis + n, 0);
+	sort(animal, animal + n);
+	long long ans = 0;
+	for (int i = n - 1; i &gt;= 0; i--)
+	{
+		int u = animal[i].second;
+		int min_num = animal[i].first;
+		vis[u] = true;
+		for (int j = 0; j &lt; (int)edge[u].size(); j++)
+		{
+			int v = edge[u][j];
+			if (!vis[v])
+				continue;
+			if (d_sets.root(v) != d_sets.root(u))
+			{
+				ans += 1LL * min_num * d_sets.num[d_sets.root(v)] * d_sets.num[d_sets.root(u)];
+				d_sets.join(v, u);
+			}
+		}
+	}
+
+	double final_ans = ans * 2.0 / n / (n - 1);
+	printf("%.12f\n", final_ans);
+	return 0;
+}
+</code></pre>
+
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are some write-ups for the problems I solved on Codeforces.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+	<div class="panel-heading"><big>Tasks</big></div>
+	<div class="panel-body">
+		<div class="text-center">100 Problems.</div>
+		<div class="progress">
+			<div class="progress-bar" style="width: 29%;"></div>
+		</div>
+		<div class="text-center">10 Problems.</div>
+		<div class="progress">
+			<div class="progress-bar" style="width: 100%;"></div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

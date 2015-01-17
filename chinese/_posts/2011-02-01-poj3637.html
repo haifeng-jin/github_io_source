@@ -1,0 +1,35 @@
+---
+layout: post
+title: poj3637
+category: chinese
+---
+<p>水题，只要排好序后，从大到小每三个取一个，加起来就是答案。</p>  <p>&#160;</p>  <pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+const int maxn = 20002;
+
+int main()
+{
+	//freopen(&quot;D:\\t.txt&quot;, &quot;r&quot;, stdin);
+	int t;
+	scanf(&quot;%d&quot;, &amp;t);
+	while (t--)
+	{
+		int n;
+		int good[maxn];
+		scanf(&quot;%d&quot;, &amp;n);
+		for (int i = 0; i &lt; n; i++)
+			scanf(&quot;%d&quot;, &amp;good[i]);
+		sort(good, good + n);
+		int ans = 0;
+		int i = n % 3;
+		for (;i &lt; n; i += 3)
+			ans += good[i];
+		printf(&quot;%d\n&quot;, ans);
+	}
+	return 0;
+}</pre>

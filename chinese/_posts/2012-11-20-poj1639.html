@@ -1,0 +1,221 @@
+---
+layout: post
+title: poj1639
+category: chinese
+---
+<p>题意：给一个无向图，求最小生成树，对图中的一个点进行了度数限制，其度不能超过k。</p>
+<p>分析：设该限制点为0号点，先将其删除，然后求各连通分支的最小生成树。然后将0点加回图中，把0点与各个连通分支中与它最近的点相连。</p>
+<p>然后可能现在0点的度小于限制，我们不断的增加0点的度，直到超过限制，观察什么时候最小生成树的总长度最小。</p>
+<p>对于每次给0点加边我们需要进行一下操作：先以0号点为根，计算出图中各个点通过树枝边到0号点的路径中的最长边长度（BFS或DFS实现）。然后，对于0点的各个非树枝边，我们尝试着选择一个加到树中，加入树中后必然产生环，我们进行破环（删掉环上的某条边），看加哪个边并破环后得到的最小生成树最小，就加那条边并破环。破环的方法如下：例如，我们将0点与a点的边加入树中，则原来a点到0点的树枝边路径中需要有一个边被去掉，我们为了让最小生成树较小，我们选择去掉那条路径上最长的边，这在之前已经计算出来了。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0bc975ab-3f42-42dd-b1fe-39e3805a7433')"><img id="code_img_closed_0bc975ab-3f42-42dd-b1fe-39e3805a7433" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0bc975ab-3f42-42dd-b1fe-39e3805a7433" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0bc975ab-3f42-42dd-b1fe-39e3805a7433',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_0bc975ab-3f42-42dd-b1fe-39e3805a7433" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">poj1639</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;<span style="color: #000000;">
+#include </span>&lt;queue&gt;<span style="color: #000000;">
+#include </span>&lt;vector&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxv = <span style="color: #800080;">110</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> edge
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        w, v1, v2;
+    edge(</span><span style="color: #0000ff;">int</span> ww, <span style="color: #0000ff;">int</span> vv1, <span style="color: #0000ff;">int</span><span style="color: #000000;"> vv2):w(ww), v1(vv1), v2(vv2){}
+    edge(){}
+}edges[maxv </span>*<span style="color: #000000;"> maxv], bestedge[maxv];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        n, namecount, father[maxv], areacount, best[maxv], limit, answer, fans;
+</span><span style="color: #0000ff;">string</span><span style="color: #000000;">    names[maxv];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    used[maxv][maxv];
+vector</span>&lt;vector&lt;edge&gt;&gt;<span style="color: #000000;">map(maxv);
+
+
+</span><span style="color: #0000ff;">int</span> getid(<span style="color: #0000ff;">string</span><span style="color: #000000;"> name)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; namecount; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (name ==<span style="color: #000000;"> names[i])
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> i;
+    names[namecount</span>++] =<span style="color: #000000;"> name;
+    </span><span style="color: #0000ff;">return</span> namecount - <span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, length, n1, n2;
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    name1, name2;
+
+    memset(used, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(used));
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+    namecount </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+    answer </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    areacount </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    names[</span><span style="color: #800080;">0</span>] = <span style="color: #800000;">"</span><span style="color: #800000;">Park</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        getchar();
+        cin </span>&gt;&gt;<span style="color: #000000;"> name1;
+        cin </span>&gt;&gt;<span style="color: #000000;"> name2;
+        cin </span>&gt;&gt;<span style="color: #000000;"> length;
+        n1 </span>=<span style="color: #000000;"> getid(name1);
+        n2 </span>=<span style="color: #000000;"> getid(name2);
+        map[n1].push_back(edge(length, n2, </span>-<span style="color: #800080;">1</span><span style="color: #000000;">));
+        map[n2].push_back(edge(length, n1, </span>-<span style="color: #800080;">1</span><span style="color: #000000;">));
+        edges[i].v1 </span>=<span style="color: #000000;"> n1;
+        edges[i].v2 </span>=<span style="color: #000000;"> n2;
+        edges[i].w </span>=<span style="color: #000000;"> length;
+    }
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">limit);
+}
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span>&lt;<span style="color: #000000;"> (edge a, edge b)
+{
+    </span><span style="color: #0000ff;">return</span> a.w &lt;<span style="color: #000000;"> b.w;
+}
+
+</span><span style="color: #0000ff;">int</span> getanc(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">if</span> (father[a] !=<span style="color: #000000;"> a)
+        </span><span style="color: #0000ff;">return</span> father[a] =<span style="color: #000000;"> getanc(father[a]);
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> a;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> makeareas()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, n1, n2;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; namecount; i++<span style="color: #000000;">)
+        father[i] </span>=<span style="color: #000000;"> i;
+    sort(edges, edges </span>+<span style="color: #000000;"> n);
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (edges[i].v1 == <span style="color: #800080;">0</span> || edges[i].v2 == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        n1 </span>=<span style="color: #000000;"> getanc(edges[i].v1);
+        n2 </span>=<span style="color: #000000;"> getanc(edges[i].v2);
+        </span><span style="color: #0000ff;">if</span> (n1 ==<span style="color: #000000;"> n2)
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        father[n1] </span>=<span style="color: #000000;"> n2;
+        used[edges[i].v1][edges[i].v2] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        used[edges[i].v2][edges[i].v1] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt; namecount; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (father[i] ==<span style="color: #000000;"> i)
+            areacount</span>++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> maketree()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        vdist[maxv], n1, i, vconect[maxv];
+
+    memset(vconect, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vconect));
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; map[<span style="color: #800080;">0</span>].size(); i++<span style="color: #000000;">)
+    {
+        n1 </span>= getanc(map[<span style="color: #800080;">0</span><span style="color: #000000;">][i].v1);
+        </span><span style="color: #0000ff;">if</span> (vconect[n1] == -<span style="color: #800080;">1</span> || vdist[n1] &gt; map[<span style="color: #800080;">0</span><span style="color: #000000;">][i].w)
+        {
+            vconect[n1] </span>= map[<span style="color: #800080;">0</span><span style="color: #000000;">][i].v1;
+            vdist[n1] </span>= map[<span style="color: #800080;">0</span><span style="color: #000000;">][i].w;
+        }
+    }
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt; namecount; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (father[i] !=<span style="color: #000000;"> i)
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        used[vconect[i]][</span><span style="color: #800080;">0</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        used[</span><span style="color: #800080;">0</span>][vconect[i]] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> calculate()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (used[edges[i].v1][edges[i].v2])
+            answer </span>+=<span style="color: #000000;"> edges[i].w;
+    fans </span>=<span style="color: #000000;"> answer;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> dp()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, l, vused[maxv];
+
+    queue</span>&lt;<span style="color: #0000ff;">int</span>&gt;<span style="color: #000000;"> q;
+    memset(father, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(father));
+    memset(vused, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vused));
+    memset(best, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(best));
+    memset(bestedge, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(bestedge));
+    vused[</span><span style="color: #800080;">0</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; map[<span style="color: #800080;">0</span>].size(); i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (used[<span style="color: #800080;">0</span>][map[<span style="color: #800080;">0</span><span style="color: #000000;">][i].v1])
+        {
+            q.push(map[</span><span style="color: #800080;">0</span><span style="color: #000000;">][i].v1);
+            father[map[</span><span style="color: #800080;">0</span>][i].v1] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+            vused[map[</span><span style="color: #800080;">0</span>][i].v1] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+    </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">q.empty())
+    {
+        l </span>=<span style="color: #000000;"> q.front();
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; map[l].size(); i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (!vused[map[l][i].v1] &amp;&amp;<span style="color: #000000;"> used[l][map[l][i].v1])
+            {
+                vused[map[l][i].v1] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+                q.push(map[l][i].v1);
+                </span><span style="color: #0000ff;">if</span> (best[l] &gt;<span style="color: #000000;"> map[l][i].w)
+                {
+                    best[map[l][i].v1] </span>=<span style="color: #000000;"> best[l];
+                    bestedge[map[l][i].v1] </span>=<span style="color: #000000;"> bestedge[l];
+                }
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                {
+                    best[map[l][i].v1] </span>=<span style="color: #000000;"> map[l][i].w;
+                    bestedge[map[l][i].v1] </span>=<span style="color: #000000;"> map[l][i];
+                    bestedge[map[l][i].v1].v2 </span>=<span style="color: #000000;"> l;
+                }
+            }
+        q.pop();
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> up1()
+{
+    </span><span style="color: #0000ff;">int</span>        dis = <span style="color: #800080;">1000000000</span><span style="color: #000000;">, besti, i;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; map[<span style="color: #800080;">0</span>].size(); i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (!used[<span style="color: #800080;">0</span>][map[<span style="color: #800080;">0</span>][i].v1] &amp;&amp; dis &gt; map[<span style="color: #800080;">0</span>][i].w - best[map[<span style="color: #800080;">0</span><span style="color: #000000;">][i].v1])
+        {
+            dis </span>= map[<span style="color: #800080;">0</span>][i].w - best[map[<span style="color: #800080;">0</span><span style="color: #000000;">][i].v1];
+            besti </span>= map[<span style="color: #800080;">0</span><span style="color: #000000;">][i].v1;
+        }
+    used[</span><span style="color: #800080;">0</span>][besti] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    used[besti][</span><span style="color: #800080;">0</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    answer </span>+=<span style="color: #000000;"> dis;
+    </span><span style="color: #0000ff;">if</span> (answer &lt;<span style="color: #000000;"> fans)
+        fans </span>=<span style="color: #000000;"> answer;
+    used[bestedge[besti].v1][bestedge[besti].v2] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    used[bestedge[besti].v2][bestedge[besti].v1] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    init();
+    makeareas();
+    maketree();
+    calculate();
+    </span><span style="color: #0000ff;">for</span> (i = areacount; i &lt; limit; i++<span style="color: #000000;">)
+    {
+        dp();
+        up1();
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Total miles driven: %d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, fans);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

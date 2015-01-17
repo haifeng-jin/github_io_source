@@ -1,0 +1,120 @@
+---
+layout: post
+title: 2013 ACM/ICPC 杭州网络赛C题
+category: chinese
+---
+<p>题意：驴和老虎，在一个矩阵的两个格子里，有各自的起始方向。两者以相同的速度向前移动，前方不能走时驴总是向右，老虎总是向左。他们不能超出矩阵边界也不能走自己走过的格子（但可以走对方走过的格子）。如果不能前进时转向后仍不能前进则永久停止运动，问两者是否相遇（同时出现在同一个格子里，同时出现在格子的边界上不算），若相遇给出相遇坐标。</p>
+<p>分析：模拟即可，每次将两者按其规则移动，并判断两者是否在同一个格子里。注意：起始点在同一个格子里也算相遇。转向不算时间，因为题里说二者速度始终相同。本来应该用面向对象的方式，但是比赛时不敢轻举妄动&hellip;&hellip;</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c9d644ae-134e-4f25-9f4f-dae6f6b7e599')"><img id="code_img_closed_c9d644ae-134e-4f25-9f4f-dae6f6b7e599" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c9d644ae-134e-4f25-9f4f-dae6f6b7e599" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c9d644ae-134e-4f25-9f4f-dae6f6b7e599',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c9d644ae-134e-4f25-9f4f-dae6f6b7e599" class="cnblogs_code_hide">
+<pre>#include &lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_Y 1005
+<span style="color: #0000ff;">#define</span> MAX_X MAX_Y
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Point
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y;
+    Point()
+    {}
+    Point(</span><span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span><span style="color: #000000;"> y):x(x), y(y)
+    {}
+    </span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> == (<span style="color: #0000ff;">const</span> Point &amp;a) <span style="color: #0000ff;">const</span><span style="color: #000000;">
+    {
+        </span><span style="color: #0000ff;">return</span> a.x == x &amp;&amp; a.y ==<span style="color: #000000;"> y;
+    }
+    Point </span><span style="color: #0000ff;">operator</span> + (<span style="color: #0000ff;">const</span> Point &amp;<span style="color: #000000;">a)
+    {
+        </span><span style="color: #0000ff;">return</span> Point(x + a.x, y +<span style="color: #000000;"> a.y);
+    }
+};
+
+Point dir[</span><span style="color: #800080;">4</span>] = {Point(<span style="color: #800080;">0</span>, <span style="color: #800080;">1</span>), Point(<span style="color: #800080;">1</span>, <span style="color: #800080;">0</span>), Point(<span style="color: #800080;">0</span>, -<span style="color: #800080;">1</span>), Point(-<span style="color: #800080;">1</span>, <span style="color: #800080;">0</span><span style="color: #000000;">)};
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> donkey_vis[MAX_X][MAX_Y];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> tiger_vis[MAX_X][MAX_Y];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> tiger_dir;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> donkey_dir;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> grid_size;
+Point tiger, donkey;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> tiger_stop, donkey_stop;
+
+</span><span style="color: #0000ff;">void</span> visit(Point a, <span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[][MAX_X])
+{
+    vis[a.x][a.y] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> input(Point &amp;a, <span style="color: #0000ff;">int</span> &amp;<span style="color: #000000;">dir)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;x, &amp;y, &amp;<span style="color: #000000;">dir);
+    a.x </span>=<span style="color: #000000;"> x;
+    a.y </span>=<span style="color: #000000;"> y;
+}
+
+</span><span style="color: #0000ff;">bool</span> ok(Point a, <span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[][MAX_Y])
+{
+    </span><span style="color: #0000ff;">if</span> (a.x &lt; <span style="color: #800080;">0</span> || a.x &gt;= grid_size || a.y &lt; <span style="color: #800080;">0</span> || a.y &gt;=<span style="color: #000000;"> grid_size)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> !<span style="color: #000000;">vis[a.x][a.y];
+}
+
+</span><span style="color: #0000ff;">void</span> move(Point &amp;animal, <span style="color: #0000ff;">int</span> &amp;cur_dir, <span style="color: #0000ff;">bool</span> vis[][MAX_Y], <span style="color: #0000ff;">bool</span> &amp;stop, <span style="color: #0000ff;">int</span><span style="color: #000000;"> dir_delta)
+{    
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (stop)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    Point des </span>= animal +<span style="color: #000000;"> dir[cur_dir];
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok(des, vis))
+    {
+        animal </span>=<span style="color: #000000;"> des;
+        visit(des, vis);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    cur_dir </span>= (cur_dir + dir_delta + <span style="color: #800080;">4</span>) % <span style="color: #800080;">4</span><span style="color: #000000;">;
+    des </span>= animal +<span style="color: #000000;"> dir[cur_dir];
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok(des, vis))
+    {
+        animal </span>=<span style="color: #000000;"> des;
+        visit(des, vis);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    stop </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> work()
+{
+    tiger_stop </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    donkey_stop </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    memset(tiger_vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(tiger_vis));
+    memset(donkey_vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(donkey_vis));
+    </span><span style="color: #0000ff;">if</span> (tiger ==<span style="color: #000000;"> donkey)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    visit(tiger, tiger_vis);
+    visit(donkey, donkey_vis);
+    </span><span style="color: #0000ff;">while</span> (!(tiger_stop &amp;&amp;<span style="color: #000000;"> donkey_stop))
+    {
+        move(tiger, tiger_dir, tiger_vis, tiger_stop, </span>-<span style="color: #800080;">1</span><span style="color: #000000;">);
+        move(donkey, donkey_dir, donkey_vis, donkey_stop, </span><span style="color: #800080;">1</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">if</span> (tiger ==<span style="color: #000000;"> donkey)
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">grid_size), grid_size)
+    {
+        input(donkey, donkey_dir);
+        input(tiger, tiger_dir);
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (work())
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, tiger.x, tiger.y);
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">-1\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

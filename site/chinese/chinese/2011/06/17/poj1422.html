@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj1422</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj1422</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 17 Jun 2011</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：给定一个有向图，在这个图上的某些点上放伞兵，可以使伞兵可以走到图上所有的点。且每个点只被一个伞兵走一次。问至少放多少伞兵。</p>
+<p>分析：最小路径覆盖。我们可以把问题转化为，在图上的边中选出一些边，使得每个点的入度与出度都不超过1。</p>
+<p>我们开始在图上的每个点都放上伞兵，然后没选出一条边，就意味着有一个伞兵可以被取消掉了。也就是说需要的最少伞兵数=点总数－能选出的最大边数。</p>
+<p>我们只要求最大边数即可。用二分图匹配，把每个点拆成两个点，分别加入二分图的两个点集，原图中一条由a到b的边在二分图中是一条由第一个点集中的第a个点到第二个点集中的第b个点。也就是第一个点集的点与出边有关，第二个与入边有关。匹配时也就保证了每个点的入度与出度都不超过1。求最大匹配即为能选出的最大边数。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('64f4c73e-8a37-4de7-a17a-87658f2d3be1')"><img id="code_img_closed_64f4c73e-8a37-4de7-a17a-87658f2d3be1" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_64f4c73e-8a37-4de7-a17a-87658f2d3be1" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('64f4c73e-8a37-4de7-a17a-87658f2d3be1',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_64f4c73e-8a37-4de7-a17a-87658f2d3be1" class="cnblogs_code_hide">
+<div><span style="color: #000000;">#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">iostream</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdio</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdlib</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstring</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000ff;">using</span><span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;<br /><br /></span><span style="color: #0000ff;">#define</span><span style="color: #000000;"> maxn 150</span><span style="color: #000000;"><br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> uN, vN;<br /></span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> g[maxn][maxn];<br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> xM[maxn], yM[maxn];<br /></span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> chk[maxn];<br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;<br /><br /></span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> SearchPath(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> u)<br />{<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v;<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (v </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; v </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> vN; v</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (g[u][v] </span><span style="color: #000000;">&amp;&amp;</span><span style="color: #000000;">!</span><span style="color: #000000;">chk[v])<br />        {<br />            chk[v] </span><span style="color: #000000;">=</span><span style="color: #0000ff;">true</span><span style="color: #000000;">;<br />            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (yM[v] </span><span style="color: #000000;">==</span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">||</span><span style="color: #000000;"> SearchPath(yM[v]))<br />            {<br />                yM[v] </span><span style="color: #000000;">=</span><span style="color: #000000;"> u;<br />                xM[u] </span><span style="color: #000000;">=</span><span style="color: #000000;"> v;<br />                </span><span style="color: #0000ff;">return</span><span style="color: #0000ff;">true</span><span style="color: #000000;">;<br />            }<br />        }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #0000ff;">false</span><span style="color: #000000;">;<br />}<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> MaxMatch()<br />{<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> u, ret </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />    memset(xM, </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(xM));<br />    memset(yM, </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(yM));<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (u </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; u </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> uN; u</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (xM[u] </span><span style="color: #000000;">==</span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">)<br />        {<br />            memset(chk, </span><span style="color: #0000ff;">false</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(chk));<br />            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (SearchPath(u))<br />                ret</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />        }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;<br />}<br /><br /></span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()<br />{<br />    memset(g, </span><span style="color: #800080;">0</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(g));<br />    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">n, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">m);<br />    uN </span><span style="color: #000000;">=</span><span style="color: #000000;"> vN </span><span style="color: #000000;">=</span><span style="color: #000000;"> n;<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> m; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />    {<br />        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;<br />        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">a, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">b);<br />        a</span><span style="color: #000000;">--</span><span style="color: #000000;">;<br />        b</span><span style="color: #000000;">--</span><span style="color: #000000;">;<br />        g[a][b] </span><span style="color: #000000;">=</span><span style="color: #0000ff;">true</span><span style="color: #000000;">;<br />    }<br />}<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()<br />{<br /></span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);</span><span style="color: #008000;"><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;<br />    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">t);<br />    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (t</span><span style="color: #000000;">--</span><span style="color: #000000;">)<br />    {<br />        input();<br />        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ans </span><span style="color: #000000;">=</span><span style="color: #000000;"> n </span><span style="color: #000000;">-</span><span style="color: #000000;"> MaxMatch();<br />        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);<br />    }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />}</span></div>
+
+</div>
+
+</div>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+---
+layout: post
+title: poj1578
+category: chinese
+---
+<p>字符串处理麻烦题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a995f723-d84d-4c94-a145-942abea2224f')"><img id="code_img_closed_a995f723-d84d-4c94-a145-942abea2224f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a995f723-d84d-4c94-a145-942abea2224f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a995f723-d84d-4c94-a145-942abea2224f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_a995f723-d84d-4c94-a145-942abea2224f" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">zoj1702</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxlength = <span style="color: #800080;">2001</span>, maxl = <span style="color: #800080;">100</span>, maxc = <span style="color: #800080;">30</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">string</span><span style="color: #000000;">    header, nextheader, word[maxl][maxc];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        lnum, cnum, csize[maxc];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    st;
+    </span><span style="color: #0000ff;">int</span>        l = <span style="color: #800080;">0</span>, c = <span style="color: #800080;">0</span><span style="color: #000000;">, i;
+
+    memset(csize, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(csize));
+    cnum </span>=<span style="color: #000000;"> header.length();
+    </span><span style="color: #0000ff;">while</span> (<span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        getline(cin, nextheader);
+        </span><span style="color: #0000ff;">if</span> (nextheader[<span style="color: #800080;">0</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">&gt;</span><span style="color: #800000;">'</span> || nextheader[<span style="color: #800080;">0</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">&lt;</span><span style="color: #800000;">'</span> || nextheader[<span style="color: #800080;">0</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">=</span><span style="color: #800000;">'</span> || nextheader[<span style="color: #800080;">0</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; cnum - <span style="color: #800080;">1</span>; i++<span style="color: #000000;">)
+        {
+            word[l][i] </span>= nextheader.substr(<span style="color: #800080;">0</span>, nextheader.find(<span style="color: #800000;">"</span><span style="color: #800000;">&amp;</span><span style="color: #800000;">"</span><span style="color: #000000;">));
+            nextheader.erase(</span><span style="color: #800080;">0</span>, nextheader.find(<span style="color: #800000;">"</span><span style="color: #800000;">&amp;</span><span style="color: #800000;">"</span>) + <span style="color: #800080;">1</span><span style="color: #000000;">);
+            </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">int</span>(word[l][i].length()) &gt;<span style="color: #000000;"> csize[i])
+                csize[i] </span>=<span style="color: #000000;"> word[l][i].length();
+        }
+        word[l][cnum </span>- <span style="color: #800080;">1</span>] =<span style="color: #000000;"> nextheader;
+        </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">int</span>(word[l][cnum - <span style="color: #800080;">1</span>].length()) &gt; csize[cnum - <span style="color: #800080;">1</span><span style="color: #000000;">])
+            csize[cnum </span>- <span style="color: #800080;">1</span>] = word[l][cnum - <span style="color: #800080;">1</span><span style="color: #000000;">].length();
+        l</span>++<span style="color: #000000;">;
+    }
+    lnum </span>=<span style="color: #000000;"> l;
+}
+
+</span><span style="color: #0000ff;">void</span> printl(<span style="color: #0000ff;">int</span> w, <span style="color: #0000ff;">string</span><span style="color: #000000;"> st)
+{
+    </span><span style="color: #0000ff;">int</span>        i, l = w -<span style="color: #000000;"> st.length();
+
+    cout </span>&lt;&lt;<span style="color: #000000;"> st;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; l; i++<span style="color: #000000;">)
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> printc(<span style="color: #0000ff;">int</span> w, <span style="color: #0000ff;">string</span><span style="color: #000000;"> st)
+{
+    </span><span style="color: #0000ff;">int</span>        i, l = w -<span style="color: #000000;"> st.length();
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; l / <span style="color: #800080;">2</span>; i++<span style="color: #000000;">)
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+    cout </span>&lt;&lt;<span style="color: #000000;"> st;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; l / <span style="color: #800080;">2</span>; i++<span style="color: #000000;">)
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (l % <span style="color: #800080;">2</span> != <span style="color: #800080;">0</span><span style="color: #000000;">)
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+}
+
+
+</span><span style="color: #0000ff;">void</span> printr(<span style="color: #0000ff;">int</span> w, <span style="color: #0000ff;">string</span><span style="color: #000000;"> st)
+{
+    </span><span style="color: #0000ff;">int</span>        i, l = w -<span style="color: #000000;"> st.length();
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; l; i++<span style="color: #000000;">)
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+    cout </span>&lt;&lt;<span style="color: #000000;"> st;
+}
+
+</span><span style="color: #0000ff;">void</span> printword(<span style="color: #0000ff;">int</span> i, <span style="color: #0000ff;">string</span><span style="color: #000000;"> st)
+{
+    </span><span style="color: #0000ff;">switch</span><span style="color: #000000;"> (header[i])
+    {
+        </span><span style="color: #0000ff;">case</span>    <span style="color: #800000;">'</span><span style="color: #800000;">&lt;</span><span style="color: #800000;">'</span>: printl(csize[i], st); <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span>    <span style="color: #800000;">'</span><span style="color: #800000;">=</span><span style="color: #800000;">'</span>: printc(csize[i], st); <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span>    <span style="color: #800000;">'</span><span style="color: #800000;">&gt;</span><span style="color: #800000;">'</span>: printr(csize[i], st); <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> print()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, j;
+    
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">first line</span>
+    cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">@-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; cnum - <span style="color: #800080;">1</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; csize[i]; j++<span style="color: #000000;">)
+            cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">---</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; csize[cnum - <span style="color: #800080;">1</span>]; j++<span style="color: #000000;">)
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-@</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">second line</span>
+    cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">|</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; cnum; i++<span style="color: #000000;">)
+    {
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+        printword(i, word[</span><span style="color: #800080;">0</span><span style="color: #000000;">][i]);
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;"> |</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    }
+    cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">third line</span>
+    cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">|-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; cnum - <span style="color: #800080;">1</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; csize[i]; j++<span style="color: #000000;">)
+            cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-+-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; csize[cnum - <span style="color: #800080;">1</span>]; j++<span style="color: #000000;">)
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-|</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">other lines</span>
+    <span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">1</span>; j &lt; lnum; j++<span style="color: #000000;">)
+    {
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">|</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; cnum; i++<span style="color: #000000;">)
+        {
+            cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+            printword(i, word[j][i]);
+            cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;"> |</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        }
+        cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+    }
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">last line</span>
+    cout &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">@-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; cnum - <span style="color: #800080;">1</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; csize[i]; j++<span style="color: #000000;">)
+            cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">---</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; csize[cnum - <span style="color: #800080;">1</span>]; j++<span style="color: #000000;">)
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">-@</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("y.txt", "w", stdin);</span>
+<span style="color: #000000;">    getline(cin, header);
+    </span><span style="color: #0000ff;">while</span> (header[<span style="color: #800080;">0</span>] != <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    {
+        init();
+        print();
+        header </span>=<span style="color: #000000;"> nextheader;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,132 @@
+---
+layout: post
+title: poj2996
+category: chinese
+---
+<p>本题是简单的模拟，使用双层vector嵌套存储棋子的位置和种类，然后分别对每个vector进行排序</p>  <p>注意：排序方法为sort(piece[i].begin(), piece[i].end(), cmpWhite);   <br />当然，cmpWhite是比较函数，可以不加比较函数，只用用前两个参数。</p>  <p>&#160;</p>  <pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+
+const int maxn = 9;
+
+int getid[150];
+
+struct Piece
+{
+	int x, y, d;
+	Piece()
+	{
+	}
+	Piece(int xx, int yy, char dd) :
+		x(xx), y(yy), d(dd)
+	{
+	}
+};
+
+vector&lt;vector&lt;Piece&gt; &gt; piece(12);
+
+void init()
+{
+	string st;
+
+	memset(getid, -1, sizeof(getid));
+	getid[int('K')] = 0;
+	getid[int('Q')] = 1;
+	getid[int('R')] = 2;
+	getid[int('B')] = 3;
+	getid[int('N')] = 4;
+	getid[int('P')] = 5;
+	getid[int('k')] = 6;
+	getid[int('q')] = 7;
+	getid[int('r')] = 8;
+	getid[int('b')] = 9;
+	getid[int('n')] = 10;
+	getid[int('p')] = 11;
+	for (int i = 1; i &lt; maxn; i++)
+	{
+		getline(cin, st);
+		for (int j = 1; j &lt; maxn; j++)
+		{
+			char ch;
+			getchar();
+			getchar();
+			cin &gt;&gt; ch;
+			getchar();
+			if (getid[int(ch)] != -1)
+				piece[getid[int(ch)]].push_back(Piece(9 - i, j, ch));
+		}
+		getline(cin, st);
+	}
+}
+
+bool cmpWhite(const Piece &amp;a, const Piece &amp;b)
+{
+	if (a.x == b.x)
+		return a.y &lt; b.y;
+	return a.x &lt; b.x;
+}
+
+bool cmpBlack(const Piece &amp;a, const Piece &amp;b)
+{
+	if (a.x == b.x)
+		return a.y &lt; b.y;
+	return a.x &gt; b.x;
+}
+
+void sortout()
+{
+	for (int i = 0; i &lt; 6; i++)
+		sort(piece[i].begin(), piece[i].end(), cmpWhite);
+	for (int i = 6; i &lt; 12; i++)
+		sort(piece[i].begin(), piece[i].end(), cmpBlack);
+}
+
+void output()
+{
+	bool first = true;
+
+	cout &lt;&lt; &quot;White: &quot;;
+	for (int i = 0; i &lt; 6; i++)
+	{
+		for (unsigned int j = 0; j &lt; piece[i].size(); j++)
+		{
+			if (first)
+				first = false;
+			else
+				cout &lt;&lt; &quot;,&quot;;
+			if (piece[i][j].d != 'P')
+				cout &lt;&lt; char(piece[i][j].d);
+			cout &lt;&lt; char(piece[i][j].y + 'a' - 1) &lt;&lt; piece[i][j].x;
+		}
+	}
+
+	cout &lt;&lt; endl;
+	first = true;
+	cout &lt;&lt; &quot;Black: &quot;;
+	for (int i = 6; i &lt; 12; i++)
+	{
+		for (unsigned int j = 0; j &lt; piece[i].size(); j++)
+		{
+			if (first)
+				first = false;
+			else
+				cout &lt;&lt; &quot;,&quot;;
+			if (piece[i][j].d != 'p')
+				cout &lt;&lt; char(piece[i][j].d - 'a' + 'A');
+			cout &lt;&lt; char(piece[i][j].y + 'a' - 1) &lt;&lt; piece[i][j].x;
+		}
+	}
+}
+
+int main()
+{
+	//freopen(&quot;D:\\t.txt&quot;, &quot;r&quot;, stdin);
+	init();
+	sortout();
+	output();
+	return 0;
+}</pre>

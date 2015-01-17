@@ -1,0 +1,63 @@
+---
+layout: post
+title: poj1047
+category: chinese
+---
+<p>高精度，java做</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('f91db86e-a520-4ff4-b26e-c793735bef7f')"><img id="code_img_closed_f91db86e-a520-4ff4-b26e-c793735bef7f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_f91db86e-a520-4ff4-b26e-c793735bef7f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('f91db86e-a520-4ff4-b26e-c793735bef7f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_f91db86e-a520-4ff4-b26e-c793735bef7f" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span> java.io.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> java.util.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> java.math.*<span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Main {
+    
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">boolean</span> equal(String a, String b, <span style="color: #0000ff;">int</span><span style="color: #000000;"> x)
+    {
+        </span><span style="color: #0000ff;">int</span> len =<span style="color: #000000;"> a.length();
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; len; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (a.charAt(i) != b.charAt((i + x) %<span style="color: #000000;"> len))
+                </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    }
+    
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">boolean</span><span style="color: #000000;"> ok(String a, String b)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = b.length(); i &lt; a.length(); i++<span style="color: #000000;">)
+            b </span>= "0" +<span style="color: #000000;"> b;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; b.length(); i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (equal(a, b, i))
+                </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    }
+    
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> FileNotFoundException
+    {
+</span><span style="color: #008000;">//</span><span style="color: #008000;">        Scanner cin = new Scanner(new FileInputStream("t.txt"));</span>
+        Scanner cin = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Scanner(System.in);
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (cin.hasNext())
+        {
+            String st </span>=<span style="color: #000000;"> cin.next();
+            BigInteger a </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> BigInteger(st);
+            BigInteger b;
+            </span><span style="color: #0000ff;">boolean</span> cycle = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">int</span> n =<span style="color: #000000;"> st.length();
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 1; i &lt;= n; i++<span style="color: #000000;">)
+            {
+                b </span>=<span style="color: #000000;"> a.multiply(BigInteger.valueOf(i));
+                </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">ok(st, b.toString()))
+                {
+                    cycle </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+                    </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                }
+            }
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (cycle)
+                System.out.println(st </span>+ " is cyclic"<span style="color: #000000;">);
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                System.out.println(st </span>+ " is not cyclic"<span style="color: #000000;">);
+        }
+    }
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,73 @@
+---
+layout: post
+title: poj1028
+category: chinese
+---
+<p>简单栈模拟</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2ae9c4b3-f14e-4869-85ba-2cbdd4e52d0e')"><img id="code_img_closed_2ae9c4b3-f14e-4869-85ba-2cbdd4e52d0e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2ae9c4b3-f14e-4869-85ba-2cbdd4e52d0e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2ae9c4b3-f14e-4869-85ba-2cbdd4e52d0e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_2ae9c4b3-f14e-4869-85ba-2cbdd4e52d0e" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;stack&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+stack</span>&lt;<span style="color: #0000ff;">string</span>&gt;<span style="color: #000000;">bstack, fstack;
+</span><span style="color: #0000ff;">string</span><span style="color: #000000;">    current;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> visit()
+{
+    </span><span style="color: #0000ff;">if</span> (current != <span style="color: #800000;">""</span><span style="color: #000000;">)
+        bstack.push(current);
+    cin </span>&gt;&gt;<span style="color: #000000;"> current;
+    </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">fstack.empty())
+        fstack.pop();
+    cout </span>&lt;&lt; current &lt;&lt;<span style="color: #000000;"> endl;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> forward()
+{
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (fstack.empty())
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Ignored\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    bstack.push(current);
+    current </span>=<span style="color: #000000;"> fstack.top();
+    fstack.pop();
+    cout </span>&lt;&lt; current &lt;&lt;<span style="color: #000000;"> endl;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> back()
+{
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (bstack.empty())
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Ignored\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    fstack.push(current);
+    current </span>=<span style="color: #000000;"> bstack.top();
+    bstack.pop();
+    cout </span>&lt;&lt; current &lt;&lt;<span style="color: #000000;"> endl;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    command;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    current = <span style="color: #800000;">"</span><span style="color: #800000;">http://www.acm.org/</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (cin &gt;&gt; command &amp;&amp; command != <span style="color: #800000;">"</span><span style="color: #800000;">QUIT</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (command == <span style="color: #800000;">"</span><span style="color: #800000;">VISIT</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+            visit();
+        </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (command == <span style="color: #800000;">"</span><span style="color: #800000;">FORWARD</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+            forward();
+        </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (command == <span style="color: #800000;">"</span><span style="color: #800000;">BACK</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+            back();
+        getchar();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

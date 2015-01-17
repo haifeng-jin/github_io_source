@@ -1,0 +1,88 @@
+---
+layout: post
+title: poj1595
+category: chinese
+---
+<p>素数筛</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d3c90228-0b15-4f0b-8a8c-5a4de4e2ef5b')"><img id="code_img_closed_d3c90228-0b15-4f0b-8a8c-5a4de4e2ef5b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d3c90228-0b15-4f0b-8a8c-5a4de4e2ef5b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d3c90228-0b15-4f0b-8a8c-5a4de4e2ef5b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_d3c90228-0b15-4f0b-8a8c-5a4de4e2ef5b" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cmath&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 1005
+<span style="color: #0000ff;">#define</span> maxm 1005
+
+<span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">is</span><span style="color: #000000;">[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> prm[maxm];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> sum[maxn];
+
+</span><span style="color: #0000ff;">int</span> getprm(<span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">int</span> i, j, k = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> s, e = (<span style="color: #0000ff;">int</span>) (sqrt(<span style="color: #800080;">0.0</span> + n) + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    memset(</span><span style="color: #0000ff;">is</span>, <span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">is</span><span style="color: #000000;">));
+    prm[k</span>++] = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    prm[k</span>++] = <span style="color: #800080;">2</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">is</span>[<span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">4</span>; i &lt; n; i += <span style="color: #800080;">2</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">is</span>[i] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">3</span>; i &lt; e; i += <span style="color: #800080;">2</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">is</span><span style="color: #000000;">[i])
+        {
+            prm[k</span>++] =<span style="color: #000000;"> i;
+            </span><span style="color: #0000ff;">for</span> (s = i * <span style="color: #800080;">2</span>, j = i * i; j &lt; n; j +=<span style="color: #000000;"> s)
+                </span><span style="color: #0000ff;">is</span>[j] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        }
+    </span><span style="color: #0000ff;">for</span> (; i &lt; n; i += <span style="color: #800080;">2</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">is</span><span style="color: #000000;">[i])
+            prm[k</span>++] =<span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> k;
+}
+
+</span><span style="color: #0000ff;">void</span> work(<span style="color: #0000ff;">int</span> n, <span style="color: #0000ff;">int</span><span style="color: #000000;"> m)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;
+    </span><span style="color: #0000ff;">if</span> (n &amp; <span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        m</span>--<span style="color: #000000;">;
+        a </span>= n / <span style="color: #800080;">2</span> -<span style="color: #000000;"> m;
+        b </span>= n / <span style="color: #800080;">2</span> +<span style="color: #000000;"> m;
+    }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+    {
+        a </span>= n / <span style="color: #800080;">2</span> -<span style="color: #000000;"> m;
+        b </span>= n / <span style="color: #800080;">2</span> + m - <span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (a &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+        a </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (b &gt;=<span style="color: #000000;"> n)
+        b </span>= n - <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = a; i &lt;= b; i++<span style="color: #000000;">)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;"> %d</span><span style="color: #800000;">"</span><span style="color: #000000;">, prm[i]);
+    puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);</span>
+    getprm(<span style="color: #800080;">1001</span><span style="color: #000000;">);
+    memset(sum, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(sum));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= <span style="color: #800080;">1000</span>; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">is</span><span style="color: #000000;">[i])
+            sum[i] </span>= sum[i - <span style="color: #800080;">1</span>] + <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            sum[i] </span>= sum[i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;m) !=<span style="color: #000000;"> EOF)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d:</span><span style="color: #800000;">"</span><span style="color: #000000;">, n, m);
+        work(sum[n], m);    
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

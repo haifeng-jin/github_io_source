@@ -1,0 +1,101 @@
+---
+layout: post
+title: poj3211
+category: chinese
+---
+<p>01背包</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a1ec1a69-187e-4d0d-bd3b-c56812d6bc9e')"><img id="code_img_closed_a1ec1a69-187e-4d0d-bd3b-c56812d6bc9e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a1ec1a69-187e-4d0d-bd3b-c56812d6bc9e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a1ec1a69-187e-4d0d-bd3b-c56812d6bc9e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_a1ec1a69-187e-4d0d-bd3b-c56812d6bc9e" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 105
+<span style="color: #0000ff;">#define</span> maxm 15
+<span style="color: #0000ff;">#define</span> maxl 50
+<span style="color: #0000ff;">#define</span> maxt maxn * 1000
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Cloth
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t, c;
+}cloth[maxn];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> m, n;
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> color[maxm][maxl];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> f[maxt];
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> &lt; (<span style="color: #0000ff;">const</span> Cloth &amp;a, <span style="color: #0000ff;">const</span> Cloth &amp;<span style="color: #000000;">b)
+{
+    </span><span style="color: #0000ff;">return</span> a.c &lt;<span style="color: #000000;"> b.c;
+}
+
+</span><span style="color: #0000ff;">int</span> getid(<span style="color: #0000ff;">char</span> *<span style="color: #000000;">a)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">strcmp(a, color[i]))
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">return</span> -<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, color[i]);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> temp[maxl];
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%s</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">cloth[i].t, temp);
+        cloth[i].c </span>=<span style="color: #000000;"> getid(temp);
+    }
+}
+
+</span><span style="color: #0000ff;">int</span> bag(<span style="color: #0000ff;">int</span> w[], <span style="color: #0000ff;">int</span> num, <span style="color: #0000ff;">int</span><span style="color: #000000;"> sum)
+{
+    memset(f, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">bool</span>) * (sum + <span style="color: #800080;">1</span><span style="color: #000000;">));
+    f[</span><span style="color: #800080;">0</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; num; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = sum; j - w[i] &gt;= <span style="color: #800080;">0</span>; j--<span style="color: #000000;">)
+            f[j] </span>= f[j] || f[j -<span style="color: #000000;"> w[i]];
+    </span><span style="color: #0000ff;">int</span> ret =<span style="color: #000000;"> sum;
+    </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">f[ret])
+        ret</span>--<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> l = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> wash[maxn];
+    </span><span style="color: #0000ff;">int</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> x = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> sum = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span> (cloth[l].c ==<span style="color: #000000;"> i)
+        {
+            wash[x</span>++] =<span style="color: #000000;"> cloth[l].t;
+            sum </span>+=<span style="color: #000000;"> cloth[l].t;
+            l</span>++<span style="color: #000000;">;
+        }
+        ans </span>+= sum - bag(wash, x, sum / <span style="color: #800080;">2</span><span style="color: #000000;">);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;m, &amp;n), m |<span style="color: #000000;"> n)
+    {
+        memset(cloth, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(cloth));
+        input();
+        sort(cloth, cloth </span>+<span style="color: #000000;"> n);
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

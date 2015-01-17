@@ -1,0 +1,161 @@
+---
+layout: post
+title: poj1409
+category: chinese
+---
+<p>dfs+排序</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2e4603d0-7b58-4cb2-a293-119c37830873')"><img id="code_img_closed_2e4603d0-7b58-4cb2-a293-119c37830873" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2e4603d0-7b58-4cb2-a293-119c37830873" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2e4603d0-7b58-4cb2-a293-119c37830873',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_2e4603d0-7b58-4cb2-a293-119c37830873" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">zoj1684
+</span><span style="color: #008000;">//</span><span style="color: #008000;">注意字典序排序，是按照逐个单词比较出来的，每个句子的第x个单词只和其他句子的第x个单词进行比较。先比第一个单词再比第二个单词
+</span><span style="color: #008000;">//</span><span style="color: #008000;">例如： 句子"i am"的字典序就在句子"ia m"的前面
+</span><span style="color: #008000;">//</span><span style="color: #008000;">还有根据g++编译器，string是不能进行memset的，否则会出错。</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxn = <span style="color: #800080;">105</span>, maxl = <span style="color: #800080;">105</span>, maxa = <span style="color: #800080;">105</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> words
+{
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    sequence;
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    word;
+};
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> answers
+{
+    </span><span style="color: #0000ff;">int</span>        numbers[<span style="color: #800080;">301</span><span style="color: #000000;">];
+};
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        n, len, total;
+</span><span style="color: #0000ff;">string</span><span style="color: #000000;">    input;
+answers    ans[maxa];
+words    dictionary[maxn];
+
+</span><span style="color: #0000ff;">void</span> makesequence(words &amp;<span style="color: #000000;">x)
+{
+    </span><span style="color: #0000ff;">int</span>        i, l =<span style="color: #000000;"> x.word.length(), temp;
+    
+    x.sequence </span>= <span style="color: #800000;">""</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; l; i++<span style="color: #000000;">)
+    {
+        temp </span>= (x.word[i] - <span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span>) / <span style="color: #800080;">3</span> + <span style="color: #800080;">2</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">switch</span><span style="color: #000000;"> (x.word[i])
+        {
+            </span><span style="color: #0000ff;">case</span>    <span style="color: #800000;">'</span><span style="color: #800000;">s</span><span style="color: #800000;">'</span>    :temp = <span style="color: #800080;">7</span>; <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span>    <span style="color: #800000;">'</span><span style="color: #800000;">v</span><span style="color: #800000;">'</span>    :temp = <span style="color: #800080;">8</span>; <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span>    <span style="color: #800000;">'</span><span style="color: #800000;">z</span><span style="color: #800000;">'</span><span style="color: #000000;">    :
+            </span><span style="color: #0000ff;">case</span>    <span style="color: #800000;">'</span><span style="color: #800000;">y</span><span style="color: #800000;">'</span>    :temp = <span style="color: #800080;">9</span>; <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        }
+        x.sequence </span>+= temp + <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+    
+    total </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    memset(ans, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(ans));
+    getchar();
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+    {
+        getline(cin, dictionary[i].word);
+        makesequence(dictionary[i]);
+    }
+    getline(cin, input);
+    len </span>=<span style="color: #000000;"> input.length();
+}
+
+</span><span style="color: #0000ff;">void</span> work(<span style="color: #0000ff;">int</span><span style="color: #000000;"> start)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i,l;
+
+    </span><span style="color: #0000ff;">if</span> (start ==<span style="color: #000000;"> len)
+    {
+        total</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt;= ans[total - <span style="color: #800080;">1</span>].numbers[<span style="color: #800080;">0</span>]; i++<span style="color: #000000;">)
+            ans[total].numbers[i] </span>= ans[total - <span style="color: #800080;">1</span><span style="color: #000000;">].numbers[i];
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+    {
+        l </span>=<span style="color: #000000;"> dictionary[i].word.length();
+        </span><span style="color: #0000ff;">if</span> (l &gt; len -<span style="color: #000000;"> start)
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (input.substr(start, l) ==<span style="color: #000000;"> dictionary[i].sequence)
+        {
+            ans[total].numbers[</span><span style="color: #800080;">0</span>]++<span style="color: #000000;">;
+            ans[total].numbers[ans[total].numbers[</span><span style="color: #800080;">0</span>]] =<span style="color: #000000;"> i;
+            work(start </span>+<span style="color: #000000;"> l);
+            ans[total].numbers[</span><span style="color: #800080;">0</span>]--<span style="color: #000000;">;
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> bigger(answers a, answers b)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">     l,i;
+    
+    l </span>= a.numbers[<span style="color: #800080;">0</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">if</span> (l &gt; b.numbers[<span style="color: #800080;">0</span><span style="color: #000000;">])
+        l </span>= b.numbers[<span style="color: #800080;">0</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= l; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (dictionary[a.numbers[i]].word &gt;<span style="color: #000000;"> dictionary[b.numbers[i]].word)
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (dictionary[a.numbers[i]].word &lt;<span style="color: #000000;"> dictionary[b.numbers[i]].word)
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (a.numbers[<span style="color: #800080;">0</span>] &lt; b.numbers[<span style="color: #800080;">0</span><span style="color: #000000;">])
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> sort()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i,j;
+    answers    t;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; total - <span style="color: #800080;">1</span>; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (j = i + <span style="color: #800080;">1</span>; j &lt; total; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (bigger(ans[i], ans[j]))
+            {
+                t </span>=<span style="color: #000000;"> ans[i];
+                ans[i] </span>=<span style="color: #000000;"> ans[j];
+                ans[j] </span>=<span style="color: #000000;"> t;
+            }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> print()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i,j;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; total; i++<span style="color: #000000;">)
+    {
+        cout </span>&lt;&lt; dictionary[ans[i].numbers[<span style="color: #800080;">1</span><span style="color: #000000;">]].word;
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">2</span>; j &lt;= ans[i].numbers[<span style="color: #800080;">0</span>]; j++<span style="color: #000000;">)
+            cout </span>&lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span> &lt;&lt;<span style="color: #000000;"> dictionary[ans[i].numbers[j]].word;
+        cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">.\n</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    }
+    cout </span>&lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;">--\n</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("y.txt", "w", stdout);</span>
+    cin &gt;&gt;<span style="color: #000000;"> n;
+    </span><span style="color: #0000ff;">while</span> (n != <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        init();
+        work(</span><span style="color: #800080;">0</span><span style="color: #000000;">);
+        sort();
+        print();
+        cin </span>&gt;&gt;<span style="color: #000000;"> n;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

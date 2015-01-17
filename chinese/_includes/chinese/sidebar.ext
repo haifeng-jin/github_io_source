@@ -1,0 +1,2 @@
+{% include chinese/profile.ext %}
+{% include chinese/highlight.ext %}

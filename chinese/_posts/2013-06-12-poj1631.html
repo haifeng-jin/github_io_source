@@ -1,0 +1,67 @@
+---
+layout: post
+title: poj1631
+category: chinese
+---
+<p>最长递增子序列</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('95391143-74d8-4e41-906c-4789e3235089')"><img id="code_img_closed_95391143-74d8-4e41-906c-4789e3235089" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_95391143-74d8-4e41-906c-4789e3235089" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('95391143-74d8-4e41-906c-4789e3235089',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_95391143-74d8-4e41-906c-4789e3235089" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 40004
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> d[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> m;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n ;i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">f[i]);
+}
+
+</span><span style="color: #0000ff;">int</span> binarysearch(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">int</span> l = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> r =<span style="color: #000000;"> m;
+    </span><span style="color: #0000ff;">while</span> (l &lt;<span style="color: #000000;"> r)
+    {
+        </span><span style="color: #0000ff;">int</span> mid = (l + r) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (d[mid] &lt;<span style="color: #000000;"> a)
+            l </span>= mid + <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            r </span>=<span style="color: #000000;"> mid;
+    }
+    </span><span style="color: #0000ff;">if</span> (l &gt;=<span style="color: #000000;"> m)
+        m</span>++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> l;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    m </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        d[binarysearch(f[i])] </span>=<span style="color: #000000;"> f[i];
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> m;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        input();
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

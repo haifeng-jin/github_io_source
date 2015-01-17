@@ -1,0 +1,104 @@
+---
+layout: post
+title: poj2676
+category: chinese
+---
+<p>搜索</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5c120c2a-c880-40dd-acc7-0ba03b3a140c')"><img id="code_img_closed_5c120c2a-c880-40dd-acc7-0ba03b3a140c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5c120c2a-c880-40dd-acc7-0ba03b3a140c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5c120c2a-c880-40dd-acc7-0ba03b3a140c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5c120c2a-c880-40dd-acc7-0ba03b3a140c" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 15
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> map[maxn][maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> visr[maxn][maxn], visc[maxn][maxn], visb[maxn][maxn][maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> found;
+
+</span><span style="color: #0000ff;">void</span> make(<span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span> y, <span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">bool</span><span style="color: #000000;"> v)
+{
+    visr[x][a] </span>=<span style="color: #000000;"> v;
+    visc[y][a] </span>=<span style="color: #000000;"> v;
+    visb[x </span>/ <span style="color: #800080;">3</span>][y / <span style="color: #800080;">3</span>][a] =<span style="color: #000000;"> v;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> st[maxn];
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">9</span>; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; <span style="color: #800080;">9</span>; j++<span style="color: #000000;">)
+        {
+            map[i][j] </span>= st[j] - <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+            make(i, j, map[i][j], </span><span style="color: #0000ff;">true</span><span style="color: #000000;">);
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span> ok(<span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span> y, <span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">return</span> !visr[x][a] &amp;&amp; !visc[y][a] &amp;&amp; !visb[x / <span style="color: #800080;">3</span>][y / <span style="color: #800080;">3</span><span style="color: #000000;">][a];
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> print()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">9</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; <span style="color: #800080;">9</span>; j++<span style="color: #000000;">)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, map[i][j]);
+        putchar(</span><span style="color: #800000;">'</span><span style="color: #800000;">\n</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> dfs(<span style="color: #0000ff;">int</span><span style="color: #000000;"> pos)
+{
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (found)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (pos == <span style="color: #800080;">9</span> * <span style="color: #800080;">9</span><span style="color: #000000;">)
+    {
+        found </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        print();
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">int</span> x = pos / <span style="color: #800080;">9</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> y = pos % <span style="color: #800080;">9</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (map[x][y])
+    {
+        dfs(pos </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= <span style="color: #800080;">9</span>; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok(x, y, i))
+        {
+            make(x, y, i, </span><span style="color: #0000ff;">true</span><span style="color: #000000;">);
+            map[x][y] </span>=<span style="color: #000000;"> i;
+            dfs(pos </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">);
+            map[x][y] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+            make(x, y, i, </span><span style="color: #0000ff;">false</span><span style="color: #000000;">);
+        }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        memset(visr, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(visr));
+        memset(visc, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(visc));
+        memset(visb, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(visb));
+        input();
+        found </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        dfs(</span><span style="color: #800080;">0</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

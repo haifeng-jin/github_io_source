@@ -1,0 +1,136 @@
+---
+layout: post
+title: poj3231
+category: chinese
+---
+<p>简单模拟，题意描述不清晰，我来仔细描述一下，flashget在下载一些文件，每个文件有一个初始大小，初始速度，最大速度。当一个文件下载结束后，他的速度（占用的带宽）会平均分配给别的任务（各文件的速度增加值相同），假设我们要把速度x分配给a个文件，那么就要给每个文件分配x/a的速度，前提条件是分配后该文件的速度不超过其最大速度。若超过了则不能给他分配这么多，只让它达到其最大速度即可。这样一来我们的下载速度就会有剩余，因为受到最大速度的限制，有些文件并没有被分配到x/a这么多的速度。对于剩余的速度怎么处理呢？就是除去那几个已经到达最大速度的文件，其余文件按照刚才的方法再分配一次剩余速度。模拟即可。这题精度很难控制，我开始试着用先将所有到达最大速度的进程先处理，最后再计算平均值的方法，居然是错的，理论上这种做法比上述做法精度高。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c83d3d16-9e65-4907-b5bf-00959da17e31')"><img id="code_img_closed_c83d3d16-9e65-4907-b5bf-00959da17e31" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c83d3d16-9e65-4907-b5bf-00959da17e31" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c83d3d16-9e65-4907-b5bf-00959da17e31',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_c83d3d16-9e65-4907-b5bf-00959da17e31" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 105
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Elem
+{
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;"> size, speed, max_speed;
+} elem[maxn];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> time_left[maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> finished[maxn];
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> ans[maxn];
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> reached[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> task_left;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">m);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%lf%lf%lf</span><span style="color: #800000;">"</span>, &amp;elem[i].size, &amp;elem[i].speed, &amp;<span style="color: #000000;">elem[i].max_speed);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> cal_time()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">finished[i])
+            time_left[i] </span>= elem[i].size /<span style="color: #000000;"> elem[i].speed;
+}
+
+</span><span style="color: #0000ff;">void</span> size_reduce(<span style="color: #0000ff;">double</span><span style="color: #000000;"> min_time)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">finished[i])
+            elem[i].size </span>-= min_time *<span style="color: #000000;"> elem[i].speed;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> get_min()
+{
+    </span><span style="color: #0000ff;">int</span> ret = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (finished[ret])
+        ret</span>++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = ret + <span style="color: #800080;">1</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (!finished[i] &amp;&amp; time_left[i] &lt;<span style="color: #000000;"> time_left[ret])
+            ret </span>=<span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">void</span> distribute(<span style="color: #0000ff;">double</span><span style="color: #000000;"> bandwidth)
+{
+    </span><span style="color: #0000ff;">double</span> band_left =<span style="color: #000000;"> bandwidth;
+    </span><span style="color: #0000ff;">int</span> num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (!finished[i] &amp;&amp; !<span style="color: #000000;">reached[i])
+            num</span>++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (num == <span style="color: #800080;">0</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;"> average;
+    </span><span style="color: #0000ff;">while</span> (band_left &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        average </span>= band_left /<span style="color: #000000;"> num;
+        </span><span style="color: #0000ff;">bool</span> did = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (finished[i] ||<span style="color: #000000;"> reached[i])
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            did </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span> (elem[i].max_speed - elem[i].speed &lt;<span style="color: #000000;"> average)
+            {
+                band_left </span>-= elem[i].max_speed -<span style="color: #000000;"> elem[i].speed;
+                elem[i].speed </span>=<span style="color: #000000;"> elem[i].max_speed;
+                reached[i] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+                num</span>--<span style="color: #000000;">;
+            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            {
+                band_left </span>-=<span style="color: #000000;"> average;
+                elem[i].speed </span>+=<span style="color: #000000;"> average;
+            }
+        }
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">did)
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    memset(finished, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(finished));
+    memset(reached, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(reached));
+    </span><span style="color: #0000ff;">double</span> now_time = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    task_left </span>=<span style="color: #000000;"> n;
+    </span><span style="color: #0000ff;">while</span> (task_left &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        cal_time();
+        </span><span style="color: #0000ff;">int</span> next_task =<span style="color: #000000;"> get_min();
+        finished[next_task] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        task_left</span>--<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">double</span> bandwidth =<span style="color: #000000;"> elem[next_task].speed;
+        </span><span style="color: #0000ff;">double</span> min_time =<span style="color: #000000;"> time_left[next_task];
+        size_reduce(min_time);
+        now_time </span>+=<span style="color: #000000;"> min_time;
+        ans[next_task] </span>=<span style="color: #000000;"> now_time;
+        distribute(bandwidth);
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">int</span> t = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n), n)
+    {
+        t</span>++<span style="color: #000000;">;
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Case %d:\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, t);
+        input();
+        work();
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">NO%d:%.3fs\n</span><span style="color: #800000;">"</span>, i + <span style="color: #800080;">1</span><span style="color: #000000;">, ans[i]);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

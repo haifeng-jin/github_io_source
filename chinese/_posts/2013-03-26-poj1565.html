@@ -1,0 +1,37 @@
+---
+layout: post
+title: poj1565
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5f593dc0-a5bb-41a2-afbf-05cc2f3567f1')"><img id="code_img_closed_5f593dc0-a5bb-41a2-afbf-05cc2f3567f1" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5f593dc0-a5bb-41a2-afbf-05cc2f3567f1" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5f593dc0-a5bb-41a2-afbf-05cc2f3567f1',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_5f593dc0-a5bb-41a2-afbf-05cc2f3567f1" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">zoj1712</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">string</span><span style="color: #000000;">    st;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span>        i, l = st.length(), temp = <span style="color: #800080;">1</span>, ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+
+    </span><span style="color: #0000ff;">for</span> (i = l - <span style="color: #800080;">1</span>; i &gt;= <span style="color: #800080;">0</span>; i--<span style="color: #000000;">)
+    {
+        temp </span>*= <span style="color: #800080;">2</span><span style="color: #000000;">;
+        ans </span>+= (st[i] - <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span>) * (temp - <span style="color: #800080;">1</span><span style="color: #000000;">);
+    }
+    cout </span>&lt;&lt; ans &lt;&lt;<span style="color: #000000;"> endl;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (getline(cin, st) &amp;&amp; st != <span style="color: #800000;">"</span><span style="color: #800000;">0</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        work();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

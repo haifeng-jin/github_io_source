@@ -1,0 +1,66 @@
+---
+layout: post
+title: poj2336
+category: chinese
+---
+<p>dp,这一题是没有后效性的，只要在保证了每个子问题时间最少的基础上在追求运送次数最少即可。是不会有运送次数减少了，而时间却增多了的情况的。所以时间最优是次数最优的前提。所以状态转移的时候，只要从自问题的时间最优的情况来，肯定没错。</p>
+<p>f[i] = max(f[j], arrive_time[i]) + each_time * 2</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d64c0f93-5793-4adb-b51b-95a38ebcb40c')"><img id="code_img_closed_d64c0f93-5793-4adb-b51b-95a38ebcb40c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d64c0f93-5793-4adb-b51b-95a38ebcb40c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d64c0f93-5793-4adb-b51b-95a38ebcb40c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_d64c0f93-5793-4adb-b51b-95a38ebcb40c" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 1505
+<span style="color: #0000ff;">#define</span> inf 0x3f3f3f3f
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m, each_time;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> arrive_time[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn], times[maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;each_time, &amp;<span style="color: #000000;">m);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= m; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">arrive_time[i]);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    f[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    times[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= m; i++<span style="color: #000000;">)
+    {
+        f[i] </span>=<span style="color: #000000;"> inf;
+        times[i] </span>=<span style="color: #000000;"> inf;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = i - <span style="color: #800080;">1</span>; j &gt;= <span style="color: #800080;">0</span> &amp;&amp; i - j &lt;= n; j--<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span> temp = max(f[j], arrive_time[i]) + each_time * <span style="color: #800080;">2</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span> (temp ==<span style="color: #000000;"> f[i])
+                times[i] </span>= min(times[i], times[j] + <span style="color: #800080;">1</span><span style="color: #000000;">);
+            </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (temp &lt;<span style="color: #000000;"> f[i])
+            {
+                f[i] </span>=<span style="color: #000000;"> temp;
+                times[i] </span>= times[j] + <span style="color: #800080;">1</span><span style="color: #000000;">;
+            }
+        }
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d %d\n</span><span style="color: #800000;">"</span>, f[m] -<span style="color: #000000;"> each_time, times[m]);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        input();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

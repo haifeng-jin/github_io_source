@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj3261</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj3261</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 05 Jul 2012</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>后缀数组+单调队列</p>
+<p>注意：后缀数组的所有后缀中包括空串，因此有strlen(s)+1个后缀。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9153b5f8-7df4-4ce1-b76e-8a122fb73d67')"><img id="code_img_closed_9153b5f8-7df4-4ce1-b76e-8a122fb73d67" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9153b5f8-7df4-4ce1-b76e-8a122fb73d67" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9153b5f8-7df4-4ce1-b76e-8a122fb73d67',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_9153b5f8-7df4-4ce1-b76e-8a122fb73d67" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> N 20005
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Elem
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> pos, value;
+    Elem()
+    {}
+    Elem(</span><span style="color: #0000ff;">int</span> pp, <span style="color: #0000ff;">int</span><span style="color: #000000;"> vv): pos(pp), value(vv)
+    {}
+}q[N];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> s[N];
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> N &gt; 256</span>
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> sa[N], height[N], rank[N], tmp[N], top[N];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;<span style="color: #000000;">m);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">s[i]);
+}
+
+</span><span style="color: #0000ff;">void</span> makesa(<span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> O(N * log N)</span>
+    <span style="color: #0000ff;">int</span><span style="color: #000000;"> i, j, len, na;
+    na </span>= (n &lt; <span style="color: #800080;">256</span> ? <span style="color: #800080;">256</span><span style="color: #000000;"> : n);
+    memset(top, </span><span style="color: #800080;">0</span>, na * <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">));
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        top[rank[i] </span>= s[i] &amp; <span style="color: #800080;">0xff</span>]++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt; na; i++<span style="color: #000000;">)
+        top[i] </span>+= top[i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        sa[</span>--top[rank[i]]] =<span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">for</span> (len = <span style="color: #800080;">1</span>; len &lt; n; len &lt;&lt;= <span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        {
+            j </span>= sa[i] -<span style="color: #000000;"> len;
+            </span><span style="color: #0000ff;">if</span> (j &lt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+                j </span>+=<span style="color: #000000;"> n;
+            tmp[top[rank[j]]</span>++] =<span style="color: #000000;"> j;
+        }
+        sa[tmp[top[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span>]] = j = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt; n; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (rank[tmp[i]] != rank[tmp[i - <span style="color: #800080;">1</span>]] || rank[tmp[i] +<span style="color: #000000;"> len]
+                    </span>!= rank[tmp[i - <span style="color: #800080;">1</span>] +<span style="color: #000000;"> len])
+                top[</span>++j] =<span style="color: #000000;"> i;
+            sa[tmp[i]] </span>=<span style="color: #000000;"> j;
+        }
+        memcpy(rank, sa, n </span>* <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">));
+        memcpy(sa, tmp, n </span>* <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">));
+        </span><span style="color: #0000ff;">if</span> (j &gt;= n - <span style="color: #800080;">1</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> lcp(<span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> O(4 * N)</span>
+    <span style="color: #0000ff;">int</span><span style="color: #000000;"> i, j, k;
+    </span><span style="color: #0000ff;">for</span> (j = rank[height[i = k = <span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span>]; i &lt; n - <span style="color: #800080;">1</span>; i++, k++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">while</span> (k &gt;= <span style="color: #800080;">0</span> &amp;&amp; s[i] != s[sa[j - <span style="color: #800080;">1</span>] +<span style="color: #000000;"> k])
+            height[j] </span>= (k--), j = rank[sa[j] + <span style="color: #800080;">1</span><span style="color: #000000;">];
+}
+
+</span><span style="color: #0000ff;">void</span> push(Elem a, <span style="color: #0000ff;">int</span> front, <span style="color: #0000ff;">int</span> &amp;<span style="color: #000000;">rear)
+{
+    </span><span style="color: #0000ff;">while</span> (rear &gt; front &amp;&amp; a.value &lt;= q[rear - <span style="color: #800080;">1</span><span style="color: #000000;">].value)
+        rear</span>--<span style="color: #000000;">;
+    q[rear</span>++] =<span style="color: #000000;"> a;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> front = <span style="color: #800080;">0</span>, rear = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; m; i++<span style="color: #000000;">)
+        push(Elem(i, height[i]), front, rear);
+    </span><span style="color: #0000ff;">int</span> ret =<span style="color: #000000;"> q[front].value;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = m; i &lt;= n; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">while</span> (front != rear &amp;&amp; q[front].pos &lt;= i - m + <span style="color: #800080;">1</span><span style="color: #000000;">)
+            front</span>++<span style="color: #000000;">;
+        push(Elem(i, height[i]), front, rear);
+        ret </span>=<span style="color: #000000;"> max(ret, q[front].value);
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    makesa(n </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">);
+    lcp(n </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

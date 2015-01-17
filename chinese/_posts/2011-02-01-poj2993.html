@@ -1,0 +1,86 @@
+---
+layout: post
+title: poj2993
+category: chinese
+---
+<p>可以认为这是一道简单的字符串处理题，只要把相应的值填入map对应的位置，然后把map输出就行了</p>  <p>&#160;</p>  <pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+char map[9][9];
+
+void init()
+{
+	memset(map, 0, sizeof(map));
+	string st;
+	cin &gt;&gt; st;
+	getline(cin, st);
+	int i = 0;
+	while (st[i] != '\0')
+	{
+		i++;
+		char ch;
+		if (st[i] &gt; 'Z')
+			ch = 'P';
+		else
+		{
+			ch = st[i];
+			i++;
+		}
+		int y = st[i++] - 'a' + 1;
+		int x = st[i++] - '0';
+		x = 9 - x;
+		map[x][y] = ch;
+	}
+	cin &gt;&gt; st;
+	getline(cin, st);
+	i = 0;
+	while (st[i] != '\0')
+	{
+		i++;
+		char ch;
+		if (st[i] &gt; 'Z')
+			ch = 'p';
+		else
+		{
+			ch = st[i] + 'a' - 'A';
+			i++;
+		}
+		int y = st[i++] - 'a' + 1;
+		int x = st[i++] - '0';
+		x = 9 - x;
+		map[x][y] = ch;
+	}
+}
+
+void output()
+{
+	string line = &quot;+---+---+---+---+---+---+---+---+&quot;;
+
+	cout &lt;&lt; line &lt;&lt; endl;
+	for (int i = 1; i &lt; 9; i++)
+	{
+		for (int j = 1; j &lt; 9; j++)
+		{
+			char ch1 = map[i][j], ch;
+			if ((i + j) % 2 == 1)
+				ch = ':';
+			else
+				ch = '.';
+			if (ch1 == 0)
+				ch1 = ch;
+			printf(&quot;|%c%c%c&quot;, ch, ch1, ch);
+		}
+		cout &lt;&lt; &quot;|&quot; &lt;&lt; endl;
+		cout &lt;&lt; line &lt;&lt; endl;
+	}
+}
+int main()
+{
+	//freopen(&quot;D:\\t.txt&quot;, &quot;r&quot;, stdin);
+	init();
+	output();
+	return 0;
+}</pre>

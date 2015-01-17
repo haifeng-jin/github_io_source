@@ -1,0 +1,145 @@
+---
+layout: post
+title: poj1135
+category: chinese
+---
+<p>最短路变形</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('bb8177f8-f78d-4a17-9575-369ed51fbd11')"><img id="code_img_closed_bb8177f8-f78d-4a17-9575-369ed51fbd11" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_bb8177f8-f78d-4a17-9575-369ed51fbd11" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('bb8177f8-f78d-4a17-9575-369ed51fbd11',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_bb8177f8-f78d-4a17-9575-369ed51fbd11" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 505
+<span style="color: #0000ff;">#define</span> maxm maxn * maxn
+<span style="color: #0000ff;">#define</span> inf 0x3f3f3f3f
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Edge
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v, w, next;
+}edge[maxm];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> head[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> edge_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> q[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> dist[maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn];
+
+</span><span style="color: #0000ff;">void</span> addedge(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span> b, <span style="color: #0000ff;">int</span><span style="color: #000000;"> w)
+{
+    edge[edge_num].v </span>=<span style="color: #000000;"> b;
+    edge[edge_num].w </span>=<span style="color: #000000;"> w;
+    edge[edge_num].next </span>=<span style="color: #000000;"> head[a];
+    head[a] </span>= edge_num++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    memset(head, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));
+    edge_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b, w;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;a, &amp;b, &amp;<span style="color: #000000;">w);
+        a</span>--<span style="color: #000000;">;
+        b</span>--<span style="color: #000000;">;
+        addedge(a, b, w);
+        addedge(b, a, w);
+    }
+}
+
+</span><span style="color: #0000ff;">bool</span> relax(<span style="color: #0000ff;">int</span> u, Edge &amp;<span style="color: #000000;">e)
+{
+    </span><span style="color: #0000ff;">if</span> (dist[e.v] &gt; dist[u] +<span style="color: #000000;"> e.w)
+    {
+        dist[e.v] </span>= dist[u] +<span style="color: #000000;"> e.w;
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">bool</span> spfa(<span style="color: #0000ff;">int</span><span style="color: #000000;"> x)
+{
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        dist[i] </span>=<span style="color: #000000;"> inf;
+    </span><span style="color: #0000ff;">int</span> front = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> rear = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    q[front] </span>=<span style="color: #000000;"> x;
+    dist[x] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    vis[x] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (front !=<span style="color: #000000;"> rear)
+    {
+        </span><span style="color: #0000ff;">int</span> temp = q[front++<span style="color: #000000;">];
+        </span><span style="color: #0000ff;">if</span> (front ==<span style="color: #000000;"> maxn)
+            front </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        vis[temp] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = head[temp]; i != -<span style="color: #800080;">1</span>; i =<span style="color: #000000;"> edge[i].next)
+        {
+            </span><span style="color: #0000ff;">if</span> (relax(temp, edge[i]) &amp;&amp; !<span style="color: #000000;">vis[edge[i].v])
+            {
+                q[rear</span>++] =<span style="color: #000000;"> edge[i].v;
+                </span><span style="color: #0000ff;">if</span> (rear ==<span style="color: #000000;"> maxn)
+                    rear </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+            }
+        }
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">double</span> get_time(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span> b, <span style="color: #0000ff;">int</span><span style="color: #000000;"> w)
+{
+    </span><span style="color: #0000ff;">if</span> (a &gt;<span style="color: #000000;"> b)
+        swap(a, b);
+    </span><span style="color: #0000ff;">if</span> (a + w &lt;=<span style="color: #000000;"> b)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> b;
+    </span><span style="color: #0000ff;">return</span> b + (w - (b - a)) * <span style="color: #800080;">1.0</span> / <span style="color: #800080;">2</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (dist[ans] &lt;<span style="color: #000000;"> dist[i])
+            ans </span>=<span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;"> max_time;
+    max_time </span>=<span style="color: #000000;"> dist[ans];
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> u = <span style="color: #800080;">0</span>; u &lt; n; u++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = head[u]; ~i; i =<span style="color: #000000;"> edge[i].next)
+        {
+            </span><span style="color: #0000ff;">int</span> v =<span style="color: #000000;"> edge[i].v;
+            </span><span style="color: #0000ff;">double</span> temp =<span style="color: #000000;"> get_time(dist[u], dist[v], edge[i].w);
+            </span><span style="color: #0000ff;">if</span> (temp &gt;<span style="color: #000000;"> max_time)
+            {
+                a </span>=<span style="color: #000000;"> min(u, v);
+                b </span>=<span style="color: #000000;"> max(u, v);
+                max_time </span>=<span style="color: #000000;"> temp;
+            }
+        }
+    </span><span style="color: #0000ff;">if</span> (max_time &gt;<span style="color: #000000;"> dist[ans])
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">The last domino falls after %.1f seconds, between key dominoes %d and %d.\n</span><span style="color: #800000;">"</span>, max_time, a + <span style="color: #800080;">1</span>, b + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">The last domino falls after %.1f seconds, at key domino %d.\n</span><span style="color: #800000;">"</span>, (<span style="color: #0000ff;">double</span>)dist[ans], ans + <span style="color: #800080;">1</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">int</span> t = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;m), n |<span style="color: #000000;"> m)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">System #%d\n</span><span style="color: #800000;">"</span>, ++<span style="color: #000000;">t);
+        input();
+        spfa(</span><span style="color: #800080;">0</span><span style="color: #000000;">);
+        work();
+        puts(</span><span style="color: #800000;">""</span><span style="color: #000000;">);
+    }    
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

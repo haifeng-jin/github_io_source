@@ -1,0 +1,203 @@
+---
+layout: post
+title: poj1554
+category: chinese
+---
+<p>麻烦的字符串处理</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2a6ed4f2-d1a1-4c38-aa0a-55fce9b8d40a')"><img id="code_img_closed_2a6ed4f2-d1a1-4c38-aa0a-55fce9b8d40a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2a6ed4f2-d1a1-4c38-aa0a-55fce9b8d40a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2a6ed4f2-d1a1-4c38-aa0a-55fce9b8d40a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_2a6ed4f2-d1a1-4c38-aa0a-55fce9b8d40a" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">zoj1762
+</span><span style="color: #008000;">//</span><span style="color: #008000;">注意题意，是按挑战名单的列，逐列进行从上至下的输入</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxn = <span style="color: #800080;">35</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">int</span>        n, fact2[<span style="color: #800080;">11</span>], roundnum, longest[<span style="color: #800080;">11</span><span style="color: #000000;">], linenum, t;
+</span><span style="color: #0000ff;">string</span>    input[maxn / <span style="color: #800080;">2</span>][<span style="color: #800080;">2</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">string</span>    list[maxn * <span style="color: #800080;">4</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">char</span>    output[maxn][maxn * <span style="color: #800080;">8</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span>        startp[<span style="color: #800080;">11</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, pos;
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    st;
+
+    memset(longest, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(longest));
+    memset(output, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(output));
+    getchar();
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt;= <span style="color: #800080;">32</span>; i++<span style="color: #000000;">)
+    {
+        list[i] </span>= <span style="color: #800000;">""</span><span style="color: #000000;">;
+    }
+    i </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (<span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        getline(cin, st);
+        pos </span>= st.find(<span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">if</span> (pos == <span style="color: #0000ff;">string</span><span style="color: #000000;">::npos)
+        {
+            input[i][</span><span style="color: #800080;">0</span>] =<span style="color: #000000;"> st;
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        }
+        input[i][</span><span style="color: #800080;">0</span>] = st.substr(<span style="color: #800080;">0</span><span style="color: #000000;">, pos);
+        st.erase(</span><span style="color: #800080;">0</span>, pos + <span style="color: #800080;">1</span><span style="color: #000000;">);
+        input[i][</span><span style="color: #800080;">1</span>] =<span style="color: #000000;"> st;
+        i</span>++<span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> makelist()
+{
+    </span><span style="color: #0000ff;">int</span>        i, j, start, end, l = (n + <span style="color: #800080;">1</span>) / <span style="color: #800080;">2</span><span style="color: #000000;">, pos;
+
+    list[</span><span style="color: #800080;">1</span>] = input[l - <span style="color: #800080;">1</span>][<span style="color: #800080;">0</span><span style="color: #000000;">];
+    i </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (fact2[i] - <span style="color: #800080;">1</span> &lt;<span style="color: #000000;"> n)
+        i</span>++<span style="color: #000000;">;
+    roundnum </span>=<span style="color: #000000;"> i;
+    pos </span>= l - <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">2</span>; i &lt; roundnum; i++<span style="color: #000000;">)
+    {
+        pos </span>-= fact2[i - <span style="color: #800080;">2</span><span style="color: #000000;">];    
+        </span><span style="color: #0000ff;">for</span> (j = fact2[i - <span style="color: #800080;">1</span>]; j &lt;= fact2[i] - <span style="color: #800080;">1</span>; j++<span style="color: #000000;">)
+        {
+            list[j] </span>= input[pos + (j - fact2[i - <span style="color: #800080;">1</span>]) / <span style="color: #800080;">2</span>][j % <span style="color: #800080;">2</span><span style="color: #000000;">];
+        }
+    }
+    start </span>= fact2[roundnum - <span style="color: #800080;">2</span><span style="color: #000000;">];
+    end </span>= fact2[roundnum - <span style="color: #800080;">1</span>] - <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = l - <span style="color: #800080;">2</span> - (fact2[roundnum - <span style="color: #800080;">1</span>] - <span style="color: #800080;">2</span>) / <span style="color: #800080;">2</span>; i &gt;= <span style="color: #800080;">0</span>; i--<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (j = start; j &lt;= end; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (input[i][<span style="color: #800080;">0</span>] == list[j] || input[i][<span style="color: #800080;">1</span>] ==<span style="color: #000000;"> list[j])
+            {
+                list[j </span>* <span style="color: #800080;">2</span>] = input[i][<span style="color: #800080;">0</span><span style="color: #000000;">];
+                list[j </span>* <span style="color: #800080;">2</span> + <span style="color: #800080;">1</span>] = input[i][<span style="color: #800080;">1</span><span style="color: #000000;">];
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            }
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> makelongest()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, j;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= roundnum; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (j = fact2[i - <span style="color: #800080;">1</span>]; j &lt;= fact2[i] - <span style="color: #800080;">1</span>; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (longest[i] &lt; <span style="color: #0000ff;">int</span><span style="color: #000000;">(list[j].length()))
+                longest[i] </span>=<span style="color: #000000;"> list[j].length();
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> makestartp()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    startp[roundnum] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = roundnum - <span style="color: #800080;">1</span>; i &gt;= <span style="color: #800080;">1</span>; i--<span style="color: #000000;">)
+        startp[i] </span>= startp[i + <span style="color: #800080;">1</span>] + longest[i + <span style="color: #800080;">1</span>] + fact2[roundnum - i - <span style="color: #800080;">1</span>] + <span style="color: #800080;">2</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> drawname(<span style="color: #0000ff;">int</span> x,<span style="color: #0000ff;">int</span> y, <span style="color: #0000ff;">int</span> length, <span style="color: #0000ff;">string</span><span style="color: #000000;"> name)
+{
+    </span><span style="color: #0000ff;">int</span>        l =<span style="color: #000000;"> name.length(), i;
+
+    output[x][y] </span>= <span style="color: #800000;">'</span><span style="color: #800000;">_</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+    output[x][y </span>+ l + <span style="color: #800080;">1</span>] = <span style="color: #800000;">'</span><span style="color: #800000;">_</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt;= length; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (i &lt;<span style="color: #000000;"> l)
+            output[x][y </span>+ <span style="color: #800080;">1</span> + i] =<span style="color: #000000;"> name[i];
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            output[x][y </span>+ <span style="color: #800080;">1</span> + i] = <span style="color: #800000;">'</span><span style="color: #800000;">_</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> drawline(<span style="color: #0000ff;">int</span> x, <span style="color: #0000ff;">int</span> y, <span style="color: #0000ff;">int</span><span style="color: #000000;"> size)
+{
+    </span><span style="color: #0000ff;">int</span>        i, x1 = x, y1 =<span style="color: #000000;"> y;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; size; i++<span style="color: #000000;">)
+    {
+        output[x1][y1] </span>= <span style="color: #800000;">'</span><span style="color: #800000;">\\</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+        x1</span>++<span style="color: #000000;">;
+        y1</span>++<span style="color: #000000;">;
+    }
+    y1</span>--<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; size; i++<span style="color: #000000;">)
+    {
+        output[x1][y1] </span>= <span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+        x1</span>++<span style="color: #000000;">;
+        y1</span>--<span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> makeoutput()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, nowline, j;
+    </span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    first;
+
+    linenum </span>= fact2[roundnum] - <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = roundnum; i &gt;= <span style="color: #800080;">1</span>; i--<span style="color: #000000;">)
+    {
+        nowline </span>= fact2[roundnum - i] - <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (j = fact2[i - <span style="color: #800080;">1</span>]; j &lt;= fact2[i] - <span style="color: #800080;">1</span>; j++, nowline += fact2[roundnum - i + <span style="color: #800080;">1</span><span style="color: #000000;">])
+        {
+            </span><span style="color: #0000ff;">if</span> (list[j] != <span style="color: #800000;">""</span><span style="color: #000000;">)
+            {
+                drawname(nowline, startp[i], longest[i], list[j]);
+                </span><span style="color: #0000ff;">if</span> (j % <span style="color: #800080;">2</span> == <span style="color: #800080;">0</span><span style="color: #000000;">)
+                    drawline(nowline </span>+ <span style="color: #800080;">1</span>, startp[i] + longest[i] + <span style="color: #800080;">2</span>, fact2[roundnum -<span style="color: #000000;"> i]);
+            }
+        }
+    }
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; linenum; i++<span style="color: #000000;">)
+    {
+        j </span>= startp[<span style="color: #800080;">1</span><span style="color: #000000;">];
+        </span><span style="color: #0000ff;">while</span> (output[i][j] == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            j</span>--<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (; j &gt;= <span style="color: #800080;">0</span>; j--<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (output[i][j] == <span style="color: #800080;">0</span><span style="color: #000000;">)
+                output[i][j] </span>= <span style="color: #800000;">'</span> <span style="color: #800000;">'</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> print()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, j;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; linenum; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (output[i][<span style="color: #800080;">0</span>] == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; output[i][j] != <span style="color: #800080;">0</span>; j++<span style="color: #000000;">)
+            cout </span>&lt;&lt;<span style="color: #000000;"> output[i][j];
+        cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("y.txt", "w", stdout);</span>
+    fact2[<span style="color: #800080;">0</span>] = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= <span style="color: #800080;">10</span>; i++<span style="color: #000000;">)
+        fact2[i] </span>= fact2[i - <span style="color: #800080;">1</span>] * <span style="color: #800080;">2</span><span style="color: #000000;">;
+    t </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (cin &gt;&gt; n &amp;&amp; n != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Tournament %d</span><span style="color: #800000;">"</span>, ++<span style="color: #000000;">t);
+        cout </span>&lt;&lt;<span style="color: #000000;"> endl;
+        init();
+        makelist();
+        makelongest();
+        makestartp();
+        makeoutput();
+        print();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

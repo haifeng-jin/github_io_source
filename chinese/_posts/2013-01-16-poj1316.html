@@ -1,0 +1,46 @@
+---
+layout: post
+title: poj1316
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2751ea47-7539-48cd-89b4-6929a2bf29a9')"><img id="code_img_closed_2751ea47-7539-48cd-89b4-6929a2bf29a9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2751ea47-7539-48cd-89b4-6929a2bf29a9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2751ea47-7539-48cd-89b4-6929a2bf29a9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_2751ea47-7539-48cd-89b4-6929a2bf29a9" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 10001
+
+<span style="color: #0000ff;">bool</span><span style="color: #000000;"> is_self[maxn];
+
+</span><span style="color: #0000ff;">int</span> generate(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">int</span> ret =<span style="color: #000000;"> a;
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (a)
+    {
+        ret </span>+= a % <span style="color: #800080;">10</span><span style="color: #000000;">;
+        a </span>/= <span style="color: #800080;">10</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; maxn; i++<span style="color: #000000;">)
+        is_self[i] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; maxn; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (is_self[i])
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, i);
+        </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> generate(i);
+        </span><span style="color: #0000ff;">if</span> (temp &lt;<span style="color: #000000;"> maxn)
+            is_self[temp] </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

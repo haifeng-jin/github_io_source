@@ -1,0 +1,33 @@
+---
+layout: post
+title: poj3517
+category: chinese
+---
+<p>题意：约瑟夫问题</p>
+<p>分析：约瑟夫问题，有n个人站成一圈，依次编号0～n，编号为m%n的人出局，然后剩下的n-1个人重新编号，让原来在m后面的那个人编号为0，剩下的依次递增，编号从1～n-1。再次让编号为m%(n-1)的人出局。不断重复此过程，直至只剩一个人为止。问这个人在第一次编号时的编号。想要解决约瑟夫问题我们要逆推。试考虑刚才过程的逆过程。当前剩余x人且已编号，逆过程也就是把那个刚刚出局的人重新加进圈里来，并还原上一次的编号。我们需要做的是在当前x人中的编号为0的那个人前面插入一个人，让那个人的编号为m%(x+1)，其余人的编号可根据这个新加进来的人的编号来确定。我们要从最后剩一个人的情况开始逆推到剩余n个人的情况。我们只需要让那个最终胜利的人的编号按照逆过程的编号变化规律进行变化即可。其变化规律为，设原来获胜者序号为a，加入一个出局的人之后人数为x，则现在获胜者的序号应当变为(a+m)%x，即让序号跟原来比错位了m个人。总结成递推公式：f(n)=(f(n-1)+m)%n</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1ce0fefd-cf50-40d1-bd66-bc124f6f2691')"><img id="code_img_closed_1ce0fefd-cf50-40d1-bd66-bc124f6f2691" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1ce0fefd-cf50-40d1-bd66-bc124f6f2691" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1ce0fefd-cf50-40d1-bd66-bc124f6f2691',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_1ce0fefd-cf50-40d1-bd66-bc124f6f2691" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m, k;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;m, &amp;k), n | m |<span style="color: #000000;"> k)
+    {
+        </span><span style="color: #0000ff;">int</span> a = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= n; i++<span style="color: #000000;">)
+            a </span>= (a + m) %<span style="color: #000000;"> i;
+        a </span>+= k % n -<span style="color: #000000;"> m;
+        a </span>= (a % n + n) %<span style="color: #000000;"> n;
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span>, a + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

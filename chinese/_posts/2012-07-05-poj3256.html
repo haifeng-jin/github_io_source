@@ -1,0 +1,101 @@
+---
+layout: post
+title: poj3256
+category: chinese
+---
+<p>bfs</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('48a96df6-99b2-42f7-9207-2970521ad05b')"><img id="code_img_closed_48a96df6-99b2-42f7-9207-2970521ad05b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_48a96df6-99b2-42f7-9207-2970521ad05b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('48a96df6-99b2-42f7-9207-2970521ad05b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_48a96df6-99b2-42f7-9207-2970521ad05b" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxc 105
+<span style="color: #0000ff;">#define</span> maxn 1005
+<span style="color: #0000ff;">#define</span> maxm 10005
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Edge
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v, next;
+} edge[maxm];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> cow, n, m;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> head[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ncount;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> reach[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> q[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> pos[maxc];
+
+</span><span style="color: #0000ff;">void</span> addedge(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span><span style="color: #000000;"> b)
+{
+    edge[ncount].v </span>=<span style="color: #000000;"> b;
+    edge[ncount].next </span>=<span style="color: #000000;"> head[a];
+    head[a] </span>= ncount++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;cow, &amp;n, &amp;<span style="color: #000000;">m);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; cow; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">pos[i]);
+        pos[i]</span>--<span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;a, &amp;<span style="color: #000000;">b);
+        addedge(a </span>- <span style="color: #800080;">1</span>, b - <span style="color: #800080;">1</span><span style="color: #000000;">);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> bfs(<span style="color: #0000ff;">int</span><span style="color: #000000;"> s)
+{
+    </span><span style="color: #0000ff;">int</span> front = <span style="color: #800080;">0</span>, rear = <span style="color: #800080;">0</span><span style="color: #000000;">;
+
+    q[rear</span>++] =<span style="color: #000000;"> s;
+    vis[s] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (front !=<span style="color: #000000;"> rear)
+    {
+        </span><span style="color: #0000ff;">int</span> u = q[front++<span style="color: #000000;">];
+        reach[u]</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = head[u]; ~i; i =<span style="color: #000000;"> edge[i].next)
+        {
+            </span><span style="color: #0000ff;">int</span> v =<span style="color: #000000;"> edge[i].v;
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (vis[v])
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            q[rear</span>++] =<span style="color: #000000;"> v;
+            vis[v] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    memset(reach, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(reach));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; cow; i++<span style="color: #000000;">)
+    {
+        memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+        bfs(pos[i]);
+    }
+    </span><span style="color: #0000ff;">int</span> ret = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (reach[i] ==<span style="color: #000000;"> cow)
+            ret</span>++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    memset(head, -<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));
+    ncount </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    input();
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

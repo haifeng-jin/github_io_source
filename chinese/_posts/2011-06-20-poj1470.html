@@ -1,0 +1,117 @@
+---
+layout: post
+title: poj1470
+category: chinese
+---
+<p>题意：基本的lca问题</p>
+<p>分析：lca的离线算法为tarjan，tarjan算法的流程如下。dfs遍历树，节点a在遍历完成之后退回到a在树中的父亲节点，然后a在并查集中的father指针会指向这个父亲节点。也就是说一个节点，所有以它的被遍历过的直接子节点为根的子树中的点都会在并查集中被合并到这个点，并以它作为代表元。最开始每个点自己一个集合，每次合并操作都是伴随着遍历中的退后行为进行的。这样就产生了一个性质，在遍历过程中，一个被遍历过的节点的集合代表元在哪，取决于由树根到该节点的路径上我退后到了哪个节点。这样一来，所有遍历过的节点与当前节点的lca也恰好就是它们的代表元了。在遍历离开当前点之前，先将所有遍历过的点与当前点的lca在二维数组中记录下来。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('48ff1dc3-8b98-405a-a65b-b42b0e89649d')"><img id="code_img_closed_48ff1dc3-8b98-405a-a65b-b42b0e89649d" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_48ff1dc3-8b98-405a-a65b-b42b0e89649d" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('48ff1dc3-8b98-405a-a65b-b42b0e89649d',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_48ff1dc3-8b98-405a-a65b-b42b0e89649d" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 909
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, root;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> g[maxn][maxn], hasroot[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> id[maxn], lcs[maxn][maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> sum[maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b, m;
+    </span><span style="color: #0000ff;">char</span> st[<span style="color: #800080;">100</span><span style="color: #000000;">];
+    memset(g, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(g));
+    memset(hasroot, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(hasroot));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i =<span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">a);
+        a</span>--<span style="color: #000000;">;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%[^0-9]</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">m);
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%[^0-9]</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i =<span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+        {
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">b);
+            b</span>--<span style="color: #000000;">;
+            hasroot[b] </span>=<span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            g[a][b] </span>= g[b][a] =<span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i =<span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">hasroot[i])
+        {
+            root </span>=<span style="color: #000000;"> i;
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        }
+}
+
+</span><span style="color: #0000ff;">int</span> <span style="color: #0000ff;">get</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;"> i)
+{
+    </span><span style="color: #0000ff;">if</span> ((id[i] ==<span style="color: #000000;"> i))
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">return</span> id[i] =<span style="color: #0000ff;">get</span><span style="color: #000000;">(id[i]);
+}
+
+</span><span style="color: #0000ff;">void</span> unin(<span style="color: #0000ff;">int</span> i, <span style="color: #0000ff;">int</span><span style="color: #000000;"> j)
+{
+    id[</span><span style="color: #0000ff;">get</span>(i)] =<span style="color: #0000ff;">get</span><span style="color: #000000;">(j);
+}
+
+</span><span style="color: #0000ff;">void</span> dfs(<span style="color: #0000ff;">int</span><span style="color: #000000;"> rt)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i;
+    id[rt] </span>=<span style="color: #000000;"> rt;
+    </span><span style="color: #0000ff;">for</span> (i =<span style="color: #800080;">0</span>; i &lt; n; ++<span style="color: #000000;">i)
+        </span><span style="color: #0000ff;">if</span> (g[rt][i] &amp;&amp;-<span style="color: #800080;">1</span>==<span style="color: #000000;"> id[i])
+        {
+            dfs(i);
+            unin(i, rt);
+        }
+    </span><span style="color: #0000ff;">for</span> (i =<span style="color: #800080;">0</span>; i &lt; n; ++<span style="color: #000000;">i)
+        </span><span style="color: #0000ff;">if</span> (-<span style="color: #800080;">1</span>!=<span style="color: #000000;"> id[i])
+            lcs[rt][i] </span>= lcs[i][rt] =<span style="color: #0000ff;">get</span><span style="color: #000000;">(i);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> m;
+    </span><span style="color: #0000ff;">char</span> st[<span style="color: #800080;">100</span><span style="color: #000000;">];
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">m);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i =<span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%[^0-9]</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">a);
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%[^0-9]</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">b);
+        a</span>--<span style="color: #000000;">;
+        b</span>--<span style="color: #000000;">;
+        sum[lcs[a][b]]</span>++<span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i =<span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (sum[i])
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d:%d\n</span><span style="color: #800000;">"</span>, i +<span style="color: #800080;">1</span><span style="color: #000000;">, sum[i]);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">char</span> st[<span style="color: #800080;">100</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;n) !=<span style="color: #000000;"> EOF)
+    {
+        input();
+        memset(id, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(id));
+        memset(sum, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(sum));
+        dfs(root);
+        work();
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%[^0-9]</span><span style="color: #800000;">"</span><span style="color: #000000;">, st);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

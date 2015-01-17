@@ -1,0 +1,80 @@
+---
+layout: post
+title: poj1130
+category: chinese
+---
+<p>bfs，数据范围是10</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6df087a4-50a9-4fae-abcf-a23b79e05cf7')"><img id="code_img_closed_6df087a4-50a9-4fae-abcf-a23b79e05cf7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6df087a4-50a9-4fae-abcf-a23b79e05cf7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6df087a4-50a9-4fae-abcf-a23b79e05cf7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_6df087a4-50a9-4fae-abcf-a23b79e05cf7" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;queue&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 10
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, et;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> map[maxn][maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> dist[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> dist1[maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    memset(map, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(map));
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;<span style="color: #000000;">et);
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b;
+    </span><span style="color: #0000ff;">while</span> (~scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;a, &amp;<span style="color: #000000;">b))
+        map[b][a] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> bfs(<span style="color: #0000ff;">int</span> s, <span style="color: #0000ff;">int</span> guard_room, <span style="color: #0000ff;">int</span>*<span style="color: #000000;"> dist)
+{
+    queue</span>&lt;<span style="color: #0000ff;">int</span>&gt;<span style="color: #000000;"> q;
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    memset(dist, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span>) *<span style="color: #000000;"> n);
+    vis[s] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    q.push(s);
+    dist[s] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">q.empty())
+    {
+        </span><span style="color: #0000ff;">int</span> u =<span style="color: #000000;"> q.front();
+        q.pop();
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (map[u][i] &amp;&amp; !vis[i] &amp;&amp; i !=<span style="color: #000000;"> guard_room)
+            {
+                q.push(i);
+                vis[i] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+                dist[i] </span>= dist[u] + <span style="color: #800080;">1</span><span style="color: #000000;">;
+            }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span> ret = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (i !=<span style="color: #000000;"> et)
+        {
+            bfs(et, i, dist1);
+            </span><span style="color: #0000ff;">if</span> (dist1[<span style="color: #800080;">0</span>] != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span> (dist[ret] &gt;<span style="color: #000000;"> dist[i])
+                ret </span>=<span style="color: #000000;"> i;
+        }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    bfs(et, </span>-<span style="color: #800080;">1</span><span style="color: #000000;">, dist);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Put guards in room %d.\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, work());
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

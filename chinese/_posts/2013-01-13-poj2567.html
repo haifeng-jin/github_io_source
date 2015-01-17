@@ -1,0 +1,118 @@
+---
+layout: post
+title: poj2567
+category: chinese
+---
+<p>模拟</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c2c9378e-4569-48f3-a9fe-daa64eb79c6d')"><img id="code_img_closed_c2c9378e-4569-48f3-a9fe-daa64eb79c6d" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c2c9378e-4569-48f3-a9fe-daa64eb79c6d" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c2c9378e-4569-48f3-a9fe-daa64eb79c6d',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_c2c9378e-4569-48f3-a9fe-daa64eb79c6d" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>    maxn=<span style="color: #800080;">59</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">char</span>    st[<span style="color: #800080;">1000</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span>        vertex[maxn][maxn],mark[maxn],marknum,vertexnum[maxn],stl[maxn*<span style="color: #800080;">3</span><span style="color: #000000;">],stlnum;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    memset(vertex,</span><span style="color: #800080;">0</span>,<span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vertex));
+    memset(mark,</span><span style="color: #800080;">0</span>,<span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(mark));
+    memset(vertexnum,</span><span style="color: #800080;">0</span>,<span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vertexnum));
+    marknum</span>=<span style="color: #800080;">0</span><span style="color: #000000;">;
+    stlnum</span>=<span style="color: #800080;">0</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> del(<span style="color: #0000ff;">int</span> x,<span style="color: #0000ff;">int</span><span style="color: #000000;"> y)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i=<span style="color: #800080;">1</span>;i&lt;=vertexnum[x];i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (vertex[x][i]==<span style="color: #000000;">y)
+        {
+            vertex[x][i]</span>=<span style="color: #000000;">vertex[x][vertexnum[x]];
+            vertexnum[x]</span>--<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make()
+{
+    </span><span style="color: #0000ff;">int</span>        len=strlen(st),i,temp=<span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">bool</span>    did=<span style="color: #0000ff;">true</span><span style="color: #000000;">;
+
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">0</span>;i&lt;=len-<span style="color: #800080;">1</span>;i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span>(st[i]==<span style="color: #800000;">'</span><span style="color: #800000;">)</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">did)
+            {
+                stl[</span>++stlnum]=<span style="color: #000000;">temp;
+                temp</span>=<span style="color: #800080;">0</span><span style="color: #000000;">;
+                did</span>=<span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            }
+            stl[</span>++stlnum]=-<span style="color: #800080;">1</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (st[i]==<span style="color: #800000;">'</span><span style="color: #800000;">(</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">did)
+            {
+                stl[</span>++stlnum]=<span style="color: #000000;">temp;
+                temp</span>=<span style="color: #800080;">0</span><span style="color: #000000;">;
+                did</span>=<span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            }
+        }
+        </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (st[i]&gt;=<span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span>&amp;&amp;st[i]&lt;=<span style="color: #800000;">'</span><span style="color: #800000;">9</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        {
+            temp</span>=temp*<span style="color: #800080;">10</span>+st[i]-<span style="color: #800080;">48</span><span style="color: #000000;">;
+            did</span>=<span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span>        i=<span style="color: #800080;">0</span>,stack[maxn],min,j,stacknum=<span style="color: #800080;">0</span><span style="color: #000000;">;
+
+    make();
+    stacknum</span>++<span style="color: #000000;">;
+    stack[</span><span style="color: #800080;">1</span>]=stl[<span style="color: #800080;">1</span><span style="color: #000000;">];
+    marknum</span>=<span style="color: #800080;">1</span><span style="color: #000000;">;
+    mark[</span><span style="color: #800080;">1</span>]=stack[<span style="color: #800080;">1</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">2</span>;i&lt;=stlnum;i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (stl[i]==-<span style="color: #800080;">1</span><span style="color: #000000;">)
+            stacknum</span>--<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        {            
+                stack[</span>++stacknum]=<span style="color: #000000;">stl[i];
+                vertex[stack[stacknum]][</span>++vertexnum[stack[stacknum]]]=stack[stacknum-<span style="color: #800080;">1</span><span style="color: #000000;">];
+                vertex[stack[stacknum</span>-<span style="color: #800080;">1</span>]][++vertexnum[stack[stacknum-<span style="color: #800080;">1</span>]]]=<span style="color: #000000;">stack[stacknum];
+                mark[</span>++marknum]=<span style="color: #000000;">stl[i];
+        }
+    }
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;marknum;i++<span style="color: #000000;">)
+    {
+        min</span>=-<span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (j=<span style="color: #800080;">1</span>;j&lt;=marknum;j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> ((vertexnum[mark[j]]==<span style="color: #800080;">1</span>)&amp;&amp;(min==-<span style="color: #800080;">1</span>||min&gt;<span style="color: #000000;">mark[j]))
+                min</span>=<span style="color: #000000;">mark[j];
+        </span><span style="color: #0000ff;">if</span> (i!=<span style="color: #800080;">1</span><span style="color: #000000;">)
+            cout</span>&lt;&lt;<span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">;
+        cout</span>&lt;&lt;vertex[min][<span style="color: #800080;">1</span><span style="color: #000000;">];
+        del(vertex[min][</span><span style="color: #800080;">1</span><span style="color: #000000;">],min);
+        vertexnum[min]</span>=<span style="color: #800080;">0</span><span style="color: #000000;">;
+    }
+    cout</span>&lt;&lt;<span style="color: #000000;">endl;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt","r",stdin);</span>
+    <span style="color: #0000ff;">while</span><span style="color: #000000;"> (gets(st))
+    {
+        init();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

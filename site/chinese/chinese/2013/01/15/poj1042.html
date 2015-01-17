@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj1042</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj1042</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 15 Jan 2013</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：有n个湖，每个湖有一个初始的每单位时间的上钩鱼数，在那里钓鱼时该上钩率会以di的速率不断下降，不钓的时候上钩率不变。这n个湖是排成一排的，从第一个湖开始每个单位时间可以选择钓鱼或者往下一个湖走，这些路是单向的不能往回走。给定总时间h，问最多能钓到多少鱼。</p>
+<p>分析：我们依次枚举究竟要在前多少个湖钓鱼，那么我们可以先将路上的时间计算好，然后人为我们可以在这几个湖之间瞬间转移，每次挑一个上钩率最高的湖去钓即可。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e64a72bf-f998-4e68-bc57-bee508fa1476')"><img id="code_img_closed_e64a72bf-f998-4e68-bc57-bee508fa1476" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e64a72bf-f998-4e68-bc57-bee508fa1476" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e64a72bf-f998-4e68-bc57-bee508fa1476',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_e64a72bf-f998-4e68-bc57-bee508fa1476" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;stdio.h&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxn=<span style="color: #800080;">26</span>,maxh=<span style="color: #800080;">16</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;">    init();
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;">    work();
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;">    print();
+</span><span style="color: #0000ff;">void</span>    make(<span style="color: #0000ff;">int</span> a,<span style="color: #0000ff;">int</span><span style="color: #000000;"> time);
+
+</span><span style="color: #0000ff;">int</span>        N,n,h,f[maxn],d[maxn],t[maxn-<span style="color: #800080;">1</span><span style="color: #000000;">],ans[maxn],ansf;
+</span><span style="color: #0000ff;">bool</span>    p=<span style="color: #0000ff;">false</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt","r",stdin);</span>
+    N = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (N--<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">while</span> (cin&gt;&gt;n&amp;&amp;n!=<span style="color: #800080;">0</span><span style="color: #000000;">)
+        {
+            init();
+            work();
+            print();
+        }
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+    
+    cin</span>&gt;&gt;<span style="color: #000000;">h;
+    h</span>=h*<span style="color: #800080;">12</span><span style="color: #000000;">;
+    ansf</span>=-<span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;=n;i++<span style="color: #000000;">)
+        cin</span>&gt;&gt;<span style="color: #000000;">f[i];
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;=n;i++<span style="color: #000000;">)
+        cin</span>&gt;&gt;<span style="color: #000000;">d[i];
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;n;i++<span style="color: #000000;">)
+        cin</span>&gt;&gt;<span style="color: #000000;">t[i];
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span>        i,time=<span style="color: #800080;">0</span><span style="color: #000000;">;
+
+    t[</span><span style="color: #800080;">0</span>]=<span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;=n;i++<span style="color: #000000;">)
+    {
+        time</span>+=t[i-<span style="color: #800080;">1</span><span style="color: #000000;">];
+        make(i,h</span>-<span style="color: #000000;">time);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> print()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (p)
+        cout</span>&lt;&lt;<span style="color: #000000;">endl;
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;n;i++<span style="color: #000000;">)
+        cout</span>&lt;&lt;ans[i]*<span style="color: #800080;">5</span>&lt;&lt;<span style="color: #800000;">"</span><span style="color: #800000;">, </span><span style="color: #800000;">"</span><span style="color: #000000;">;
+    cout</span>&lt;&lt;ans[n]*<span style="color: #800080;">5</span>&lt;&lt;endl&lt;&lt;<span style="color: #800000;">"</span><span style="color: #800000;">Number of fish expected: </span><span style="color: #800000;">"</span>&lt;&lt;ansf&lt;&lt;<span style="color: #000000;">endl;
+    p</span>=<span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> make(<span style="color: #0000ff;">int</span> a,<span style="color: #0000ff;">int</span><span style="color: #000000;"> time)
+{
+    </span><span style="color: #0000ff;">int</span>        i,ls[maxn],max1,maxi,fish=<span style="color: #800080;">0</span><span style="color: #000000;">,ans1[maxn],j;
+
+    memset(ans1,</span><span style="color: #800080;">0</span>,<span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(ans1));
+    </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;=a;i++<span style="color: #000000;">)
+        ls[i]</span>=<span style="color: #000000;">f[i];
+    </span><span style="color: #0000ff;">while</span> (time&gt;<span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        max1</span>=-<span style="color: #800080;">1</span><span style="color: #000000;">;
+        maxi</span>=-<span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;=a;i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (ls[i]&gt;<span style="color: #000000;">max1)
+            {
+                max1</span>=<span style="color: #000000;">ls[i];
+                maxi</span>=<span style="color: #000000;">i;
+            }
+        ans1[maxi]</span>+=<span style="color: #800080;">1</span><span style="color: #000000;">;
+        fish</span>+=<span style="color: #000000;">max1;
+        ls[maxi]</span>=<span style="color: #800080;">0</span>&gt;ls[maxi]-d[maxi]?<span style="color: #800080;">0</span>:ls[maxi]-<span style="color: #000000;">d[maxi];
+        time</span>--<span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (fish&lt;<span style="color: #000000;">ansf)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (fish&gt;<span style="color: #000000;">ansf)
+    {
+        </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;=n;i++<span style="color: #000000;">)
+            ans[i]</span>=<span style="color: #000000;">ans1[i];    
+        ansf</span>=<span style="color: #000000;">fish;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    j</span>=<span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (j&lt;=n&amp;&amp;ans1[j]==<span style="color: #000000;">ans[j])
+        j</span>++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (ans1[j]&gt;<span style="color: #000000;">ans[j])
+        </span><span style="color: #0000ff;">for</span> (i=<span style="color: #800080;">1</span>;i&lt;=n;i++<span style="color: #000000;">)
+            ans[i]</span>=<span style="color: #000000;">ans1[i];
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

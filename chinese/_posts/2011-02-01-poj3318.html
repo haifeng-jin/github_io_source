@@ -1,0 +1,75 @@
+---
+layout: post
+title: poj3318
+category: chinese
+---
+<p>题意：给定三个矩阵a，b，c，问a&times;b是否等于c？</p>
+<p>分析：只需要设置一个列向量x,求a*(b*x),求c*x,看是否相等即可。</p>
+<p>当然这不能保证正确，x是生成的随机向量，多次生成多次测试即可使错误概率大大减小。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush: csharp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include &lt;ctime&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+const int maxn = 510;
+
+long long  a[maxn][maxn], b[maxn][maxn], c[maxn][maxn], x[maxn];
+int n;
+
+void init(long long m[maxn][maxn])
+{
+	for (int i = 0; i &lt; n; i++)
+		for (int j = 0; j &lt; n; j++)
+			scanf("%I64d", &amp;m[i][j]);
+}
+
+void mul(long long m[maxn][maxn], long long x[maxn], long long ans[maxn])
+{
+	for (int i = 0; i &lt; n; i++)
+	{
+		ans[i] = 0;
+		for (int j = 0; j &lt; n; j++)
+			ans[i] += x[j] * m[i][j];
+	}
+}
+
+bool check(long long ans1[maxn], long long ans2[maxn])
+{
+	for (int i = 0; i &lt; n; i++)
+		if (ans1[i] != ans2[i])
+			return false;
+	return true;
+}
+int main()
+{
+	//freopen("D:\\t.txt", "r", stdin);
+	scanf("%d", &amp;n);
+	init(a);
+	init(b);
+	init(c);
+	int t = 10;
+	while (t--)
+	{
+		srand(time(NULL));
+		for (int i = 0; i &lt; n; i++)
+			x[i] = rand()%1000 + 1;
+		long long ans[maxn], ans1[maxn], ans2[maxn];
+		mul(b, x, ans);
+		mul(a, ans, ans1);
+		mul(c, x, ans2);
+		if (!check(ans1, ans2))
+		{
+			printf("NO\n");
+			return 0;
+		}
+	}
+	printf("YES\n");
+	return 0;
+}
+
+</pre>
+</div>

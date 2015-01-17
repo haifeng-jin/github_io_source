@@ -1,0 +1,93 @@
+---
+layout: post
+title: poj1618
+category: chinese
+---
+<p>题意：有n个长度为len的模式串，问在所有长度为L的串中有多少个串符合如下条件：该串所有长度为len的子串都在这n个模式串中。</p>
+<p>分析：动态规划，f[i][j]表示长度为i的以第j个模式串为后缀的符合条件的串有多少个，f[i + 1][k] += f[i][j];</p>
+<p>k要符合第k个模式串可以由第j个模式串去掉首字母，再在结尾添加一个字母得到。就相当于我们不断的将模式串有重叠地（重叠长度为len-1）搭在当前构成的长度为i的串的结尾，使长度变为i+1。</p>
+<p>也就是第k个模式串就是长度为i+1的串比长度为i的串多出的那个长度为len的子串（长度为i+1的串的长度为len的子串个数只比长度为i的串的长度为len的子串个数多1）。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ce4adc2e-fee9-4fdc-a0ef-f63971741652')"><img id="code_img_closed_ce4adc2e-fee9-4fdc-a0ef-f63971741652" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ce4adc2e-fee9-4fdc-a0ef-f63971741652" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ce4adc2e-fee9-4fdc-a0ef-f63971741652',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_ce4adc2e-fee9-4fdc-a0ef-f63971741652" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 605
+<span style="color: #0000ff;">#define</span> maxl 30
+<span style="color: #0000ff;">#define</span> maxm 105
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Edge
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> next, v;
+}edge[maxn </span>*<span style="color: #000000;"> maxn];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> head[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> comb_cnt, type_cnt, streamer_len;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> comb_len;
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> comb[maxn][maxl];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ecount;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxm][maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; comb_cnt; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, comb[i]);
+}
+
+</span><span style="color: #0000ff;">void</span> addedge(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span><span style="color: #000000;"> b)
+{
+    edge[ecount].v </span>=<span style="color: #000000;"> b;
+    edge[ecount].next </span>=<span style="color: #000000;"> head[a];
+    head[a] </span>= ecount++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">bool</span> connect1(<span style="color: #0000ff;">char</span> *a, <span style="color: #0000ff;">char</span> *<span style="color: #000000;">b)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; comb_len; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (a[i] != b[i - <span style="color: #800080;">1</span><span style="color: #000000;">])
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make()
+{
+    comb_len </span>= strlen(comb[<span style="color: #800080;">0</span><span style="color: #000000;">]);
+    ecount </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    memset(head, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; comb_cnt; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; comb_cnt; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (connect1(comb[i], comb[j]))
+                addedge(i, j);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    memset(f, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(f));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; comb_cnt; i++<span style="color: #000000;">)
+        f[comb_len][i] </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = comb_len; i &lt; streamer_len; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; comb_cnt; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> k = head[j]; k != -<span style="color: #800080;">1</span>; k =<span style="color: #000000;"> edge[k].next)
+                f[i </span>+ <span style="color: #800080;">1</span>][edge[k].v] +=<span style="color: #000000;"> f[i][j];
+    </span><span style="color: #0000ff;">int</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; comb_cnt; i++<span style="color: #000000;">)
+        ans </span>+=<span style="color: #000000;"> f[streamer_len][i];
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;type_cnt, &amp;streamer_len, &amp;comb_cnt), type_cnt | streamer_len |<span style="color: #000000;"> comb_cnt)
+    {
+        input();
+        make();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

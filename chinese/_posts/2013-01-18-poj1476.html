@@ -1,0 +1,90 @@
+---
+layout: post
+title: poj1476
+category: chinese
+---
+<p>递推</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a7cc573f-56d9-4d84-afc9-d2d6fcb30975')"><img id="code_img_closed_a7cc573f-56d9-4d84-afc9-d2d6fcb30975" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a7cc573f-56d9-4d84-afc9-d2d6fcb30975" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a7cc573f-56d9-4d84-afc9-d2d6fcb30975',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_a7cc573f-56d9-4d84-afc9-d2d6fcb30975" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 15
+<span style="color: #0000ff;">#define</span> maxk 1005
+<span style="color: #0000ff;">#define</span> maxd 35
+<span style="color: #0000ff;">#define</span> inf 0x3f3f3f3f
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn][maxk];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> flight_num[maxn][maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> flight[maxn][maxn][maxd];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; n; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (i !=<span style="color: #000000;"> j)
+            {
+                scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">flight_num[i][j]);
+                </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> k = <span style="color: #800080;">0</span>; k &lt; flight_num[i][j]; k++<span style="color: #000000;">)
+                    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">flight[i][j][k]);
+            }
+}
+
+</span><span style="color: #0000ff;">void</span> cal(<span style="color: #0000ff;">int</span> day, <span style="color: #0000ff;">int</span> u, <span style="color: #0000ff;">int</span><span style="color: #000000;"> v)
+{
+    </span><span style="color: #0000ff;">if</span> (f[u][day] == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (flight_num[u][v] == <span style="color: #800080;">0</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (flight[u][v][day % flight_num[u][v]] != <span style="color: #800080;">0</span>
+            &amp;&amp; (f[v][day + <span style="color: #800080;">1</span>] == -<span style="color: #800080;">1</span> || f[v][day + <span style="color: #800080;">1</span>] &gt; f[u][day] + flight[u][v][day %<span style="color: #000000;"> flight_num[u][v]]))
+        f[v][day </span>+ <span style="color: #800080;">1</span>] = f[u][day] + flight[u][v][day %<span style="color: #000000;"> flight_num[u][v]];
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> work()
+{
+    memset(f, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(f));
+    f[</span><span style="color: #800080;">0</span>][<span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; n; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> k = <span style="color: #800080;">0</span>; k &lt; n; k++<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">if</span> (j !=<span style="color: #000000;"> k)
+                    cal(i, j, k);
+    </span><span style="color: #0000ff;">return</span> f[n - <span style="color: #800080;">1</span><span style="color: #000000;">][m];
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> output()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt;= m; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; n; j++<span style="color: #000000;">)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, f[j][i]);
+        puts(</span><span style="color: #800000;">""</span><span style="color: #000000;">);
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">int</span> t = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;m), n |<span style="color: #000000;"> m)
+    {
+        input();
+        </span><span style="color: #0000ff;">int</span> ans =<span style="color: #000000;"> work();
+</span><span style="color: #008000;">//</span><span style="color: #008000;">        output();</span>
+        printf(<span style="color: #800000;">"</span><span style="color: #800000;">Scenario #%d\n</span><span style="color: #800000;">"</span>, ++<span style="color: #000000;">t);
+        </span><span style="color: #0000ff;">if</span> (ans == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+            puts(</span><span style="color: #800000;">"</span><span style="color: #800000;">No flight possible.</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">The best flight costs %d.\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+        puts(</span><span style="color: #800000;">""</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj1201</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../../../../../index.html">Home</a>
+            </li>
+            <li>
+              <a href="../../../../../codeforces/index.html">Codeforces</a>
+            </li>
+            <li>
+              <a href="../../../../../chinese/index.html">Chinese</a>
+            </li>
+            <li>
+              <a href="https://github.com/jhfjhfj1/codelib">Library</a>
+            </li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li>
+				<form class="navbar-form" style="padding-bottom:35px">
+				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+				</form>
+				</li>
+			</ul>
+		</li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>About</a></li>
+            <li><a>Contact</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<script type="text/javascript"> 
+function googlesearch () {
+var key=document.getElementsByName("search-key-words")[0].value;
+var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
+window.open(link);
+document.getElementsByName("search-key-words")[0].value=""}
+</script>
+
+
+	
+	
+	
+		
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj1201</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 23 Jun 2011</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<p>题意：给定一些区间和每个区间内的元素数量（选一些互不相同的整数作为区间内的元素,每个整数只至多选1次），问最少有多少个元素（所有元素不能重复）。</p>
+<p>分析：这题是用spfa做差分约束。不能向bellman一样。还是把差分约束理解为求最长路比较直观。</p>
+<p>对于dist[a]-dist[b]&gt;=c，我们可以看作dist[a]&gt;=dist[b]+c，所以我们如果初始化为负无穷，起点初始化为0，并让所有的不等式都满足，那么就是在求一个最长路。</p>
+<p>首先用数组sum[i]表示小于等于i的元素有多少个。这样区间[a+1,b]的元素个数要求c，可以表示为sum[b]-sum[a]&gt;=c。还要注意每个元素要么选要么不选，其数量只能是0或1。因此，0&lt;=sum[i]-sum[i-1]&lt;=1</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('af9540f7-876c-452e-8c9a-b0d1aebde788')"><img id="code_img_closed_af9540f7-876c-452e-8c9a-b0d1aebde788" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_af9540f7-876c-452e-8c9a-b0d1aebde788" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('af9540f7-876c-452e-8c9a-b0d1aebde788',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_af9540f7-876c-452e-8c9a-b0d1aebde788" class="cnblogs_code_hide">
+<div><span style="color: #000000;">#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">iostream</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdio</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdlib</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstring</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000ff;">using</span><span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;<br /><br /></span><span style="color: #0000ff;">#define</span><span style="color: #000000;"> maxn 50005</span><span style="color: #000000;"><br /></span><span style="color: #0000ff;">#define</span><span style="color: #000000;"> INF 0x3f3f3f3f</span><span style="color: #000000;"><br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> pnt[maxn </span><span style="color: #000000;">*</span><span style="color: #800080;">3</span><span style="color: #000000;">], cost[maxn </span><span style="color: #000000;">*</span><span style="color: #800080;">3</span><span style="color: #000000;">], nxt[maxn </span><span style="color: #000000;">*</span><span style="color: #800080;">3</span><span style="color: #000000;">];<br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> e, head[maxn];<br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> dist[maxn];<br /></span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn];<br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, mmin, mmax;<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> relax(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> u, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> c)<br />{<br />    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (dist[v] </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> dist[u] </span><span style="color: #000000;">+</span><span style="color: #000000;"> c)<br />    {<br />        dist[v] </span><span style="color: #000000;">=</span><span style="color: #000000;"> dist[u] </span><span style="color: #000000;">+</span><span style="color: #000000;"> c;<br />        </span><span style="color: #0000ff;">return</span><span style="color: #800080;">1</span><span style="color: #000000;">;<br />    }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />}<br /><br />inline </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> addedge(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> u, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> v, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> c)<br />{<br />    pnt[e] </span><span style="color: #000000;">=</span><span style="color: #000000;"> v;<br />    cost[e] </span><span style="color: #000000;">=</span><span style="color: #000000;"> c;<br />    nxt[e] </span><span style="color: #000000;">=</span><span style="color: #000000;"> head[u];<br />    head[u] </span><span style="color: #000000;">=</span><span style="color: #000000;"> e</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />}<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> SPFA(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> src, </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n)<br />{<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i;<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (i </span><span style="color: #000000;">=</span><span style="color: #000000;"> src; i </span><span style="color: #000000;">&lt;=</span><span style="color: #000000;"> n; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />    {<br />        vis[i] </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />        dist[i] </span><span style="color: #000000;">=</span><span style="color: #000000;">-</span><span style="color: #000000;">INF;<br />    }<br />    dist[src] </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> Q[maxn </span><span style="color: #000000;">*</span><span style="color: #800080;">3</span><span style="color: #000000;">], top </span><span style="color: #000000;">=</span><span style="color: #800080;">1</span><span style="color: #000000;">;<br />    Q[</span><span style="color: #800080;">0</span><span style="color: #000000;">] </span><span style="color: #000000;">=</span><span style="color: #000000;"> src;<br />    vis[src] </span><span style="color: #000000;">=</span><span style="color: #0000ff;">true</span><span style="color: #000000;">;<br />    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (top)<br />    {<br />        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> u, v;<br />        u </span><span style="color: #000000;">=</span><span style="color: #000000;"> Q[</span><span style="color: #000000;">--</span><span style="color: #000000;">top];<br />        vis[u] </span><span style="color: #000000;">=</span><span style="color: #0000ff;">false</span><span style="color: #000000;">;<br />        </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (i </span><span style="color: #000000;">=</span><span style="color: #000000;"> head[u]; i </span><span style="color: #000000;">!=</span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">; i </span><span style="color: #000000;">=</span><span style="color: #000000;"> nxt[i])<br />        {<br />            v </span><span style="color: #000000;">=</span><span style="color: #000000;"> pnt[i];<br />            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (</span><span style="color: #800080;">1</span><span style="color: #000000;">==</span><span style="color: #000000;"> relax(u, v, cost[i]) </span><span style="color: #000000;">&amp;&amp;</span><span style="color: #000000;">!</span><span style="color: #000000;">vis[v])<br />            {<br />                Q[top</span><span style="color: #000000;">++</span><span style="color: #000000;">] </span><span style="color: #000000;">=</span><span style="color: #000000;"> v;<br />                vis[v] </span><span style="color: #000000;">=</span><span style="color: #0000ff;">true</span><span style="color: #000000;">;<br />            }<br />        }<br />    }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> dist[n];<br />}<br /><br /></span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()<br />{<br />    mmax </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />    mmin </span><span style="color: #000000;">=</span><span style="color: #000000;"> INF;<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> n; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />    {<br />        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b, c;<br />        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">a, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">b, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">c);<br />        a</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />        b</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (mmax </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> b)<br />            mmax </span><span style="color: #000000;">=</span><span style="color: #000000;"> b;<br />        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (mmin </span><span style="color: #000000;">&gt;</span><span style="color: #000000;"> a)<br />            mmin </span><span style="color: #000000;">=</span><span style="color: #000000;"> a;<br />        addedge(a </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, b, c);<br />    }<br />    </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #000000;"> mmin; i </span><span style="color: #000000;">&lt;=</span><span style="color: #000000;"> mmax; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />    {<br />        addedge(i, i </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">);<br />        addedge(i </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, i, </span><span style="color: #800080;">0</span><span style="color: #000000;">);<br />    }<br />}<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()<br />{<br />    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span><span style="color: #008000;"><br /></span><span style="color: #000000;">    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">n);<br />    e </span><span style="color: #000000;">=</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />    memset(head, </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(head));<br />    input();<br />    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, SPFA(mmin </span><span style="color: #000000;">-</span><span style="color: #800080;">1</span><span style="color: #000000;">, mmax));<br />    </span><span style="color: #0000ff;">return</span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />}</span></div>
+
+</div>
+
+</div>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+
+
+
+
+
+	<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+
+
+
+            </div>
+
+
+		
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

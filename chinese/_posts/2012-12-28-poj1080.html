@@ -1,0 +1,78 @@
+---
+layout: post
+title: poj1080
+category: chinese
+---
+<p>dp,类似最长公共子序列</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e821a6d0-c430-4400-a060-8e45316e7b4c')"><img id="code_img_closed_e821a6d0-c430-4400-a060-8e45316e7b4c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e821a6d0-c430-4400-a060-8e45316e7b4c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e821a6d0-c430-4400-a060-8e45316e7b4c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_e821a6d0-c430-4400-a060-8e45316e7b4c" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxl 105
+
+<span style="color: #0000ff;">char</span> name[<span style="color: #800080;">6</span>] = <span style="color: #800000;">"</span><span style="color: #800000;">ACGT-</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> gene1[maxl], gene2[maxl];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> len1, len2;
+</span><span style="color: #0000ff;">int</span> match[<span style="color: #800080;">5</span>][<span style="color: #800080;">5</span>] =<span style="color: #000000;">
+{
+{ </span><span style="color: #800080;">5</span>, -<span style="color: #800080;">1</span>, -<span style="color: #800080;">2</span>, -<span style="color: #800080;">1</span>, -<span style="color: #800080;">3</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">1</span>, <span style="color: #800080;">5</span>, -<span style="color: #800080;">3</span>, -<span style="color: #800080;">2</span>, -<span style="color: #800080;">4</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">2</span>, -<span style="color: #800080;">3</span>, <span style="color: #800080;">5</span>, -<span style="color: #800080;">2</span>, -<span style="color: #800080;">2</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">1</span>, -<span style="color: #800080;">2</span>, -<span style="color: #800080;">2</span>, <span style="color: #800080;">5</span>, -<span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">3</span>, -<span style="color: #800080;">4</span>, -<span style="color: #800080;">2</span>, -<span style="color: #800080;">1</span>, <span style="color: #800080;">0</span><span style="color: #000000;"> } };
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxl][maxl];
+
+</span><span style="color: #0000ff;">void</span> input(<span style="color: #0000ff;">int</span> &amp;len, <span style="color: #0000ff;">char</span> *<span style="color: #000000;">gene)
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">len);
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span>, gene + <span style="color: #800080;">1</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span> get_id(<span style="color: #0000ff;">char</span><span style="color: #000000;"> ch)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">5</span>; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (ch ==<span style="color: #000000;"> name[i])
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">return</span> -<span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    f[</span><span style="color: #800080;">0</span>][<span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= len1; i++<span style="color: #000000;">)
+        f[i][</span><span style="color: #800080;">0</span>] = match[get_id(gene1[i])][get_id(<span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span>)] + f[i - <span style="color: #800080;">1</span>][<span style="color: #800080;">0</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= len2; i++<span style="color: #000000;">)
+        f[</span><span style="color: #800080;">0</span>][i] = match[get_id(gene2[i])][get_id(<span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span>)] + f[<span style="color: #800080;">0</span>][i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= len1; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">1</span>; j &lt;= len2; j++<span style="color: #000000;">)
+        {
+            f[i][j] </span>=<span style="color: #000000;"> match[get_id(gene1[i])][get_id(gene2[j])]
+                    </span>+ f[i - <span style="color: #800080;">1</span>][j - <span style="color: #800080;">1</span><span style="color: #000000;">];
+            f[i][j] </span>=<span style="color: #000000;"> max(f[i][j],
+                    match[get_id(gene1[i])][get_id(</span><span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span>)] + f[i - <span style="color: #800080;">1</span><span style="color: #000000;">][j]);
+            f[i][j] </span>=<span style="color: #000000;"> max(f[i][j],
+                    match[get_id(gene2[j])][get_id(</span><span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span>)] + f[i][j - <span style="color: #800080;">1</span><span style="color: #000000;">]);
+        }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, f[len1][len2]);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        input(len1, gene1);
+        input(len2, gene2);
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

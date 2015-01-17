@@ -1,0 +1,36 @@
+---
+layout: post
+title: poj1862
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('fd049ea8-f0df-4ab0-9593-dc02f2a6373c')"><img id="code_img_closed_fd049ea8-f0df-4ab0-9593-dc02f2a6373c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_fd049ea8-f0df-4ab0-9593-dc02f2a6373c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('fd049ea8-f0df-4ab0-9593-dc02f2a6373c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_fd049ea8-f0df-4ab0-9593-dc02f2a6373c" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;<span style="color: #000000;">
+#include </span>&lt;cmath&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 105
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">f[i]);
+    sort(f, f </span>+<span style="color: #000000;"> n);
+    </span><span style="color: #0000ff;">double</span> ans = f[n - <span style="color: #800080;">1</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = n - <span style="color: #800080;">2</span>; i &gt;= <span style="color: #800080;">0</span>; i--<span style="color: #000000;">)
+        ans </span>= <span style="color: #800080;">2</span> * sqrt(ans *<span style="color: #000000;"> f[i]);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%.3f\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

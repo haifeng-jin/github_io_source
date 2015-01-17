@@ -1,0 +1,90 @@
+---
+layout: post
+title: poj1013
+category: chinese
+---
+<p>题意：有12个硬币，其中有且仅有一个是假的，假的比真的或轻或重，给出3次天平测量的结果，每次告知左侧和右侧的硬币各有那几个，以及天平的平衡状态，问第几个硬币是假的，是轻是重。（保证结果唯一）</p>
+<p>分析：对于每次测量，如果天平平衡则说明所有天平上的硬币都是真的，如果两端不平衡，那么轻的一端的所有硬币只可能是轻的假币，不可能是重的假币。重的一端同理。于是我们知道哪些硬币一定是真币，哪些硬币一定不是重的假币也不是轻的假币，则这些也是真币。除此之外，剩下的那一个就是假币，如果它不可能轻，那么它一定重，反之亦然。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e9c734ea-d227-4ac0-80fc-f698fb1ddd3f')"><img id="code_img_closed_e9c734ea-d227-4ac0-80fc-f698fb1ddd3f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e9c734ea-d227-4ac0-80fc-f698fb1ddd3f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e9c734ea-d227-4ac0-80fc-f698fb1ddd3f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_e9c734ea-d227-4ac0-80fc-f698fb1ddd3f" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;">
+{
+    </span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    maybelight, maybeheavy, mustbenormal;
+}coin[</span><span style="color: #800080;">13</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        n;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    left, right, judge;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        j, i;
+
+    memset(coin, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(coin));
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">3</span>; i++<span style="color: #000000;">)
+    {
+        cin </span>&gt;&gt;<span style="color: #000000;"> left;
+        cin </span>&gt;&gt;<span style="color: #000000;"> right;
+        cin </span>&gt;&gt;<span style="color: #000000;"> judge;
+        </span><span style="color: #0000ff;">if</span> (judge == <span style="color: #800000;">"</span><span style="color: #800000;">even</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; left.length(); j++<span style="color: #000000;">)
+                coin[left[j] </span>- <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span>].mustbenormal = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; right.length(); j++<span style="color: #000000;">)
+                coin[right[j] </span>- <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span>].mustbenormal = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }</span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (judge == <span style="color: #800000;">"</span><span style="color: #800000;">down</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; left.length(); j++<span style="color: #000000;">)
+                coin[left[j] </span>- <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span>].maybelight = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; right.length(); j++<span style="color: #000000;">)
+                coin[right[j] </span>- <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span>].maybeheavy = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt;= <span style="color: #800000;">'</span><span style="color: #800000;">L</span><span style="color: #800000;">'</span> - <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span>; j++<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">if</span> (left.find(<span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span> + j) == <span style="color: #0000ff;">string</span>::npos &amp;&amp; right.find(<span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span> + j) == <span style="color: #0000ff;">string</span><span style="color: #000000;">::npos)
+                    coin[j].mustbenormal </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }</span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (judge == <span style="color: #800000;">"</span><span style="color: #800000;">up</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; left.length(); j++<span style="color: #000000;">)
+                coin[left[j] </span>- <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span>].maybeheavy = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; right.length(); j++<span style="color: #000000;">)
+                coin[right[j] </span>- <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span>].maybelight = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt;= <span style="color: #800000;">'</span><span style="color: #800000;">L</span><span style="color: #800000;">'</span> - <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span>; j++<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">if</span> (left.find(<span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span> + j) == <span style="color: #0000ff;">string</span>::npos &amp;&amp; right.find(<span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span> + j) == <span style="color: #0000ff;">string</span><span style="color: #000000;">::npos)
+                    coin[j].mustbenormal </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, ans;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt;= <span style="color: #800000;">'</span><span style="color: #800000;">L</span><span style="color: #800000;">'</span> - <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (coin[i].mustbenormal || (coin[i].maybeheavy &amp;&amp;<span style="color: #000000;"> coin[i].maybelight))
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        ans </span>=<span style="color: #000000;"> i;
+    }
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (coin[ans].maybeheavy)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%c is the counterfeit coin and it is heavy.\n</span><span style="color: #800000;">"</span>, ans + <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%c is the counterfeit coin and it is light.\n</span><span style="color: #800000;">"</span>, ans + <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    cin &gt;&gt;<span style="color: #000000;"> n;
+    getchar();
+    </span><span style="color: #0000ff;">while</span> (n--<span style="color: #000000;">)
+    {
+        init();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

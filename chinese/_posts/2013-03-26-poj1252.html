@@ -1,0 +1,62 @@
+---
+layout: post
+title: poj1252
+category: chinese
+---
+<p>dp注意要多dp出一段，因为有时候付钱需要超过100元再找钱。</p>
+<p>求和函数accumulate需要包含头文件numeric，使用方法为sum = accumulate(f, f + n, 0);</p>
+<p>求最大值函数max_element返回最大值指针，需要包含头文件algorithm，使用方法为max_value=*max_element(f, f+n);</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('aa4c2ff7-5481-4939-a891-aeb61fb79014')"><img id="code_img_closed_aa4c2ff7-5481-4939-a891-aeb61fb79014" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_aa4c2ff7-5481-4939-a891-aeb61fb79014" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('aa4c2ff7-5481-4939-a891-aeb61fb79014',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_aa4c2ff7-5481-4939-a891-aeb61fb79014" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;<span style="color: #000000;">
+#include </span>&lt;numeric&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 20005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn];
+</span><span style="color: #0000ff;">int</span> coin[<span style="color: #800080;">6</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> g[maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">6</span>; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">coin[i]);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt;= <span style="color: #800080;">2000</span>; i++<span style="color: #000000;">)
+        f[i] </span>=<span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; <span style="color: #800080;">6</span>; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = coin[i]; j &lt;= <span style="color: #800080;">2000</span>; j++<span style="color: #000000;">)
+            f[j] </span>= min(f[j], f[j - coin[i]] + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    memcpy(g, f, </span><span style="color: #800080;">101</span> * <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">));
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= <span style="color: #800080;">100</span>; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = i + <span style="color: #800080;">1</span>; j &lt;= <span style="color: #800080;">2000</span>; j++<span style="color: #000000;">)
+            g[i] </span>= min(f[j] + f[j -<span style="color: #000000;"> i], g[i]);
+    </span><span style="color: #0000ff;">int</span> sum = accumulate(g, g + <span style="color: #800080;">101</span>, <span style="color: #800080;">0</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">double</span> ave = sum / <span style="color: #800080;">100.0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> max_value = *max_element(g, g + <span style="color: #800080;">101</span><span style="color: #000000;">);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%.2f %d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ave, max_value);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        input();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

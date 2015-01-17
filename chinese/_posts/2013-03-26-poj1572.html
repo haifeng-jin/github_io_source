@@ -1,0 +1,65 @@
+---
+layout: post
+title: poj1572
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0a7afd91-77cd-4c4e-8e82-87df98a97eec')"><img id="code_img_closed_0a7afd91-77cd-4c4e-8e82-87df98a97eec" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0a7afd91-77cd-4c4e-8e82-87df98a97eec" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0a7afd91-77cd-4c4e-8e82-87df98a97eec',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_0a7afd91-77cd-4c4e-8e82-87df98a97eec" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">zoj1707</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxn = <span style="color: #800080;">100</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        n;
+</span><span style="color: #0000ff;">string</span><span style="color: #000000;">    origin[maxn], replace1[maxn], sequence;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        getline(cin, origin[i]);
+        getline(cin, replace1[i]);
+    }
+    getline(cin, sequence);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        l, l2, i, pos;
+
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        pos </span>=<span style="color: #000000;"> sequence.find(origin[i]);
+        l </span>=<span style="color: #000000;"> origin[i].length();
+        </span><span style="color: #0000ff;">while</span> (pos != <span style="color: #0000ff;">string</span><span style="color: #000000;">::npos)
+        {
+            sequence.erase(pos, l);
+            sequence.insert(pos, replace1[i]);
+            pos </span>=<span style="color: #000000;"> sequence.find(origin[i]);
+        }
+    }
+    cout </span>&lt;&lt; sequence &lt;&lt;<span style="color: #000000;"> endl;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    cin &gt;&gt;<span style="color: #000000;"> n;
+    getchar();
+    </span><span style="color: #0000ff;">while</span> (n != <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        init();
+        work();
+        cin </span>&gt;&gt;<span style="color: #000000;"> n;
+        getchar();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

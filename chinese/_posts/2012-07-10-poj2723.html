@@ -1,0 +1,117 @@
+---
+layout: post
+title: poj2723
+category: chinese
+---
+<p>题意：有m层楼，从一层到m层，要进入每层都要打开位于该层的两道门中的至少一道。门锁有2n种，每个门锁为2n种中的一种，可以重复。有2n把钥匙，分别对应2n种锁，但是钥匙两两一组，共n组，每组只能选一个来开门，被选中的可以多次使用，另一个一次都不能用。问最多能上多少层。</p>
+<p>分析：二分查找能上的层数。每次对于一个确定的层数，也就确定了哪些门需要开。变为一个2-sat问题。其中两两一组的钥匙就是图中的节点。当然图中还需要一些矛盾。矛盾如下，某层有x,y两种锁，x的钥匙a与钥匙b一组，y的要是c与钥匙d一组。如果在某次选了钥匙b，那么本层的x将无法被打开，只能开y，就必须选钥匙c，不能选钥匙d。所以钥匙b与钥匙d是矛盾的。</p>
+<p>2-sat问题：</p>
+<p>有n组元素，每组两个，从中选出n个，每组选且只选一个。这2n个元素中有些元素之间有矛盾关系，要求选出的n个元素中，任意两个之间都不存在矛盾。问是否存在满足条件的选取方案。这就是2-sat问题。解决方法如下，例如a,b一组，c,d一组，a,c有矛盾，那么选a则不能选c，不选c则必须选d。所以选a就必须选d。同理选c就必须选b。我们引两条边，a-&gt;d,&nbsp;c-&gt;b。对于所有的矛盾都用类似的方式加边。这样只要从x点可以走到y点，那么选x点就必须选y点。然后对全图求强连通分支。在一个强连通分支中，选了一个点，则必须选强连通分支中的所有点。如果有某两个点属于同一组，且属于同一个强连通分支，则必然无解，否则有解。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('eb3652e5-5a7d-46f1-84da-0c13eb9d8956')"><img id="code_img_closed_eb3652e5-5a7d-46f1-84da-0c13eb9d8956" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_eb3652e5-5a7d-46f1-84da-0c13eb9d8956" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('eb3652e5-5a7d-46f1-84da-0c13eb9d8956',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_eb3652e5-5a7d-46f1-84da-0c13eb9d8956" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 3010
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> g[maxn][maxn], ct[maxn], f[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x[maxn], y[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> prev[maxn], low[maxn], stk[maxn], sc[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> cnt0, ptr, cnt1;
+
+</span><span style="color: #0000ff;">void</span> dfs(<span style="color: #0000ff;">int</span><span style="color: #000000;"> w)
+{
+    </span><span style="color: #0000ff;">int</span> min(<span style="color: #800080;">0</span><span style="color: #000000;">);
+    prev[w] </span>= cnt0++<span style="color: #000000;">;
+    low[w] </span>=<span style="color: #000000;"> prev[w];
+    min </span>=<span style="color: #000000;"> low[w];
+    stk[ptr</span>++] =<span style="color: #000000;"> w;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; ct[w]; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> t =<span style="color: #000000;"> g[w][i];
+        </span><span style="color: #0000ff;">if</span> (prev[t] == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+            dfs(t);
+        </span><span style="color: #0000ff;">if</span> (low[t] &lt;<span style="color: #000000;"> min)
+            min </span>=<span style="color: #000000;"> low[t];
+    }
+    </span><span style="color: #0000ff;">if</span> (min &lt;<span style="color: #000000;"> low[w])
+    {
+        low[w] </span>=<span style="color: #000000;"> min;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">do</span><span style="color: #000000;">{
+        </span><span style="color: #0000ff;">int</span> v = stk[--<span style="color: #000000;">ptr];
+        sc[v] </span>=<span style="color: #000000;"> cnt1;
+        low[v] </span>=<span style="color: #000000;"> maxn;
+    }</span><span style="color: #0000ff;">while</span> (stk[ptr] !=<span style="color: #000000;"> w);
+    </span>++<span style="color: #000000;">cnt1;
+}
+
+</span><span style="color: #0000ff;">void</span> Tarjan(<span style="color: #0000ff;">int</span><span style="color: #000000;"> N)
+{
+    cnt0 </span>= cnt1 = ptr = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; N; ++<span style="color: #000000;">i)
+        prev[i] </span>= low[i] = -<span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; N; ++<span style="color: #000000;">i)
+        </span><span style="color: #0000ff;">if</span> (prev[i] == -<span style="color: #800080;">1</span><span style="color: #000000;">)
+            dfs(i);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> solve()
+{
+    Tarjan(n);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (sc[i] ==<span style="color: #000000;"> sc[f[i]])
+            </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span> check(<span style="color: #0000ff;">int</span><span style="color: #000000;"> Mid)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        ct[i] </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; Mid; i++<span style="color: #000000;">)
+    {
+        g[f[x[i]]][ct[f[x[i]]]</span>++] =<span style="color: #000000;"> y[i];
+        g[f[y[i]]][ct[f[y[i]]]</span>++] =<span style="color: #000000;"> x[i];
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> solve();
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;m), n |<span style="color: #000000;"> m)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> p,q ;
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;p, &amp;<span style="color: #000000;">q);
+            f[p] </span>=<span style="color: #000000;"> q;
+            f[q] </span>=<span style="color: #000000;"> p;
+        }
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; m; i++<span style="color: #000000;">)
+            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;x[i], &amp;<span style="color: #000000;">y[i]);
+        n </span>*= <span style="color: #800080;">2</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> Min = <span style="color: #800080;">0</span>, Max = m + <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span> (Min + <span style="color: #800080;">1</span> &lt;<span style="color: #000000;"> Max)
+        {
+            </span><span style="color: #0000ff;">int</span> Mid = (Min + Max) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (check(Mid))
+                Min </span>=<span style="color: #000000;"> Mid;
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                Max </span>=<span style="color: #000000;"> Mid;
+        }
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, Min);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

@@ -1,0 +1,70 @@
+---
+layout: post
+title: poj2184
+category: chinese
+---
+<p>题意：给定一些奶牛，每个牛有s和f两个属性值，有正有负，要求选出一些牛，使得这些牛的两种属性的和的加和最大，且这些牛的两种属性分别求加和不能为负。</p>
+<p>分析：dp，开始想到dp[i][s][f]，表示前i头牛能否实现属性和分别为s,f。空间和时间都不允许，要将f从状态中拿出來，让f的属性和作为所求的值。即变为d[i][s]=f的形式。表示用前i头牛构成s属性和为s的情况下f属性和最大为多少。状态转移从两种情况来，即用或者不用当前的牛。dp[i][j] = max(dp[i - 1][j - s[i]] + f[i], dp[i - 1][j])。在实际操作的时候可以将第一维去掉，进行空间上的优化。但是由于s[i]的值有正有负，所以在填写数组的顺序要根据s[i]的值来决定，若为正则从右到左（类似01背包的空间优化），若为负则从左到右。</p>
+<p>注意：动态规划中状态维和值是可以相互转化的。状态维过多，效率低的时候，可以把将其转化为数组值；同理，数组值不唯一无法规划时，可以增加状态维使状态更详细。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('108c46c4-039d-48f5-a359-c48078dbce11')"><img id="code_img_closed_108c46c4-039d-48f5-a359-c48078dbce11" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_108c46c4-039d-48f5-a359-c48078dbce11" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('108c46c4-039d-48f5-a359-c48078dbce11',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_108c46c4-039d-48f5-a359-c48078dbce11" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 105
+<span style="color: #0000ff;">#define</span> maxs 2000 * 100
+<span style="color: #0000ff;">#define</span> shift 1000 * 100
+<span style="color: #0000ff;">#define</span> inf 0x3f3f3f3f
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> n, s[maxn], f[maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> dp[maxs];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">n);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;s[i], &amp;<span style="color: #000000;">f[i]);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; maxs; i++<span style="color: #000000;">)
+        dp[i] </span>= -<span style="color: #000000;">inf;
+    dp[</span><span style="color: #800080;">0</span> + shift] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> l = <span style="color: #800080;">0</span>, r = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        l </span>= min(l, l +<span style="color: #000000;"> s[i]);
+        r </span>= max(r, r +<span style="color: #000000;"> s[i]);
+        </span><span style="color: #0000ff;">int</span> step = <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> begin = l, end =<span style="color: #000000;"> r;
+        </span><span style="color: #0000ff;">if</span> (s[i] &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+        {
+            step </span>= -<span style="color: #800080;">1</span><span style="color: #000000;">;
+            swap(begin, end);
+        }
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = begin; j != end + step; j +=<span style="color: #000000;"> step)
+        {
+            dp[j </span>+ shift] = max(dp[j - s[i] + shift] + f[i], dp[j +<span style="color: #000000;"> shift]);
+</span><span style="color: #008000;">//</span><span style="color: #008000;">            printf("%d %d\n", j, dp[j + shift]);</span>
+<span style="color: #000000;">        }
+    }
+    </span><span style="color: #0000ff;">int</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt;= r; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (dp[i + shift] &gt;= <span style="color: #800080;">0</span><span style="color: #000000;">)
+            ans </span>= max(ans, i + dp[i +<span style="color: #000000;"> shift]);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+<span style="color: #000000;">    input();
+    work();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

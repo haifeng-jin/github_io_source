@@ -1,0 +1,88 @@
+---
+layout: post
+title: poj3067
+category: chinese
+---
+<p>树状数组</p>
+<p>题意：有两排城市，这两排之间有一些城市之间有连接的道路，给出所有道路，问有多少道路是相交的。</p>
+<p>分析：求逆序数。我们先把所有的道路按照a升序，a相同时b升序的方法排列。这样从头至尾便利，对于每条道路，我们只需要知道它之前有多少道路的b大于它的b就可以了，所以我们只要知道前面有多少b小于等于它的再用下标减去就可以了。而这个求有多少小于等于的过程就用树状数组来实现。我们每看到一条边，就把它的b作为下标，把树状数组对应位进行修改。这样一来，树状数组所有下标小于等于该道路的b的数的总和就是我们要求的b小于等于该道路的道路数。</p>
+<p>开始我看了一个程序，是按照b降序，b相同时a升序。每次找a比它小的，这样很难处理b相等的情况，所以不推荐。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:cpp;collapse:true;;gutter:false;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+#define maxn 2005
+
+struct Highway
+{
+	int a, b;
+} way[maxn * maxn];
+
+int n, m, k, c[maxn];
+long long ans;
+
+void input()
+{
+	scanf("%d%d%d", &amp;n, &amp;m, &amp;k);
+	for (int i = 0; i &lt; k; i++)
+		scanf("%d%d", &amp;way[i].a, &amp;way[i].b);
+}
+
+bool cmp(const Highway &amp;a, const Highway &amp;b)
+{
+	if (a.a != b.a)
+		return a.a &lt; b.a;
+	return a.b &lt; b.b;
+}
+
+long long cal(int a)
+{
+	long long sum = 0;
+	while (a &gt; 0)
+	{
+		sum += c[a];
+		a -= (a &amp; -a);
+	}
+	return sum;
+}
+
+void modify(int a, int x)
+{
+	while (a &lt;= m)
+	{
+		c[a] += x;
+		a += (a &amp; -a);
+	}
+}
+
+void work()
+{
+	ans = 0;
+	for (int i = 0; i &lt; k; i++)
+	{
+		ans += i - cal(way[i].b);
+		modify(way[i].b, 1);
+	}
+}
+
+int main()
+{
+	//freopen("D:\\t.txt", "r", stdin);
+	int t;
+	scanf("%d", &amp;t);
+	for (int i = 0; i &lt; t; i++)
+	{
+		memset(c, 0, sizeof(c));
+		input();
+		sort(way, way + k, cmp);
+		work();
+		printf("Test case %d: %I64d\n", i + 1, ans);
+	}
+	return 0;
+}
+</pre>
+</div>

@@ -1,0 +1,43 @@
+---
+layout: post
+title: poj1579
+category: chinese
+---
+<p>记忆化搜索</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e951b266-eb05-446f-94a6-6362807eaf37')"><img id="code_img_closed_e951b266-eb05-446f-94a6-6362807eaf37" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e951b266-eb05-446f-94a6-6362807eaf37" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e951b266-eb05-446f-94a6-6362807eaf37',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_e951b266-eb05-446f-94a6-6362807eaf37" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 25
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> a, b, c;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> f[maxn][maxn][maxn];
+
+</span><span style="color: #0000ff;">int</span> w(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span> b, <span style="color: #0000ff;">int</span><span style="color: #000000;"> c)
+{
+    </span><span style="color: #0000ff;">if</span> (a &lt;= <span style="color: #800080;">0</span> || b &lt;= <span style="color: #800080;">0</span> || c &lt;= <span style="color: #800080;">0</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (a &gt; <span style="color: #800080;">20</span> || b &gt; <span style="color: #800080;">20</span> || c &gt; <span style="color: #800080;">20</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> w(<span style="color: #800080;">20</span>, <span style="color: #800080;">20</span>, <span style="color: #800080;">20</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">if</span> (f[a][b][c] != -<span style="color: #800080;">1</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> f[a][b][c];
+    </span><span style="color: #0000ff;">if</span> (a &lt; b &amp;&amp; b &lt;<span style="color: #000000;"> c)
+        </span><span style="color: #0000ff;">return</span> f[a][b][c] = w(a, b, c - <span style="color: #800080;">1</span>) + w(a, b - <span style="color: #800080;">1</span>, c - <span style="color: #800080;">1</span>)- w(a, b - <span style="color: #800080;">1</span><span style="color: #000000;">, c);
+    </span><span style="color: #0000ff;">return</span> f[a][b][c] = w(a - <span style="color: #800080;">1</span>, b, c) + w(a - <span style="color: #800080;">1</span>, b - <span style="color: #800080;">1</span>, c) + w(a - <span style="color: #800080;">1</span>, b, c - <span style="color: #800080;">1</span>) - w(a - <span style="color: #800080;">1</span>, b - <span style="color: #800080;">1</span>, c - <span style="color: #800080;">1</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    memset(f, </span>-<span style="color: #800080;">1</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(f));
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d</span><span style="color: #800000;">"</span>, &amp;a, &amp;b, &amp;c), ~a | ~b | ~<span style="color: #000000;">c)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">w(%d, %d, %d) = %d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, a, b, c,  w(a, b, c));    
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

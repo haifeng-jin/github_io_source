@@ -1,0 +1,37 @@
+---
+layout: post
+title: poj1519
+category: chinese
+---
+<p>简单题，注意9的倍数的情况</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4d8c1d3a-c408-4b56-9b7f-c0d6665ed563')"><img id="code_img_closed_4d8c1d3a-c408-4b56-9b7f-c0d6665ed563" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4d8c1d3a-c408-4b56-9b7f-c0d6665ed563" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4d8c1d3a-c408-4b56-9b7f-c0d6665ed563',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_4d8c1d3a-c408-4b56-9b7f-c0d6665ed563" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 1005
+
+<span style="color: #0000ff;">char</span><span style="color: #000000;"> st[maxn];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span>, st), strcmp(st, <span style="color: #800000;">"</span><span style="color: #800000;">0</span><span style="color: #800000;">"</span><span style="color: #000000;">))
+    {
+        </span><span style="color: #0000ff;">int</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> len =<span style="color: #000000;"> strlen(st);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; len; i++<span style="color: #000000;">)
+            ans </span>= (ans * <span style="color: #800080;">10</span> + st[i] - <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span>) % <span style="color: #800080;">9</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ans)
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">9\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

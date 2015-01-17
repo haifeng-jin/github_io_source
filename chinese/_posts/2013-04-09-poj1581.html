@@ -1,0 +1,50 @@
+---
+layout: post
+title: poj1581
+category: chinese
+---
+<p>简单模拟</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d11502df-e1dc-4397-ab8f-7ecc5da0ba05')"><img id="code_img_closed_d11502df-e1dc-4397-ab8f-7ecc5da0ba05" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d11502df-e1dc-4397-ab8f-7ecc5da0ba05" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d11502df-e1dc-4397-ab8f-7ecc5da0ba05',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_d11502df-e1dc-4397-ab8f-7ecc5da0ba05" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">zoj1764</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        n, winprob, winpoint, nowprob, nowpoint;
+</span><span style="color: #0000ff;">string</span><span style="color: #000000;">    winname, nowname;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, a, b, j;
+    
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);</span>
+    cin &gt;&gt;<span style="color: #000000;"> n;
+    winprob </span>= -<span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        cin </span>&gt;&gt;<span style="color: #000000;"> nowname;
+        nowprob </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        nowpoint </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; <span style="color: #800080;">4</span>; j++<span style="color: #000000;">)
+        {
+            cin </span>&gt;&gt; a &gt;&gt;<span style="color: #000000;"> b;
+            </span><span style="color: #0000ff;">if</span> (b &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+            {
+                nowprob</span>++<span style="color: #000000;">;
+                nowpoint </span>= nowpoint + b + (a - <span style="color: #800080;">1</span>) * <span style="color: #800080;">20</span><span style="color: #000000;">;
+            }
+            </span><span style="color: #0000ff;">if</span> (nowprob &gt; winprob || (nowprob == winprob &amp;&amp; nowpoint &lt;<span style="color: #000000;"> winpoint))
+            {
+                winname </span>=<span style="color: #000000;"> nowname;
+                winprob </span>=<span style="color: #000000;"> nowprob;
+                winpoint </span>=<span style="color: #000000;"> nowpoint;
+            }
+        }
+    }
+    cout </span>&lt;&lt; winname &lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span> &lt;&lt; winprob &lt;&lt; <span style="color: #800000;">"</span> <span style="color: #800000;">"</span> &lt;&lt; winpoint &lt;&lt;<span style="color: #000000;"> endl;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,85 @@
+---
+layout: post
+title: poj1166
+category: chinese
+---
+<p><span style="line-height: 1.5;">爆搜就可以过，不过我用了迭代加深。</span></p>
+<p>注意每个操作最多进行4次</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e1be1863-1619-487e-93b0-4dc18f8114a5')"><img id="code_img_closed_e1be1863-1619-487e-93b0-4dc18f8114a5" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e1be1863-1619-487e-93b0-4dc18f8114a5" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e1be1863-1619-487e-93b0-4dc18f8114a5',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e1be1863-1619-487e-93b0-4dc18f8114a5" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_ANS 100
+
+<span style="color: #0000ff;">int</span> clock[<span style="color: #800080;">9</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">char</span> move[<span style="color: #800080;">9</span>][<span style="color: #800080;">10</span>] = {<span style="color: #800000;">"</span><span style="color: #800000;">ABDE</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">ABC</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">BCEF</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">ADG</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">BDEFH</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">CFI</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">DEGH</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">GHI</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">EFHI</span><span style="color: #800000;">"</span><span style="color: #000000;">};
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ans[MAX_ANS], ans_num;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">9</span>; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">clock[i]);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> output()
+{
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, ans[<span style="color: #800080;">0</span><span style="color: #000000;">]);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; ans_num; i++<span style="color: #000000;">)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;"> %d</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans[i]);
+    putchar(</span><span style="color: #800000;">'</span><span style="color: #800000;">\n</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> ok()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">9</span>; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (clock[i])
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> make(<span style="color: #0000ff;">char</span>* move, <span style="color: #0000ff;">int</span><span style="color: #000000;"> value)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; move[i]; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> index = move[i] - <span style="color: #800000;">'</span><span style="color: #800000;">A</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+        clock[index] </span>= (clock[index] + value + <span style="color: #800080;">4</span>) % <span style="color: #800080;">4</span><span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> dfs(<span style="color: #0000ff;">int</span> step, <span style="color: #0000ff;">int</span> limit, <span style="color: #0000ff;">int</span><span style="color: #000000;"> move_index)
+{
+    </span><span style="color: #0000ff;">if</span> (step &gt;<span style="color: #000000;"> limit)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ok())
+    {
+        output();
+        exit(</span><span style="color: #800080;">0</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = move_index; i &lt; <span style="color: #800080;">9</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; <span style="color: #800080;">3</span>; j++<span style="color: #000000;">)
+        {
+            make(move[i], </span><span style="color: #800080;">1</span><span style="color: #000000;">);
+            ans[ans_num</span>++] = i + <span style="color: #800080;">1</span><span style="color: #000000;">;
+            dfs(step </span>+ <span style="color: #800080;">1</span>, limit, i + <span style="color: #800080;">1</span><span style="color: #000000;">);
+        }
+        ans_num </span>-= <span style="color: #800080;">3</span><span style="color: #000000;">;
+        make(move[i], </span>-<span style="color: #800080;">3</span><span style="color: #000000;">);
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    input();
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">100</span>; i++<span style="color: #000000;">)
+    {
+        ans_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        dfs(</span><span style="color: #800080;">0</span>, i, <span style="color: #800080;">0</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

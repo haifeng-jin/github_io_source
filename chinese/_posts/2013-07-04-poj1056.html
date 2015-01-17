@@ -1,0 +1,105 @@
+---
+layout: post
+title: poj1056
+category: chinese
+---
+<p>简单题</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('62f2e075-24c6-4252-ac40-e5db35f5e628')"><img id="code_img_closed_62f2e075-24c6-4252-ac40-e5db35f5e628" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_62f2e075-24c6-4252-ac40-e5db35f5e628" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('62f2e075-24c6-4252-ac40-e5db35f5e628',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_62f2e075-24c6-4252-ac40-e5db35f5e628" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> cnode
+{
+    cnode    </span>*pzero, *<span style="color: #000000;">pone;
+    </span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    end;
+}trie[</span><span style="color: #800080;">20000</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        ncount, t;
+
+</span><span style="color: #0000ff;">bool</span> insert(cnode *proot, <span style="color: #0000ff;">char</span> *<span style="color: #000000;">a)
+{
+    </span><span style="color: #0000ff;">if</span> (proot-&gt;<span style="color: #000000;">end)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (a[<span style="color: #800080;">0</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">1</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (a[<span style="color: #800080;">0</span>] != <span style="color: #800000;">'</span><span style="color: #800000;">\0</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (proot-&gt;pone ==<span style="color: #000000;"> NULL)
+            {
+                ncount</span>++<span style="color: #000000;">;
+                proot</span>-&gt;pone = trie +<span style="color: #000000;"> ncount;
+                proot</span>-&gt;pone-&gt;end = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+                proot</span>-&gt;pone-&gt;pone =<span style="color: #000000;"> NULL;
+                proot</span>-&gt;pone-&gt;pzero =<span style="color: #000000;"> NULL;
+            }
+            </span><span style="color: #0000ff;">return</span> insert(proot-&gt;pone, a + <span style="color: #800080;">1</span><span style="color: #000000;">);
+        }
+        proot</span>-&gt;end = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (proot-&gt;pone == NULL &amp;&amp; proot-&gt;pzero ==<span style="color: #000000;"> NULL)
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (a[<span style="color: #800080;">0</span>] != <span style="color: #800000;">'</span><span style="color: #800000;">\0</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (proot-&gt;pzero ==<span style="color: #000000;"> NULL)
+        {
+            ncount</span>++<span style="color: #000000;">;
+            proot</span>-&gt;pzero = trie +<span style="color: #000000;"> ncount;
+            proot</span>-&gt;pzero-&gt;end = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            proot</span>-&gt;pzero-&gt;pone =<span style="color: #000000;"> NULL;
+            proot</span>-&gt;pzero-&gt;pzero =<span style="color: #000000;"> NULL;
+        }        
+        </span><span style="color: #0000ff;">return</span> insert(proot-&gt;pzero, a + <span style="color: #800080;">1</span><span style="color: #000000;">);
+    }
+    proot</span>-&gt;end = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (proot-&gt;pone == NULL &amp;&amp; proot-&gt;pzero ==<span style="color: #000000;"> NULL)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">char</span>*<span style="color: #000000;">    st;
+    </span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    ans;
+
+    st </span>= <span style="color: #800000;">""</span><span style="color: #000000;">;
+    ncount </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    trie[</span><span style="color: #800080;">0</span>].end = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    trie[</span><span style="color: #800080;">0</span>].pzero =<span style="color: #000000;"> NULL;
+    trie[</span><span style="color: #800080;">0</span>].pone =<span style="color: #000000;"> NULL;
+    ans </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">)
+    {
+        st </span>= <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">char</span>[<span style="color: #800080;">11</span><span style="color: #000000;">];
+        </span><span style="color: #0000ff;">if</span> (!(cin &gt;&gt;<span style="color: #000000;"> st))
+            exit(</span><span style="color: #800080;">0</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">if</span> (st[<span style="color: #800080;">0</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">9</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ans)
+            </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">insert(trie, st))
+                ans </span>= <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        getchar();
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">Set %d is </span><span style="color: #800000;">"</span><span style="color: #000000;">, t);
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ans)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">immediately decodable\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">not immediately decodable\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    t = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">)
+    {
+        t</span>++<span style="color: #000000;">;
+        init();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

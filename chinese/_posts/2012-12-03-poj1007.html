@@ -1,0 +1,72 @@
+---
+layout: post
+title: poj1007
+category: chinese
+---
+<p>简单排序</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('85793492-6f60-47ce-aaad-e0e97133ca2e')"><img id="code_img_closed_85793492-6f60-47ce-aaad-e0e97133ca2e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_85793492-6f60-47ce-aaad-e0e97133ca2e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('85793492-6f60-47ce-aaad-e0e97133ca2e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_85793492-6f60-47ce-aaad-e0e97133ca2e" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">poj1007</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxn = <span style="color: #800080;">101</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;">  item
+{
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    sequence;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        unsort;
+}dna[maxn];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        n, m;
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span>&lt;<span style="color: #000000;">(item a, item b)
+{
+    </span><span style="color: #0000ff;">return</span> a.unsort &lt;<span style="color: #000000;"> b.unsort;
+}
+
+</span><span style="color: #0000ff;">int</span> calculate(<span style="color: #0000ff;">string</span><span style="color: #000000;"> st)
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, j, ans;
+    
+    ans </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; st.length(); i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">for</span> (j = i; j &lt; st.length(); j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (st[i] &gt;<span style="color: #000000;"> st[j])
+                ans</span>++<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ans;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    getchar();
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        getline(cin, dna[i].sequence);
+        dna[i].unsort </span>=<span style="color: #000000;"> calculate(dna[i].sequence);
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> print()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+    
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        cout </span>&lt;&lt; dna[i].sequence &lt;&lt;<span style="color: #000000;"> endl;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    cin &gt;&gt; m &gt;&gt;<span style="color: #000000;"> n;
+    init();
+    sort(dna, dna </span>+<span style="color: #000000;"> n);
+    print();
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

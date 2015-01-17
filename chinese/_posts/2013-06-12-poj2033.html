@@ -1,0 +1,43 @@
+---
+layout: post
+title: poj2033
+category: chinese
+---
+<p>递推</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d348e6cd-bfc7-4385-9fe4-b3af08b5d3d0')"><img id="code_img_closed_d348e6cd-bfc7-4385-9fe4-b3af08b5d3d0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d348e6cd-bfc7-4385-9fe4-b3af08b5d3d0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d348e6cd-bfc7-4385-9fe4-b3af08b5d3d0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_d348e6cd-bfc7-4385-9fe4-b3af08b5d3d0" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+
+<span style="color: #0000ff;">char</span> st[<span style="color: #800080;">50005</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span> f[<span style="color: #800080;">50005</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">bool</span> ok(<span style="color: #0000ff;">char</span> a, <span style="color: #0000ff;">char</span><span style="color: #000000;"> b)
+{
+    </span><span style="color: #0000ff;">if</span> (a == <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> x = (a - <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span>) * <span style="color: #800080;">10</span> + b - <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">return</span> x &lt;= <span style="color: #800080;">26</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span>, st), st[<span style="color: #800080;">0</span>] != <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> len =<span style="color: #000000;"> strlen(st);
+        f[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">1</span><span style="color: #000000;">;
+        f[</span><span style="color: #800080;">1</span>] = <span style="color: #800080;">1</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">2</span>; i &lt;= len; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (st[i - <span style="color: #800080;">1</span>] == <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                f[i] </span>= f[i - <span style="color: #800080;">2</span><span style="color: #000000;">];
+            </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (ok(st[i - <span style="color: #800080;">2</span>], st[i - <span style="color: #800080;">1</span><span style="color: #000000;">]))
+                f[i] </span>= f[i - <span style="color: #800080;">1</span>] + f[i - <span style="color: #800080;">2</span><span style="color: #000000;">];    
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                f[i] </span>= f[i - <span style="color: #800080;">1</span><span style="color: #000000;">];
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, f[len]);
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

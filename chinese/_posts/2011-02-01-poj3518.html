@@ -1,0 +1,75 @@
+---
+layout: post
+title: poj3518
+category: chinese
+---
+<p>线性筛法可以过</p>  <p>&#160;</p>  <div class="cnblogs_Highlighter">   <pre class="brush: csharp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+
+const int  MAXSIZE=1500000;
+unsigned long previous[MAXSIZE+1];   /*size of array is MAXSIZE, then previous*/
+unsigned long next[MAXSIZE+1];         /*and next[MAXSIZE] can be used for */
+unsigned long prime, fact, i, mult;         /*number MAXSIZE*/
+unsigned long n;
+bool notprime[MAXSIZE+1];
+inline void REMOVE(unsigned long x)
+{
+       next[previous[x]]=next[x];
+       previous[next[x]]=previous[x];
+       notprime[x] = true;
+}
+inline void INITIAL(unsigned long n)
+{
+   unsigned long i=3;
+   memset(notprime, 0, sizeof(notprime));
+   notprime[0] = true;
+   notprime[1] = true;
+   while(i&lt;=n)
+   {
+     previous[i]=i-2;
+     if(i+2&lt;=n)
+     {
+         next[i]=i+2;
+         notprime[i + 1] = true;
+         i+=2;
+     }
+     else
+     {
+          next[i]=0;
+          break;
+     }
+   }
+   previous[3]=2;
+   next[2]=3;
+   previous[2]=0;
+}
+int main(void)
+{
+	n = 1500000;
+	INITIAL(n);
+    for(prime=3;prime*prime&lt;=n;prime=next[prime])
+        for(fact=prime;prime*fact&lt;=n;fact=next[fact])
+            for(mult=prime*fact;mult&lt;=n;mult*=prime)
+                   REMOVE(mult);
+    int k;
+    while (scanf(&quot;%d&quot;, &amp;k) != EOF &amp;&amp; k != 0)
+    {
+    	int l = k, r = k;
+    	if (!notprime[k])
+    	{
+    		printf(&quot;0\n&quot;);
+    		continue;
+    	}
+    	while (notprime[l])
+    		l--;
+    	while (notprime[r])
+    	    r++;
+    	printf(&quot;%d\n&quot;, r - l);
+    }
+    return 0;
+}</pre>
+</div>

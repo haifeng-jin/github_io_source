@@ -1,0 +1,194 @@
+---
+layout: post
+title: poj1185
+category: chinese
+---
+<p>状态压缩dp</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5897a8da-5380-4644-9232-bda7893b0704')"><img id="code_img_closed_5897a8da-5380-4644-9232-bda7893b0704" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5897a8da-5380-4644-9232-bda7893b0704" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5897a8da-5380-4644-9232-bda7893b0704',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5897a8da-5380-4644-9232-bda7893b0704" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;iostream&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_COL_NUM 15
+<span style="color: #0000ff;">#define</span> MAX_ROW_NUM 105
+<span style="color: #0000ff;">#define</span> MAX_STAT 2050
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Status
+{
+    </span><span style="color: #0000ff;">int</span> row_bit[<span style="color: #800080;">3</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> last_bit_count;
+}status[</span><span style="color: #800080;">100000</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> row_num, col_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> grid[MAX_ROW_NUM];
+</span><span style="color: #0000ff;">int</span> f[<span style="color: #800080;">3</span><span style="color: #000000;">][MAX_STAT][MAX_STAT];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ans;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> status_cnt;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;row_num, &amp;<span style="color: #000000;">col_num);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; row_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> row[MAX_COL_NUM];
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, row);
+        </span><span style="color: #0000ff;">int</span> row_bit = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; row[j]; j++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (row[j] == <span style="color: #800000;">'</span><span style="color: #800000;">H</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            {
+                row_bit </span>= (row_bit &lt;&lt; <span style="color: #800080;">1</span>) | <span style="color: #800080;">1</span><span style="color: #000000;">;
+            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            {
+                row_bit </span>= (row_bit &lt;&lt; <span style="color: #800080;">1</span>) | <span style="color: #800080;">0</span><span style="color: #000000;">;
+            }
+        }
+        grid[i] </span>=<span style="color: #000000;"> row_bit;
+    }
+}
+
+</span><span style="color: #0000ff;">int</span> count_bit(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">int</span> ret = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (a &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (a &amp; <span style="color: #800080;">1</span><span style="color: #000000;">)
+            ret</span>++<span style="color: #000000;">;
+        a </span>&gt;&gt;= <span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">bool</span> ok(<span style="color: #0000ff;">int</span><span style="color: #000000;"> bit)
+{
+    </span><span style="color: #0000ff;">while</span> (bit &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> ((bit &amp; <span style="color: #800080;">3</span>) == <span style="color: #800080;">3</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> ((bit &amp; <span style="color: #800080;">5</span>) == <span style="color: #800080;">5</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        bit </span>&gt;&gt;= <span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">bool</span> ok(<span style="color: #0000ff;">int</span> bit, <span style="color: #0000ff;">int</span><span style="color: #000000;"> row)
+{
+    </span><span style="color: #0000ff;">return</span> (bit &amp; grid[row]) == <span style="color: #800080;">0</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    memset(f, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(f));
+    </span><span style="color: #0000ff;">int</span> col_stat = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; col_num; i++<span style="color: #000000;">)
+        col_stat </span>*= <span style="color: #800080;">3</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; col_stat; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> i;
+        </span><span style="color: #0000ff;">int</span> row_bit[<span style="color: #800080;">3</span><span style="color: #000000;">];
+        row_bit[</span><span style="color: #800080;">1</span>] = row_bit[<span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; col_num; j++<span style="color: #000000;">)
+        {
+            row_bit[</span><span style="color: #800080;">0</span>] &lt;&lt;= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            row_bit[</span><span style="color: #800080;">1</span>] &lt;&lt;= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            row_bit[temp </span>% <span style="color: #800080;">3</span>] |= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            temp </span>/= <span style="color: #800080;">3</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">if</span> (!ok(row_bit[<span style="color: #800080;">0</span>], <span style="color: #800080;">0</span>) || !ok(row_bit[<span style="color: #800080;">1</span>], <span style="color: #800080;">1</span>) || !ok(row_bit[<span style="color: #800080;">0</span>]) || !ok(row_bit[<span style="color: #800080;">1</span><span style="color: #000000;">]))
+        {
+            f[</span><span style="color: #800080;">0</span>][row_bit[<span style="color: #800080;">0</span>]][row_bit[<span style="color: #800080;">1</span>]] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        }
+        f[</span><span style="color: #800080;">0</span>][row_bit[<span style="color: #800080;">0</span>]][row_bit[<span style="color: #800080;">1</span>]] = count_bit(row_bit[<span style="color: #800080;">0</span>]) + count_bit(row_bit[<span style="color: #800080;">1</span><span style="color: #000000;">]);
+        ans </span>= max(ans, f[<span style="color: #800080;">0</span>][row_bit[<span style="color: #800080;">0</span>]][row_bit[<span style="color: #800080;">1</span><span style="color: #000000;">]]);
+    }    
+
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make_stat()
+{
+    </span><span style="color: #0000ff;">int</span> col_stat = <span style="color: #800080;">1</span><span style="color: #000000;">;
+    status_cnt </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; col_num; i++<span style="color: #000000;">)
+        col_stat </span>*= <span style="color: #800080;">4</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; col_stat; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> i;
+        </span><span style="color: #0000ff;">int</span> row_bit[<span style="color: #800080;">4</span><span style="color: #000000;">];
+        row_bit[</span><span style="color: #800080;">2</span>] = row_bit[<span style="color: #800080;">1</span>] = row_bit[<span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; col_num; j++<span style="color: #000000;">)
+        {
+            row_bit[</span><span style="color: #800080;">0</span>] &lt;&lt;= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            row_bit[</span><span style="color: #800080;">1</span>] &lt;&lt;= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            row_bit[</span><span style="color: #800080;">2</span>] &lt;&lt;= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            row_bit[temp </span>% <span style="color: #800080;">4</span>] |= <span style="color: #800080;">1</span><span style="color: #000000;">;
+            temp </span>/= <span style="color: #800080;">4</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">bool</span> conflict = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; <span style="color: #800080;">3</span>; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">ok(row_bit[j]))
+            {
+                conflict </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            }
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (conflict)
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        status[status_cnt].last_bit_count </span>= count_bit(row_bit[<span style="color: #800080;">2</span><span style="color: #000000;">]);
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; <span style="color: #800080;">3</span>; j++<span style="color: #000000;">)
+            status[status_cnt].row_bit[j] </span>=<span style="color: #000000;"> row_bit[j];
+        status_cnt</span>++<span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; row_num - <span style="color: #800080;">2</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; status_cnt; j++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span> a = status[j].row_bit[<span style="color: #800080;">0</span><span style="color: #000000;">];
+            </span><span style="color: #0000ff;">int</span> b = status[j].row_bit[<span style="color: #800080;">1</span><span style="color: #000000;">];
+            </span><span style="color: #0000ff;">int</span> c = status[j].row_bit[<span style="color: #800080;">2</span><span style="color: #000000;">];
+            </span><span style="color: #0000ff;">bool</span> conflict = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> k = <span style="color: #800080;">0</span>; k &lt; <span style="color: #800080;">3</span>; k++<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">if</span> (!ok(status[j].row_bit[k], i +<span style="color: #000000;"> k))
+                {
+                    conflict </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+                    </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                }
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (conflict)
+                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+            f[(i </span>+ <span style="color: #800080;">1</span>) % <span style="color: #800080;">3</span>][b][c] = max(f[(i + <span style="color: #800080;">1</span>) % <span style="color: #800080;">3</span>][b][c], f[i % <span style="color: #800080;">3</span>][a][b] +<span style="color: #000000;"> status[j].last_bit_count);
+            ans </span>= max(ans, f[(i + <span style="color: #800080;">1</span>) % <span style="color: #800080;">3</span><span style="color: #000000;">][b][c]);
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    input();
+    </span><span style="color: #0000ff;">if</span> (row_num == <span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        ans </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; (<span style="color: #800080;">1</span> &lt;&lt; col_num); i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (ok(i) &amp;&amp; ok(i, <span style="color: #800080;">0</span><span style="color: #000000;">))
+                ans </span>=<span style="color: #000000;"> max(ans, count_bit(i));
+        }
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }
+    ans </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    init();
+    make_stat();
+    work();
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>

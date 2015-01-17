@@ -1,0 +1,103 @@
+---
+layout: post
+title: poj1111
+category: chinese
+---
+<p>bfs</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0c38c1f9-4c70-4b96-b454-14e5773b6764')"><img id="code_img_closed_0c38c1f9-4c70-4b96-b454-14e5773b6764" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0c38c1f9-4c70-4b96-b454-14e5773b6764" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0c38c1f9-4c70-4b96-b454-14e5773b6764',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_0c38c1f9-4c70-4b96-b454-14e5773b6764" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;queue&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> maxn 30
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Point
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> x, y;
+} s;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n, m;
+</span><span style="color: #0000ff;">int</span> dir[<span style="color: #800080;">8</span>][<span style="color: #800080;">2</span>] =<span style="color: #000000;">
+{
+{ </span><span style="color: #800080;">1</span>, <span style="color: #800080;">0</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">0</span>, <span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">1</span>, <span style="color: #800080;">0</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">0</span>, -<span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">1</span>, <span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">1</span>, <span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span><span style="color: #800080;">1</span>, -<span style="color: #800080;">1</span><span style="color: #000000;"> },
+{ </span>-<span style="color: #800080;">1</span>, -<span style="color: #800080;">1</span><span style="color: #000000;"> } };
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> map[maxn][maxn];
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> vis[maxn][maxn];
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, map[i]);
+}
+
+</span><span style="color: #0000ff;">bool</span> in_map(Point &amp;<span style="color: #000000;">a)
+{
+    </span><span style="color: #0000ff;">return</span> a.x &gt;= <span style="color: #800080;">0</span> &amp;&amp; a.y &gt;= <span style="color: #800080;">0</span> &amp;&amp; a.x &lt; n &amp;&amp; a.y &lt;<span style="color: #000000;"> m;
+}
+
+</span><span style="color: #0000ff;">int</span> cal(Point &amp;<span style="color: #000000;">a)
+{
+    </span><span style="color: #0000ff;">int</span> ret = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">4</span>; i++<span style="color: #000000;">)
+    {
+        Point b </span>=<span style="color: #000000;"> a;
+        b.x </span>+= dir[i][<span style="color: #800080;">0</span><span style="color: #000000;">];
+        b.y </span>+= dir[i][<span style="color: #800080;">1</span><span style="color: #000000;">];
+        </span><span style="color: #0000ff;">if</span> (!in_map(b) || map[b.x][b.y] == <span style="color: #800000;">'</span><span style="color: #800000;">.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            ret</span>++<span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> bfs()
+{
+    memset(vis, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vis));
+    queue</span>&lt;Point&gt;<span style="color: #000000;"> q;
+    q.push(s);
+    vis[s.x][s.y] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> ans =<span style="color: #000000;"> cal(s);
+    </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">q.empty())
+    {
+        Point a </span>=<span style="color: #000000;"> q.front();
+        q.pop();
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">8</span>; i++<span style="color: #000000;">)
+        {
+            Point b </span>=<span style="color: #000000;"> a;
+            b.x </span>+= dir[i][<span style="color: #800080;">0</span><span style="color: #000000;">];
+            b.y </span>+= dir[i][<span style="color: #800080;">1</span><span style="color: #000000;">];
+            </span><span style="color: #0000ff;">if</span> (in_map(b) &amp;&amp; map[b.x][b.y] == <span style="color: #800000;">'</span><span style="color: #800000;">X</span><span style="color: #800000;">'</span> &amp;&amp; !<span style="color: #000000;">vis[b.x][b.y])
+            {
+                q.push(b);
+                ans </span>+=<span style="color: #000000;"> cal(b);
+                vis[b.x][b.y] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+            }
+        }
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ans;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d%d</span><span style="color: #800000;">"</span>, &amp;n, &amp;m, &amp;s.x, &amp;s.y), n | m | s.x |<span style="color: #000000;"> s.y)
+    {
+        s.x</span>--<span style="color: #000000;">;
+        s.y</span>--<span style="color: #000000;">;
+        input();
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, bfs());
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

@@ -1,0 +1,108 @@
+---
+layout: post
+title: poj2349
+category: chinese
+---
+<p>最小生成树，克鲁斯卡尔</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('7afbe113-0ee4-4a6d-96d7-d76c81e6dcfb')"><img id="code_img_closed_7afbe113-0ee4-4a6d-96d7-d76c81e6dcfb" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_7afbe113-0ee4-4a6d-96d7-d76c81e6dcfb" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('7afbe113-0ee4-4a6d-96d7-d76c81e6dcfb',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_7afbe113-0ee4-4a6d-96d7-d76c81e6dcfb" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">poj2349</span>
+#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;<span style="color: #000000;">
+#include </span>&lt;queue&gt;<span style="color: #000000;">
+#include </span>&lt;cmath&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span>    <span style="color: #0000ff;">int</span>        maxp = <span style="color: #800080;">501</span>, maxdist = <span style="color: #800080;">20000</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;">
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        x, y;
+}point[maxp];
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> edge
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        v;
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;">    w;
+    edge(</span><span style="color: #0000ff;">double</span> w, <span style="color: #0000ff;">int</span><span style="color: #000000;"> v):w(w),v(v){}
+};
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">        s, p, lencount;
+</span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    vused[maxp];
+</span><span style="color: #0000ff;">double</span>    len[maxp *<span style="color: #000000;"> maxp], vdist[maxp];
+
+</span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span>&lt;<span style="color: #000000;">(edge a, edge b)
+{
+    </span><span style="color: #0000ff;">return</span> a.w &gt;<span style="color: #000000;"> b.w;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> init()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i;
+
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;s, &amp;<span style="color: #000000;">p);
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; p; i++<span style="color: #000000;">)
+    {
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d</span><span style="color: #800000;">"</span>, &amp;point[i].x, &amp;<span style="color: #000000;">point[i].y);
+        vdist[i] </span>=<span style="color: #000000;"> maxdist;
+    }
+    memset(vused, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(vused));
+    lencount </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">double</span> distance(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span><span style="color: #000000;"> b)
+{
+    </span><span style="color: #0000ff;">return</span> sqrt(<span style="color: #0000ff;">double</span>((point[a].x - point[b].x) * (point[a].x - point[b].x) + (point[a].y - point[b].y) * (point[a].y -<span style="color: #000000;"> point[b].y)));
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> maketree()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, ncount;
+    edge    temp(</span><span style="color: #800080;">0</span>, <span style="color: #800080;">0</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">double</span><span style="color: #000000;">    dis;
+
+    priority_queue</span>&lt;edge&gt;<span style="color: #000000;"> pq;
+    vdist[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    vused[</span><span style="color: #800080;">0</span>] = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+    ncount </span>= <span style="color: #800080;">1</span><span style="color: #000000;">;
+    pq.push(edge(</span><span style="color: #800080;">0</span>, <span style="color: #800080;">0</span><span style="color: #000000;">));
+    </span><span style="color: #0000ff;">while</span> (ncount &lt;=<span style="color: #000000;"> p)
+    {
+        </span><span style="color: #0000ff;">do</span><span style="color: #000000;">
+        {
+            temp </span>=<span style="color: #000000;"> pq.top();
+            pq.pop();
+        }</span><span style="color: #0000ff;">while</span> (vused[temp.v] &amp;&amp; !<span style="color: #000000;">pq.empty());
+        len[lencount</span>++] =<span style="color: #000000;"> temp.w;
+        vused[temp.v] </span>= <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        ncount</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; p; i++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">vused[i])
+            {
+                dis </span>=<span style="color: #000000;"> distance(temp.v, i);
+                </span><span style="color: #0000ff;">if</span> (dis &lt;<span style="color: #000000;"> vdist[i])
+                {
+                    vdist[i] </span>=<span style="color: #000000;"> dis;
+                    pq.push(edge(dis, i));
+                }
+            }
+    }
+    sort(len, len </span>+<span style="color: #000000;"> lencount);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%.2f\n</span><span style="color: #800000;">"</span>, len[p -<span style="color: #000000;"> s]);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        t;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        init();
+        maketree();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

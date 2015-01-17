@@ -1,0 +1,87 @@
+---
+layout: post
+title: poj1016
+category: chinese
+---
+<p>模拟</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('022ec88a-d281-4ae1-a3a6-1dc281104583')"><img id="code_img_closed_022ec88a-d281-4ae1-a3a6-1dc281104583" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_022ec88a-d281-4ae1-a3a6-1dc281104583" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('022ec88a-d281-4ae1-a3a6-1dc281104583',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_022ec88a-d281-4ae1-a3a6-1dc281104583" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;<span style="color: #0000ff;">string</span>&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">string</span><span style="color: #000000;">    origin;
+
+</span><span style="color: #0000ff;">string</span>    tostring(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    ans, l;
+    
+    ans </span>= <span style="color: #800000;">""</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (a)
+    {
+        l </span>= <span style="color: #800000;">""</span><span style="color: #000000;">;
+        l </span>+= a % <span style="color: #800080;">10</span> + <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+        ans.insert(</span><span style="color: #800080;">0</span><span style="color: #000000;">, l);
+        a </span>/= <span style="color: #800080;">10</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ans;
+}
+
+</span><span style="color: #0000ff;">string</span> make(<span style="color: #0000ff;">string</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">int</span>        i, times[<span style="color: #800080;">10</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">string</span><span style="color: #000000;">    ans;
+
+    memset(times, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(times));
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; a.length(); i++<span style="color: #000000;">)
+        times[a[i] </span>- <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span>]++<span style="color: #000000;">;
+    ans </span>= <span style="color: #800000;">""</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">0</span>; i &lt; <span style="color: #800080;">10</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">times[i])
+            </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+        ans </span>+=<span style="color: #000000;"> tostring(times[i]);
+        ans </span>+= i + <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ans;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">string</span>    trans[<span style="color: #800080;">20</span><span style="color: #000000;">];
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">        i, j;
+    
+    trans[</span><span style="color: #800080;">0</span>] =<span style="color: #000000;"> origin;
+    </span><span style="color: #0000ff;">for</span> (i = <span style="color: #800080;">1</span>; i &lt;= <span style="color: #800080;">15</span>; i++<span style="color: #000000;">)
+    {
+        trans[i] </span>= make(trans[i - <span style="color: #800080;">1</span><span style="color: #000000;">]);
+        </span><span style="color: #0000ff;">if</span> (trans[i] == trans[i - <span style="color: #800080;">1</span><span style="color: #000000;">])
+        {
+            </span><span style="color: #0000ff;">if</span> (i == <span style="color: #800080;">1</span><span style="color: #000000;">)
+                cout </span>&lt;&lt; origin &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;"> is self-inventorying\n</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                cout </span>&lt;&lt; origin &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;"> is self-inventorying after </span><span style="color: #800000;">"</span> &lt;&lt; i - <span style="color: #800080;">1</span> &lt;&lt;<span style="color: #800000;">"</span><span style="color: #800000;"> steps\n</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">for</span> (j = <span style="color: #800080;">0</span>; j &lt; i - <span style="color: #800080;">1</span>; j++<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> (trans[i] ==<span style="color: #000000;"> trans[j])
+            {
+                cout </span>&lt;&lt; origin &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;"> enters an inventory loop of length </span><span style="color: #800000;">"</span> &lt;&lt; i - j &lt;&lt;<span style="color: #000000;"> endl;
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+            }
+    }
+    cout </span>&lt;&lt; origin &lt;&lt; <span style="color: #800000;">"</span><span style="color: #800000;"> can not be classified after 15 iterations\n</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (cin &gt;&gt; origin &amp;&amp; origin != <span style="color: #800000;">"</span><span style="color: #800000;">-1</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+    {
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>
+<p>&nbsp;</p>

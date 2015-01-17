@@ -1,0 +1,111 @@
+---
+layout: post
+title: poj2250
+category: chinese
+---
+<p>dp，最长公共子序列变形</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2dd2d6e2-1bcd-40e3-84c0-0449acad09f0')"><img id="code_img_closed_2dd2d6e2-1bcd-40e3-84c0-0449acad09f0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2dd2d6e2-1bcd-40e3-84c0-0449acad09f0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2dd2d6e2-1bcd-40e3-84c0-0449acad09f0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_2dd2d6e2-1bcd-40e3-84c0-0449acad09f0" class="cnblogs_code_hide">
+<pre>#include &lt;iostream&gt;<span style="color: #000000;">
+#include </span>&lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstdlib&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">int</span> maxn = <span style="color: #800080;">105</span>, maxl = <span style="color: #800080;">45</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> text1[maxn], text2[maxn], len1, len2;
+</span><span style="color: #0000ff;">char</span> dic[maxn * <span style="color: #800080;">2</span><span style="color: #000000;">][maxl];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> tot;
+</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> first[maxl];
+</span><span style="color: #0000ff;">int</span> f[maxn][maxn], <span style="color: #0000ff;">from</span><span style="color: #000000;">[maxn][maxn];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> stk[maxn];
+
+</span><span style="color: #0000ff;">int</span> getid(<span style="color: #0000ff;">char</span> *<span style="color: #000000;">word)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; tot; i++<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> (strcmp(dic[i], word) == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> i;
+    strcpy(dic[tot</span>++<span style="color: #000000;">], word);
+    </span><span style="color: #0000ff;">return</span> tot - <span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> input(<span style="color: #0000ff;">int</span> text[], <span style="color: #0000ff;">int</span> &amp;<span style="color: #000000;">len)
+{
+    </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> word[maxl];
+    </span><span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span><span style="color: #000000;">;
+
+    strcpy(word, first);
+    </span><span style="color: #0000ff;">while</span> (strcmp(word, <span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span><span style="color: #000000;">))
+    {
+        text[i</span>++] =<span style="color: #000000;"> getid(word);
+</span><span style="color: #008000;">//</span><span style="color: #008000;">        printf("%d %d\n", i - 1, text[i - 1]);</span>
+        scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, word);
+    }
+    len </span>= i - <span style="color: #800080;">1</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= len1; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">1</span>; j &lt;= len2; j++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">if</span> (f[i - <span style="color: #800080;">1</span>][j] &gt; f[i][j - <span style="color: #800080;">1</span><span style="color: #000000;">])
+            {
+                </span><span style="color: #0000ff;">from</span>[i][j] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+                f[i][j] </span>= f[i - <span style="color: #800080;">1</span><span style="color: #000000;">][j];
+            }
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+            {
+                </span><span style="color: #0000ff;">from</span>[i][j] = <span style="color: #800080;">1</span><span style="color: #000000;">;
+                f[i][j] </span>= f[i][j - <span style="color: #800080;">1</span><span style="color: #000000;">];
+            }
+            </span><span style="color: #0000ff;">if</span> (text1[i] == text2[j] &amp;&amp; f[i][j] &lt; f[i - <span style="color: #800080;">1</span>][j - <span style="color: #800080;">1</span>] + <span style="color: #800080;">1</span><span style="color: #000000;">)
+            {
+                f[i][j] </span>= f[i - <span style="color: #800080;">1</span>][j - <span style="color: #800080;">1</span>] + <span style="color: #800080;">1</span><span style="color: #000000;">;
+                </span><span style="color: #0000ff;">from</span>[i][j] = <span style="color: #800080;">2</span><span style="color: #000000;">;
+            }
+</span><span style="color: #008000;">//</span><span style="color: #008000;">            printf("%d %d %d\n", i, j, f[i][j]);</span>
+<span style="color: #000000;">        }
+    }
+
+    </span><span style="color: #0000ff;">int</span> a = len1, b =<span style="color: #000000;"> len2;
+    </span><span style="color: #0000ff;">int</span> rear = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (a &amp;&amp;<span style="color: #000000;"> b)
+    {
+        </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">from</span>[a][b] == <span style="color: #800080;">0</span><span style="color: #000000;">)
+            a</span>--<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">from</span>[a][b] == <span style="color: #800080;">1</span><span style="color: #000000;">)
+            b</span>--<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+        {
+            stk[rear</span>++] =<span style="color: #000000;"> text1[a];
+            a</span>--<span style="color: #000000;">;
+            b</span>--<span style="color: #000000;">;
+        }
+    }
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">    printf("%d %d %d\n", rear, len1, len2);</span>
+    printf(<span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span>, dic[stk[rear - <span style="color: #800080;">1</span><span style="color: #000000;">]]);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = rear - <span style="color: #800080;">2</span>; i &gt;= <span style="color: #800080;">0</span>; i--<span style="color: #000000;">)
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;"> %s</span><span style="color: #800000;">"</span><span style="color: #000000;">, dic[stk[i]]);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span>
+    <span style="color: #0000ff;">while</span> (~scanf(<span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, first))
+    {
+        memset(f, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(f));
+        tot </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        input(text1, len1);
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s</span><span style="color: #800000;">"</span><span style="color: #000000;">, first);
+        input(text2, len2);
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+</div>

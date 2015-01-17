@@ -1,0 +1,58 @@
+---
+layout: post
+title: poj1976
+category: chinese
+---
+<p>dp</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2019c5df-8e65-4998-b02e-bb16d3b6f0de')"><img id="code_img_closed_2019c5df-8e65-4998-b02e-bb16d3b6f0de" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2019c5df-8e65-4998-b02e-bb16d3b6f0de" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2019c5df-8e65-4998-b02e-bb16d3b6f0de',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2019c5df-8e65-4998-b02e-bb16d3b6f0de" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;cstring&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+</span><span style="color: #0000ff;">#define</span> MAX_COACH_NUM 50005
+
+<span style="color: #0000ff;">int</span><span style="color: #000000;"> coach_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> coach[MAX_COACH_NUM];
+</span><span style="color: #0000ff;">int</span> f[<span style="color: #800080;">4</span><span style="color: #000000;">][MAX_COACH_NUM];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> sum[MAX_COACH_NUM];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> min_loco;
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">coach_num);
+    coach[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= coach_num; i++<span style="color: #000000;">)
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">coach[i]);
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">min_loco);
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> work()
+{
+    memset(f, </span><span style="color: #800080;">0</span>, <span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(f));
+    sum[</span><span style="color: #800080;">0</span>] = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= coach_num; i++<span style="color: #000000;">)
+        sum[i] </span>= sum[i - <span style="color: #800080;">1</span>] +<span style="color: #000000;"> coach[i];
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt;= <span style="color: #800080;">3</span>; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = coach_num - i * min_loco + <span style="color: #800080;">1</span>; j &gt; <span style="color: #800080;">0</span>; j--<span style="color: #000000;">)
+            f[i][j] </span>= max(f[i][j + <span style="color: #800080;">1</span>], f[i - <span style="color: #800080;">1</span>][j + min_loco] + sum[j + min_loco - <span style="color: #800080;">1</span>] - sum[j - <span style="color: #800080;">1</span><span style="color: #000000;">]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d\n</span><span style="color: #800000;">"</span>, f[<span style="color: #800080;">3</span>][<span style="color: #800080;">1</span><span style="color: #000000;">]);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> t;
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">t);
+    </span><span style="color: #0000ff;">while</span> (t--<span style="color: #000000;">)
+    {
+        input();
+        work();
+    }
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>
