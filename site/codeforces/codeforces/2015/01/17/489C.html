@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>425B</title>
+    <title>489C</title>
 
     <!-- Bootstrap Core  -->
     <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
@@ -107,17 +107,15 @@ document.getElementsByName("search-key-words")[0].value=""}
 
                 <!-- Title -->
 		
-                <h1>425B</h1>
+                <h1>489C</h1>
                 <hr>
 
                 <!-- Date/Time -->
-		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 12 Dec 2014</span>
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 17 Jan 2015</span>
 
 		<div class="pull-right">
 			
-			<span class="label label-default">greedy</span>
-			
-			<span class="label label-default">enumeration</span>
+			<span class="label label-default">network flow</span>
 			
 		</div>
 
@@ -129,29 +127,24 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 <h3 id="description">Description</h3>
 <p><br />
-A matrix with <script type="math/tex">n</script> rows and <script type="math/tex">m</script> columns consists of 1s and 0s.
-(<script type="math/tex">1\leq n,m \leq 100</script>)
-We are asked to change the matrix with less than <script type="math/tex">k</script> operations.
-(<script type="math/tex">1\leq k \leq 10</script>)
-After the change, every connected region is a rectangle.
-Output the minimal number of operations needed.
+Given two set of integers. Totally, <script type="math/tex">n</script> integers.
+There are <script type="math/tex">m</script> edges connecting some integers from one set to the other.
+($$1 \leq n,m \leq 100)</p>
+
+<p>One operation could reduce two integers which have a edge between them by a common factor.
+Output the maximum number of operations could be performed.
 <br /></p>
 
 <h3 id="tutorial">Tutorial</h3>
 <p><br />
-The final matrix must look like a chess board but with rectangles of 1s and 0s instead of squares of black and white.
-So there is a vector <script type="math/tex">x</script> has <script type="math/tex">n</script> values can serve as a pattern of each column.
-Every column either the same as <script type="math/tex">x</script> or different with <script type="math/tex">x</script> in every value.
-If we found <script type="math/tex">x</script>, we can easily use greedy to decide how many operations we need to change each column into <script type="math/tex">x</script> or its counter part.</p>
+It is easy to know that each operation should use a prime factor, so that the answer could be maximized.
+For each prime number which is a factor of any of the integer in the set, we perform a maxflow.
+Each integer is a vertex in the network flow graph.</p>
 
-<p>Posit <script type="math/tex">n \leq m</script>.
-There are two situations.
-The first is <script type="math/tex">n > k</script>, which means some columns cannot be modified, since <script type="math/tex">m > k</script> (because <script type="math/tex">n \leq m</script> and <script type="math/tex">n > k</script>).
-If we modify each column, we must use more than <script type="math/tex">k</script> operations which is not allowed.
-So we just enumerate each column as <script type="math/tex">x</script> and calculate the answer.</p>
+<p>In the time of prime <script type="math/tex">p</script>, we add edges from the source to the integers in the first set with capacity of the number of <script type="math/tex">p</script>s that the integer contains.
+Likely, we add edges from the integers in the second set to the terminal.</p>
 
-<p>The second situation is <script type="math/tex">n \leq k</script>.
-Since <script type="math/tex">k \leq 10</script>, we can just enumerate all the possible <script type="math/tex">x</script> with <script type="math/tex">O(2^n)</script>, and use the same method to calculate the answer.
+<p>Finally, we add up each maxflow which is the answer of the problem.
 <br /></p>
 
 <h3 id="solution">Solution</h3>
@@ -159,96 +152,150 @@ Since <script type="math/tex">k \leq 10</script>, we can just enumerate all the 
 
 <pre><code>#include &lt;cstdio&gt;
 #include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#include &lt;set&gt;
 using namespace std;
 
-const int MAX_N = 110;
-const int MAX_M = 110;
+const int MAX_N = 105;
 
-int n, m, opr_num;
-int f[MAX_N][MAX_M];
-int vec[MAX_N];
+#define REP(i,n) for((i)=0;(i)&lt;(int)(n);(i)++)
+#define snuke(c,itr) for(__typeof((c).begin()) itr=(c).begin();itr!=(c).end();itr++)
 
-void make(int bits)
-{
-	int i = 0;
-	while (bits)
-	{
-		vec[i++] = bits &amp; 1;
-		bits &gt;&gt;= 1;
+typedef int F;
+#define F_INF (1&lt;&lt;29)
+#define MAXV 1000
+#define MAXE 1000 // E*2!
+
+F cap[MAXE],flow[MAXE];
+int to[MAXE],_prev[MAXE],last[MAXV],used[MAXV],level[MAXV];
+
+struct MaxFlow{
+    int V,E;
+
+    MaxFlow(int n){
+	int i;
+	V = n; E = 0;
+	REP(i,V) last[i] = -1;
+    }
+
+    void add_edge(int x, int y, F f){
+	cap[E] = f; flow[E] = 0; to[E] = y; _prev[E] = last[x]; last[x] = E; E++;
+	cap[E] = 0; flow[E] = 0; to[E] = x; _prev[E] = last[y]; last[y] = E; E++;
+    }
+
+    bool bfs(int s, int t){
+	int i;
+	REP(i,V) level[i] = -1;
+	queue &lt;int&gt; q;
+	q.push(s); level[s] = 0;
+	while(!q.empty()){
+	    int x = q.front(); q.pop();
+	    for(i=last[x];i&gt;=0;i=_prev[i]) if(level[to[i]] == -1 &amp;&amp; cap[i] &gt; flow[i]) {q.push(to[i]); level[to[i]] = level[x] + 1;}
 	}
-}
+	return (level[t] != -1);
+    }
 
-int work()
-{
-	int ret = 0;
-	for (int i = 0; i &lt; m; i++)
-	{
-		int same = 0;
-		int diff = 0;
-		for (int j = 0; j &lt; n; j++)
-		{
-			if (vec[j] == f[j][i])
-			{
-				same++;
-			}else
-			{
-				diff++;
-			}
-		}
-		ret += min(same, diff);
+    F dfs(int v, int t, F f){
+	int i;
+	if(v == t) return f;
+	for(i=used[v];i&gt;=0;used[v]=i=_prev[i]) if(level[to[i]] &gt; level[v] &amp;&amp; cap[i] &gt; flow[i]){
+	    F tmp = dfs(to[i],t,min(f,cap[i]-flow[i]));
+	    if(tmp &gt; 0) {flow[i] += tmp; flow[i^1] -= tmp; return tmp;}
 	}
-	return ret;
-}
+	return 0;
+    }
+
+    F maxflow(int s, int t){
+	int i;
+	while(bfs(s,t)){
+	    REP(i,V) used[i] = last[i];
+	    while(dfs(s,t,F_INF) != 0);
+	}
+	F ans = 0;
+	for(i=last[s];i&gt;=0;i=_prev[i]) ans += flow[i];
+	return ans;
+    }
+
+};
+
+int n, m;
+int f[MAX_N];
+int odd[MAX_N], even[MAX_N];
 
 int main()
 {
 	//input
-	scanf("%d%d%d", &amp;n, &amp;m, &amp;opr_num);
+	scanf("%d%d", &amp;n, &amp;m);
 	for (int i = 0; i &lt; n; i++)
 	{
-		for (int j = 0; j &lt; m; j++)
-		{
-			if (m &gt; n)
-			{
-				scanf("%d", &amp;f[i][j]);
-			}else
-			{
-				scanf("%d", &amp;f[j][i]);
-			}
-		}
+		scanf("%d", f + i);
 	}
-	if (n &gt; m)
+	for (int i = 0; i &lt; m; i++)
 	{
-		swap(m, n);
+		int a, b;
+		scanf("%d%d", &amp;a, &amp;b);
+		a--;
+		b--;
+		if (b &amp; 1)
+		{
+			swap(a, b);
+		}
+		odd[i] = a;
+		even[i] = b;
 	}
 
 	//work
-	int ans = n * m;
-	if (n &lt;= opr_num)
+	set&lt;int&gt; s;
+	for (int i = 0; i &lt; n; i++)
 	{
-		for (int i = 0; i &lt; (1 &lt;&lt; n); i++)
+		int temp = f[i];
+		for (int j = 2; j * j &lt;= temp; j++)
 		{
-			make(i);
-			ans = min(ans, work());
+			if (temp % j == 0)
+			{
+				s.insert(j);
+			}
+			while (temp % j == 0)
+			{
+				temp /= j;
+			}
 		}
-	}else
+		if (temp &gt; 1)
+		{
+			s.insert(temp);
+		}
+	}
+
+	//flow
+	int ans = 0;
+	for (typeof(s.begin()) itr = s.begin(); itr != s.end(); itr++)
 	{
+		int factor = *itr;
+		MaxFlow net = MaxFlow(n + 2);
+		for (int i = 0; i &lt; n; i++)
+		{
+			int cnt = 0;
+			int temp = f[i];
+			while (temp % factor == 0)
+			{
+				temp /= factor;
+				cnt++;
+			}
+			if (i &amp; 1)
+			{
+				net.add_edge(n, i, cnt);
+			}else
+			{
+				net.add_edge(i, n + 1, cnt);
+			}
+		}
 		for (int i = 0; i &lt; m; i++)
 		{
-			for (int j = 0; j &lt; n; j++)
-			{
-				vec[j] = f[j][i];
-			}
-			ans = min(ans, work());
+			net.add_edge(odd[i], even[i], F_INF);
 		}
+		ans += net.maxflow(n, n + 1);
 	}
-	if (ans &gt; opr_num)
-	{
-		puts("-1");
-	}else
-	{
-		printf("%d\n", ans);
-	}
+	printf("%d\n", ans);
 	return 0;
 }
 </code></pre>
