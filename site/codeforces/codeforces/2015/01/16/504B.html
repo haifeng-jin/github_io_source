@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>446B</title>
+    <title>504B</title>
 
     <!-- Bootstrap Core  -->
     <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
@@ -107,17 +107,19 @@ document.getElementsByName("search-key-words")[0].value=""}
 
                 <!-- Title -->
 		
-                <h1>446B</h1>
+                <h1>504B</h1>
                 <hr>
 
                 <!-- Date/Time -->
-		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 07 Dec 2014</span>
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 16 Jan 2015</span>
 
 		<div class="pull-right">
 			
-			<span class="label label-default">brute force</span>
+			<span class="label label-default">combinatorial mathematics</span>
 			
-			<span class="label label-default">greedy</span>
+			<span class="label label-default">data structures</span>
+			
+			<span class="label label-default">binary indexed tree</span>
 			
 		</div>
 
@@ -127,95 +129,151 @@ document.getElementsByName("search-key-words")[0].value=""}
 		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
+<h3 id="description">Description</h3>
+<p><br />
+Give you two permutations of <script type="math/tex">n</script> integers of <script type="math/tex">0</script> to <script type="math/tex">n - 1</script>.
+(<script type="math/tex">1 \leq n \leq 2\times 10^5</script>).
+Posit they are the <script type="math/tex">a</script>th and <script type="math/tex">b</script>th permutation.
+Output the <script type="math/tex">(a + b) \% n</script>th permutation.
+<br /></p>
+
+<h3 id="tutorial">Tutorial</h3>
+<p><br />
+With the thought of dynamic programming, we can come up with the formula of calculating the rank of a permutation, which is as follows.
+<script type="math/tex">rank = \sum\limits_{i=1}^{n}{less(p_i) \times (n - i)!}</script>.
+<script type="math/tex">p_i</script> is the <script type="math/tex">i</script>th number in the permutation.
+<script type="math/tex">less(p_i)</script> means the number of <script type="math/tex">p_j</script> which is less than <script type="math/tex">p_i</script> and <script type="math/tex">j</script> is greater than <script type="math/tex">i</script>, which can be calculated by binary indexed tree.
+With this formula we can calculate <script type="math/tex">a+b</script> like we add two big integers.
+<script type="math/tex">less(p_i)</script>s are the digits of the big integers.
+We need to do the carry bit.&lt;/p&gt;</p>
+
+<p>After that we have the <script type="math/tex">a+b</script> and we need to transform it back to the <script type="math/tex">a + b</script>th permutation,
+which can be done by binary indexed tree and binary search.</p>
+<p><br /></p>
+
 <h3 id="solution">Solution</h3>
 <p><br /></p>
 
-<pre><code>#include &lt;cstdlib&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
+<pre><code>#include &lt;cstdio&gt;
 #include &lt;algorithm&gt;
-#include &lt;queue&gt;
 using namespace std;
 
-#define MAX_ROW_NUM 1005
-#define MAX_COL_NUM MAX_ROW_NUM
 #define D(x) 
-#define MAX_K 1000005
 
-int row_num, col_num;
-int operation_num;
-int decrease_value;
-int matrix[MAX_ROW_NUM][MAX_COL_NUM];
-int row_sum[MAX_ROW_NUM];
-int col_sum[MAX_COL_NUM];
-long long row_ans[MAX_K];
-long long col_ans[MAX_K];
+const int MAX_N = (int)(1e5) * 2 + 10;
 
-void input()
+int n;
+int a[MAX_N];
+int b[MAX_N];
+int sum_b[MAX_N];
+int sum_a[MAX_N];
+int c[MAX_N];
+int sum_c[MAX_N];
+
+int binary_indexed_tree[MAX_N];
+
+int low_bit(int x)
 {
-	scanf("%d%d", &amp;row_num, &amp;col_num);
-	scanf("%d%d", &amp;operation_num, &amp;decrease_value);
-	for (int i = 0; i &lt; row_num; i++)
+	return x &amp; (-x);
+}
+
+void add(int pos, int val)
+{
+	for (int i = pos; i &lt; MAX_N; i += low_bit(i))
 	{
-		for (int j = 0; j &lt; col_num; j++)
-		{
-			int a;
-			scanf("%d", &amp;a);
-			matrix[i][j] = a;
-			row_sum[i] += a;
-			col_sum[j] += a;
-		}
+		binary_indexed_tree[i] += val;
 	}
 }
 
-void make(priority_queue&lt;int&gt; &amp;pq, int multi)
+int sum(int pos)
 {
-	int top = pq.top();
-	pq.pop();
-	top -= decrease_value * multi;
-	pq.push(top);
-}
-
-long long work()
-{
-	priority_queue&lt;int&gt; pq_row;
-	priority_queue&lt;int&gt; pq_col;
-	for (int i = 0; i &lt; row_num; i++)
+	int ret = 0;
+	for (int i = pos; i &gt; 0; i -= low_bit(i))
 	{
-		pq_row.push(row_sum[i]);
-	}
-	for (int i = 0; i &lt; col_num; i++)
-	{
-		pq_col.push(col_sum[i]);
-	}
-	col_ans[0] = row_ans[0] = 0;
-	for (int i = 1; i &lt;= operation_num; i++)
-	{
-		row_ans[i] = pq_row.top() + row_ans[i - 1];
-		make(pq_row, col_num);
-	}
-	for (int i = 1; i &lt;= operation_num; i++)
-	{
-		col_ans[i] = pq_col.top() + col_ans[i - 1];
-		make(pq_col, row_num);
-	}
-	long long ret = -(1LL &lt;&lt; 50);
-	for (int i = 0; i &lt;= operation_num; i++)
-	{
-		long long temp = col_ans[i] + row_ans[operation_num - i];
-		long long total_decrease = decrease_value;
-		total_decrease *= i;
-		total_decrease *= operation_num - i;
-		temp -= total_decrease;
-		ret = max(ret, temp);
+		ret += binary_indexed_tree[i];
 	}
 	return ret;
 }
 
+void input(int a[])
+{
+	for (int i = 1; i &lt;= n; i++)
+	{
+		scanf("%d", &amp;a[i]);
+		a[i]++;
+	}
+}
+
+void work(int sum_a[], int a[])
+{
+	fill(binary_indexed_tree, binary_indexed_tree + n + 1, 0);
+	for (int i = n; i; i--)
+	{
+		sum_a[i] = sum(a[i]);
+		add(a[i], 1);
+	}
+}
+
+bool ok(int mid, int a)
+{
+	return sum(mid) &gt;= a;
+}
+
+int binary_search(int start, int end, int a)
+{
+	int l = start;
+	int r = end;
+	while (l &lt; r)
+	{
+		int mid = (l + r) / 2;
+		if (ok(mid, a))
+			r = mid;
+		else
+			l = mid + 1;
+	}
+	return l;
+}
+
 int main()
 {
-	input();
-	printf("%I64d\n", work());
+	//input
+	scanf("%d", &amp;n);
+	input(a);
+	input(b);
+
+	//work
+	work(sum_a, a);
+	work(sum_b, b);
+	for (int i = 1; i &lt;= n; i++)
+	{
+		sum_c[i] = sum_a[i] + sum_b[i];
+	}
+	for (int i = n; i; i--)
+	{
+		if (sum_c[i] &gt; n - i)
+		{
+			sum_c[i] -= n - i + 1;
+			sum_c[i - 1] += 1;
+		}
+	}
+	fill(binary_indexed_tree, binary_indexed_tree + n + 1, 0);
+	for (int i = 1; i &lt;= n; i++)
+		add(i, 1);
+	for (int i = 1; i &lt;= n; i++)
+	{
+		c[i] = binary_search(1, n, sum_c[i] + 1);
+		add(c[i], -1);
+	}
+	D(for (int i = 1; i &lt;4; i++) printf("%d\n", sum_c[i]));
+
+	//output
+	for (int i = 1; i &lt;= n; i++)
+	{
+		printf("%d", c[i] - 1);
+		if (i != n)
+			putchar(' ');
+	}
+	puts("");
 	return 0;
 }
 </code></pre>
