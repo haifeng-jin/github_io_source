@@ -2,5 +2,5 @@ baseurl: .
 paginate: 20
 paginate_path: "/page:num/"
 markdown: kramdown
-cf_num: 31
+cf_num: 32
 rooturl: ..

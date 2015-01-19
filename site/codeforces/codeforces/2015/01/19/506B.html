@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>388B</title>
+    <title>506B</title>
 
     <!-- Bootstrap Core  -->
     <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
@@ -107,15 +107,17 @@ document.getElementsByName("search-key-words")[0].value=""}
 
                 <!-- Title -->
 		
-                <h1>388B</h1>
+                <h1>506B</h1>
                 <hr>
 
                 <!-- Date/Time -->
-		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 22 Dec 2014</span>
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 19 Jan 2015</span>
 
 		<div class="pull-right">
 			
-			<span class="label label-default">constructive algorithms</span>
+			<span class="label label-default">dsu</span>
+			
+			<span class="label label-default">graphs</span>
 			
 		</div>
 
@@ -125,74 +127,151 @@ document.getElementsByName("search-key-words")[0].value=""}
 		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
+<h3 id="description">Description</h3>
+<p><br />
+There are <script type="math/tex">n</script> vertexes in the graph.
+Now we need to add some unidirected edges to it.
+To make sure that we can go from <script type="math/tex">a</script> to <script type="math/tex">b</script> in each pair <script type="math/tex">(a,b)</script> among the <script type="math/tex">m</script> pairs given below.
+(<script type="math/tex">1 \leq n,m \leq 10^5</script>)
+Output the minimum number of edges to be added.
+<br /></p>
+
+<h3 id="tutorial">Tutorial</h3>
+<p><br />
+First we add all the edges and use Disjoint Set Union to see the connected components.
+In a component without circles, we can construct the edges like this.
+We arrange all the points in a line, and connect them into a chain.
+There must exist a chain can fulfill the condition in the description.</p>
+
+<p>For those component contain circles, we just form a big circle which every vertex can go to every vertex.</p>
+
+<p>Topological order can be used for circle detection.
+If after the BFS, there still some vertex’s degree is not zero, it must contain cricle.
+<br /></p>
+
 <h3 id="solution">Solution</h3>
 <p><br /></p>
 
 <pre><code>#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
 using namespace std;
 
-#define D(x) 
+#define D(x) x
 
-const int MAX_N = 100;
+const int MAX_N = (int)(1e5) + 10;
 
-int num;
-bool ans[MAX_N][MAX_N];
-
-void connect(int a, int b)
+struct DSU
 {
-	ans[a][b] = ans[b][a] = true;
+	int father[MAX_N];
+
+	DSU()
+	{}
+
+	DSU(int n)
+	{
+		for (int i = 0; i &lt; n; i++)
+		{
+			father[i] = i;
+		}
+	}
+
+	int find(int a)
+	{
+		int ret = a;
+		while (father[ret] != ret)
+			ret = father[ret];
+		while (father[a] != a)
+		{
+			int b = a;
+			a = father[a];
+			father[b] = ret;
+		}
+		return ret;
+	}
+
+	void merge(int a, int b)
+	{
+		father[find(a)] = father[find(b)];
+	}
+};
+
+
+int n, m;
+bool circle[MAX_N];
+vector&lt;int&gt; edge[MAX_N];
+int degree[MAX_N];
+
+void add_edge(int a, int b)
+{
+	edge[a].push_back(b);
+	degree[b]++;
+}
+
+void bfs(int node_num, vector&lt;int&gt; edge[])
+{
+	//indexes start from 0
+	queue&lt;int&gt; q;
+	for (int i = 0; i &lt; node_num; i++)
+	{
+		if (degree[i] == 0)
+		{
+			q.push(i);
+		}
+	}
+	while (!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		//push u into an array to get the topological order sequence
+		for (int i = 0; i &lt; (int)edge[u].size(); i++)
+		{
+			int v = edge[u][i];
+			if (degree[v] == 0)
+			{
+				continue;
+			}
+			degree[v]--;
+			if (degree[v] == 0)
+			{
+				q.push(v);
+			}
+		}
+	}
+	//if degree[i] != 0 now, it means there is a circle on the connected component with vertex i.
 }
 
 int main()
 {
-	//init
-	connect(1, 3);
-	connect(1, 4);
-	for (int i = 1; i &lt; 30; i++)
-	{
-		connect(i * 2 + 1, i * 2 + 3);
-		connect(i * 2 + 1, i * 2 + 4);
-		connect(i * 2 + 2, i * 2 + 3);
-		connect(i * 2 + 2, i * 2 + 4);
-	}
-	for (int i = 1; i &lt;= 30; i++)
-	{
-		connect(62 + i, 63 + i);
-	}
-	connect(93, 2);
-
 	//input
-	scanf("%d", &amp;num);
-
-	//work
-	int temp = 0;
-	while (num &gt; 0)
+	scanf("%d%d", &amp;n, &amp;m);
+	DSU dsu = DSU(n);
+	for (int i = 0; i &lt; m; i++)
 	{
-		if (num &amp; 1)
-		{
-			connect(temp * 2 + 1, 63 + temp);
-			if (temp != 0)
-			{
-				connect(temp * 2 + 2, 63 + temp);
-			}
-		}
-		temp++;
-		num &gt;&gt;= 1;
+		int a, b;
+		scanf("%d%d", &amp;a, &amp;b);
+		a--;
+		b--;
+		add_edge(a, b);
+		dsu.merge(a, b);
 	}
-
-	//output
-	printf("%d\n", 93);
-	for (int i = 1; i &lt;= 93; i++)
+	bfs(n, edge);
+	for (int i = 0; i &lt; n; i++)
 	{
-		for (int j = 1; j &lt;= 93; j++)
+		if (degree[i])
 		{
-			if (ans[i][j])
-				putchar('Y');
-			else
-				putchar('N');
+			circle[dsu.find(i)] = true;
 		}
-		putchar('\n');
 	}
+	int ans = n;
+	for (int i = 0; i &lt; n; i++)
+	{
+		if (dsu.father[i] == i &amp;&amp; !circle[i])
+		{
+			ans--;
+		}
+	}
+	printf("%d\n", ans);
 	return 0;
 }
 </code></pre>
