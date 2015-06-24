@@ -1,0 +1,35 @@
+---
+layout: default
+rooturl: ../../../..
+---
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>{{page.title}}</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on {{ page.date | date_to_string }}</span>
+
+		<div class="pull-right">
+			{% for tag in page.tags %}
+			<span class="label label-default">{{ tag }}</span>
+			{% endfor %}
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		{% include common/mathjax.ext %}
+		{{content}}
+                <hr>
+
+
+		<!-- Disqus -->
+		{% include common/disqus.ext %}
+
+            </div>
