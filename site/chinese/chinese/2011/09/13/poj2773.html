@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出m，k，求第k小的与m互质的数。</p>
 <p>分析：根据gcd的求法，我们可知，求最大公约数的第一步是用大数对小数取余。gcd(a,b)==gcd(a%b,b)，进一步推出gcd(a,b)==gcd(a+b, b)。也就是说，当求出了1~m间与m互质的数之后，把这些数加上m就可以得到m~2m间的与m互质的数。而且m~2m间不会有某个与m互质的数被漏掉。因为如果m&lt;=a&lt;=2m，且gcd(a, m)==1，那么gcd(a - m, m)必然等于1。也就是必然有个在1~m间的数a-m，可以通过加m的方式得到a。所以与m互质的数是有周期性的。我们只需要求出第一个周期即可。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('c84cdbd1-7615-4cb1-9135-b24473a1310a')"><img id="code_img_closed_c84cdbd1-7615-4cb1-9135-b24473a1310a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" /><img style="display: none;" id="code_img_opened_c84cdbd1-7615-4cb1-9135-b24473a1310a" class="code_img_opened" onclick="cnblogs_code_hide('c84cdbd1-7615-4cb1-9135-b24473a1310a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

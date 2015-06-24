@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一些顶点均为整数坐标，问能构成多少个面积为整数的三角形。给出公式：A=|x1y2 - y1x2 + x2y3 - y2x3 + x3y1 - y3x1|/2</p>
 <p>分析：面积是否为整数只需要看|x1y2 - y1x2 + x2y3 - y2x3 + x3y1 - y3x1|mod2是否为0，所以可以先对每个x,y都mod2，并不影响结果。所以总共有4种点，01，00，10，11。3重循环枚举三角形的3个顶点分别是哪种，并用公式计算其面积是否为整数，若为整数则用组合数学知识，通过每种顶点的个数计算能构成的三角形数。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('277252d4-bc46-4a4a-b7f5-15648f6e9d3a')"><img src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" class="code_img_closed" id="code_img_closed_277252d4-bc46-4a4a-b7f5-15648f6e9d3a" /><img src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" class="code_img_opened" id="code_img_opened_277252d4-bc46-4a4a-b7f5-15648f6e9d3a" onclick="cnblogs_code_hide('277252d4-bc46-4a4a-b7f5-15648f6e9d3a',event)" style="display: none;" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

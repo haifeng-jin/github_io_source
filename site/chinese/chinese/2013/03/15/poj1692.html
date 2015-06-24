@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：两个数列，第一行的数字可以和第二行的数字连线。连线有如下条件，被连上的两数字必须相等，且每个数字只能连一条线，每条连线必须与且仅与另一条连线相交，相交两连线上的数字不能相等。问最多能连多少条线。</p>
 <p>分析：dp。f[i][j]表示第一行的前i个数字和第二行的前j个数字最多能连几条线，则f[i][j]=max(f[i-1][j],f[i][j-1],f[k-1][l-1]+2)。k是第一行前i-1个数字中最右一个能与第二行j位置连线的数的位置。l同理。这样状态转移为n，状态为n^2，总的时间复杂度为n^3。但是我们可以不用每次顺序查找k,l的值，我们进行预处理。数组last_equal1[i][x]表示第一行前i个数字中最右一个等于x的数字的位置。题中说x的取值范围在100以内，所以空间上是可行的。若第一行第i个数恰好是x那么last_equal1[i][x]=i，否则last_equal1[i][x]=last_equal1[i-1][x]。last_equal2[j][x]同理。这样总复杂度降为n^2。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('4f5f39e7-8625-4937-9112-307ac4fd11b9')"><img id="code_img_closed_4f5f39e7-8625-4937-9112-307ac4fd11b9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4f5f39e7-8625-4937-9112-307ac4fd11b9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4f5f39e7-8625-4937-9112-307ac4fd11b9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -219,16 +219,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -251,13 +245,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

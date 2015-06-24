@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：把n拆分为2的幂相加的形式，问有多少种拆分方法。</p>
 <p>分析：dp，任何dp一定要注意各个状态来源不能有重复情况。根据奇偶分两种情况，如果n是奇数则与n-1的情况相同。如果n是偶数则还可以分为两种情况，有1和没有1。这样分可以保证两种情况没有重复，对于有1的情况可以直接拆出两个1（拆一个也行，但变成奇数之后一定会拆另一个），然后变为n-2的情况。对于没有1的情况可以直接将其转化为n/2。因为n拆分出所有的数字都是2的倍数。只需要将每种拆分结果中的数字都除以2就会与n/2的一种拆分相对应。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('11f6849c-26e7-4d41-b566-aaf374dd6f26')"><img id="code_img_closed_11f6849c-26e7-4d41-b566-aaf374dd6f26" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_11f6849c-26e7-4d41-b566-aaf374dd6f26" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('11f6849c-26e7-4d41-b566-aaf374dd6f26',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

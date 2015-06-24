@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定一些区间和每个区间内的元素数量（选一些互不相同的整数作为区间内的元素,每个整数只至多选1次），问最少有多少个元素（所有元素不能重复）。</p>
 <p>分析：这题是用spfa做差分约束。不能向bellman一样。还是把差分约束理解为求最长路比较直观。</p>
 <p>对于dist[a]-dist[b]&gt;=c，我们可以看作dist[a]&gt;=dist[b]+c，所以我们如果初始化为负无穷，起点初始化为0，并让所有的不等式都满足，那么就是在求一个最长路。</p>
@@ -159,16 +159,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -191,13 +185,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

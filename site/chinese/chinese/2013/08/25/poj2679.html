@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一个有向图，每条边有两个属性：一个长度一个费用。费用可能是负数。长度一定是非负的。给出一个起点和一个终点，现要求，从起点走到终点，且从每个点走出时选择的那条边必须是以该点作为起点的边中费用最小或并列费用最小的边。如果依据这个原则无法走到终点则输出VOID。并且要求从起点到终点的过程中，先要保证费用最小，在有多解时，保证长度最小。最后输出最小费用和长度。如果费用可以无限小则输出UNBOUND。</p>
 <p>分析：读入图后，可以先将所有点的出边进行一下整理，只保留费用最小的边。然后无论怎么走都一定复合第一条费用最小边原则。然后要判断费用是否可能无限小，即判断从起点到终点的路途中是否可能有负权回路。这是这道题的难点，我们之前只会用SPFA或bellman-ford全图是否有负权回路，那么怎么判断起点到终点之间有没有呢？既然是要走到终点，那么所有不能到达终点的点都是绝对不能去的，那么我们就先把这些点删除。然后剩下的所有点都是能到达终点的，现在只要图中含有负权回路则一定费用无限小。且如果本题费用如果无限小则现在图中一定含有负权回路。那么怎么判断哪些点能到达终点呢？只要建立一个与原图反向的图，再从终点开始dfs看能到达哪些点，这些点就是在原图中能到达终点的点。反向图即把原图中所有的边的起点变成终点，终点变成起点。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('83c1de4a-e5ce-42e8-83d6-606f0716f4df')"><img id="code_img_closed_83c1de4a-e5ce-42e8-83d6-606f0716f4df" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_83c1de4a-e5ce-42e8-83d6-606f0716f4df" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('83c1de4a-e5ce-42e8-83d6-606f0716f4df',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
@@ -322,16 +322,10 @@ vector</span>&lt;vector&lt;Edge&gt; &gt;<span style="color: #000000;"> R;
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -354,13 +348,9 @@ vector</span>&lt;vector&lt;Edge&gt; &gt;<span style="color: #000000;"> R;
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

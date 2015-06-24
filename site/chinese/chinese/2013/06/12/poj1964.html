@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一个格子矩阵，格子分为两种&mdash;&mdash;可用和不可用。要求在画一个矩形，矩形所覆盖的格子全都是可用的，并且要求矩形的面积最大。</p>
 <p>分析：dp。O(n^2)的效率。先说一种低效的方法，依次枚举每个格子， 从该格子向上走直到遇到不可用点为止，将这段路程对应的线段，向左平移直到遇到不可用的格子为止，再向右平移直到遇到不可用的格子为止。这个想段所覆盖过的面积是一个矩形，计算这个矩形面积并更新结果。这样做一定可以找到正确答案，因为对于最大的那个矩形一定有一个挡住它向上延伸的不可用的格子，当我们从这个格子正下方的那个矩形下边缘上的格子出发向上走进行上述操作即可获得这个矩形。对于这种低效的方法如果获取每个格子能向上走的距离的效率是O(1)的，获取这个线段左右平移的距离的效率也是O(1)的，那么总体效率就是O(n^2)的，因为只有n^2个格子。显然每个格子可以向上走多远，是可以通过简单的每列由上向下的递推得到的。而在已知一行所有格子向上走的线段的高度的条件下，是可以通过单调栈的方式来确定每个线段左侧距离最近的比它短的线段在哪里的。单调栈可以以O(n)的效率计算出n个线段的结果，相当于每个线段O(1)。右侧同理。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('a78358cb-e45c-4f4c-81e0-7f256c093318')"><img id="code_img_closed_a78358cb-e45c-4f4c-81e0-7f256c093318" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a78358cb-e45c-4f4c-81e0-7f256c093318" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a78358cb-e45c-4f4c-81e0-7f256c093318',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
@@ -246,16 +246,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -278,13 +272,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

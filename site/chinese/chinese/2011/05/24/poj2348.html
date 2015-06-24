@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定两个数，两个人轮流操作，先把其中一个数变为0的人赢。这种操作是用把大数变为大数减小数的若干倍的差（不能小于0）。问谁能赢。</p>
 <p>分析：谁先抢到关键态，谁就能赢。关键态就是大数是小数的二倍多。一个人一旦抢到了关键态，就可以直接操控下面一连串的非关键态的次序，非关键态相当于每个人进行的都是a%b，所以是交替进行a%b和b%a。也就是说这个究竟自己是a%b还是b%a在非关键态中，自己是无法决定的。只能由上一个关键态的操控者决定。这样获胜的方法就是，一个人一旦取得关键态，就算准次序，让自己获得下一个关键态。直至获胜。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('7c6293ee-7e9e-418b-b3e4-56526c2d9042')"><img id="code_img_closed_7c6293ee-7e9e-418b-b3e4-56526c2d9042" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_7c6293ee-7e9e-418b-b3e4-56526c2d9042" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('7c6293ee-7e9e-418b-b3e4-56526c2d9042',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

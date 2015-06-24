@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：对于n堆石子，每堆若干个，两人轮流操作，每次操作分两步，第一步从某堆中去掉至少一个，第二步（可省略）把该堆剩余石子的一部分分给其它的某些堆。</p>
 <p>最后谁无子可取即输。</p>
 <p>分析：首先我们考虑两堆相等的情况，一定是谁取谁输，因为对方永远可以做对称的操作。对于四堆，1、2堆相等，3、4堆相等的情况，一定也是先手输，后手也只需要做对称的操作（在先手取石子的对称堆中取相同多的石子，并把和先手等量的石子分给先手分配给的堆的对称堆。（若先手在3堆取，并分给1堆，那后手就在4堆取，分给2堆）。也就是说对于任意的一对一对相等的情况来说，一定是后手必胜。</p>
@@ -161,16 +161,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -193,13 +187,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

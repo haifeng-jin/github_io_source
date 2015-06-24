@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：有m层楼，从一层到m层，要进入每层都要打开位于该层的两道门中的至少一道。门锁有2n种，每个门锁为2n种中的一种，可以重复。有2n把钥匙，分别对应2n种锁，但是钥匙两两一组，共n组，每组只能选一个来开门，被选中的可以多次使用，另一个一次都不能用。问最多能上多少层。</p>
 <p>分析：二分查找能上的层数。每次对于一个确定的层数，也就确定了哪些门需要开。变为一个2-sat问题。其中两两一组的钥匙就是图中的节点。当然图中还需要一些矛盾。矛盾如下，某层有x,y两种锁，x的钥匙a与钥匙b一组，y的要是c与钥匙d一组。如果在某次选了钥匙b，那么本层的x将无法被打开，只能开y，就必须选钥匙c，不能选钥匙d。所以钥匙b与钥匙d是矛盾的。</p>
 <p>2-sat问题：</p>
@@ -260,16 +260,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -292,13 +286,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

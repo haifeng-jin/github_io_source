@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：每个物品有两个属性：长和宽（长宽不可互换）。如果一个物品的长和宽均大于另一个物品，则这个物品可以罩住另一个物品，用这种罩住物品的方法将物品分组，一组之内的物品可以一个罩住一个的全部罩起来。问最少分成几组？</p>
 <p>分析：通常这种问题是问物品最多的一组有多少个，这个问题则稍有不同。有人说要用到Dilworth定理，个人认为没什么关系。我们的做法是将物品先按照长从小到大排序。还有一个数组，用来存储当前每个分组的罩在最外层的长和宽，开始该数组为空。然后从小到大每次取出所有长度相等的物品，扣在当前的分组数组中的物品上，更新数组中存储的长宽值。这样长度相等的一起扣，在判断能不能扣的上的时候就不需要考虑长度了，之前扣好的都是长度小于当前物品的。在扣的过程中要注意发挥每个物品的最大能力，即让每个物品扣住刚好比它小一点点的物品。因为假设如果物品X不去扣比它小一点的那个物品A，而去扣比它小很多的那个物品B。而另一个物品Y，本来只能扣B不能扣A，又因为B已经被X扣了，Y只能单成一组，造成组数增加。在实际操作中是先拿当前长度的那个宽度最大的，发挥其最大作用，然后宽度次大的&hellip;&hellip;为了程序实现起来简便，我们可以直接将所有物品按长度升序，宽度降序来排序，这样每次取出一个物品加入到分组中，就相当与我们刚才的操作了。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('89fd480f-e119-42ca-86c6-5732f8485c31')"><img id="code_img_closed_89fd480f-e119-42ca-86c6-5732f8485c31" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_89fd480f-e119-42ca-86c6-5732f8485c31" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('89fd480f-e119-42ca-86c6-5732f8485c31',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
@@ -224,16 +224,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -256,13 +250,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

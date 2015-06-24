@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：有k种物品，m个供应商，n个收购商。每个供应商和收购商都需要一些种类的物品若干。每个供应商与每个收购商之间的对于不同物品的运费是不同的。求满足收购商要求的情况下，最小运费。</p>
 <p>分析：最小费用最大流，最大流的前提下求最小费用。这题我们可以把k种物品分开计算，每次对一种物品进行最小费用最大流计算。如果不分开算会超时。对于每种物品，从源到供应商连接，容量为供应商的储存量，费用为0。采购商到汇连边，容量为需求量，费用为0。供应商到采购商连边，容量为无穷，费用为对应的运费。</p>
 <p>最小费用最大流的计算流程大致是：每次找到一条根据费用来看的最短路，然后对这条最短路进行增加流量，直到所有路径流量都不能增加为止。</p>
@@ -156,16 +156,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -188,13 +182,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

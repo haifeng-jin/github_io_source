@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定每个矩形的高度以及底边在数轴上的起点和终点。各矩形间可能有重叠。问它们覆盖的总面积是多少。</p>
 <p>分析：线段树的题，开始以为不能用线段树，因为如果在已经插入了许多又瘦又高的楼的情况下，插入一个又矮又宽的楼横跨他们的话，就会对中间相交部分进行许多次修改复杂度远大于O(logn)。后来看了答案才知道，可以先把楼房按照高度从小到大排序，这样就不会出现这样的情况了。后来wa的原因是建树的范围比实际范围大了1个单位。另外，跨度横坐标需要离散化。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('559273ad-5ebe-4b03-8ce8-75b6bcd0dee0')"><img id="code_img_closed_559273ad-5ebe-4b03-8ce8-75b6bcd0dee0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_559273ad-5ebe-4b03-8ce8-75b6bcd0dee0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('559273ad-5ebe-4b03-8ce8-75b6bcd0dee0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
@@ -281,16 +281,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -313,13 +307,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

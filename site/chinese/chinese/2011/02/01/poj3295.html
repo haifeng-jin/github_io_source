@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>本题中最多5个命题变项：p,q,r,s,t</p>  <p>每个有0,1两种取值，所以总共32种情况，分别枚举即可。</p>  <p>对于每种情况，计算表达式的值，如果有结果为0的则输出not</p>  <p>难点在于如何计算表达式的值，我们采用递归的方法，把表达式分为一或两个子表达式，并把参数end（本表达式的结束位置）传给上一层，一遍上一层获取第二个子表达式的起始位置。最后通过两个子表达式的结束位置，得到整个表达式的结束位置。</p>  <p>end是本表达式的最后一位的下标，即本表达式的长度减一。</p>  <p>所以 end = 2 + end1 + end2;</p>  <p>&#160;</p>  <pre class="brush: cpp; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 #include &lt;cstring&gt;
@@ -216,16 +216,10 @@ int main()
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -248,13 +242,9 @@ int main()
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一段只有音高（整数表示），没有节奏的乐谱，问其中最长的曲调相同的没有重叠的两段的长度是多少。</p>
 <p>分析：后缀数组，一定要注意，吉大的模板的nlogn算法，要初始化n=strlen(s) ＋1，另外，s，sa,rank一定要从0位置开始使用。height从1位置开始有意义。</p>
 <p>这题是要在求出相邻音高之差之后找不重叠（无公共部分）的最长的重复出现过至少两次的串，也就是在height数组中找到一个连续段，其各项均大于d且sa数组中的对应段中最大值最小值之差要大于d。找到最大的d即可。d符合一个性质，就是小的d都满足，大的d都不满足。用二分法找分界线即可。</p>
@@ -160,16 +160,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -192,13 +186,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

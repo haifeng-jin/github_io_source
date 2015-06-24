@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定每个点在平面内的坐标，要求选出一些点，在这些点建立加油站，使得总花费最少（1号点必须建立加油站）。在i点建立加油站需要花费2^i。建立加油站要求能使得汽车从1点开始走遍全图所有的点并回到1点，途中汽车加油次数不限，每个加油站的使用次数不限，但是汽车油箱有上限d（加满油可以跑距离d）。</p>
 <p>分析：突破口在于在i号点建立加油站的费用为2^i，这样特殊的花费会使得我们有一个贪心的规律，就是尽量不在号比较大的点建加油站，如果在n号点建立加油站的费用会大于在除n以外的所有点都建加油站的总费用。所以我们可以先尝试把除n以外的所有点建立加油站，观察是否满足要求。若满足则说明我们必然不会在n点建立加油站，若不满足我们就一定要在n点建加油站。若需要建，我们就建，然后就不用再考虑n点了，在确定了n点之后，我们用同样的方法来观察n-1号点是否需要建立加油站，即将1~n-2号点都建立加油站，观察是否满足要求。以此类推，可以推出所有点的情况。</p>
 <p>接下来我们需要解决对于一种给定的加油站建立情况，我们如何判断它是否满足题中的travel around的要求。分为两部判断，1.判断所有加油站是否可达（从1号点开始广搜，若到当前点距离&lt;=d则入队）。2.判断其余点是否可达（刚才的广搜过程可以顺便标出每个点到最近的加油站的距离，要求能从加油站到该点并返回加油站，所以点到加油站的距离必须小于等于d/2）。若满足这两点必然符合要求，否则不符合要求。</p>
@@ -270,16 +270,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -302,13 +296,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

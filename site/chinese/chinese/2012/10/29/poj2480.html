@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出n（2^31），求<span>&sum;gcd(i, n) 1&lt;=i &lt;=n。</span></p>
 <p><span>分析：首先所有与n互质的数字x都满足gcd(x,n)=1。我们先计算这种等于1的情况，恰好是n的欧拉函数phi(n)。我们可以将上述情况视为跟n最大公约数为1的情况，现在我们将其推广至最大公约数为p的情况。对于对于所有满足gcd(x,n)=p（p为常数）的x，他们与n拥有相同的gcd，那么他们同时除以p之后，就会变得和n/p互质，这种数字x有phi(n/p)个，这些x的和为p*phi(n/p)个。所以我们要计算&sum;gcd(i, n) 1&lt;=i &lt;=n，只需要根据gcd的值不同，分类进行计算即可，总结成公式：&sum;p*phi(n/p)（p是n的约数）</span></p>
 <p><span>对于这个公式我们有一个快速计算的方法，我们先想，若要计算&sum;p，我们可以用公式(x1^0+x1^1+...+x1^c1)*(x2^0+x2^1+...+x2^c2)*...*(xm^0+xm^1+...+xm^cm)。xi是n的质因数，ci是n中含有xi的个数。同理，根据欧拉函数的公式，每个欧拉函数值也和各个质因子有关，求&sum;phi(n/p)=&sum;phi(p)=(1 + x1^0 * (x1 - 1) + x1^1 * (x1- 1) + ...+x1^(c1-1) * (x1- 1))*...*(...)。然后由于二者都是质因子幂相乘的形式，所以可以把两者综合起来，对于每个括号里的每一项，都是约数因式和欧拉函数因式的乘积的形式，即p的因式要乘以phi(n/p)的因式，两因式的质因子指数是互补的，最终公式变为(x1^(c1-1)*(c1-1) + x1^c1)*...。</span></p>
@@ -236,16 +236,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -268,13 +262,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

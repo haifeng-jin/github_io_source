@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出每只狗的pretty value，然后多次询问，每次输出区间[i,j](狗站成一排，从第i只到第j只)的第k小的值是多少。区间之间有交叉，但是没有完全包含。</p>
 <p>分析：先把所有区间排序，然后从左至右把每个区间用线段树维护离散化后的pretty value，即线段树的区间的意义是pretty value。每次删除在上一个区间中且不在当前区间中的节点，插入在当前区间中且不在上一个区间中的节点，使得线段树中的节点恰好为该区间内的所有节点。然后查询第k个就容易了。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('2ae361a7-cd88-4e09-a25e-ab0f466e96cd')"><img id="code_img_closed_2ae361a7-cd88-4e09-a25e-ab0f466e96cd" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2ae361a7-cd88-4e09-a25e-ab0f466e96cd" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2ae361a7-cd88-4e09-a25e-ab0f466e96cd',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

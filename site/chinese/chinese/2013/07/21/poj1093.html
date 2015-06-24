@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一个句子和要求整理后每行包含的字符数，要求将其整理为一种总badness最小的形式。设每个空格长度为n，单个空格的badness计算公式为(n-1)^2。总badness等于所有空格的badness的总和。给出整理后的格式。在badness最小的前提下，在分配一行中的空格时要让前面的空格尽量少。如果一个单词单占一行，badness为500。</p>
 <p>分析：动态规划。f[i]表示前i个单词的最小badness是多少。f[i]=f[i-j]+cost(i-j,j);。cost(a,b)表示从单词a+1到单词b的放在一行中最小badness是多少。</p>
 <p>并用from[i]存储f[i]是从哪个位置计算得来的值，即最后一次更新f[i]时i-j是几，即f[i]所在行的上一行的最后一个单词是第几个。</p>
@@ -295,16 +295,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -327,13 +321,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

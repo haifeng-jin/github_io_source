@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一个矩阵（100&times;100）求一个子矩阵，使得子矩阵中各个元素的和最大。</p>
 <p>分析：类似最大子段和，我们可以将这个矩阵一些列的集合，如果最优解（最大子矩阵）左起第i列，右止于第j列，上下边界先不管。那么我们相当于把这些列的对应位加和，成为一列。并对改列求最大子段和即可。这样我们只需要枚举所有的i和j，然后合并列，然后求最大子段和，取最大即可。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('e3147d46-50b1-4f49-a2af-d355d15ddbb8')"><img id="code_img_closed_e3147d46-50b1-4f49-a2af-d355d15ddbb8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e3147d46-50b1-4f49-a2af-d355d15ddbb8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e3147d46-50b1-4f49-a2af-d355d15ddbb8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -200,16 +200,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -232,13 +226,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

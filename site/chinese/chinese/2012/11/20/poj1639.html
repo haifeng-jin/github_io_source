@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给一个无向图，求最小生成树，对图中的一个点进行了度数限制，其度不能超过k。</p>
 <p>分析：设该限制点为0号点，先将其删除，然后求各连通分支的最小生成树。然后将0点加回图中，把0点与各个连通分支中与它最近的点相连。</p>
 <p>然后可能现在0点的度小于限制，我们不断的增加0点的度，直到超过限制，观察什么时候最小生成树的总长度最小。</p>
@@ -364,16 +364,10 @@ vector</span>&lt;vector&lt;edge&gt;&gt;<span style="color: #000000;">map(maxv);
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -396,13 +390,9 @@ vector</span>&lt;vector&lt;edge&gt;&gt;<span style="color: #000000;">map(maxv);
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

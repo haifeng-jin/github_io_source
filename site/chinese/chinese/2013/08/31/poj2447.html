@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：两个素数P，Q。N=P*Q; T=(P-1)*(Q-1); (E*D)mod T = 1; (0&lt;=D&lt;T)。E与T互质，公钥是{E,N}，私钥是{D,N}。原始信息M的加密过程为C=(M^E)mod N; 解密过程为 M=(C^D)mod N;（"^"表示幂） 现在给出C,E,N（&lt;2^62）。求M。</p>
 <p>分析：先通过N分解求P,Q（pollard-rho+Miller-rabin）。通过P，Q求T，通过(E*D)mod T = 1求D(扩展欧几里德)，通过M=(C^D)mod N求M。</p>
 <p>如何使用扩展欧几里德呢，</p>
@@ -290,16 +290,10 @@ LL Pollard_rho(LL x,LL c){
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -322,13 +316,9 @@ LL Pollard_rho(LL x,LL c){
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

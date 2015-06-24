@@ -30,16 +30,8 @@
 </head>
 
 <body>
-	{% include navbar.ext %}
-	{% if page.category == 'home' %}
-		{% include home/header.ext %}
-	{% endif %}
-	{% if page.category == 'codeforces' %}
-		{% include codeforces/header.ext %}
-	{% endif %}
-	{% if page.category == 'chinese' %}
-		{% include chinese/header.ext %}
-	{% endif %}
+	{% include common/navbar.ext %}
+	{% include header.ext %}
 
     <!-- Page Content -->
     <div class="container">
@@ -48,9 +40,7 @@
 		{{content}}
 
 
-		{% if page.category != 'home' %}
 		{% include sidebar.ext %}
-		{% endif %}
 
         </div>
         <!-- /.row -->

@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一个八数码问题，求解法，不可解则输出unsolvable。</p>
 <p>分析：可以用ida*算法，估价函数可以使用每个数码到其最终位置的最短距离之和。对于不可解的判断，我这里用迭代深度大于100时判定为不可解。</p>
 <p>还有一种更高级的无解判断方法。就是将八数码矩阵中的空格忽略，然后将8个数字排成一排，第二行接在第一行后面，第三行接在第二行后面，通过观察我们发现移动空格不会影响这个8个数字组成的数列中逆序数队的奇偶性，因此如果逆序数对的奇偶性与目标状态不同则一定无解。至于为什么奇偶性相同就一定有解，我就不知道为什么了，不过这个命题确实是正确的。</p>
@@ -294,16 +294,10 @@ Node getchild(</span><span style="color: #0000ff;">int</span> a, Node &amp;<span
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -326,13 +320,9 @@ Node getchild(</span><span style="color: #0000ff;">int</span> a, Node &amp;<span
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

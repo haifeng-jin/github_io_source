@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定n，问有n个点的连通图有多少种，每个点是不同的。</p>
 <p>分析：求出有n个点的图有多少种，求出不连通的有多少种，相减即可。求有n个点的不连通图时，枚举第n个点所在的连通分支有几个点，有k个点的话，除去第n点，还要选k-1个点，有C(n - 1, k -1)种选法。剩余n-k个点，这n-k个点随意构图，每两点间要么有边，要么没边，两种选择。有2^C(n-k,2)种情况。则用C(n - 1, k -1)乘以2^C(n-k,2)再乘以k个点构成连通图的情况总数，这样规模为n的问题转化为规模为k的子问题。dp处理即可。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('cf5bca1c-4d51-4e9b-80bd-4ae47dc298da')"><img id="code_img_closed_cf5bca1c-4d51-4e9b-80bd-4ae47dc298da" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" /><img style="display: none;" id="code_img_opened_cf5bca1c-4d51-4e9b-80bd-4ae47dc298da" class="code_img_opened" onclick="cnblogs_code_hide('cf5bca1c-4d51-4e9b-80bd-4ae47dc298da',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" /><span class="cnblogs_code_collapse">View Code </span>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

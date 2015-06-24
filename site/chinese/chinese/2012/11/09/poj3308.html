@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：一个矩阵，已知其中一些格会降落伞兵，每行每列都有一个武器，可以一次性消灭该行或该列的全部伞兵，每个武器对应不同的价格，若使用多个武器则总价是各个武器价钱的乘积，问消灭所有伞兵最少要多少钱。</p>
 <p>分析：最小权覆盖集。难点在于武器总价不是加和而是乘积，那么我们需要把各个单价转化为以e为底的对数，这样再求对数加和的时候其实各个原单价之间是相乘的关系。建立二分图，每行对应一个节点，每列对应一个节点，各点权值等于其武器价钱的以e为底的对数，每个伞兵是连接其所在行列节点的一条边。对这个二分图求最小权独立集。转化为最小割，转化为最大流。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('5745f734-596b-4ec6-813f-7baf7135b814')"><img id="code_img_closed_5745f734-596b-4ec6-813f-7baf7135b814" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5745f734-596b-4ec6-813f-7baf7135b814" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5745f734-596b-4ec6-813f-7baf7135b814',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -289,16 +289,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -321,13 +315,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

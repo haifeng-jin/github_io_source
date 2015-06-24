@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：从某年某月某天开始两个人轮流开始将日期推进，推进方法有两种，1.推进到第二天 2.推进到下个月的这一天。谁到达2001.11.4谁赢，谁超过了谁输。</p>
 <p>分析：np问题，我们设月号加日号等于d，对于第二种推进方式，会改变d的奇偶性。（因为月的奇偶变了，日的奇偶没变，和的奇偶就变了）。对于第一种推进方式，如果推进后还在同一个月份，那么会改变d的奇偶性。（因为月的奇偶没变，日的变了，和的奇偶就变了）。第一种推进方式，跨月份的时候，有些会改变，有些不会改变。有31天、29天的月份会变，30天、28天的不会变，其中对于d为偶的情况（2月28，4、6月30）可以利用第二中方式变为奇。</p>
 <p>由此可见对于绝大部分情况来说d的奇偶是轮流出现的，最终必败态是11月4日奇态。所有的偶态均可到达奇态，对于d为奇的9、11月30也可以到达奇态。其余奇态只能到达偶态。如果把偶态和9.30和11.30划入集合A，其余划入集合B，那么对于A的所有元素均有办法到达集合B。而B中元素只能到达集合A，无法到达集合B。且11.4属于B。所以，A中元素为必胜，B中为必败。（还需仔细考虑快到2001.11.4的那些日子，幸好也没有出现任何意外）</p>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

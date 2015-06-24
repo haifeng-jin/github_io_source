@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>最小路径覆盖</p>
 <p>题意：不是赤裸裸的最小路径覆盖（走遍所有的点），正常的最小路径覆盖中两个人走的路径不能有重复的点，而本题可以重复。</p>
 <p>分析：我们仍可将问题转化为最小路径覆盖。如果一个人需要经过另一个人走过的点的时候，让他直接从该点上空飞过去，越过该点，直接走下一个点。如果我们赋予每个人这种能力，那么求得的无重复点的最小路径覆盖结果，就是题目要求的结果，因为需要重复的地方只要飞过去，就可以不重复了。赋予这个能力的方法就是把所有点能间接到达的点全都改为直接到达。然后正常求最小路径覆盖即可。</p>
@@ -156,16 +156,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -188,13 +182,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：一些士兵站在矩阵的一些方格内，现要把他们移动到一横排，并连续地排成一队，问最少需要移动多少步。</p>
 <p>分析：先将他们移动到同一横排，这横排应该是他们纵坐标的中位数，才能使得此过程总步数最少。然后要把他们紧凑起来。我们先把横坐标排序，并假设起点是a，那么我们就是要求i=1~n,abs(a+i - xi)的加和。即i=1~n,abs(a-(xi - i))的加和。我们构建一个新数列zi = xi - i，当a 等于z的中位数时原式的值最小。</p>
 <p>综上我们可以得到一个普遍结论，就是对于一个数列Xi（i=1~n)，取一个X使得i=1～n时abs(Xi-A)的加和最小，那么A应该是数列Xi的中位数。Xi不一定是直接给出的，可能是一个关于已知量的表达式。</p>
@@ -158,16 +158,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -190,13 +184,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

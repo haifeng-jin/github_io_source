@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：一个数列，给出这个数列中的某些位置的数，给出所有相邻的三个数字的和，数列头和尾处给出相邻两个数字的和。有若干次询问，每次问某一位置的数字的最大值。</p>
 <p>分析：设数列为a1～an。首先通过相邻三个数字的和我们可以求出a3,a6,a9&hellip;&hellip;是多少。a3=sum(a1,a2,a3)-sum(a1,a2)。a6=sum(a4,a5,a6)-sum(a3,a4,a5)。后面依次类推。</p>
 <p>推到了数列的最右面，如果恰好知道了an或者a(n-1)中的一个，那么可以通过sum(an,a(n-1))减去它来求得另一个。</p>
@@ -283,16 +283,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -315,13 +309,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

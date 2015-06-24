@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出n个互不相同的数字，要求一个最大的子段，使得该子段内所有数（除了两端以外），值都在两端的数字之间，且不能等于两端的数。</p>
 <p>分析：先对整个数组分别构造最大值RMQ和最小值RMQ的st数组。然后，枚举子段起点，对于每个起点求出这个起点是区间最小值的最远终点（用二分查找）。然后在这个区间内找到最大值位置，从起点到最大值位置这个区间就是起点所对应的符合题意的最大区间。枚举过所有的起点之后，结果就求出来了。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('443d4ad6-c3d9-4660-8299-a8aa76909e2c')"><img id="code_img_closed_443d4ad6-c3d9-4660-8299-a8aa76909e2c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_443d4ad6-c3d9-4660-8299-a8aa76909e2c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('443d4ad6-c3d9-4660-8299-a8aa76909e2c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -274,16 +274,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -306,13 +300,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

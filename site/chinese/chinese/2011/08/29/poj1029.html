@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定一些硬币，已知其中有一个假硬币重量与其余不同，其余硬币重量相同。给出若干次天平测量结果，问能否判断出这个硬币是哪个，若能则输出是哪个。</p>
 <p>分析：两端重量相等则两端的硬币都是真的，每个不等情况中必然包含那个假的，且每次出现在同一边（总在小的一边或总在大的一边）。也就是说，只要某些硬币在不等 的一边中不是每次都出现，则它一定是真的。用以上方法进行判断哪些是真的，暂时忽略没出现过的，看有多少个不是真的，如果只有一个则必然是结果，若有多个则无法判断。如果出现过的都是真的，看没出现过的有几个，如果只有一个则为结果，否则无法判断。</p>
 <p>还有人说可以暴力枚举哪个球是有问题的，是轻是重，每次观察与测量结果是否矛盾。</p>
@@ -270,16 +270,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -302,13 +296,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

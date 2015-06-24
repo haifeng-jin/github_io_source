@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：n头牛站一排，每个牛有k个属性，每个属性有两种取值：1或0。（1表示拥有该属性，0表示没有）要求找一个牛的最长连续队伍（子段），这个队伍中拥有每个属性的牛的个数相同。</p>
 <p>分析：我们记录一个sum[i][j]数组，记录前i个牛的第j个属性和。我们用我们需要寻找sum中的两行，这两行中所有对应位的差都相等，则这段牛是符合条件的答案之一。所以我们用另一数组，来记录sum中对应行的各个元素之间的差异。我们记录c[i][j] = sum[i][j] - sum[i][0]这样只要c的两行对应相等即可。然后我们就找相隔最远的两个c的相等行即为所求。我们要对c的每行进行hash。hash数组的方法是&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ret = ((ret &lt;&lt; 2) + (a[i] &gt;&gt; 4)) ^ (a[i] &lt;&lt; 10);</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('a858fc7d-675e-498e-9e90-61b23b63fa4e')"><img id="code_img_closed_a858fc7d-675e-498e-9e90-61b23b63fa4e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a858fc7d-675e-498e-9e90-61b23b63fa4e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a858fc7d-675e-498e-9e90-61b23b63fa4e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

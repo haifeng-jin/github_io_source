@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定一些单词，如果一个单词的尾字母与另一个的首字母相同则可以连接。问是否可以每个单词用一次，将所有单词连接，可以则输出字典序最小的序列。</p>
 <p>分析：把每个字母作为一个结点。每个单词作为一条边。这样就可以把问题转化为欧拉路径。现判断欧拉路径是否存在。若存在则找到欧拉路径，找的方法是，先找到出度&gt;入度（无欧拉回路）的结点，从起点开始，dfs（v,e），v是当前结点，e是到v的边。用vis数组记录某条边是否被访问过，从v开始继续搜索未访问过的边。每层dfs结束时把该层的边入栈。dfs整个结束后，把边依次出栈，得到的就是欧拉路径。</p>
 <p>void dfs(int v, int e)<br />{<br />&nbsp;&nbsp;&nbsp; vis[e] = true;<br />&nbsp;&nbsp;&nbsp; for (int i = head[v]; i != -1; i = edge[i].next)<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if (!vis[i])<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; dfs(edge[i].v, i);<br />&nbsp;&nbsp;&nbsp; stk[top++] = e;<br />}</p>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

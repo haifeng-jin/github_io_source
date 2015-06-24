@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：有n个元素，开始每个元素自己一栈，有两种操作，将含有元素x的栈放在含有y的栈的顶端，合并为一个栈。第二种操作是询问含有x元素下面有多少个元素。</p>
 <p>分析：并查集，因为当我们知道栈中元素的总数，和某元素到栈顶的距离，我们就能知道这个元素下面有多少元素。我们并操作的时候，始终使用在上面栈的代表元来做合并之后的代表元，这样也就达到了栈中的代表元是栈中的堆顶元素的效果，我们只需在每个代表元中记录该栈中的元素总数即可。然而我们还需要得知某元素到代表元的距离，这样我们就需要记录每个元素到其父亲的距离，把它到代表元上所经过的距离加起来，即为它到代表元的距离。这样我们就得出了结果。另外优化的过程（把路上所有元素的father改为代表元的过程）比较复杂，容易错。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('8eb9ec49-589a-439d-98d6-6aa50954da94')"><img id="code_img_closed_8eb9ec49-589a-439d-98d6-6aa50954da94" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_8eb9ec49-589a-439d-98d6-6aa50954da94" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('8eb9ec49-589a-439d-98d6-6aa50954da94',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

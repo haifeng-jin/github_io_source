@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：平面上有一些点，现要求用一些圆心在x轴上的圆（雷达）来覆盖这些点，问最少需要多少雷达。</p>
 <p><span style="color: #000000;"><span style="font-family: verdana, Arial, Helvetica, sans-serif;"><span style="font-size: small;">分析：</span></span></span>我的解法是把点按横坐标排序，然后把每个点的雷达尽量往右放，然后每放一个雷达都要保证雷达左面的岛都被雷达所覆盖。所以我们可以按一个点靠右放完雷达后，再根据后面的在雷达位置左面的点，把雷达向左移。一个雷达经过了移的过程，就一定是能覆盖左面的岛。所以排好序后，只需O(n)。</p>
 <p>注意：unique函数的返回值是结尾指针，所以可以用被注释掉两行的方法来获得数组长度。</p>
@@ -242,16 +242,10 @@ int main()
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -274,13 +268,9 @@ int main()
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

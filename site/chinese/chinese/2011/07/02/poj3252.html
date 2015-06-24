@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：问区间[a,b]中，有多少个数化成二进制后，0比1多。</p>
 <p>分析：以110100为例，先计算小于100000的有多少个，c(5,2)+c(5,1)。还需要计算100000～110100之间的数量。再将除最高位的1之外的最高的1改为0，以保证后面组合时出现的所有数字小于110100，形如10****。后四位组合数c(4,2)+c(4,1)。再将下一个1变为0，变为1100**。如此依次将各个1变为0,并固定1前面的位，可以帮助我们计算出所有在100000～110100之间的数量。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('28609165-d00e-43ca-b202-32ceaa0d9f37')"><img id="code_img_closed_28609165-d00e-43ca-b202-32ceaa0d9f37" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_28609165-d00e-43ca-b202-32ceaa0d9f37" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('28609165-d00e-43ca-b202-32ceaa0d9f37',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

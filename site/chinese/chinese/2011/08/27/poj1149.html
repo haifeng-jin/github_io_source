@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意： 有 M 个猪圈，每个猪圈里初始时有若干头猪。一开始所有猪圈都是关闭的。依次来了 N 个顾客，每个顾客分别会打开指定的几个猪圈，从中买若干头猪。每个顾客分别都有他能够买的数量的上限。每个顾客走后，他打开的那些猪圈中的猪，都可以被任意地调换到其它开着的猪圈里，然后所有猪圈重新关上。</p>
 <p>分析： 此题是网络流，网络流里经典的构图题。将顾客看作除源和汇以外的节点，源和每个猪圈的第一个顾客连边，边的权是开始时猪圈中猪的数目，若源和某个节点之间有重边，则将权合并，每个猪圈的前后相邻两顾客之间连边，由前一个顾客指向后一个顾客。每个顾客和汇之间连边，边的权是顾客所希望购买的猪的数目。</p>
 <p>网络流，需要对图进行化简</p>
@@ -158,16 +158,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -190,13 +184,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

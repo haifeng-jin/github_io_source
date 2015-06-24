@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：有一些珠子排成一圈，珠子有两种颜色：黑和白。每次操作可以调换中间隔着一个珠子的两珠子的位置，给出这个圈子的初始状态，问最终能否通过操作让圈子中所有同色的珠子排在一起，即黑白分开。</p>
 <p>分析：分两种情况，珠子总数为偶数，那么奇数位置上的珠子无法移动到偶数位上，偶数位的也无法移动到奇数位上，但在奇数位内部和偶数位内部可以自由移动。任何一个连续区间内奇数位和偶数位的数量差都不超过1。因此想要黑色珠子全都连在一起，则要求奇数位上的黑色珠子数量和偶数位上的黑色珠子数量之差的绝对值要小于等于1。</p>
 <p>对于第二种情况，珠子总数为奇数，这种情况一定可以达到目标，因为如果任意相邻两珠子可交换则一定可以达到目标。对于总数为奇数的情况，相当于将一种相邻两珠子可交换的排列方式更改了珠子的排列顺序，但交换方式不变。例如，7个珠子，1357246。把这个序列首尾相接则形成了一个相邻两两可交换的环，可以达到任何目标状态。</p>
@@ -206,16 +206,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -238,13 +232,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

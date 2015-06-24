@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：对于4*n+1(n为自然数)组成的集合，乘法在该集合中是封闭的。现规定h-prime是这个集合的数字中只有1和本身能整除的数(不含1)。其余为h合数。从h合数中划分出一部分数字，这些数是由两个h素数相乘得到的，称之为h-semi。现要求在指定1～n范围内有多少个h-semi。</p>
 <p>分析：筛法，就是把h合数全筛掉，开始默认所有的都是h素数，然后枚举两个数，把他们的乘积筛掉。这道题要求h-semi，所以我们要改进一下，把原来的true false标注变为0（h素数）, 1（非h-semi的合数）, 2（h-semi）的标注。在筛的过程中如果发现枚举的两个数暂时没被筛掉，我们就把他们的乘积标注为h-semi（前提是它没被标为1）。容易论证，任何一个非h-semi的合数在此过程中都会至少被标为1一次（设a&lt;=b&lt;=c，为三个组成非h-semi，d的因子。枚举到a,c时，a*c被标为2。然后会枚举到b和a&times;c。则必然将a*b*c标为1），所以即使我们之前误标为2,后来也会被更正为1。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('40a435d8-cd2e-4dd6-a0ad-050da2403660')"><img id="code_img_closed_40a435d8-cd2e-4dd6-a0ad-050da2403660" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_40a435d8-cd2e-4dd6-a0ad-050da2403660" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('40a435d8-cd2e-4dd6-a0ad-050da2403660',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

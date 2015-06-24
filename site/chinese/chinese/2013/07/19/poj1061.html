@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：两个青蛙在赤道上跳跃，走环路。起始位置分别为x，y。每次跳跃距离分别为m，n。赤道长度为L。两青蛙跳跃方向与次数相同的情况下，问两青蛙是否有方法跳跃到同一点。输出最少跳跃次数。</p>
 <p>分析：扩展欧几里德。设两青蛙跳了s步。有方程：(x+n*s)-(y+m*s)=k*L。整理得：(n-m)*s+L*(-k)=y-x</p>
 <p>此时方程已经符合扩展欧几里德的形式:a*x+b*y=gcd(a,b)了。按要求求解即可。</p>
@@ -229,16 +229,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -261,13 +255,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

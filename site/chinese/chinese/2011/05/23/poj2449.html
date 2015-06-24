@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定一个图，求起点到终点的第k短路。</p>
 <p>分析：先用dijkstra从t反向寻找最短路。然后使用A*算法，把f(i)=g(i) + h(i)。h(i)就是i点到t的最短距离。当某点出队次数达到k次的时候，结果为该点的当前路程＋该点到t的最短距离。（我没有判断不连通的情况）</p>
 <p>为什么这样做是对的呢？我们这样来思考，如果不实用最短路，而只使用A*那么t第x次出队的结果即为第x短路的距离。继而可以想到，从第一个出队次数达到x的点，沿着最短路走到t，一定是第x短路。</p>
@@ -158,16 +158,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -190,13 +184,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

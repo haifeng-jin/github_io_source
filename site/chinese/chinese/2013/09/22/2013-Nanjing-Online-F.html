@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一个4&times;4的点阵，连接相邻点可以构成一个九宫格，每个小格边长为1。从没有边的点阵开始，两人轮流向点阵中加边，如果加入的边构成了新的边长为1的小正方形，则加边的人得分。构成几个得几分，最终完成九宫格时，谁的分高谁赢。现在给出两人前若干步的操作，问接下来两人都采取最优策略的情况下，谁赢。</p>
 <p>分析：博弈搜索，有人说要加记忆化，我没有加也过了&hellip;&hellip;与赤裸裸的博弈搜索的区别在于对于最终状态，并不是谁无路可走谁输，而是谁分低谁输。注意判断分数相等的情况。在搜索中每个节点要么是必胜态，要么是必败态，可参见这里对NP问题的描述：<a href="http://www.cnblogs.com/rainydays/archive/2011/05/27/2059781.html">http://www.cnblogs.com/rainydays/archive/2011/05/27/2059781.html</a></p>
 <p>边的存储与判断不好处理，我是使用了edge_row[ ][ ]数组来存储横向边，edge_col[ ][ ]来存储纵向边。并用其左边（横向）或上边（纵向）的点来代表这条边。</p>
@@ -299,16 +299,10 @@ Point get_point(</span><span style="color: #0000ff;">int</span><span style="colo
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -331,13 +325,9 @@ Point get_point(</span><span style="color: #0000ff;">int</span><span style="colo
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

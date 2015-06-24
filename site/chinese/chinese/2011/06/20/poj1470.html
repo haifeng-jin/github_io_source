@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：基本的lca问题</p>
 <p>分析：lca的离线算法为tarjan，tarjan算法的流程如下。dfs遍历树，节点a在遍历完成之后退回到a在树中的父亲节点，然后a在并查集中的father指针会指向这个父亲节点。也就是说一个节点，所有以它的被遍历过的直接子节点为根的子树中的点都会在并查集中被合并到这个点，并以它作为代表元。最开始每个点自己一个集合，每次合并操作都是伴随着遍历中的退后行为进行的。这样就产生了一个性质，在遍历过程中，一个被遍历过的节点的集合代表元在哪，取决于由树根到该节点的路径上我退后到了哪个节点。这样一来，所有遍历过的节点与当前节点的lca也恰好就是它们的代表元了。在遍历离开当前点之前，先将所有遍历过的点与当前点的lca在二维数组中记录下来。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('48ff1dc3-8b98-405a-a65b-b42b0e89649d')"><img id="code_img_closed_48ff1dc3-8b98-405a-a65b-b42b0e89649d" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_48ff1dc3-8b98-405a-a65b-b42b0e89649d" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('48ff1dc3-8b98-405a-a65b-b42b0e89649d',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
@@ -260,16 +260,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -292,13 +286,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

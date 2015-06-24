@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：对于n的每个约数a，设a的约数个数为b，求所有b^3的和。</p>
 <p>分析：我们可以试想，对于一个整数n=a^k(a是质数)n的约数个数一定是k+1，这些约数是a^0,a^1,a^2&hellip;&hellip;。而我们发现每个约数仍然是a^k的形式，所以每个约数的约数个数一定为ki＋1(对于约数a^i)。所以约数个数序列应该为1,2,3,4,5&hellip;&hellip;k+1。而对于这个n本题所求的结果一定为1^3，2^3&hellip;&hellip;(k+1)^3。用立方和公式可直接求解。立方和公式：[n*(n+1)/2]^2。当然，本题给出的数可能由多个质因子组成。而这样一来，n的约数就变为a^i * b^j * c^k &hellip;&hellip;（a,b,c为质因子）。而每个约数的约数个数也符合相乘的规律，即对于约数a^i * b^j * c^k &hellip;&hellip;，其约数个数应为：a^i的约数个数＊b^j的约数个数＊c^k的约数个数。（因为其每个约数都是分别取a^i的一个约数、b^j的一个约数&hellip;&hellip;并相乘得到的，因此根据组合数学的乘法原理，总方法数等于每个步骤的方法数相乘）这样题目就可以转化为，每个质因子取若干个，并将其乘积的约数个数（每个的约数个数相乘）取立方，并求所有情况的和。也就是把每个质因子取若干个，并把其的方法数取立方后相乘，然后求总和。这样就可以提取后写成多项式乘积的形式了：(1^3+2^3 + &hellip;&hellip;＋(i+1)^3)*(1^3+2^3 + &hellip;&hellip;＋(j+1)^3)*(1^3+2^3 + &hellip;&hellip;＋(k+1)^3)*&hellip;&hellip;。这个多项式乘积的意思就是，每个括号中取一个，就是取了一定量的质因子，并获得了其约数个数的立方。相乘便得到了对应约数的约数个数。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('68fd4db9-d50b-4b7d-be85-dc00e376406e')"><img id="code_img_closed_68fd4db9-d50b-4b7d-be85-dc00e376406e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_68fd4db9-d50b-4b7d-be85-dc00e376406e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('68fd4db9-d50b-4b7d-be85-dc00e376406e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

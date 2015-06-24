@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出两个字符串，求最长公共子串的长度。</p>
 <p>分析：一道后缀数组的题，构造后缀数组有两种算法，dc3和倍增，效率分别为O(n)和O(nlogn)，但前者的实现较困难。后缀数组构造后获得了3个数组，sa[i]表示所有后缀排序后的排在第i位的后缀，rank[i]表示原串从第i位到结尾的那个后缀在sa中的排名是多少。height[i]表示sa[i]和sa[i + 1]所表示的字符串的最长公共前缀的长度。本题可以利用height来做，先把两个串连接，找最大height。但是记得在把两个字符串连接时加一个特殊字符作分隔。并注意判断两个sa起始位置不在一个串的内部。之所以要加这个分隔符，首先是可以保证我们所求的两个串的起始位置在sa中是相邻的，如果不加入这个分隔符，答案中两个子串在sa中可能中间会出现一些横跨两个字符串的后缀，遇到这种不相邻的情况，需要用height在两串之间的最小值外加复杂的两串是否合法匹配的判断，例如：aaba,abaaba。如果没有判断好可能会出现abaabaaba与abaaba的匹配。而且这样一来求区间内height最小值的复杂度至少是O(nlogn)（用rmq）。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('71eae502-6b19-43f8-a37e-3daf99998f6a')"><img id="code_img_closed_71eae502-6b19-43f8-a37e-3daf99998f6a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_71eae502-6b19-43f8-a37e-3daf99998f6a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('71eae502-6b19-43f8-a37e-3daf99998f6a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

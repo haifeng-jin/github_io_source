@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：平面上有许多点，每个点有一个权值。给定一个大小确定的矩形，边与x，y轴平行，平移这个矩形能圈住的点的权值之和最大是多少。</p>
 <p>分析：线段树 c++ac g++re</p>
 <p>先把题目转化一下，用矩形的中心点来描述这个矩形的位置。并对每个点建立一个矩形中心点的活动范围，即矩形中心点在这个范围内即可覆盖到该点，建立方法就是以每个点为中心画一个与题中矩形大小相等的矩形。现在点变成了矩形，矩形变成了点。我们要求的是找一个位置来放这个点使得它在最多的矩形内部，即该点的矩形重叠层数最多。</p>
@@ -170,16 +170,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -202,13 +196,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

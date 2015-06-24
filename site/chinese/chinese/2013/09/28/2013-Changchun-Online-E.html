@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一个字符串，要从头、尾和中间找出三个完全相等的子串，这些串覆盖的区间互相不能有重叠部分。头、尾的串即为整个字符串的前缀和后缀。问这个相同的子串的最大长度是多少。</p>
 <p>分析：利用KMP算法中的next数组。next数组有一个性质，如果next[b]指向a。a&lt;b。那么 以a作为结尾的原串前缀 是 以b作为结尾的原串前缀 的后缀。</p>
 <p>那么如果b是原串的最后一位，那么以b结尾的前缀就是原串，则a结尾的前缀与一个原串的后缀相等。</p>
@@ -229,16 +229,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -261,13 +255,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

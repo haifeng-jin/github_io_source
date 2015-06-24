@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：把时间转换为公制，给普通的出年月日时分秒，然后从2000/1/1开始是公制的时间起始点，每天有10小时，每小时有100分，每分有100秒计算，问给出的普通的时间点，在公制中对应的时间点的公制表示是多少。</p>
 <p>分析：难点在于给出年月日，统计过了多少天。</p>
 <p>本题以2000年为起点恰为闰年。我们可以先将2000年刨除，从2001年开始，2001年是一个崭新的400年的开头，所以就恰好符合除法规律，例如2008年是2001年开始的第8年，8／4＝2，2001～2008出现过2个闰年，2009年，9／4＝2，出现过两个闰年。所以从2001年起（包括2001年）到n年（包括n年），所包含的闰年数可以直接通过除法求得，设x= n - 2001 + 1;则闰年数＝x/4-x/100+x/400;对于本题中的year来说，n= year-1;</p>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

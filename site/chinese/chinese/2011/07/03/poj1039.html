@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：几何计算，给出一个管道（一条从左到右的折线，与它向下移动1后的折线构成），问管道最左边发出的光线所能到达的最远位置的横坐标是多少。</p>
 <p><img src="http://poj.org/images/1039/pipe.gif" alt="" /></p>
 <p>分析：容易知道，要求一个能到达最远的光线，这条光线一定是经过至少两个折线的折点（每个这点可能是上面折线的，也可能是下面折线的），那么我们就每次枚举两个管道折点，求一直线看该直线与管道边缘线段交点。在求的过程中，可以从左到右依次判断是否与各个折点的横断面相交，然后可以得知是否会与管道壁相交。通过直线在横断面对应横坐标的位置的纵坐标高于还是低于横断面。可以判断其与那个管道壁相交，求交点即可。然后在所有交点中找一个横坐标最小的。</p>
@@ -160,16 +160,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -192,13 +186,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

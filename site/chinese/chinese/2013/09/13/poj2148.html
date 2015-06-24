@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出若干个没有公共面积的多边形，几个多边形可能属于同一个国家，要求给这个地图染色，同一个国家用相同的颜色，相邻国家不能用相同颜色。问最少需要多少种颜色。</p>
 <p>分析：计算几何+搜索。先判断哪些多边形是相邻的(这里只有一个公共点的不算相邻)。对于两个多边形，两两比较他们所有的边，看是否有重合部分。建好图后，枚举颜色数量（也可二分查找），并判断这些颜色是否可行。判断过程用搜索。搜索的方法是，n个点，第一层确定第一个点的颜色，第二层确定第二个点的颜色，以此类推，每次要向下递归前先判断当前染色是否产生冲突。而不是向二分图染色那样染搜相邻的点。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('99849bb5-b349-4db5-889d-d85a6ae58bda')"><img id="code_img_closed_99849bb5-b349-4db5-889d-d85a6ae58bda" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_99849bb5-b349-4db5-889d-d85a6ae58bda" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('99849bb5-b349-4db5-889d-d85a6ae58bda',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
@@ -386,16 +386,10 @@ map</span>&lt;<span style="color: #0000ff;">string</span>, <span style="color: #
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -418,13 +412,9 @@ map</span>&lt;<span style="color: #0000ff;">string</span>, <span style="color: #
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

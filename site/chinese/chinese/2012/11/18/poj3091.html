@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给一个三脚阵，第i行有i个点。皇后可以攻击三脚阵中六方向上的所有点，给定三脚阵的边长n，已知最多可以放floor((n * 2 + 1) / 3)个互不冲突的皇后，要求给出一种方案。</p>
 <p><img src="http://poj.org/images/3091_1.png" alt="" /></p>
 <p>分析：根据题中数据找规律，进行构造，n&lt;3的是特殊情况，每个点坐标用两个值表示，[i,j]表示第i行的第j个点，我们发现把这(n * 2 + 1) / 3个放皇后的坐标，从右往左看，发现i是从n开始每次递减1。从左往右看j的变化规律是1,3,5,7&hellip;&hellip;2,4,6,8&hellip;&hellip;，先奇数从1递增，然后偶数从2递增，那么分界线在哪呢？就是i&gt;=j的时候是奇数，i增长慢但起点高，j增长快但起点底，j必然在某一点超越i，在超越之前j是奇数，超越之后j是偶数。</p>
@@ -204,16 +204,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -236,13 +230,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

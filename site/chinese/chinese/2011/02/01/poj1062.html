@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：每个人都有一个物品，对应一定的钱数，想要得到此物品可以直接出钱，也可以通过用其他人的物品并添加一些钱来交换，问要得到酋长的物品最少需要多少钱？另外，每个人都有一个等级，要求和你交易的人中不能有任何两人的等级相差m以上。</p>
 <p>分析：我们可以把本题理解为，我们要买一号物品，而一个物品的一部分价值可以转化为别的物品，我们通过购买别的物品和加钱来购买获得一号物品。所以我们可以把需要加的钱数作为该物品到别的物品的一条边，走过这条边，我们要花一些钱，然后我们只需要购买现在所在结点的物品即可。这样就把问题转化为最短路问题，用dijkstra就可以了。</p>
 <p>本题还有个等级制度的问题。我们可以每次枚举一个宽为m的等级区间，忽略不在区间内的点，进行dijkstra。</p>
@@ -251,16 +251,10 @@ int main()
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -283,13 +277,9 @@ int main()
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

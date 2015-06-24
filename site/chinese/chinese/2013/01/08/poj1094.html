@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：有一些未知数各不相等，给出一些两两比较的大小关系，问到第几个关系开始可以确定整体排序或出现矛盾，再或者所有关系都用过了也无法确定整体排序。</p>
 <p>分析：闭包传递，我们每获得一个比较关系就更新我们已知的关系库，关系库中要记录所有我们现在已知的能比较大小的关系对。一条大小关系a&lt;b的信息可以给我们提供如下信息：</p>
 <p>1.a&lt;b</p>
@@ -264,16 +264,10 @@ Result work(</span><span style="color: #0000ff;">int</span> a, <span style="colo
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -296,13 +290,9 @@ Result work(</span><span style="color: #0000ff;">int</span> a, <span style="colo
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

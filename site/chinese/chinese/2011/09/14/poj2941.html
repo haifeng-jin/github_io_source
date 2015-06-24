@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给一个n*n矩阵，问选n个格，每行一个每列一个，是否任意选法的加和都相等。</p>
 <p>分析：我们认为我们只选择对角线上的n个格。这样任意两种选法可以通过行列交换来得到。如果要选(1,2)(2,1)可以交换1,2两列，然后仍然选择对角线。由于有些情况可能需要多次交换，这样就要求任意一次交换不能影响加和。所以矩阵中任意的矩形的四角都满足a+c=b+d。即a-b=c-d。即任意两列，所有对应位差相等。有一个简便的判别方法，任意两列对应位差相等&lt;=&gt;所有相邻列对应位差相等。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('8d43ec56-f58c-4476-83d2-67f36c0fb1eb')"><img id="code_img_closed_8d43ec56-f58c-4476-83d2-67f36c0fb1eb" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_8d43ec56-f58c-4476-83d2-67f36c0fb1eb" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('8d43ec56-f58c-4476-83d2-67f36c0fb1eb',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

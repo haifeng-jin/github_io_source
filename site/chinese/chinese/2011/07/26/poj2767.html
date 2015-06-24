@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：一些圆台形(中空，厚度忽略不计)的碗，罗在一起，问最小高度是多少。</p>
 <p>分析：枚举所有情况，每放一个碗，就要记录其碗底的高度。记录碗底高度的方法是，枚举下面所有的碗，把想象中把这个碗与下面的碗直接叠放在一起，看碗底的高度，取最大值，得到这个碗底的真实高度。每次罗起了所有的碗，就根据每个碗碗底的高度计算其碗顶的高度，并取最大值，即为本次罗碗的高度。不断更新最终结果，取最小值。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('3d2bacb5-934d-40c9-8a8f-cfa4bd64142b')"><img id="code_img_closed_3d2bacb5-934d-40c9-8a8f-cfa4bd64142b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_3d2bacb5-934d-40c9-8a8f-cfa4bd64142b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('3d2bacb5-934d-40c9-8a8f-cfa4bd64142b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

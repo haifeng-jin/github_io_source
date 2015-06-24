@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>差分约束系统</p>
 <p>差分约束系统有两种方式可以求解，最短路和最长路。当我们把不等式整理成d[a]+w&lt;=d[b]时，我们求最长路。整理成d[a]+w&gt;=d[b]时，我们求最短路。当求最短路时，我们通常要把各点距离初始化为正无穷，求最短路，把各点距离逐渐减小，直到符合所有不等式。也就是开始各点不符合条件，后来通过减小变得符合了，所以一定是符合条件的最大值。既然是求最大值，并且是减小各点距离，也就是把各点由数轴的右侧向左侧拉，所以我们一定要选择一个最终在数轴最左侧的点，并初始化为0，把所有正无穷的点拉近到符合不等式。最长路同理。</p>
 <p>另外本题我的做法判断impossible的情况是不完全的，暂未发现谁处理得比较正确。我的代码只能判断起点可达的点是否有负环。</p>
@@ -156,16 +156,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -188,13 +182,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

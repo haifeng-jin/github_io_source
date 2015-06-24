@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：有一个矩阵，某些格有人，某些格有房子，每个人可以上下左右移动，问给每个人进一个房子，所有人需要走的距离之和最小是多少。</p>
 <p>分析：最小费用最大流每个人一个点，每个房子一个点，每个人到所有房子加容量为1费用为二者距离的边，源到所有人加容量为1费用为0的边，所有房子到汇加容量为1费用为0的边。因为没有初始化ne，wa了两次。渐渐开始理解网络流的题型了，是一种可以自由分配，求最优分配方案的题。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('9303702b-f1dc-45aa-a73c-fff04a366677')"><img id="code_img_closed_9303702b-f1dc-45aa-a73c-fff04a366677" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9303702b-f1dc-45aa-a73c-fff04a366677" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9303702b-f1dc-45aa-a73c-fff04a366677',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给一棵n个节点的无根树，问去掉那一点可以使各连通分支中的节点数均&lt;=n/2。</p>
 <p>分析：任意选定一个根，用自底向上的方法记录每棵子树的节点数。这样对于每个节点就可以通过它子树的节点数量迅速地判断它是否符合条件，别忘了还要判断它上面那个它祖宗所在的连通分支（节点数为n减去其各个子树的连通分支数再减1）。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('57870756-4a07-4c82-81b6-c739032ded4a')"><img id="code_img_closed_57870756-4a07-4c82-81b6-c739032ded4a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_57870756-4a07-4c82-81b6-c739032ded4a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('57870756-4a07-4c82-81b6-c739032ded4a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -277,16 +277,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -309,13 +303,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

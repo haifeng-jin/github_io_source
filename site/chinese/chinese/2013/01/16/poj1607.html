@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：一叠卡片，用一种摆法，要求每张卡片短边与桌檐平行，并让他们超出桌檐尽量多，问能超出桌檐多少。</p>
 <p><img src="http://s9.sinaimg.cn/middle/82be9d91gc7c035bb9468&amp;690" alt="POJ&nbsp;&lt;wbr&gt;1607" /></p>
 <p>分析：对于n张卡片的最佳摆法，我们只需要在n-1张卡片的摆法下面加一张边缘与桌檐重合的卡片，并将所有卡片一起向桌檐外移动。对于一种最佳摆法，其中心一定在桌檐上，所以一定符合杠杆原理，支点是桌檐。那么对于n张卡片的情况，我们假设第n张向外移动了x，那么前n-1张的重心就在桌檐外x，因为他们的重心在n-1张卡片时原本在桌檐上。第n张卡片的重心在桌檐内0.5-x处，那么我们可以列出杠杆平衡方程：(0.5-x)*1=x*(n-1)</p>
@@ -178,16 +178,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -210,13 +204,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

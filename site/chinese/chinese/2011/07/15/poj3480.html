@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：n堆石子，两人轮流操作，每次操作只能选定其中一堆，并取走若干个（&gt;=1个）。谁取走最后一个谁输。给定一个状态，问先取的赢还是后取的赢。</p>
 <p>分析：看题目类似nim博弈问题。所以想到sg函数，nim的sg是把格堆石子数抑或起来，看是否为0。本题我们就自己写出一些能解决的状态（可以手动判断np状态），观察各堆总数抑或结果和必胜必败态的联系。发现一个规律，sg函数为0则必胜，否则必败。只有一种特殊情况不符合该规律，就是所有堆都为1。</p>
 <p>在网上看到了一篇证明，在此复制过来，简单加工一下。</p>
@@ -160,16 +160,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -192,13 +186,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：ABC三个物种构成循环捕食的食物网。给出一些捕食与同类 关系，询问一些关系是否正确。</p>
 <p>分析：并查集，但要随时记录并更新每个元素与其父亲之间的关系。用rank数组记录与父亲的关系。若为rank[x]==1则x吃其父亲，0表示同类，-1表示被吃。我们认为并查集中每个集合中的所有的动物都站在一条数轴上，每个点可以站多个动物，他们占据了一些连续的点。若b在a的右邻位则b吃a，若a,b相距是3的整数倍，则ab同类。这样以来rank数组的意义就变成了该动物与其父亲的在数轴上的差距（有正负）。当我们确定了a,b到祖先的距离时，只需要用rank[a]-rank[b]就可以获得a到b的距离。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('d9c2e930-3148-4a47-90bc-0395f6cb67c5')"><img id="code_img_closed_d9c2e930-3148-4a47-90bc-0395f6cb67c5" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d9c2e930-3148-4a47-90bc-0395f6cb67c5" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d9c2e930-3148-4a47-90bc-0395f6cb67c5',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

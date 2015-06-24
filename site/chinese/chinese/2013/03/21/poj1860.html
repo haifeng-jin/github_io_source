@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：有若干种货币，某些币种之间可兑换，给出各种兑换时的汇率和手续费，任何兑换都是双向的，但是两个方向的汇率和手续费可能不同，并告知你现在拥有的货币种类（只拥有一种）及数量，问是否可以通过货币建兑换最后回到本币种后钱数有所增加。</p>
 <p>分析：普通的货币兑换一般都是用floyd。但是本题除了汇率还多出一个条件&mdash;&mdash;手续费，所以不能简单地使用floyd。我用的是spfa求最长路，检查是否有环路。从自己的币种出发，如果发现正环，那么则可以不停地走环路以增加自己手中的价值，又因为所有的路都是双向的，所以当手中的价值增加的足够多之后是一定可以回到自己原有的币种的。又因为正环能使价值达到正无穷，所以回去之后价值一定增加。所以本题转化为判断是否有正环。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('20f704da-edd9-4b33-9084-60383caffc50')"><img id="code_img_closed_20f704da-edd9-4b33-9084-60383caffc50" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_20f704da-edd9-4b33-9084-60383caffc50" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('20f704da-edd9-4b33-9084-60383caffc50',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -267,16 +267,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -299,13 +293,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

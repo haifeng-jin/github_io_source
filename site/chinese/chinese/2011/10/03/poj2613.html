@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出p,q,r,s，求c(p,q)/c(r,s)</p>
 <p>分析：利用组合数公式，写出整体的分子和分母（用数组标记，分子分母各有哪些数），把相同的数字约去。然后把分子乘上，分母除掉。但是这样直接乘除会损失精度。所以我们定义double ans = 1;然后当ans&lt;1时算乘法，ans&gt;=1时算除法，以控制ans始终在1不会和1相差10000倍以上，以保证精度。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('d9bcf5d1-5334-40d8-8a74-db24e1976b43')"><img id="code_img_closed_d9bcf5d1-5334-40d8-8a74-db24e1976b43" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" /><img style="display: none;" id="code_img_opened_d9bcf5d1-5334-40d8-8a74-db24e1976b43" class="code_img_opened" onclick="cnblogs_code_hide('d9bcf5d1-5334-40d8-8a74-db24e1976b43',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" /><span class="cnblogs_code_collapse">View Code </span>
@@ -156,16 +156,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -188,13 +182,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

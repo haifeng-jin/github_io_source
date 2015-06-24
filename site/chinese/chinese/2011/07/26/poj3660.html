@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：牛之间有绝对的强弱，给出一些胜负关系，问有多少头牛可以确定其绝对排名。</p>
 <p>分析：有人说叫闭包传递。这题就是用一种类似于floyd的算法，开始时，如果a胜b则由a到b连一条边。这样所有a能走到的点都是排名在a以后的。所有能走到a的点都是排名在a以前的。用floyd，求出每个点能到达的点。如果有一个点，排名在它之前的和排名在它之后的点之和为n-1，那么它的排名就是确定的。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('cfa88d56-6de6-41d9-82b7-40481ffe1cec')"><img src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" class="code_img_closed" id="code_img_closed_cfa88d56-6de6-41d9-82b7-40481ffe1cec" /><img src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" class="code_img_opened" id="code_img_opened_cfa88d56-6de6-41d9-82b7-40481ffe1cec" onclick="cnblogs_code_hide('cfa88d56-6de6-41d9-82b7-40481ffe1cec',event)" style="display: none;" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

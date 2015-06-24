@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：一个由多个圆柱体摞起来形成的蛋糕，要求上边的圆柱的半径和高都比下边的圆柱大。给定圆柱的体积，问除去下表面之外的圆柱面积最小是多少？</p>
 <p>分析：深度优先搜索。由最底层的蛋糕向上逐层搜索，每次迭代则蛋糕向上一层。所以搜索深度确定，为蛋糕的层数。</p>
 <p>与通常的深度优先搜索不同的是，本题的每个搜索状态由两个量来标明：半径和高。因此向下一个状态迭代时需要用一个二重循环来枚举接下来状态的半径和高。</p>
@@ -226,16 +226,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -258,13 +252,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

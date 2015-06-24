@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定一个无向连通图，问该图的最小生成树是否唯一。</p>
 <p>分析：有一个定理，如果该图存在次小生成树（与原最小生成树不同，但长度小于等于原最小生成树），则一定可以通过从原最小生成树中去掉一个边并再入一个边得到。</p>
 <p>经过思考我们会发现，如果要加入一个v1和v2之间的新边，那么则应去掉原有的两点间通路（是唯一通路）中的一条边才能构成生成树。那么为了保证生成树最小，则应去掉原通路上最长的那条边。</p>
@@ -292,16 +292,10 @@ vector</span>&lt;vector&lt;XEdge&gt; &gt; G(maxn); <span style="color: #008000;"
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -324,13 +318,9 @@ vector</span>&lt;vector&lt;XEdge&gt; &gt; G(maxn); <span style="color: #008000;"
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

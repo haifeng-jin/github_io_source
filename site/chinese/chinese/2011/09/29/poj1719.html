@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>二分图匹配</p>
 <p>题意：给定一个r*c的棋盘，其中每列有2个白色格子，其余为黑色。要求选出c个白色格子，且每列一个，且每行至少一个。问能否实现，给出方案。</p>
 <p>分析：如果r&gt;c则必定无法满足，因为即使每列一个，均位于不同行，还是会有某些行没有被选中的格子。对于其余情况，先进行简单的二分图匹配（每行作为1点构成第一点集，每列作为1点构成第二点集，每个白色格子作为连接其行列点的边），如果每行都能匹配上则首先可以保证每行都有选中的格子，当然此时可能有一些列还有没有被选中的格子，只要在该列里随便选1个白的就行了，不会影响结果。</p>
@@ -156,16 +156,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -188,13 +182,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

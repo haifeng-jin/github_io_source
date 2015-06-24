@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>规律题</p>
 <p>题意：n个人站成一圈，从第一个人开始，每隔一个杀一个，问哪个人最后被杀。</p>
 <p>分析：虽然题目中认为这些人是站成一圈一杀到底，但是我们可以认为这些人是站成一排，每次从第二个活人开始，或者从第一个活人开始，从左到右每隔一个杀一个，直到只剩一个活人。如果我们每次给活人从1开始编号，那么每次从第二个杀，则每个活人的编号会变为(i - 1)/2+1，从第一个则变为i/2。最后剩一个编号为1的人。我们要做的就是记录每次从第几个开始杀，然后逆推，将编号为1的最后一个活人的编号按照刚才的规则，并根据每次从第一还是第二开始杀，逆推出其原编号。</p>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：1~n,乱序排列，告诉每个位置的前面的数字中比它小的数的个数，求每个位置的数字是多少</p>
 <p>分析：用树状数组来做，第i位如果是1，表示i在数列中的位置已经确定。全部读入到f[]后，从最后向前依次求出是几，因为每次对于未确定的最后一个数来说是可以根据它前面有多少数字比它小以及之前确定的数字（在它后面的数字）而确定它是几的。二分查找当前位置填几，设这个数字为a，应满足树状数组求和结果sum(a)，即后面已经填好的比a小的个数，加上f[i]，即前面比a小的个数，等于a-1。猜大了则结果大于a-1，猜小了则小于。找到后把树状数组第a位标1。时间复杂度为O((logn)^2 * n)</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('4496ba2a-f168-415a-b730-66d24bcd9ad5')"><img id="code_img_closed_4496ba2a-f168-415a-b730-66d24bcd9ad5" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4496ba2a-f168-415a-b730-66d24bcd9ad5" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4496ba2a-f168-415a-b730-66d24bcd9ad5',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

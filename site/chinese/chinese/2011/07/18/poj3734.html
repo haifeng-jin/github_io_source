@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给n个block涂4种颜色，要求其中red和green的block为偶数，其余随意。问有多少种涂法。</p>
 <p>分析：这题我们可以先认为是一道dp题，设f[maxn][4]，f[i][j]表示有i个block时，green和red的奇偶性为状态j时（及把j化为二进制第一位表示green是否为奇数，第二位对应red）。则我们可以由f[i - 1]推出f[i]。递推的过程是将f[i-1]的各位进行一些加法运算并附给f[i]的对应位。这个过程我们可以用矩阵来解决。f[i-1]是一个1＊4的矩阵，乘以一个4*4的矩阵之后得到一个1*4的矩阵即为f[i]。线代的知识这里就不说了。本题f[0]={1,0,0,0}； 4*4矩阵＝{ {2,1,1,0},{1,2,0,1},{1,0,2,1},{0,1,1,2} };</p>
 <p>化为矩阵后有个好处就是可以用快速幂把n次运算改为logn次运算。</p>
@@ -156,16 +156,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -188,13 +182,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

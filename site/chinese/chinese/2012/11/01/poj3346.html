@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出一张地图矩阵，上面有些墙和石头，在空地上行走不需要时间，墙不可穿越，石头可以慢慢打破也可以用工具打破，用工具打破不需要时间，慢慢打破需要相应的时间。每个入口对应不同的携带工具的数量，且只能从一个入口进入，再不能去别的入口。问要拿到宝藏需要的最少时间。</p>
 <p>分析：带堆优化的最短路。建图比较复杂，图中每个节点对应矩阵中的一个格的一种工具状态，矩阵中走到每个格身上可能剩余的工具数量为0～26个，因此矩阵中每个格对应最短路图中的27个节点，每个节点有两个属性一个是地图中的位置，一个是剩余工具的数量。下面向图中加边，矩阵中a,b两格相邻，如果a是石头，那么我们由节点(a,k)向节点(b,k)引边（k=0~26）,权值为破坏a石头需要消耗的时间。我们再由节点(a,k+1)向节点(b,k)引边，权值为0。如果a不是石头那么我们由节点(a,k)向节点(b,k)引边（k=0~26）,权值为0。要对矩阵中所有不是墙的相邻点进行加边操作，包括入口。然后我们加入一个超级源，由超级源向各个入口对应的相应节点引边。例如：入口a有x个工具，那么我们由超级源向边(a,x)引一条权值为0的边。然后我们只需要用带有堆优化dijkstra来求超级源到宝藏的最短距离即可。这样建图相当于把在遇到一个石头时候的两种选择，变成了两条岔路，两条路也分别对应了不同选择所需要消耗的时间。相当于我们把矩阵看成一个三维空间，一座大楼，前两维就是原矩阵的两维，而第三维是高度，对应了改格剩余的工具数量。然后从每块石头的位置可以不花时间走到其下一层的四方向相邻格，也可以花费一定的时间走到同层的相邻格。超级源是在地面的一个跳板，可以跳到各个入口对应的大楼的隔间中，我们的目的是从超级源用最快的速度走入大楼的宝藏对应的柱状空间中。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('a339a1a6-3f1c-47f7-a0f3-7ac5fd465073')"><img id="code_img_closed_a339a1a6-3f1c-47f7-a0f3-7ac5fd465073" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a339a1a6-3f1c-47f7-a0f3-7ac5fd465073" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a339a1a6-3f1c-47f7-a0f3-7ac5fd465073',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -362,16 +362,10 @@ priority_queue</span>&lt;Elem&gt;<span style="color: #000000;"> pq;
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -394,13 +388,9 @@ priority_queue</span>&lt;Elem&gt;<span style="color: #000000;"> pq;
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

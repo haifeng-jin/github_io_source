@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出n,m，求n中取m个的排列数抛掉末尾的0后的最后一位。</p>
 <p>分析：题目可以转化为求一段连续数列的乘积的最后非0位。乘积的末尾之所以会有0，是因为数字中有包含2和5的倍数，2和5这两个质因子组成了0。我们先将所有2和5质因子去除，求其余数字乘积的最小位。我们将2的倍数全部取出，把每个数字除以2，这样就得到了一个小一些的连续数列，这样就转化为了一个子问题，用相同方法求其最小非0位即可，具体方法稍后讲。原连续数列中去除2的倍数的同时5的偶数倍也被去除了，还剩下所有的奇数，对于这个奇数数列我们将5的奇数倍（以5结尾的数字）取出，对于这些数字除以5之后得到了一个较小的连续奇数列，转化为了一个子问题。此时原连续数列中还剩下以1,3,7,9结尾的数字，这些数字用找循环节的方式求乘积最小位即可。到目前为止，对于连续数列的求解被我们分为3部分，一部分直接计算（1379结尾的），另外两部分转化为子问题，一个子问题是求连续数列的乘积最小非0位（2的倍数），另一个子问题是求连续奇数列的最小非0位（以5结尾的）。对于奇数列的求解，我们把数列分为3部分，一部分直接求解（1379结尾的），另一部分转化为子问题（以5结尾的）。这样递归下去即可求出原连续数列乘积抛掉质因子2和5之后的最小位。我们在递归过程中可以记录被去掉的2和5的个数。现在我们试着将这些2和5乘回去。如果5比2多，那么原数列最小非0位是5。如果2比5多，那么相当于除去2和5的乘积最小位乘以比5多出来的那些2，同样可以用找循环节的方式求解。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('2730ff43-c09c-4c2d-b633-e487c1e5b650')"><img id="code_img_closed_2730ff43-c09c-4c2d-b633-e487c1e5b650" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2730ff43-c09c-4c2d-b633-e487c1e5b650" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2730ff43-c09c-4c2d-b633-e487c1e5b650',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -256,16 +256,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -288,13 +282,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

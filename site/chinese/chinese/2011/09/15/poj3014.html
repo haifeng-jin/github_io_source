@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：把n个一样的蛋糕放进m个一样的盘子，有多少种方法。</p>
 <p>分析：dp，f[i][j]表示i个盘子装j个蛋糕的方法数。分两种情况，有空盘方法数为f[i - 1][j]（撤掉一个空盘），无空盘的方法数为f[i][j - i]（每个盘子撤掉一个蛋糕）。采用滚动数组。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('ae2a8d76-4014-4d42-956e-3150544b8ff2')"><img id="code_img_closed_ae2a8d76-4014-4d42-956e-3150544b8ff2" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" /><img style="display: none;" id="code_img_opened_ae2a8d76-4014-4d42-956e-3150544b8ff2" class="code_img_opened" onclick="cnblogs_code_hide('ae2a8d76-4014-4d42-956e-3150544b8ff2',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

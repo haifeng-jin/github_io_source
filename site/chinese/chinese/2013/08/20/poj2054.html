@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定一棵树，每个节点有一个权值，现要求给这些节点进行排列，设排列后的节点顺序为v1~vn，它们的权值是w1~wn，那么我们要求一种排列使得w1*1+w2*2+...+wn*n最小。还有一个限制就是这个排列满足每个节点的父节点都排在该结点之前。</p>
 <p>分析：试想，如果没有父节点排在节点之前的限制，那么这个题目非常简单，只需要将结点按照权值从大到小排列即可。加上了这个限制之后，如果权值最大的那个节点一旦满足了条件（父节点被排在了之前的某个位置），那么这个权值最大的节点一定要紧挨着这个父节点，即把这个权值最大的节点排在它所能排的最前面的位置。因为对于这个节点如果不受限制应该排在第一位，而有了限制，在满足了限制之后也应把它尽可能地排在前面。所以它一定是挨着父节点的。那么现在在最终的排列中我们确定了两个节点的前后相邻关系，将他们绑定在了一起。</p>
 <p>试想如果保持这个相邻关系的同时去掉其他节点的限制，那么我们应该如何排列呢？我们假设绑定在一起的两节点是a和b。现有一个另外的节点x，我们看两种排列xab,abx对最终的计算结果有什么影响。x*i+a*(i+1)+b*(i+2); a*i + b*(i+1) + x*(i+2)。后者减去前者等于2x-(a+b)。即将x从ab之前挪到ab之后，ab各左移1位，结果减小a+b。x右移2位结果增加2x。因此两者谁在前谁在后我们只需要比较a+b和2x即可，也可以比较(a+b)/2和x。</p>
@@ -272,16 +272,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -304,13 +298,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

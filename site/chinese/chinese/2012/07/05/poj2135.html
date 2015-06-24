@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定一个无向图，要从1点到n点再返回1点，每条边最多走一次，问最短需要走多远。</p>
 <p>分析：最小费用最大流，把题意看成是要找两条无交集的从1到n的路线，使距离和最小。图中的点和边就是网络流图中的点和边。设置一个源，接到1点，设置一个汇，从n点接到汇。为保证无交集，我们把每条边的流量设置为1，而源发出的流量和汇接收的流量均为2。每条边的费用就是该边在原图中的权值。</p>
 <p>注意：有重边，所以要用邻接表。因为是无向图，所以要在加边时，原图中的一条边要变成网络流图中的两条边（如果把反向负权费用边也算上就总共4条边）。</p>
@@ -267,16 +267,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -299,13 +293,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

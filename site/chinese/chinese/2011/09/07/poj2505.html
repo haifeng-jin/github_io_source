@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>博弈</p>
 <p>题意：两个人轮流用2~9来乘n，使n不断扩大，n开始为1。当给一个固定值k，谁先使n超过k谁赢。</p>
 <p>分析：能到达必败态的状态为必胜态，只能到达必胜态的状态为必败态。对于给定的k，n&gt;=k时为必败态，所有能到达这些必败态的n为必胜态，这些必胜态中最小的是ceil(k/9.0)。凡是大于它的都可以直接到达必败态。然而有些状态只能到达必胜态，就是那些乘二都要进入必胜态的数字，这些数中最小的是ceil(ceil(k/9.0)/2.0)。这样我们又得到了一批必败态，我们只要按照这种方法不断地由必败推必胜，由必胜推必败，即可知道1是必败还是必胜。也就知道了stan是赢还是输了。</p>
@@ -156,16 +156,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -188,13 +182,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

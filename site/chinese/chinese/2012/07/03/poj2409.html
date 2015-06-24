@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定颜色种数和环上的珠子总数，问有多少种染色方案（通过旋转和翻转相同的算同一种）。</p>
 <p>分析：polya定理。在这里只谈一下polya定理是如何应用的。对于排成一排的带编号的小球，按照某一种方案改变其中一些球的放置顺序，可以称之为置换。每一种置换方法可以用两排数字來表示，第一排数字和第二排数字一一对应，第一排数字表示小球的原来位置（1～n），第二排数字表示小球交换后的位置。现在我们有n个小球，m种颜色。有k种置换方法，我们认为能通过置换方法交换位置后变成同一种染色情况（颜色的排列状况相同，忽略小球编号），则我们认为这些互相通过置换能达到的状态为同一种染色方法。我们现在要求总共有多少种染色方法。要计算方法数，我们先要计算k种置换方法中每种置换方法中含有的环数，即建立一个图，有n个点，把每个置换方法两排数字中的上下一一对应的数字对看成边的起点和终点，计算这个图中有几个环。我们设环数分别为c1~ck。那么染色方法数为(m^c1+m^c2+...+m^ck)/k。以上就是polya定理，这里要注意的是置换方法集合必须是群，需要满足封闭性，即如果把通过该集合中的若干个方法连续进行置换压缩成一个置换方法（用两排数子表示），那么这种新的置换方法也必须属于该集合。</p>
 <p>这道题可以这样以来就是一道赤裸裸的polya定理题了。</p>
@@ -192,16 +192,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -224,13 +218,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

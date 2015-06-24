@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定一个矩阵，其中有一些地方有水，用一些长度任意，宽度为1的木板盖住这些有水的地方，问至少需要几块板子。</p>
 <p>分析：二分图最小点集覆盖。二分图建图方法如下，把每段连续的横向的水洼看成是一个X集合中的点，每段连续的纵向的水洼看成是Y集合中的点。矩阵每个有水单元看成是一个边，它连接了它所在的横向水洼在X集合中对应的点和它所在的纵向水洼在Y集合中对应的点。（对于一段连续的水洼，如果要铺木板，一定要铺得尽量长）这样最小点集覆盖的意义就变成了，矩阵中的每个有水的单元（二分图中的每条边）所在的横向和纵向的水洼（在X集合和Y集合中的两个端点）至少有一个被覆盖。求至少需要选几个点。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('80f7690c-8598-4f87-a55f-b707e725c3d0')"><img id="code_img_closed_80f7690c-8598-4f87-a55f-b707e725c3d0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_80f7690c-8598-4f87-a55f-b707e725c3d0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('80f7690c-8598-4f87-a55f-b707e725c3d0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -273,16 +273,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -305,13 +299,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

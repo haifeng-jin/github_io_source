@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定20个砝码，分别为3^i（i=0~19)。给定一个物品，放在天平左盘，左右皆可放砝码，如何放能平衡。</p>
 <p>分析：先将给定物品的重量化为3进制。我们要让两端平衡，即让两端的三进制数各位相等，每个砝码是3进制某一位上的一个1。我们需要在左盘某些位加1（即向左盘加对应砝码），使得与原物品的重量之和化为3进制后各位都不为2，然后在右盘现在全为0，可直接将某些位变为1（即向右盘加对应砝码）凑出左盘的只有0和1的3进制数。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('2e4b5a6f-bd53-450f-9e7f-cf10e5ad2a2c')"><img src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" class="code_img_closed" id="code_img_closed_2e4b5a6f-bd53-450f-9e7f-cf10e5ad2a2c" /><img src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" class="code_img_opened" id="code_img_opened_2e4b5a6f-bd53-450f-9e7f-cf10e5ad2a2c" onclick="cnblogs_code_hide('2e4b5a6f-bd53-450f-9e7f-cf10e5ad2a2c',event)" style="display: none;" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

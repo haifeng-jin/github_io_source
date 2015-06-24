@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给n,k，求c(n,k)的约束个数。</p>
 <p>分析：用组合数学的方法求因子个数，我们分别对n!,(n-k)!,k!分解质因数。c(n,k)=n!/((n-k)!k!)，把对应因子个数相减，我们就得到了c(n,k)分解的结果。把取每个质因子的方法数相乘即为所求。所以我们需要一种快速分解x!的方法。我们可以枚举所有x!中存在的素因子，对于每个素因子求个数的方式来分解。而对于一个素因子p，我们求在x!中的方法如下，1~x中有x/p个数可以被p整除，所以x!中至少有x/p个p。然后我们再看有多少个p^2。能被p^2整除的数一定能被p整除。所以我们先将1~x中不能被p整除的数刨除。再将剩下的数除以p。现在还能被p整除的数，原来一定包含p^2。而现在剩下的数是1~x/p，问题被我们转化为了一个子问题。(x/p)!中包含多少p。这样递归求解即可。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('9e9d826a-df17-4fb4-bcf4-d23265517ef3')"><img id="code_img_closed_9e9d826a-df17-4fb4-bcf4-d23265517ef3" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" /><img style="display: none;" id="code_img_opened_9e9d826a-df17-4fb4-bcf4-d23265517ef3" class="code_img_opened" onclick="cnblogs_code_hide('9e9d826a-df17-4fb4-bcf4-d23265517ef3',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：一个数列，每次操作可以是将某区间数字都加上一个相同的整数，也可以是询问一个区间中所有数字的和。（这里区间指的是数列中连续的若干个数）对每次询问给出结果。</p>
 <p>分析：线保留型线段树，线段树中每个节点有两个变量：增量与和，一个记录当前节点对应区间被整体增加了几，另一个记录该区间的真子区间被增加了之后的和是多少。（该区间数字当前和=和+增量&times;区间长度）</p>
 <p>修改时更新路线上不完整覆盖的节点的和变量以及恰好完整覆盖的节点的增量变量。询问可以通过回溯过程通过各节点两变量值求得。</p>
@@ -257,16 +257,10 @@ cnode    tree[maxn </span>* <span style="color: #800080;">3</span><span style="c
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -289,13 +283,9 @@ cnode    tree[maxn </span>* <span style="color: #800080;">3</span><span style="c
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

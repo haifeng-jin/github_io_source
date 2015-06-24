@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给出n个5维坐标点，求最远两点的曼哈顿距离。</p>
 <p>分析：对于两维的情况，两个点(x1,y1)(x2,y2)之间的距离为|x1-x2|+|y1-y2|，可能取&plusmn;(x1-x2)&plusmn;(y1-y2)，假如真实的情况是(x1-x2)+(y1-y2)，那个在其他情况下算出来的关于这两个点的最大距离肯定比这个小（去掉绝对值符号了），这个式子除了对应同一维的两个值（如：x1和x2）是相减关系外（但不一定谁减谁）其余符号都是不确定的。我们可以把这个相减关系提取出来，变为(&plusmn;x1&plusmn;y1)-(&plusmn;x2&plusmn;y2)。(注意：这里x1和x2前面的符号是一致的，y1和y2前面的符号是一致的，这样才能保证对应值仍保持相减关系)。这样一来我们就可以看作每个点有一个权值&plusmn;x&plusmn;y。只要枚举每一维的分量前面的符号即可，对于每一次枚举算出所有的n个点中权值最大的和最小的，求差，更新答案求最大即可。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('7953632f-4864-461f-aaa6-e698f864e17d')"><img id="code_img_closed_7953632f-4864-461f-aaa6-e698f864e17d" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_7953632f-4864-461f-aaa6-e698f864e17d" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('7953632f-4864-461f-aaa6-e698f864e17d',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -157,16 +157,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -189,13 +183,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

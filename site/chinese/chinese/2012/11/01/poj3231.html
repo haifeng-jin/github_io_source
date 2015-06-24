@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>简单模拟，题意描述不清晰，我来仔细描述一下，flashget在下载一些文件，每个文件有一个初始大小，初始速度，最大速度。当一个文件下载结束后，他的速度（占用的带宽）会平均分配给别的任务（各文件的速度增加值相同），假设我们要把速度x分配给a个文件，那么就要给每个文件分配x/a的速度，前提条件是分配后该文件的速度不超过其最大速度。若超过了则不能给他分配这么多，只让它达到其最大速度即可。这样一来我们的下载速度就会有剩余，因为受到最大速度的限制，有些文件并没有被分配到x/a这么多的速度。对于剩余的速度怎么处理呢？就是除去那几个已经到达最大速度的文件，其余文件按照刚才的方法再分配一次剩余速度。模拟即可。这题精度很难控制，我开始试着用先将所有到达最大速度的进程先处理，最后再计算平均值的方法，居然是错的，理论上这种做法比上述做法精度高。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('c83d3d16-9e65-4907-b5bf-00959da17e31')"><img id="code_img_closed_c83d3d16-9e65-4907-b5bf-00959da17e31" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c83d3d16-9e65-4907-b5bf-00959da17e31" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c83d3d16-9e65-4907-b5bf-00959da17e31',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
 <div id="cnblogs_code_open_c83d3d16-9e65-4907-b5bf-00959da17e31" class="cnblogs_code_hide">
@@ -279,16 +279,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -311,13 +305,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

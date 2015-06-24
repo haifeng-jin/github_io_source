@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>树状数组</p>
 <p>题意：给定一棵树，某些节点上有苹果，多次询问各子树上的节点数，并且在询问的中途随时可能新增和删除苹果。</p>
 <p>分析：dfs遍历树的同时，对每个点标注时间，每个点有一个开始时间和一个结束时间，把这两个时间当做下标，该点的苹果个数（1或0）填入数组的两个对应位。子树中结点的时间段一定是根节点时间段的子段，所以求子树苹果数，只需求数组某区间的和即可。用树状数组比较快。</p>
@@ -256,16 +256,10 @@ int main()
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -288,13 +282,9 @@ int main()
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

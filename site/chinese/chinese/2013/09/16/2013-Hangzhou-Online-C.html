@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：驴和老虎，在一个矩阵的两个格子里，有各自的起始方向。两者以相同的速度向前移动，前方不能走时驴总是向右，老虎总是向左。他们不能超出矩阵边界也不能走自己走过的格子（但可以走对方走过的格子）。如果不能前进时转向后仍不能前进则永久停止运动，问两者是否相遇（同时出现在同一个格子里，同时出现在格子的边界上不算），若相遇给出相遇坐标。</p>
 <p>分析：模拟即可，每次将两者按其规则移动，并判断两者是否在同一个格子里。注意：起始点在同一个格子里也算相遇。转向不算时间，因为题里说二者速度始终相同。本来应该用面向对象的方式，但是比赛时不敢轻举妄动&hellip;&hellip;</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('c9d644ae-134e-4f25-9f4f-dae6f6b7e599')"><img id="code_img_closed_c9d644ae-134e-4f25-9f4f-dae6f6b7e599" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c9d644ae-134e-4f25-9f4f-dae6f6b7e599" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c9d644ae-134e-4f25-9f4f-dae6f6b7e599',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
@@ -263,16 +263,10 @@ Point tiger, donkey;
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -295,13 +289,9 @@ Point tiger, donkey;
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

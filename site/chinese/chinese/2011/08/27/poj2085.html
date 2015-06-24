@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：给定n、m，求1～n的一个排列，逆序数对数为m，且该排列的字典序最小。</p>
 <p>分析：若逆序数对数为m，则每个数右侧比其大的数的个数之和应为k=n*(n-1) - m（正序数对数）。我们可以想象，如果把k拆分成若干个数字的和，并把这些数字随意分配给n个位置，来代表该位置右侧比该位置上的数字大的数的个数，那么这定能构成一个逆序数对数为m的排列。若想要字典序最小那么就要尽量把小的数往前放。小的数也就是其右侧比其大的数较多的数。如果用拆分k的方法，则应该给第一个位置分配最大的数，然后给第二个位置分配最大的数&hellip;&hellip;然而每个位置分配的数是有限制的，因为对于位置i其右侧有n-i个数，也就是最多只能有n-i个数比它大，所以分配给该位置的数不能超过n-i。为了字典序最小我们就从左到右给每个位置分配其最大值，直至k被分配完了为止。这样就形成了一个字典序最小的逆序数对数为k的排列，但是我们并没有确切地知道这个排列是什么，只是知道了每个位置右侧比该位置上的数字大的数的个数。下面我们就来还原这个序列。这个分配k的方式有个特点，就是左面都是最大值，右面都是0。所以对于左面连续的最大值部分，我们只需要按照顺序将1～x填入其中即可（对于i位置，右侧有n-i个数字比它大，左侧所有的数字都比它小，那么它一定是i）。对于这个数组0与最大值的交界处会有一个不是最大值也不是0的数字y。我们把n-y填入答案的这个格，由于左侧数字都比它小，右侧有y个比它大的。然后对于所有的零只需将剩余的没有使用过的数字，按从大到小的顺序依次填入即可。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('6399a8b8-4e52-492e-89ad-1fe9fc8d4dbc')"><img id="code_img_closed_6399a8b8-4e52-492e-89ad-1fe9fc8d4dbc" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6399a8b8-4e52-492e-89ad-1fe9fc8d4dbc" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6399a8b8-4e52-492e-89ad-1fe9fc8d4dbc',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

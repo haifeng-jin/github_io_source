@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>题意：人和人之间如果满足4个条件的任意一条就不会成为夫妻，给定一些人，问从中最多能选多少人且保证任意两人不可能成为夫妻。</p>
 <p>分析：由于条件之一是性别相同则不能成为夫妻。我们根据性别把人划分为两个集合，每个人是一个结点构成二分图，若两个人可能成为夫妻则连一条边。（同性之间不能成为夫妻，所以同集合内无边，此图必定为二分图）。题目要求是选出最多的人，且任意两人之间无边。这就是求二分图的最大独立集。只要用总人数－最大匹配数即可。</p>
 <div class="cnblogs_code" onclick="cnblogs_code_show('a36f7c5f-af63-4ba6-88c2-27e38caa2e98')"><img src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" class="code_img_closed" id="code_img_closed_a36f7c5f-af63-4ba6-88c2-27e38caa2e98" /><img src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" class="code_img_opened" id="code_img_opened_a36f7c5f-af63-4ba6-88c2-27e38caa2e98" onclick="cnblogs_code_hide('a36f7c5f-af63-4ba6-88c2-27e38caa2e98',event)" style="display: none;" /><span class="cnblogs_code_collapse">View Code </span>
@@ -155,16 +155,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -187,13 +181,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->

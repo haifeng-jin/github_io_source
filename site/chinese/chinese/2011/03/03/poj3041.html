@@ -77,9 +77,6 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 	
-	
-	
-		
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
         <div class="container">
             <div class="row">
@@ -94,7 +91,6 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
     </header>
 
-	
 
     <!-- Page Content -->
     <div class="container">
@@ -120,6 +116,10 @@ document.getElementsByName("search-key-words")[0].value=""}
                 <hr>
 
                 <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<p>用c语言写的，memset不用包含头文件</p>
 <p>题意：矩阵上有一些小行星，占据了一些格子，我们每次操作可以清理一列中的所有小行星，也可以清理一行中的所有小行星，问最少进行多少次操作可以清理掉所有的小行星。</p>
 <p>分析：一个小行星，要么清理该行，要么该列。所以也就是每个小行星对应的行列中至少选择一样来清理。下面建图，如果我们把每行看成集合一中的点，每列看成集合二中的点，一个小行星看成是其对应行列的连线，那么也就是说不能存在某一条连线两边的点都没有被选中的情况。这恰好就是二分图最小点集覆盖的要求。</p>
@@ -171,16 +171,10 @@ document.getElementsByName("search-key-words")[0].value=""}
 
 
 
-		
 		            <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 		<div><p></p></div>
-
-
-
-
-
-	<!-- Side Widget Well -->
+<!-- Side Widget Well -->
 <div class="panel panel-default">
   <div class="panel-heading"><big>Introduction</big></div>
   <div class="panel-body">
@@ -203,13 +197,9 @@ document.getElementsByName("search-key-words")[0].value=""}
 </div>
 
 
-
-
-
             </div>
 
 
-		
 
         </div>
         <!-- /.row -->
