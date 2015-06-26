@@ -63,7 +63,7 @@ We need to include the list of our posts in "index.html" by the following code.
 
 	{{ "{% for post in site.posts " }}%}
 	<p>
-	<a href="{{post.url}}">{{ "{{ post.title " }}}}</a>Posted on {{ "{{ post.date | date_to_string " }}}}
+	<a href="{{ "{{post.url" }}}}">{{ "{{ post.title " }}}}</a>Posted on {{ "{{ post.date | date_to_string " }}}}
 	</p>
 	{{ "{% endfor " }}%}
 

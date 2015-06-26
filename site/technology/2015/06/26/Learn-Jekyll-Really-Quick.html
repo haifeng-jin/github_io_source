@@ -194,7 +194,7 @@ Use the following code to insert the snippets.</p>
 
 <pre><code>{% for post in site.posts %}
 &lt;p&gt;
-&lt;a href=""&gt;{{ post.title }}&lt;/a&gt;Posted on {{ post.date | date_to_string }}
+&lt;a href="{{post.url}}"&gt;{{ post.title }}&lt;/a&gt;Posted on {{ post.date | date_to_string }}
 &lt;/p&gt;
 {% endfor %}
 </code></pre>
