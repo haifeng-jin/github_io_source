@@ -23,6 +23,8 @@ I suggest you star it on GitHub, unless you can remember it forever. You can for
 
 ###Explaination
 
+<br/>
+
 ####YAML Heads
 We can see that nearly every file have something like the following in their heads.
 
@@ -35,24 +37,34 @@ They are called YAML. This defines some properties of the files for us to load w
 
 You can define some properties of the project by writing YAML in "_config.yml".
 
+<br/>
+
 ####Layouts
-In the directory of "_layouts" are some HTML template files. They all have the keyword "{{content}}". It marks where the content of the file using the layout is to be inserted.
+In the directory of "_layouts" are some HTML template files. They all have the keyword {{ "{{ content " }}}}. It marks where the content of the file using the layout is to be inserted.
 You can write "layout: layout_file_name" in the YAML to set the layout of the file.
+
+<br/>
 
 ####Includes
 In the directory of "_includes" are some "*.ext" files. They are the HTML snippets to include in other files.
-Use "{% include file_name.ext%}" to insert the snippets.
+Use the following code to insert the snippets.
+
+	{{ "{% include file_name.ext " }}%}
+
+<br/>
 
 ####Posts
 In the directory of "_posts" are the articles in the blog. They can be written in HTML. Their names must be in the format of "yyyy-mm-dd-title.html".
 
+<br/>
+
 ####Index
 We need to include the list of our posts in "index.html" by the following code.
 
-	{% for post in site.posts %}
+	{{ "{% for post in site.posts " }}%}
 	<p>
-	<a href="{{post.url}}">{{post.title}}</a>Posted on {{post.date | date_to_string}}
+	<a href="{{post.url}}">{{ "{{ post.title " }}}}</a>Posted on {{ "{{ post.date | date_to_string " }}}}
 	</p>
-	{% endfor %}
+	{{ "{% endfor " }}%}
 
 This is a loop generating the title and link of each post.
