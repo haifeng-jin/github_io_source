@@ -41,6 +41,7 @@
 
 
 		{% include sidebar.ext %}
+
         </div>
         <!-- /.row -->
 
@@ -49,6 +50,8 @@
     </div>
     <!-- /.container -->
 
+    <!-- Google Analytics -->
+	{% include common/analytics.ext %}
     <!-- jQuery -->
     <script src="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}/{{site.rooturl}}/js/jquery.js"></script>
 
