@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Learn Jekyll Really Quick</title>
+    <title>Jekyll on GitHub Pages</title>
 
     <!-- Bootstrap Core  -->
     <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
@@ -114,15 +114,13 @@ document.getElementsByName("search-key-words")[0].value=""}
 
                 <!-- Title -->
 		
-                <h1>Learn Jekyll Really Quick</h1>
+                <h1>Jekyll on GitHub Pages</h1>
                 <hr>
 
                 <!-- Date/Time -->
-		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 26 Jun 2015</span>
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 29 Jun 2015</span>
 
 		<div class="pull-right">
-			
-			<span class="label label-default">jekyll</span>
 			
 		</div>
 
@@ -133,73 +131,25 @@ document.getElementsByName("search-key-words")[0].value=""}
  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-		<p>This article is helping you learn the basics of Jekyll and setup your blog right now.
-The boring minutiaes which can easily learned when you use it is not mentioned at all.</p>
+		<p>You can certainly follow the <a href="https://help.github.com/articles/using-jekyll-with-pages/">instructions on GitHub</a>. 
+However, this article will provide you a much easier way to both build and maintain the website.</p>
 
-<p><br /></p>
+<p>First, <a href="https://help.github.com/articles/creating-new-files/">create</a> a repository and name it “username.github.io” (replace username with your own username).</p>
 
-<h3 id="what-is-it">What is it?</h3>
-<p>Jekyll is a software allowing you to setup and manage your blog with some HTML templates and snippets and nothing else.</p>
+<p>Second, create a file named “.nojekyll” in the repository.</p>
 
-<p><br /></p>
+<p>Third, <a href="https://help.github.com/articles/importing-a-git-repository-using-the-command-line/">clone</a> the repository to your computer.</p>
 
-<h3 id="build-your-blog">Build your blog</h3>
-<p>Here is <a href="https://github.com/jhfjhfj1/jekyll_easy_example">an easy example</a> to show the basic usage of Jekyll.</p>
+<p>Fourth, copy all the files in “_site” directory of your jekyll project to the repository you cloned.</p>
 
-<p>I suggest you star it on GitHub, unless you can remember it forever. You can fork or download it to work on it.</p>
+<p>Finally, add, commit and push using the following command after you cd to the repository.</p>
 
-<p><br /></p>
-
-<h3 id="explaination">Explaination</h3>
-
-<p><br /></p>
-
-<h4 id="yaml-heads">YAML Heads</h4>
-<p>We can see that nearly every file have something like the following in their heads.</p>
-
-<pre><code>---
-layout: default
-title: my post
----
+<pre><code>git add --all
+git commit -m "initial"
+git push origin master
 </code></pre>
 
-<p>They are called YAML. This defines some properties of the files for us to load when use them in jekyll projects.</p>
-
-<p>You can define some properties of the project by writing YAML in “_config.yml”.</p>
-
-<p><br /></p>
-
-<h4 id="layouts">Layouts</h4>
-<p>In the directory of “_layouts” are some HTML template files. They all have the keyword {{ content }}. It marks where the content of the file using the layout is to be inserted.
-You can write “layout: layout_file_name” in the YAML to set the layout of the file.</p>
-
-<p><br /></p>
-
-<h4 id="includes">Includes</h4>
-<p>In the directory of “_includes” are some “*.ext” files. They are the HTML snippets to include in other files.
-Use the following code to insert the snippets.</p>
-
-<pre><code>{% include file_name.ext %}
-</code></pre>
-
-<p><br /></p>
-
-<h4 id="posts">Posts</h4>
-<p>In the directory of “_posts” are the articles in the blog. They can be written in HTML. Their names must be in the format of “yyyy-mm-dd-title.html”.</p>
-
-<p><br /></p>
-
-<h4 id="index">Index</h4>
-<p>We need to include the list of our posts in “index.html” by the following code.</p>
-
-<pre><code>{% for post in site.posts %}
-&lt;p&gt;
-&lt;a href="{{post.url}}"&gt;{{ post.title }}&lt;/a&gt;Posted on {{ post.date | date_to_string }}
-&lt;/p&gt;
-{% endfor %}
-</code></pre>
-
-<p>This is a loop generating the title and link of each post.</p>
+<p>Now, you can check your website at “username.github.io”.</p>
 
                 <hr>
 
