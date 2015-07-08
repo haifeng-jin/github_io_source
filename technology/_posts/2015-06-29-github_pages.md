@@ -21,3 +21,10 @@ Finally, add, commit and push using the following command after you cd to the re
     git push origin master
 
 Now, you can check your website at "username.github.io".
+
+###Explanation
+
+The steps above is to build a website using Jekyll locally and upload the necessary files to GitHub.
+The second step is to block the auto-build command of GitHub Pages. Otherwise, it would take your website as a Jekyll project and build it for you.
+
+I strongly recommend not use this function. You have to run Jekyll locally to test your website before you post it. Jekyll varies greatly from version to version. What looks fine locally may have bugs when posted if you let GitHub run its Jekyll for your site. In order to unify the version we use, we do not need a second build on GitHub.
