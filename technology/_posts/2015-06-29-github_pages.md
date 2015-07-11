@@ -6,9 +6,9 @@ layout: post
 You can certainly follow the [instructions on GitHub](https://help.github.com/articles/using-jekyll-with-pages/). 
 However, this article will provide you a much easier way to both build and maintain the website.
 
-First, [create](https://help.github.com/articles/creating-new-files/) a repository and name it "username.github.io" (replace username with your own username).
+First, [create a repository](https://help.github.com/articles/creating-a-new-repository/) and name it "username.github.io" (replace username with your own username).
 
-Second, create a file named ".nojekyll" in the repository.
+Second, [create a file](https://help.github.com/articles/creating-new-files/) named ".nojekyll" in the repository.
 
 Third, [clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/) the repository to your computer.
 
