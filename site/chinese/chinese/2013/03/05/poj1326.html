@@ -27,65 +27,111 @@
 </head>
 
 <body>
-	    <!-- Navigation -->
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+	<!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
-          <a href="../../../../../index.html" class="navbar-brand">Haifeng Jin's Blog</a>
+            <a href="../../../../../index.html"
+            class="navbar-brand">
+                Haifeng Jin's Blog
+            </a>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="../../../../../index.html">Home</a>
-            </li>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../../../../../index.html">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../../../technology/index.html">
+                        Technology
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Competitive
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="../../../../../codeforces/index.html">
+                                Codeforces
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../../../../../chinese/index.html">
+                                Chinese
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1/codelib">
+                                Library
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Search
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form class="navbar-form" style="padding-bottom:35px">
+                                <input type="text" name="search-key-words" class="form-control col-lg-8"
+                                onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Contact
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="https://www.linkedin.com/in/HaifengJin">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:jin@tamu.edu">
+                                E-mail
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
+                                Facebook
+                            </a>
+                        </li>
 
-            <li>
-              <a href="../../../../../technology/index.html">Technology</a>
-            </li>
-		<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown">Competitive<b class="caret"></b></a>
-			<ul class="dropdown-menu">
-				    <li>
-				      <a href="../../../../../codeforces/index.html">Codeforces</a>
-				    </li>
-				    <li>
-				      <a href="../../../../../chinese/index.html">Chinese</a>
-				    </li>
-				    <li>
-				      <a href="https://github.com/jhfjhfj1/codelib">Library</a>
-				    </li>
-			</ul>
-		</li>
-
-
-		<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
-			<ul class="dropdown-menu">
-				<li>
-				<form class="navbar-form" style="padding-bottom:35px">
-				<input type="text" name="search-key-words" class="form-control col-lg-8" onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
-				</form>
-				</li>
-			</ul>
-		</li>
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><a>About</a></li>
-            <li><a>Contact</a></li>
-          </ul>
-
+                </li>
+                <li>
+                </li>
+            </ul>
         </div>
-      </div>
     </div>
-<script type="text/javascript"> 
-function googlesearch () {
-var key=document.getElementsByName("search-key-words")[0].value;
-var link="http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q="+key;
-window.open(link);
-document.getElementsByName("search-key-words")[0].value=""}
+</div>
+<script type="text/javascript">
+    function googlesearch() {
+        var key = document.getElementsByName("search-key-words")[0].value;
+        var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
+        window.open(link);
+        document.getElementsByName("search-key-words")[0].value = ""
+    }
 </script>
-
 
 	
     <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
@@ -244,10 +290,11 @@ document.getElementsByName("search-key-words")[0].value=""}
         </div>
         <!-- /.row -->
 
-        <hr>
 
     </div>
     <!-- /.container -->
+    <hr>
+
 
     <!-- Google Analytics -->
 	<script>
