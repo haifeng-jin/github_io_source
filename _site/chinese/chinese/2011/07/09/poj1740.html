@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj1740</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	<!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="../../../../../index.html"
+            class="navbar-brand">
+                Haifeng Jin's Blog
+            </a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../../../../../index.html">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../../../technology/index.html">
+                        Technology
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Competitive
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="../../../../../codeforces/index.html">
+                                Codeforces
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../../../../../chinese/index.html">
+                                Chinese
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1/codelib">
+                                Library
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Search
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form class="navbar-form" style="padding-bottom:35px">
+                                <input type="text" name="search-key-words" class="form-control col-lg-8"
+                                onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Contact
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="https://www.linkedin.com/in/HaifengJin">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:jin@tamu.edu">
+                                E-mail
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
+                                Facebook
+                            </a>
+                        </li>
+
+                </li>
+                <li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function googlesearch() {
+        var key = document.getElementsByName("search-key-words")[0].value;
+        var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
+        window.open(link);
+        document.getElementsByName("search-key-words")[0].value = ""
+    }
+</script>
+
+	
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj1740</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 09 Jul 2011</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+		<p>题意：对于n堆石子，每堆若干个，两人轮流操作，每次操作分两步，第一步从某堆中去掉至少一个，第二步（可省略）把该堆剩余石子的一部分分给其它的某些堆。</p>
+<p>最后谁无子可取即输。</p>
+<p>分析：首先我们考虑两堆相等的情况，一定是谁取谁输，因为对方永远可以做对称的操作。对于四堆，1、2堆相等，3、4堆相等的情况，一定也是先手输，后手也只需要做对称的操作（在先手取石子的对称堆中取相同多的石子，并把和先手等量的石子分给先手分配给的堆的对称堆。（若先手在3堆取，并分给1堆，那后手就在4堆取，分给2堆）。也就是说对于任意的一对一对相等的情况来说，一定是后手必胜。</p>
+<p>我们接下来来证明除上述情况外，所有情况都是先手必胜。因为任何一种情况都可以转化为一对一对相等的情况。若总堆数为奇数的情况，可以把石子最多的一堆的石子分配给其它堆，使得其它堆两两相等。最多一堆的石子绝对是足够多，可以完成这个补齐的任务的。因为我们把石子从小到大排序后画成条形统计图。把相邻两个分成一组（1和2一组，3和4一组&hellip;&hellip;）我们需要用第n堆填补1，3，5&hellip;&hellip;堆我们把需要填补的这些差距（2比1高出的部分，4比3高出的部分&hellip;&hellip;）投影到统计图左侧的y轴上，我们会发现这是一些不连续的区间，其长度总和明显小于第n堆。所以可以补齐。</p>
+<p>对于堆数为偶数的情况。我们把最多的一堆削弱到和最少的一堆一样多，并把拿掉的石子分给别的堆，使其一对一对地相等。可行性于前面奇数情况同理。</p>
+<p>所以只要判断是不是一对一对的相等的情况即可。</p>
+<p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('7a1f46d2-44cf-4d4a-bd24-cf042219e3bd')"><img src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" class="code_img_closed" id="code_img_closed_7a1f46d2-44cf-4d4a-bd24-cf042219e3bd" /><img src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" class="code_img_opened" id="code_img_opened_7a1f46d2-44cf-4d4a-bd24-cf042219e3bd" onclick="cnblogs_code_hide('7a1f46d2-44cf-4d4a-bd24-cf042219e3bd',event)" style="display: none;" /><span class="cnblogs_code_collapse">View Code </span>
+<div id="cnblogs_code_open_7a1f46d2-44cf-4d4a-bd24-cf042219e3bd" class="cnblogs_code_hide">
+<pre><div><span style="color: #000000;">#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">iostream</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdio</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstdlib</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br />#include </span><span style="color: #000000;">&lt;</span><span style="color: #000000;">cstring</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"><br /></span><span style="color: #0000ff;">using</span><span style="color: #000000;"> </span><span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;<br /><br /></span><span style="color: #0000ff;">bool</span><span style="color: #000000;"> f[</span><span style="color: #800080;">1005</span><span style="color: #000000;">];<br /><br /></span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()<br />{<br />    </span><span style="color: #008000;">//</span><span style="color: #008000;">freopen("t.txt", "r", stdin);</span><span style="color: #008000;"><br /></span><span style="color: #000000;">    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> n;<br />    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">n), n)<br />    {<br />        memset(f, </span><span style="color: #800080;">0</span><span style="color: #000000;">, </span><span style="color: #0000ff;">sizeof</span><span style="color: #000000;">(f));<br />        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> ans </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />        </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> n; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />        {<br />            </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> a;<br />            scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span><span style="color: #000000;">, </span><span style="color: #000000;">&amp;</span><span style="color: #000000;">a);<br />            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (f[a])<br />                ans</span><span style="color: #000000;">--</span><span style="color: #000000;">;<br />            </span><span style="color: #0000ff;">else</span><span style="color: #000000;"><br />                ans</span><span style="color: #000000;">++</span><span style="color: #000000;">;<br />            f[a] </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #000000;">!</span><span style="color: #000000;">f[a];<br />        }<br />        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (ans)<br />            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">1\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);<br />        </span><span style="color: #0000ff;">else</span><span style="color: #000000;"><br />            printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">0\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);<br />    }<br />    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> </span><span style="color: #800080;">0</span><span style="color: #000000;">;<br />}</span></div></pre>
+</div>
+</div>
+</p>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+            </div>
+
+
+
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->
+    <hr>
+
+
+    <!-- Google Analytics -->
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44322747-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

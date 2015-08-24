@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>poj1177</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="../../../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../../../../css/clean-blog.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	<!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="../../../../../index.html"
+            class="navbar-brand">
+                Haifeng Jin's Blog
+            </a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../../../../../index.html">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../../../technology/index.html">
+                        Technology
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Competitive
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="../../../../../codeforces/index.html">
+                                Codeforces
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../../../../../chinese/index.html">
+                                Chinese
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1/codelib">
+                                Library
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Search
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form class="navbar-form" style="padding-bottom:35px">
+                                <input type="text" name="search-key-words" class="form-control col-lg-8"
+                                onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Contact
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="https://www.linkedin.com/in/HaifengJin">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:jin@tamu.edu">
+                                E-mail
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
+                                Facebook
+                            </a>
+                        </li>
+
+                </li>
+                <li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function googlesearch() {
+        var key = document.getElementsByName("search-key-words")[0].value;
+        var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
+        window.open(link);
+        document.getElementsByName("search-key-words")[0].value = ""
+    }
+</script>
+
+	
+    <header class="intro-header" style="background-image: url('../../../../../img/chinese.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chinese</h1>
+                        <hr class="small">
+                        <span class="subheading">Across the Great Wall, We Can Reach Every Corner in the World</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h1>poj1177</h1>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 28 Dec 2013</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+		<p>题意：在平面直角坐标系内给出一些与坐标轴平行的矩形，将这些矩形覆盖的区域求交集，然后问这个区域的周长是多少。</p>
+<p>分析：线段树。曾经做过类似的求矩形覆盖的总面积的题。这道题同样要使用扫描线算法。属于线保留型线段树。</p>
+<p>我们先领扫描线与y轴平行。</p>
+<p>线段树内每个节点除了要记录该区间被覆盖了几层之外，还要记录当前状态下扫描线在该区间内与多少条与x轴平行的边相交。</p>
+<p>暂时不判断区间两端点是否是为交点。节点上还有两个bool型变量，记录该区间内（包括子树）线段覆盖是否接触到该区间的起始和结束点。</p>
+<p>在父节点再对子区间的起始和结束点进行特殊判断，判断子区间的端点是否是交点。</p>
+<p>这样就得知了每段与x轴平行的距离内有多少条线段需要计算，距离乘以数量即可。这样就计算出了所有与x轴平行的周长上的边的总长度。</p>
+<p>之后让扫描线与x轴平行即可计算出与y轴平行的所有周长上的边的总长度。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('455ab36e-563f-44b1-8a7d-32480fc3a477')"><img id="code_img_closed_455ab36e-563f-44b1-8a7d-32480fc3a477" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_455ab36e-563f-44b1-8a7d-32480fc3a477" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('455ab36e-563f-44b1-8a7d-32480fc3a477',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_455ab36e-563f-44b1-8a7d-32480fc3a477" class="cnblogs_code_hide">
+<pre>#include &lt;cstdio&gt;<span style="color: #000000;">
+#include </span>&lt;algorithm&gt;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+</span><span style="color: #008000;">//</span><span style="color: #008000;">scanning from left to right
+</span><span style="color: #008000;">//</span><span style="color: #008000;">discretionize Ys</span>
+<span style="color: #0000ff;">#define</span> MAX_REC_NUM 5005
+<span style="color: #0000ff;">#define</span> MAX_INTERVAL MAX_REC_NUM * 2
+
+<span style="color: #0000ff;">struct</span><span style="color: #000000;"> Node
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">    l, r;
+    Node    </span>*pleft, *<span style="color: #000000;">pright;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">    num;
+    </span><span style="color: #0000ff;">bool</span><span style="color: #000000;">    to_left, to_right;    
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;">    edge_num;
+};
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;">    node_cnt;
+Node    tree[MAX_INTERVAL </span>* <span style="color: #800080;">3</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Interval
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> start, end;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> pos;
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> value;
+    Interval()
+    {}
+    Interval(</span><span style="color: #0000ff;">int</span> start, <span style="color: #0000ff;">int</span> end, <span style="color: #0000ff;">int</span> pos, <span style="color: #0000ff;">int</span><span style="color: #000000;"> value):start(start), end(end), pos(pos), value(value)
+    {}
+    </span><span style="color: #0000ff;">bool</span> <span style="color: #0000ff;">operator</span> &lt; (<span style="color: #0000ff;">const</span> Interval &amp;a)<span style="color: #0000ff;">const</span><span style="color: #000000;">
+    {
+        </span><span style="color: #0000ff;">if</span> (pos !=<span style="color: #000000;"> a.pos)
+            </span><span style="color: #0000ff;">return</span> pos &lt;<span style="color: #000000;"> a.pos;
+        </span><span style="color: #0000ff;">return</span> value &gt;<span style="color: #000000;"> a.value;
+    }
+}interval[MAX_REC_NUM </span>* <span style="color: #800080;">2</span><span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">struct</span><span style="color: #000000;"> Rectangle
+{
+    </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> l, d, u, r;
+}rec[MAX_REC_NUM];
+
+</span><span style="color: #0000ff;">int</span> discrete[MAX_REC_NUM * <span style="color: #800080;">2</span><span style="color: #000000;">];
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> discrete_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> rec_num;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> interval_num;
+
+</span><span style="color: #0000ff;">int</span> get_index(<span style="color: #0000ff;">int</span><span style="color: #000000;"> a)
+{
+    </span><span style="color: #0000ff;">return</span> lower_bound(discrete, discrete + discrete_num, a) -<span style="color: #000000;"> discrete;
+}
+
+</span><span style="color: #0000ff;">void</span> discretization(<span style="color: #0000ff;">int</span> discrete[], <span style="color: #0000ff;">int</span> &amp;<span style="color: #000000;">discrete_num)
+{
+    sort(discrete, discrete </span>+<span style="color: #000000;"> discrete_num);
+    discrete_num </span>= unique(discrete, discrete + discrete_num) -<span style="color: #000000;"> discrete;
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> input()
+{
+    scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d</span><span style="color: #800000;">"</span>, &amp;<span style="color: #000000;">rec_num);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; rec_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> l, d, r, u;
+        scanf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d%d%d%d</span><span style="color: #800000;">"</span>, &amp;l, &amp;d, &amp;r, &amp;<span style="color: #000000;">u);
+        rec[i].l </span>=<span style="color: #000000;"> l;
+        rec[i].r </span>=<span style="color: #000000;"> r;
+        rec[i].u </span>=<span style="color: #000000;"> u;
+        rec[i].d </span>=<span style="color: #000000;"> d;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make_xscan()
+{
+    discrete_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    interval_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; rec_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> l, d, r, u;
+        l </span>=<span style="color: #000000;"> rec[i].l;
+        r </span>=<span style="color: #000000;"> rec[i].r;
+        u </span>=<span style="color: #000000;"> rec[i].u;
+        d </span>=<span style="color: #000000;"> rec[i].d;
+        interval[interval_num</span>++] = Interval(d, u, l, <span style="color: #800080;">1</span><span style="color: #000000;">);
+        interval[interval_num</span>++] = Interval(d, u, r, -<span style="color: #800080;">1</span><span style="color: #000000;">);
+        discrete[discrete_num</span>++] =<span style="color: #000000;"> u;
+        discrete[discrete_num</span>++] =<span style="color: #000000;"> d;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> make_yscan()
+{
+    discrete_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    interval_num </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; rec_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> l, d, r, u;
+        l </span>=<span style="color: #000000;"> rec[i].l;
+        r </span>=<span style="color: #000000;"> rec[i].r;
+        u </span>=<span style="color: #000000;"> rec[i].u;
+        d </span>=<span style="color: #000000;"> rec[i].d;
+        interval[interval_num</span>++] = Interval(l, r, d, <span style="color: #800080;">1</span><span style="color: #000000;">);
+        interval[interval_num</span>++] = Interval(l, r, u, -<span style="color: #800080;">1</span><span style="color: #000000;">);
+        discrete[discrete_num</span>++] =<span style="color: #000000;"> l;
+        discrete[discrete_num</span>++] =<span style="color: #000000;"> r;
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> buildtree(Node *proot, <span style="color: #0000ff;">int</span> s, <span style="color: #0000ff;">int</span><span style="color: #000000;"> e)
+{
+    proot</span>-&gt;l =<span style="color: #000000;"> s;
+    proot</span>-&gt;r =<span style="color: #000000;"> e;
+    proot</span>-&gt;to_left = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    proot</span>-&gt;to_right = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+    proot</span>-&gt;num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    proot</span>-&gt;edge_num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">if</span> (s ==<span style="color: #000000;"> e)
+    {
+        proot</span>-&gt;pleft = proot-&gt;pright =<span style="color: #000000;"> NULL;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    node_cnt</span>++<span style="color: #000000;">;
+    proot</span>-&gt;pleft = tree +<span style="color: #000000;"> node_cnt;
+    node_cnt</span>++<span style="color: #000000;">;
+    proot</span>-&gt;pright = tree +<span style="color: #000000;"> node_cnt;
+    buildtree(proot</span>-&gt;pleft, s, (s + e) / <span style="color: #800080;">2</span><span style="color: #000000;">);
+    buildtree(proot</span>-&gt;pright, (s + e) / <span style="color: #800080;">2</span> + <span style="color: #800080;">1</span><span style="color: #000000;">, e);
+}
+
+</span><span style="color: #0000ff;">void</span> recount(Node *<span style="color: #000000;">p)
+{
+    </span><span style="color: #0000ff;">if</span> (p-&gt;num &gt; <span style="color: #800080;">0</span><span style="color: #000000;">)
+    {
+        p</span>-&gt;edge_num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        p</span>-&gt;to_right = p-&gt;to_left = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">if</span> (p-&gt;pleft == NULL || p-&gt;pright ==<span style="color: #000000;"> NULL)
+    {
+        p</span>-&gt;edge_num = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        p</span>-&gt;to_right = p-&gt;to_left = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    p</span>-&gt;to_left = p-&gt;pleft-&gt;<span style="color: #000000;">to_left;
+    p</span>-&gt;to_right = p-&gt;pright-&gt;<span style="color: #000000;">to_right;
+    p</span>-&gt;edge_num = p-&gt;pleft-&gt;edge_num + p-&gt;pright-&gt;<span style="color: #000000;">edge_num;
+    </span><span style="color: #0000ff;">if</span> (p-&gt;pleft-&gt;to_right != p-&gt;pright-&gt;<span style="color: #000000;">to_left)
+        p</span>-&gt;edge_num++<span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">void</span> insert(Node *proot, <span style="color: #0000ff;">int</span> s, <span style="color: #0000ff;">int</span> e, <span style="color: #0000ff;">int</span><span style="color: #000000;"> value)
+{
+    </span><span style="color: #0000ff;">if</span> (s &gt; proot-&gt;r || e &lt; proot-&gt;<span style="color: #000000;">l)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    s </span>= max(s, proot-&gt;<span style="color: #000000;">l);
+    e </span>= min(e, proot-&gt;<span style="color: #000000;">r);
+    </span><span style="color: #0000ff;">if</span> (s == proot-&gt;l &amp;&amp; e == proot-&gt;<span style="color: #000000;">r)
+    {
+        proot</span>-&gt;num +=<span style="color: #000000;"> value;
+        recount(proot);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    }
+    insert(proot</span>-&gt;<span style="color: #000000;">pleft, s, e, value);
+    insert(proot</span>-&gt;<span style="color: #000000;">pright, s, e, value);
+    recount(proot);
+}
+
+</span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span><span style="color: #000000;"> work()
+{
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; interval_num; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> s =<span style="color: #000000;"> get_index(interval[i].start);
+        </span><span style="color: #0000ff;">int</span> e = get_index(interval[i].end) - <span style="color: #800080;">1</span><span style="color: #000000;">;
+        insert(tree, s, e, interval[i].value);
+        </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> line_num = tree-&gt;<span style="color: #000000;">edge_num;
+        </span><span style="color: #0000ff;">if</span> (tree-&gt;<span style="color: #000000;">to_left)
+            line_num</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (tree-&gt;<span style="color: #000000;">to_right)
+            line_num</span>++<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> (i != interval_num - <span style="color: #800080;">1</span><span style="color: #000000;">)
+            ans </span>+= (interval[i + <span style="color: #800080;">1</span>].pos - interval[i].pos) *<span style="color: #000000;"> line_num;
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ans;
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    input();
+    </span><span style="color: #0000ff;">long</span> <span style="color: #0000ff;">long</span> ans = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    make_xscan();
+    sort(interval, interval </span>+<span style="color: #000000;"> interval_num);
+    discretization(discrete, discrete_num);
+    buildtree(tree, </span><span style="color: #800080;">0</span><span style="color: #000000;">, discrete_num);
+    ans </span>+=<span style="color: #000000;"> work();
+
+    make_yscan();
+    sort(interval, interval </span>+<span style="color: #000000;"> interval_num);
+    discretization(discrete, discrete_num);
+    buildtree(tree, </span><span style="color: #800080;">0</span><span style="color: #000000;">, discrete_num);
+    ans </span>+=<span style="color: #000000;"> work();
+
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%lld\n</span><span style="color: #800000;">"</span><span style="color: #000000;">, ans);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code </span></div>
+<p>&nbsp;</p>
+
+                <hr>
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+		            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+		<div><p></p></div>
+<!-- Side Widget Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-body">
+    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+  </div>
+</div>
+
+
+<!-- Blog Categories Well -->
+<div class="panel panel-default">
+  <div class="panel-heading"><big>Highlight</big></div>
+  <div class="panel-body">
+            <ul class="list-unstyled">
+                <li><a href="../../../../../chinese/chinese/2014/04/17/guide.html">博客导航</a>
+                </li>
+                <li><a href="../../../../../chinese/chinese/2014/04/17/ICPC-startup.html">ACM-ICPC如何起步</a>
+                </li>
+            </ul>
+  </div>
+</div>
+
+
+            </div>
+
+
+
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->
+    <hr>
+
+
+    <!-- Google Analytics -->
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44322747-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <!-- jQuery -->
+    <script src="../../../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../../../js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>
