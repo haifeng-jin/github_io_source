@@ -12,7 +12,7 @@ Second, [create a file](https://help.github.com/articles/creating-new-files/) na
 
 Third, [clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/) the repository to your computer.
 
-Fourth, copy all the files in "_site" directory of your jekyll project to the repository you cloned.
+Fourth, copy all the files in "_site" directory of your jekyll project to the local directory you just cloned.
 
 Finally, add, commit and push using the following command after you cd to the repository.
 

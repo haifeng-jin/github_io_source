@@ -11,7 +11,7 @@
 			{% for post in paginator.posts %}
 		<tr>
 			<td>
-				<a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}{{ post.url}}">{{ post.title }}</a>
+				<a href="{% include common/root.ext %}{{ post.url}}">{{ post.title }}</a>
 			</td>
 			<td><span class="glyphicon glyphicon-time"></span> Posted on {{ post.date | date_to_string }}</td>
 			</tr>

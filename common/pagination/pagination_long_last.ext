@@ -1,3 +1,3 @@
 	<li class="disabled"><a>...</a></li>
-	<li><a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}{{ site.paginate_path | replace: ':num', paginator.total_pages }}">{{ paginator.total_pages }}</a></li>
+	<li><a href="{% include common/root.ext %}{{ site.paginate_path | replace: ':num', paginator.total_pages }}">{{ paginator.total_pages }}</a></li>
 

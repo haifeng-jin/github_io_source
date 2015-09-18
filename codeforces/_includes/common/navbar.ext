@@ -2,7 +2,7 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}/{{site.rooturl}}/index.html"
+            <a href="{% include common/root.ext %}/{{site.rooturl}}/index.html"
             class="navbar-brand">
                 Haifeng Jin's Blog
             </a>
@@ -10,12 +10,12 @@
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}/{{site.rooturl}}/index.html">
+                    <a href="{% include common/root.ext %}/{{site.rooturl}}/index.html">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}/{{site.rooturl}}/technology/index.html">
+                    <a href="{% include common/root.ext %}/{{site.rooturl}}/technology/index.html">
                         Technology
                     </a>
                 </li>
@@ -27,13 +27,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}/{{site.rooturl}}/codeforces/index.html">
+                            <a href="{% include common/root.ext %}/{{site.rooturl}}/codeforces/index.html">
                                 Codeforces
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}/{{site.rooturl}}/chinese/index.html">
-                                Chinese
                             </a>
                         </li>
                         <li>
@@ -42,6 +37,11 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="{% include common/root.ext %}/{{site.rooturl}}/chinese/index.html">
+                        Chinese
+                    </a>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">

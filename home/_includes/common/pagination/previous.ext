@@ -1,8 +1,8 @@
 {% if paginator.previous_page %}
 	{% if paginator.page == 2 %}
-		<li><a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}/index.html">&laquo;</a></li>
+		<li><a href="{% include common/root.ext %}/index.html">&laquo;</a></li>
 	{% else %}
-		<li><a href="{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}{{ site.paginate_path | replace: ':num', paginator.previous_page }}">&laquo;</a></li>
+		<li><a href="{% include common/root.ext %}{{ site.paginate_path | replace: ':num', paginator.previous_page }}">&laquo;</a></li>
 	{% endif %}
 {% else %}
 	<li class="disabled"><a>&laquo;</a></li>

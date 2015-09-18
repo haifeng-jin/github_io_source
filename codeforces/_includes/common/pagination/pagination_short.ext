@@ -5,9 +5,9 @@
 	    {% if page1 == paginator.page %}
 	      <li class="active"><a>{{ page1 }}</a></li>
 	    {% elsif page1 == 1 %}
-		<li><a href="{% if paginator.page > 1 %}../{% endif %}{{ page.rooturl }}/index.html">{{ page1 }}</a></li>
+		<li><a href="{% include common/root.ext %}/index.html">{{ page1 }}</a></li>
 	    {% else %}
-	      <li><a href="{% if paginator.page > 1 %}../{% endif %}{{ page.rooturl }}{{site.paginate_path | replace: ':num', page1 }}">{{ page1 }}</a></li>
+	      <li><a href="{% include common/root.ext %}{{site.paginate_path | replace: ':num', page1 }}">{{ page1 }}</a></li>
 	    {% endif %}
 	  {% endfor %}
 
