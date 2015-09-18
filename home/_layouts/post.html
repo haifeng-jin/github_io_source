@@ -9,7 +9,7 @@ rooturl: ../../../..
 
                 <!-- Title -->
 		
-                <h1>{{page.title}}</h1>
+                <h2>{{page.title}}</h2>
                 <hr>
 
                 <!-- Date/Time -->
@@ -24,7 +24,10 @@ rooturl: ../../../..
                 <hr>
 
                 <!-- Post Content -->
+		{% include common/mathjax.ext %}
+		<div style="font-size: 16px; line-height: 26px">
 		{{content}}
+		</div>
                 <hr>
 
 

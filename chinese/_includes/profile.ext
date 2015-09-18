@@ -1,8 +1,8 @@
 <!-- Side Widget Well -->
 <div class="panel panel-default">
-  <div class="panel-heading"><big>Introduction</big></div>
+  <div class="panel-heading"><big>简介</big></div>
   <div class="panel-body">
-    <p>Here are the blogs I have moved from my old CNBlogs, which are mainly about ACM-ICPC. All the posts here are written in Chinese.</p>
+    <p>这里是一些我写的非技术类文章。</p>
   </div>
 </div>
 

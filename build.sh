@@ -1,3 +1,7 @@
+cp layouts/* home/_layouts/
+cp layouts/* codeforces/_layouts/
+cp layouts/* chinese/_layouts/
+cp layouts/* technology/_layouts/
 cp -r common home/_includes/
 cp -r common codeforces/_includes/
 cp -r common chinese/_includes/
