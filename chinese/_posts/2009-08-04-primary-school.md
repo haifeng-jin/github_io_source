@@ -29,7 +29,7 @@ layout: post
   <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/primary-school1.jpg">
+          <img src="{{site.img}}/primary-school2.jpg">
       </div>
 </div>
 </div>
@@ -43,7 +43,7 @@ layout: post
  <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/primary-school1.jpg">
+          <img src="{{site.img}}/primary-school3.jpg">
       </div>
 </div>
 </div>
