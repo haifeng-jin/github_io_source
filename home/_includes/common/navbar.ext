@@ -66,6 +66,12 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{% include common/root.ext %}/{{site.rooturl}}/about.html">
+                        About Me
+                    </a>
+                </li>
+
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         Contact
