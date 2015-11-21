@@ -1,8 +1,8 @@
-baseurl: .
+baseurl: /technology
 paginate: 20
 paginate_path: "/page:num/"
 markdown: kramdown
 cf_num: 32
-rooturl: ..
-img: http://haifengjin.com/img
+rooturl: /
+img: /img
 category: technology

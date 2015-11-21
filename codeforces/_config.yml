@@ -1,8 +1,8 @@
-baseurl: .
+baseurl: /codeforces
 paginate: 20
 paginate_path: "/page:num/"
 markdown: kramdown
 cf_num: 32
-rooturl: ..
+rooturl: /
 img: http://haifengjin.com/img
 category: ../codeforces

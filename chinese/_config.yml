@@ -1,7 +1,7 @@
-baseurl: .
+baseurl: /chinese
 paginate: 20
 paginate_path: "/page:num/"
 markdown: kramdown
-rooturl: ..
-img: http://haifengjin.com/img
+rooturl: /
+img: /img
 category: chinese
