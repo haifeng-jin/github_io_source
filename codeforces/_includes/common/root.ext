@@ -1,1 +1,0 @@
-{% if paginator.page > 1 %}../{% endif %}{{page.rooturl}}

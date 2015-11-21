@@ -3,7 +3,7 @@
 <div class="pull-right">
 
   {% if page.next.url %}
-    <a class="btn btn-default" href="{% include common/root.ext %}/{{site.category}}{{page.next.url}}">
+    <a class="btn btn-default" href="{{site.baseurl}}{{page.next.url}}">
 	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     </a>
   {% else %}
@@ -11,12 +11,12 @@
 	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     </a>
   {% endif %}
-    <a class="btn btn-default" href="{% include common/root.ext %}/{{site.category}}">
+    <a class="btn btn-default" href="{{site.baseurl}}/">
 	<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
     </a>
 
   {% if page.previous.url %}
-    <a class="btn btn-default" href="{% include common/root.ext %}/{{site.category}}{{page.previous.url}}">
+    <a class="btn btn-default" href="{{site.baseurl}}{{page.previous.url}}">
 	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     </a>
   {% else %}
