@@ -1,9 +1,14 @@
+var data_array={
+"20151129":2,
+"20151128":3
+};
+
 var width = 900,
     height = 120,
     cellSize = 15; // cell size
     month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-    color = ["#eeeeee","#b5cdbc","#81ab8a","#508957","#1e6823"];
-    range = [0,1,2,3,4];
+    color = ["#eee","#d6e685","#8cc665","#44a340","#1e6823"];
+    range = [1,2,4,6];
 	
 var day = d3.time.format("%w"),
     week = d3.time.format("%U"),
@@ -18,7 +23,6 @@ var svg = d3.select(".calender-map").selectAll("svg")
     .attr("width", '100%')
     .attr("data-height", '0.5678')
     .attr("viewBox",'0 0 ' + width + ' ' + height)
-    .attr("class", "RdYlGn")
   .append("g")
     .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
@@ -53,28 +57,21 @@ svg.selectAll(".month")
     .attr("class", "month")
     .attr("d", monthPath);
 
-d3.csv("/data.csv", function(error, csv) {
-
-  csv.forEach(function(d) {
-    d.Comparison_Type = parseInt(d.Comparison_Type);
-  });
-
 function getRange(d) {
-  for (i = 0; i < range.length - 1; i++) {
-    if (d > range[i] && d <= range[i + 1])
+  for (i = 0; i < range.length; i++) {
+    if (d < range[i])
       return i;
   }
-  return range.length - 1;
+  return range.length;
 }
-  var data = d3.nest()
-    .key(function(d) { return d.Date; })
-    .rollup(function(d) { return  d[0].Comparison_Type; })
-    .map(csv);
 	
-  rect.filter(function(d) { return d in data; })
-      .attr("fill", function(d) { return color[getRange(data[d])]; })
-	  .attr("data-title", function(d) { return Math.round(data[d]) + " hours on " + month[parseDate(d).getMonth()] + ". " + parseDate(d).getDay()});   
-	$("rect").tooltip({container: 'body', html: true, placement:'top'}); 
+  rect
+      .attr("fill", function(d) {if (isNaN(data_array[d])) return color[0];  return color[getRange(data_array[d])]; })
+	  .attr("data-title", function(d) { if (isNaN(data_array[d])) ret = "No record on "; else ret = data_array[d] + " hours on "; return ret + month[parseDate(d).getMonth()] + ". " + parseDate(d).getDate()});   
+
+d3.csv("",function() {
+	$("rect").tooltip({container: 'body'}); 
+
 });
 
 function numberWithCommas(x) {
@@ -95,3 +92,5 @@ function monthPath(t0) {
       + "H" + (w1 + 1) * cellSize + "V" + 0
       + "H" + (w0 + 1) * cellSize + "Z";
 }
+
+
