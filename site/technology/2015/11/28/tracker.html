@@ -191,6 +191,7 @@
 
 		<div style="font-size: 16px; line-height: 26px">
 		This is a heat map calender to track how many hours of work I have done each day.
+<br>
 <script src="/js/d3.min.js"></script>
 <script src="/js/cal-heatmap.js"></script>
 <link rel="stylesheet" href="/css/cal-heatmap.css" />
@@ -205,7 +206,6 @@ var parser = function(data) {
 	var stats = {};
 	for (var d in data) {
 		date = new Date(d);
-		alert(d);
 		stats[date.getTime()/1000] = data[d];
 	}
 	return stats;
