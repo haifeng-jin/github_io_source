@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Jekyll on GitHub Pages</title>
+    <title>Working Hours Tracker</title>
 
     <!-- Bootstrap Core  -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -172,11 +172,11 @@
 
                 <!-- Title -->
 		
-                <h2>Jekyll on GitHub Pages</h2>
+                <h2>Working Hours Tracker</h2>
                 <hr>
 
                 <!-- Date/Time -->
-		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 29 Jun 2015</span>
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 28 Nov 2015</span>
 
 		<div class="pull-right">
 			
@@ -190,32 +190,45 @@
 </script>
 
 		<div style="font-size: 16px; line-height: 26px">
-		<p>You can certainly follow the <a href="https://help.github.com/articles/using-jekyll-with-pages/">instructions on GitHub</a>. 
-However, this article will provide you a much easier way to both build and maintain the website.</p>
+		This is a heat map calender to track how many hours of work I have done each day.
+<script src="/js/d3.min.js"></script>
+<script src="/js/cal-heatmap.js"></script>
+<link rel="stylesheet" href="/css/cal-heatmap.css" />
+<div id="cal-heatmap"></div>
 
-<p>First, <a href="https://help.github.com/articles/creating-a-new-repository/">create a repository</a> and name it “username.github.io” (replace username with your own username).</p>
+<script type="text/javascript">
+var my_data = {
+"11/28/2015":4
+};
 
-<p>Second, <a href="https://help.github.com/articles/creating-new-files/">create a file</a> named “.nojekyll” in the repository.</p>
+var parser = function(data) {
+	var stats = {};
+	for (var d in data) {
+		date = new Date(d);
+		alert(d);
+		stats[date.getTime()/1000] = data[d];
+	}
+	return stats;
+};
+    var calendar = new CalHeatMap();
+    calendar.init({
+        data: my_data,
+	afterLoadData: parser,
+        start: new Date(2015, 0),
+        domain: "year",
+        subDomain: "day",
+        range: 1,
+        legend: [1, 2, 3, 4],
+	verticalOrientation: true,
+	legendColors: ["#eee", "#1e6823"],
+	itemName: ["hour", "hours"],
+        subDomainTitleFormat: {
+			empty: "0 hour of work on {date}",
+			filled: "{count} {name} of work on {date}"
+		}
+    });
+</script>
 
-<p>Third, <a href="https://help.github.com/articles/importing-a-git-repository-using-the-command-line/">clone</a> the repository to your computer.</p>
-
-<p>Fourth, copy all the files in “_site” directory of your jekyll project to the local directory you just cloned.</p>
-
-<p>Finally, add, commit and push using the following command after you cd to the repository.</p>
-
-<pre><code>git add --all
-git commit -m "initial"
-git push origin master
-</code></pre>
-
-<p>Now, you can check your website at “username.github.io”.</p>
-
-<h3 id="explanation">Explanation</h3>
-
-<p>The steps above is to build a website using Jekyll locally and upload the necessary files to GitHub.
-The second step is to block the auto-build command of GitHub Pages. Otherwise, it would take your website as a Jekyll project and build it for you.</p>
-
-<p>I strongly recommend not use GitHub to build your Jekyll project. You have to run Jekyll locally to test your website before you post it. Jekyll varies greatly from version to version. What looks fine locally may have bugs when posted if you let GitHub run its Jekyll for your site. In order to unify the version we use, we do not need a second build on GitHub.</p>
 
 		</div>
                 <hr>
@@ -246,7 +259,7 @@ The second step is to block the auto-build command of GitHub Pages. Otherwise, i
 <div class="pull-right">
 
   
-    <a class="btn btn-default" href="/technology/2015/11/27/routines.html">
+    <a class="btn btn-default disabled">
 	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     </a>
   
@@ -255,7 +268,7 @@ The second step is to block the auto-build command of GitHub Pages. Otherwise, i
     </a>
 
   
-    <a class="btn btn-default" href="/technology/2015/06/26/jekyll.html">
+    <a class="btn btn-default" href="/technology/2015/11/27/routines.html">
 	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     </a>
   
