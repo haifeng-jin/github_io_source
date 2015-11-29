@@ -192,11 +192,12 @@
 		<div style="font-size: 16px; line-height: 26px">
 		This is a heat map calender to track how many hours of work I have done each day.
 <br>
+<br>
 <script src="/js/d3.min.js"></script>
+<!-- Google Analytics 
+<div id="cal-heatmap" align="center"></div>
 <script src="/js/cal-heatmap.js"></script>
 <link rel="stylesheet" href="/css/cal-heatmap.css" />
-<div id="cal-heatmap"></div>
-
 <script type="text/javascript">
 var my_data = {
 "11/28/2015":4
@@ -228,6 +229,22 @@ var parser = function(data) {
 		}
     });
 </script>
+<br>
+<br>
+-->
+    <style>
+    .day {
+      stroke: #fff;
+    }
+    .month {
+      fill: none;
+      stroke: #000;
+      stroke-width: 2px;
+    }
+    </style>
+<div class="calender-map"></div>
+<script type="text/javascript" src="/js/calendermap.js"></script>
+<br>
 
 
 		</div>
