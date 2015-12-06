@@ -14,7 +14,7 @@ var width = 900,
     cellSize = 15; // cell size
     month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     color = ["#eee","#d6e685","#8cc665","#44a340","#1e6823"];
-    range = [1,2,4,6];
+    range = [0,4,5,7];
 	
 var day = d3.time.format("%w"),
     week = d3.time.format("%U"),
@@ -64,7 +64,9 @@ svg.selectAll(".month")
     .attr("d", monthPath);
 
 function getRange(d) {
-  for (i = 0; i < range.length; i++) {
+  if (d == 0)
+    return 0;
+  for (i = 1; i < range.length; i++) {
     if (d < range[i])
       return i;
   }
