@@ -1,4 +1,5 @@
 var data_array={
+"20151209":6,
 "20151208":5,
 "20151207":7,
 "20151206":4,
@@ -67,17 +68,26 @@ svg.selectAll(".month")
     .attr("d", monthPath);
 
 function getRange(d) {
-  if (d == 0)
-    return 0;
   for (i = 1; i < range.length; i++) {
     if (d < range[i])
       return i;
   }
-  return range.length;
+  return -1;
+}
+
+function getColor(d) {
+  if (d == 0)
+    return color[0];
+  if (d >= range[range.length - 1])
+    return color[range.length];
+  index = getRange(d);
+  change = d3.scale.linear().range([color[index - 1], color[index]])
+    .domain([range[index - 1], range[index]])
+  return change(d)
 }
 	
   rect
-      .attr("fill", function(d) {if (isNaN(data_array[d])) return color[0];  return color[getRange(data_array[d])]; })
+      .attr("fill", function(d) {if (isNaN(data_array[d])) return color[0];  return getColor(data_array[d]); })
 	  .attr("data-title", function(d) { if (isNaN(data_array[d])) ret = "No record on "; else ret = data_array[d] + " hours on "; return ret + month[parseDate(d).getMonth()] + ". " + parseDate(d).getDate()});   
 
 d3.csv("",function() {
@@ -103,5 +113,4 @@ function monthPath(t0) {
       + "H" + (w1 + 1) * cellSize + "V" + 0
       + "H" + (w0 + 1) * cellSize + "Z";
 }
-
 
