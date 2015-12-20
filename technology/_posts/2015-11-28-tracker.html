@@ -6,44 +6,6 @@ This is a heat map calender to track how many hours of work I have done each day
 <br>
 <br>
 <script src="/js/d3.min.js"></script>
-<!-- Google Analytics 
-<div id="cal-heatmap" align="center"></div>
-<script src="/js/cal-heatmap.js"></script>
-<link rel="stylesheet" href="/css/cal-heatmap.css" />
-<script type="text/javascript">
-var my_data = {
-"11/28/2015":4
-};
-
-var parser = function(data) {
-	var stats = {};
-	for (var d in data) {
-		date = new Date(d);
-		stats[date.getTime()/1000] = data[d];
-	}
-	return stats;
-};
-    var calendar = new CalHeatMap();
-    calendar.init({
-        data: my_data,
-	afterLoadData: parser,
-        start: new Date(2015, 0),
-        domain: "year",
-        subDomain: "day",
-        range: 1,
-        legend: [1, 2, 3, 4],
-	verticalOrientation: true,
-	legendColors: ["#eee", "#1e6823"],
-	itemName: ["hour", "hours"],
-        subDomainTitleFormat: {
-			empty: "0 hour of work on {date}",
-			filled: "{count} {name} of work on {date}"
-		}
-    });
-</script>
-<br>
-<br>
--->
     <style>
     .day {
       stroke: #fff;
@@ -58,3 +20,11 @@ var parser = function(data) {
 <script type="text/javascript" src="/js/calendermap.js"></script>
 <br>
 
+Here is what should be count as working hours:
+<br>
+
+1.Everything in the daily plan on the calendar.
+<br>
+2.Group meetings.
+<br>
+3.Class time.
