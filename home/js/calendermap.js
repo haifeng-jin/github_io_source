@@ -1,4 +1,12 @@
 var data_array={
+"20160104":4.5,
+"20160103":0,
+"20160102":2,
+"20160101":0,
+"20151231":0,
+"20151230":1.5,
+"20151229":2,
+"20151228":2,
 "20151227":3.5,
 "20151226":1.5,
 "20151225":0,
@@ -46,7 +54,7 @@ var day = d3.time.format("%w"),
 		
    
 var svg = d3.select(".calender-map").selectAll("svg")
-    .data(d3.range(2015, 2016))
+    .data(d3.range(2015, 2017))
   .enter().append("svg")
     .attr("width", '100%')
     .attr("data-height", '0.5678')
