@@ -1,5 +1,5 @@
 var data_array={
-"20160426":7,
+"20160427":7,
 "20160426":6,
 "20160425":6,
 "20160424":1.5,
@@ -158,7 +158,7 @@ var width = 900,
     cellSize = 15; // cell size
     month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     color = ["#eee","#d6e685","#8cc665","#44a340","#1e6823"];
-    range = [0,4,5,7];
+    range = [0,3,6,8];
 	
 var day = d3.time.format("%w"),
     week = d3.time.format("%U"),
