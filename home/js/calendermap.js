@@ -158,7 +158,7 @@ var width = 900,
     cellSize = 15; // cell size
     month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     color = ["#eee","#d6e685","#8cc665","#44a340","#1e6823"];
-    range = [0,1,3,7];
+    range = [0,2,4,7];
 	
 var day = d3.time.format("%w"),
     week = d3.time.format("%U"),
