@@ -1,0 +1,78 @@
+{
+ "name": "PhD",
+ "description": "Get PhD in Computer Science",
+ "children": [
+  {
+   "name": "Course",
+   "description": "Taking courses of 30 credits (10 courses).",
+   "children": [
+    {
+     "name": "Software Engineering",
+     "description": "CSCE606",
+     "done": "30",
+     "size": "30"
+    },
+    {
+     "name": "Computer Architecture",
+     "description": "CSCE614",
+     "done": "30",
+     "size": "30"
+    },
+    {
+     "name": "Operating Systems",
+     "description": "CSCE613",
+     "done": "30",
+     "size": "30"
+    },
+    {
+     "name": "Analysis of Algorithms",
+     "description": "CSCE629",
+     "done": "30",
+     "size": "30"
+    },
+    {
+     "name": "Course1",
+     "description": "CSCE",
+     "done": "0",
+     "size": "30"
+    },
+    {
+     "name": "Course2",
+     "description": "CSCE",
+     "done": "0",
+     "size": "30"
+    },
+    {
+     "name": "Course3",
+     "description": "CSCE",
+     "done": "0",
+     "size": "30"
+    },
+    {
+     "name": "Course4",
+     "description": "CSCE",
+     "done": "0",
+     "size": "30"
+    },
+    {
+     "name": "Course5",
+     "description": "CSCE",
+     "done": "0",
+     "size": "30"
+    },
+    {
+     "name": "Course6",
+     "description": "CSCE",
+     "done": "0",
+     "size": "30"
+    }
+   ],
+  },
+  {
+   "name": "Research",
+   "description": "Doing research and finish dissertation.",
+   "size": "600",
+   "done": "0"
+  }
+ ]
+}

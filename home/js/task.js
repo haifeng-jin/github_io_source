@@ -71,7 +71,7 @@ function mouseMoveArc (d) {
 }
 
 var root_ = null;
-d3.json("/js/flare-labeled.json", function(error, root) {
+d3.json("/js/phd.json", function(error, root) {
   if (error) return console.warn(error);
   // Compute the initial layout on the entire tree to sum sizes.
   // Also compute the full name and fill color for each node,
@@ -224,6 +224,10 @@ function fill(d) {
   while (p.depth > 1) p = p.parent;
   var c = d3.lab(hue(p.name));
   c.l = luminance(d.sum);
+  if (d.done == d.sum) return c;
+  c.l = 90;
+  c.a = 0;
+  c.b = 0;
   return c;
 }
 
