@@ -71,7 +71,8 @@ function mouseMoveArc (d) {
 }
 
 var root_ = null;
-d3.json("/js/getup.json", function(error, root) {
+var data_file = document.getElementById("task").getAttribute("data");
+d3.json(data_file, function(error, root) {
   if (error) return console.warn(error);
   // Compute the initial layout on the entire tree to sum sizes.
   // Also compute the full name and fill color for each node,
