@@ -56,7 +56,7 @@ svg.selectAll(".month")
 d3.csv("/js/data.csv", function(error, csv) {
 
 csv.forEach(function(d) {
-    d.Comparison_Type = parseInt(d.Comparison_Type);
+    d.Comparison_Type = parseFloat(d.Comparison_Type);
   });
 
   var data = d3.nest()
