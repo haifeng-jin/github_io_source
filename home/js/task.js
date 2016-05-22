@@ -225,7 +225,12 @@ function fill(d) {
   while (p.depth > 1) p = p.parent;
   var c = d3.lab(hue(p.name));
   c.l = luminance(d.sum);
-  if (d.done == d.sum) return c;
+  if (d.done == d.sum) {
+    c.l = 75;
+    c.a = -20;
+    c.b = -40;
+    return c;
+  }
   c.l = 90;
   c.a = 0;
   c.b = 0;
