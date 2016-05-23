@@ -19,7 +19,7 @@ title: 我们为什么要努力
 <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/hardworking1.png">
+          <img src="{{site.img}}/hardworking1.jpg">
       </div>
 </div>
 </div>
@@ -31,7 +31,7 @@ title: 我们为什么要努力
 <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/hardworking2.png">
+          <img src="{{site.img}}/hardworking2.jpg">
       </div>
 </div>
 </div>
@@ -43,7 +43,7 @@ title: 我们为什么要努力
 <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/hardworking3.png">
+          <img src="{{site.img}}/hardworking3.jpg">
       </div>
 </div>
 </div>
