@@ -3,4 +3,4 @@ paginate: 20
 paginate_path: "/page:num/"
 markdown: kramdown
 rooturl: /
-img: http://haifengjin.com/img
+img: /img
