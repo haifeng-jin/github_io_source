@@ -4,3 +4,5 @@ paginate_path: "/page:num/"
 markdown: kramdown
 rooturl: /
 img: /img
+# Gems
+gems: [jekyll-paginate]
