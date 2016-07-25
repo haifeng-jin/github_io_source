@@ -5,3 +5,5 @@ markdown: kramdown
 rooturl: /
 img: /img
 category: chinese
+# Gems
+gems: [jekyll-paginate]

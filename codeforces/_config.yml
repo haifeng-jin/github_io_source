@@ -6,3 +6,5 @@ cf_num: 32
 rooturl: /
 img: /img
 category: ../codeforces
+# Gems
+gems: [jekyll-paginate]
