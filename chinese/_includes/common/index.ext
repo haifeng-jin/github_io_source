@@ -7,8 +7,8 @@
 					<th>Date</th>
 				</tr>
 			</thead>
-			<tbody>
-			{% for post in paginator.posts %}
+			<tbody id="articles">
+			{% for post in site.posts %}
 		<tr style="font-size:16px">
 			<td>
 				<a href="{{site.baseurl}}{{ post.url}}">{{ post.title }}</a>
@@ -19,7 +19,11 @@
 			</tbody>
 		</table>
 		<div class="text-center">
-			{% include common/pagination.ext %}
+			<ul class="pagination pagination-sm" id = "pagination">
+			    <li><a>&laquo;</a></li>
+			    <li><a>&raquo;</a></li>
+			</ul>
 		</div>
+		<script src="/js/pagination.js"></script>
            </div>
 
