@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Training Plan on Codeforces</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="load()">
+	<!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top" id="nav_bar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/index.html"
+            class="navbar-brand">
+                Haifeng Jin's Blog
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/index.html">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/technology/index.html">
+                        Technology
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Competitive
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/codeforces/index.html">
+                                Codeforces
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1/codelib">
+                                Library
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/chinese/index.html">
+                        Chinese
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Search
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form class="navbar-form" style="padding-bottom:35px">
+                                <input type="text" name="search-key-words" class="form-control col-lg-8"
+                                onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/about.html">
+                        About Me
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Contact
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="https://www.linkedin.com/in/HaifengJin">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:jin@tamu.edu">
+                                E-mail
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
+                                Facebook
+                            </a>
+                        </li>
+
+                </li>
+                <li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function googlesearch() {
+        var key = document.getElementsByName("search-key-words")[0].value;
+        var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
+        window.open(link);
+        document.getElementsByName("search-key-words")[0].value = ""
+    }
+</script>
+
+	<script>
+function load() {
+    $.get( "/codeforces/codeforces_header.html", function( data ) {
+        $(data).insertAfter("#nav_bar");
+    });
+    $.get( "/codeforces/codeforces_sidebar.html", function( data ) {
+        $("#side_bar").html(data);
+    });
+}
+</script>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h2>Training Plan on Codeforces</h2>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 28 Nov 2015</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+		<div style="font-size: 16px; line-height: 26px">
+				<div class="progress progress-striped">
+			<div class="progress-bar" style="width: 13%;"></div>
+		</div>
+
+<table class="table">
+  <tr>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/602/problem/C">602C</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/602/problem/D">602D</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/599/problem/C">599C</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/599/problem/D">599D</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/596/problem/C">596C</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/596/problem/D">596D</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/595/problem/C">595C</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/595/problem/D">595D</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/593/problem/C">593C</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/593/problem/D">593D</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/591/problem/C">591C</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/591/problem/D">591D</td>
+    <td bgcolor="#ADD8E6"><a href="http://codeforces.com/contest/588/problem/C">588C</td>
+    <td><a href="http://codeforces.com/contest/588/problem/D">588D</td>
+    <td><a href="http://codeforces.com/contest/586/problem/C">586C</td>
+    <td><a href="http://codeforces.com/contest/586/problem/D">586D</td>
+    <td><a href="http://codeforces.com/contest/584/problem/C">584C</td>
+    <td><a href="http://codeforces.com/contest/584/problem/D">584D</td>
+    <td><a href="http://codeforces.com/contest/583/problem/C">583C</td>
+    <td><a href="http://codeforces.com/contest/583/problem/D">583D</td>
+  </tr>
+  <tr>
+    <td><a href="http://codeforces.com/contest/581/problem/C">581C</td>
+    <td><a href="http://codeforces.com/contest/581/problem/D">581D</td>
+    <td><a href="http://codeforces.com/contest/580/problem/C">580C</td>
+    <td><a href="http://codeforces.com/contest/580/problem/D">580D</td>
+    <td><a href="http://codeforces.com/contest/579/problem/C">579C</td>
+    <td><a href="http://codeforces.com/contest/579/problem/D">579D</td>
+    <td><a href="http://codeforces.com/contest/577/problem/C">577C</td>
+    <td><a href="http://codeforces.com/contest/577/problem/D">577D</td>
+    <td><a href="http://codeforces.com/contest/574/problem/C">574C</td>
+    <td><a href="http://codeforces.com/contest/574/problem/D">574D</td>
+  </tr>
+  <tr>
+    <td><a href="http://codeforces.com/contest/572/problem/C">572C</td>
+    <td><a href="http://codeforces.com/contest/572/problem/D">572D</td>
+    <td><a href="http://codeforces.com/contest/570/problem/C">570C</td>
+    <td><a href="http://codeforces.com/contest/570/problem/D">570D</td>
+    <td><a href="http://codeforces.com/contest/567/problem/C">567C</td>
+    <td><a href="http://codeforces.com/contest/567/problem/D">567D</td>
+    <td><a href="http://codeforces.com/contest/558/problem/C">558C</td>
+    <td><a href="http://codeforces.com/contest/558/problem/D">558D</td>
+    <td><a href="http://codeforces.com/contest/557/problem/C">557C</td>
+    <td><a href="http://codeforces.com/contest/557/problem/D">557D</td>
+  </tr>
+  <tr>
+    <td><a href="http://codeforces.com/contest/552/problem/C">552C</td>
+    <td><a href="http://codeforces.com/contest/552/problem/D">552D</td>
+    <td><a href="http://codeforces.com/contest/551/problem/C">551C</td>
+    <td><a href="http://codeforces.com/contest/551/problem/D">551D</td>
+    <td><a href="http://codeforces.com/contest/550/problem/C">550C</td>
+    <td><a href="http://codeforces.com/contest/550/problem/D">550D</td>
+    <td><a href="http://codeforces.com/contest/548/problem/C">548C</td>
+    <td><a href="http://codeforces.com/contest/548/problem/D">548D</td>
+    <td><a href="http://codeforces.com/contest/546/problem/C">546C</td>
+    <td><a href="http://codeforces.com/contest/546/problem/D">546D</td>
+  </tr>
+  <tr>
+    <td><a href="http://codeforces.com/contest/545/problem/C">545C</td>
+    <td><a href="http://codeforces.com/contest/545/problem/D">545D</td>
+    <td><a href="http://codeforces.com/contest/544/problem/C">544C</td>
+    <td><a href="http://codeforces.com/contest/544/problem/D">544D</td>
+    <td><a href="http://codeforces.com/contest/540/problem/C">540C</td>
+    <td><a href="http://codeforces.com/contest/540/problem/D">540D</td>
+    <td><a href="http://codeforces.com/contest/535/problem/C">535C</td>
+    <td><a href="http://codeforces.com/contest/535/problem/D">535D</td>
+    <td><a href="http://codeforces.com/contest/534/problem/C">534C</td>
+    <td><a href="http://codeforces.com/contest/534/problem/D">534D</td>
+  </tr>
+  <tr>
+    <td><a href="http://codeforces.com/contest/527/problem/C">527C</td>
+    <td><a href="http://codeforces.com/contest/527/problem/D">527D</td>
+    <td><a href="http://codeforces.com/contest/525/problem/C">525C</td>
+    <td><a href="http://codeforces.com/contest/525/problem/D">525D</td>
+    <td><a href="http://codeforces.com/contest/519/problem/C">519C</td>
+    <td><a href="http://codeforces.com/contest/519/problem/D">519D</td>
+    <td><a href="http://codeforces.com/contest/518/problem/C">518C</td>
+    <td><a href="http://codeforces.com/contest/518/problem/D">518D</td>
+    <td><a href="http://codeforces.com/contest/514/problem/C">514C</td>
+    <td><a href="http://codeforces.com/contest/514/problem/D">514D</td>
+  </tr>
+  <tr>
+    <td><a href="http://codeforces.com/contest/510/problem/C">510C</td>
+    <td><a href="http://codeforces.com/contest/510/problem/D">510D</td>
+    <td><a href="http://codeforces.com/contest/508/problem/C">508C</td>
+    <td><a href="http://codeforces.com/contest/508/problem/D">508D</td>
+    <td><a href="http://codeforces.com/contest/507/problem/C">507C</td>
+    <td><a href="http://codeforces.com/contest/507/problem/D">507D</td>
+    <td><a href="http://codeforces.com/contest/496/problem/C">496C</td>
+    <td><a href="http://codeforces.com/contest/496/problem/D">496D</td>
+    <td><a href="http://codeforces.com/contest/495/problem/C">495C</td>
+    <td><a href="http://codeforces.com/contest/495/problem/D">495D</td>
+  </tr>
+  <tr>
+    <td><a href="http://codeforces.com/contest/493/problem/C">493C</td>
+    <td><a href="http://codeforces.com/contest/493/problem/D">493D</td>
+    <td><a href="http://codeforces.com/contest/492/problem/C">492C</td>
+    <td><a href="http://codeforces.com/contest/492/problem/D">492D</td>
+    <td><a href="http://codeforces.com/contest/490/problem/C">490C</td>
+    <td><a href="http://codeforces.com/contest/490/problem/D">490D</td>
+    <td><a href="http://codeforces.com/contest/489/problem/C">489C</td>
+    <td><a href="http://codeforces.com/contest/489/problem/D">489D</td>
+    <td><a href="http://codeforces.com/contest/474/problem/C">474C</td>
+    <td><a href="http://codeforces.com/contest/474/problem/D">474D</td>
+  </tr>
+  <tr>
+    <td><a href="http://codeforces.com/contest/471/problem/C">471C</td>
+    <td><a href="http://codeforces.com/contest/471/problem/D">471D</td>
+    <td><a href="http://codeforces.com/contest/467/problem/C">467C</td>
+    <td><a href="http://codeforces.com/contest/467/problem/D">467D</td>
+    <td><a href="http://codeforces.com/contest/466/problem/C">466C</td>
+    <td><a href="http://codeforces.com/contest/466/problem/D">466D</td>
+    <td><a href="http://codeforces.com/contest/463/problem/C">463C</td>
+    <td><a href="http://codeforces.com/contest/463/problem/D">463D</td>
+    <td><a href="http://codeforces.com/contest/460/problem/C">460C</td>
+    <td><a href="http://codeforces.com/contest/460/problem/D">460D</td>
+  </tr>
+</table>
+
+
+		</div>
+                <hr>
+
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4" id="side_bar">
+
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->
+    <hr>
+
+
+    <!-- Google Analytics -->
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44322747-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    
+</body>
+
+</html>

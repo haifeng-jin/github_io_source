@@ -1,0 +1,10 @@
+<script>
+function load() {
+    $.get( "/{{page.category}}/{{page.category}}_header.html", function( data ) {
+        $(data).insertAfter("#nav_bar");
+    });
+    $.get( "/{{page.category}}/{{page.category}}_sidebar.html", function( data ) {
+        $("#side_bar").html(data);
+    });
+}
+</script>

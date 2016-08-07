@@ -1,6 +1,0 @@
-	  {% if paginator.next_page %}
-	<li><a href="{{site.baseurl}}{{ site.paginate_path | replace: ':num', paginator.next_page}}">&raquo;</span></a></li>
-	  {% else %}
-		<li class="disabled"><a>&raquo;</a></li>
-	  {% endif %}
-

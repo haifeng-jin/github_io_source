@@ -1,5 +1,0 @@
-<script>
-    $.get( "/{{page.category}}/{{page.category}}_header.html", function( data ) {
-        $(data).insertAfter("#nav_bar");
-    });
-</script>

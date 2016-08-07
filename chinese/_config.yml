@@ -1,9 +1,0 @@
-baseurl: /chinese
-paginate: 20
-paginate_path: "/page:num/"
-markdown: kramdown
-rooturl: /
-img: /img
-category: chinese
-# Gems
-gems: [jekyll-paginate]

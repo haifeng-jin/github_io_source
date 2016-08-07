@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>是什么决定了我们的命运</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="load()">
+	<!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top" id="nav_bar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/index.html"
+            class="navbar-brand">
+                Haifeng Jin's Blog
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/index.html">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/technology/index.html">
+                        Technology
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Competitive
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/codeforces/index.html">
+                                Codeforces
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1/codelib">
+                                Library
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/chinese/index.html">
+                        Chinese
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Search
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form class="navbar-form" style="padding-bottom:35px">
+                                <input type="text" name="search-key-words" class="form-control col-lg-8"
+                                onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/about.html">
+                        About Me
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Contact
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="https://www.linkedin.com/in/HaifengJin">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:jin@tamu.edu">
+                                E-mail
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
+                                Facebook
+                            </a>
+                        </li>
+
+                </li>
+                <li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function googlesearch() {
+        var key = document.getElementsByName("search-key-words")[0].value;
+        var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
+        window.open(link);
+        document.getElementsByName("search-key-words")[0].value = ""
+    }
+</script>
+
+	<script>
+function load() {
+    $.get( "/chinese/chinese_header.html", function( data ) {
+        $(data).insertAfter("#nav_bar");
+    });
+    $.get( "/chinese/chinese_sidebar.html", function( data ) {
+        $("#side_bar").html(data);
+    });
+}
+</script>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h2>是什么决定了我们的命运</h2>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 07 Jun 2014</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+		<div style="font-size: 16px; line-height: 26px">
+		<p>有些人相信命运，有些人想改变命运。这篇文章里既没有任何激情，也没有什么夸张。既不积极，也不消极。只是客观、平静且真实地讲述了我对命运的看法。</p>
+
+<p>小时候我们对命运的看法惊人的一致，认为勤奋可以改变命运。勤奋的人能出人头地，懒惰的人一事无成。这些思想多来自于老师和家长的教导。因此出身贫寒而且听话的孩子们会努力学习来改变了他们本应坎坷的命运。这样的同学通常会得到社会的认可，老师的表扬。进而引导了所有人的价值观，认为这样的人是值得敬佩的。于是我们开始称颂自己奋斗而来的果实，鄙视那些游手好闲的人从上一辈人手中直接继承来的财富。我们之所以会有这样的想法，是因为我们认为是他们在用自己的行动改变着自己的命运。那自然靠自己的人比靠别人的人更伟大。</p>
+
+<div class="row">
+<div class="col-lg-12">
+      <div class="thumbnail">
+          <img src="/img/fate1.jpg" />
+      </div>
+</div>
+</div>
+
+<p>但是，在我看来无论是努力奋斗的寒门贵子，还是继承家业的富家子弟，都没有真正改变过他们的命运。努力奋斗获得的成功其实也和继承来的家产没什么两样，都是外部力量决定的，而并非由自己的行为所决定的。两者都是顺其自然的结果，所以也就没有什么好称颂和鄙视的。</p>
+
+<p>下面我们来简要地分析一下这种说法的依据。我们在初中的课堂上都学过，生物的性状是由两方面因素决定的：遗传和环境。在这里我们将人比作一种生物，注意不是直接套用这条生物学定律，只是感觉他们有异曲同工之妙。人这一辈子的一切行为、思想、成就等等可以看作是性状，那么决定这种性状的因素可以分为先天因素和后天因素，即遗传和环境。先天因素自然是我们不能决定的，后天因素也是我们不能决定的。所谓的后天因素是指我们的家庭教育，学校教育，遇到的人和事。这些都会对我们造成影响，塑造了我们的行为和思维模式。我们的每一个行为都是这二者共同作用的结果，并不是我们自己所决定的。正是这二者决定了我们的命运。</p>
+
+<div class="row">
+<div class="col-lg-12">
+      <div class="thumbnail">
+          <img src="/img/fate2.jpg" />
+      </div>
+</div>
+</div>
+<p>我们再回过头来看那个富二代的例子，我们试想他如果从一出生就生在和那个贫穷而努力的孩子一样的家庭，经历了和那个孩子一样的事情，我相信这个孩子也会同样的努力。 如果这样的情况下他仍然是游手好闲的，那只能说这种特质是天生的，自然也不是他的错。如果我们因为一个人天生的缺点而鄙视他，那又和鄙视一个先天性身体残疾的人有什么区别呢？如果我们因为一个人后天所经历的他无法改变的事情所造成的结果而鄙视他，那又和鄙视海伦凯勒这样因后天因素造成的残疾的人有什么区别呢？</p>
+
+<p>我们常听人这样说：“孩子是没有错的，如果孩子做错事，那就是大人没教好。” 如果这句话是对的，那么大人也是没有错的，因为我们没法找到二者之间的一个清晰明确的本质区别。能找到的无非是一个模糊的年龄界限，而这个年龄界限又有什么意义呢？难道过了十八岁生日就立即由没错变成有错了？</p>
+
+<div class="row">
+<div class="col-lg-12">
+      <div class="thumbnail">
+          <img src="/img/fate3.jpg" />
+      </div>
+</div>
+</div>
+
+<p>每个人都带着先天因素来到这个世界上，然后开始经历自己的人生，被这个世界上的事情所塑造。我们就像一块块石料，这个世界就是一个雕刻家，把我们雕琢成不同的形态，然而我们对我们被雕成什么是无能为力的。当我真正相信这件事情的时候，我发现我对这个世界上的许多人和事没有了曾经的愤怒。我曾经愤怒的原因是感觉有些人很坏，在蓄意地伤害其他人。但现在我知道他们的所作所为也不是他们自己所决定的。他们就像被训兽师训练出来的用于攻击的野兽，他们的攻击行为只是训练的结果，想到这真的对这样的人恨意全无。</p>
+
+<p>其实上面提到的先天因素和后天因素也还不是最本质的决定我们命运的因素。其实究其根本，是自然界的规律在决定着我们的命运。这个世界是严格按照自然定律来运行的，没有一丝一毫的偏差。有些定律已经被人们发现，有些定律还没被发现，但是我相信它们都是存在的。 就像我们知道时间和速度可以求出距离一样，未来的一切早已由世界现在的状态和这些自然定律确定好了，我们只是按照剧本在一步步的推进罢了。</p>
+
+<div class="row">
+<div class="col-lg-12">
+      <div class="thumbnail">
+          <img src="/img/fate4.jpg" />
+      </div>
+</div>
+</div>
+
+
+		</div>
+                <hr>
+
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4" id="side_bar">
+
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->
+    <hr>
+
+
+    <!-- Google Analytics -->
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44322747-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    
+</body>
+
+</html>

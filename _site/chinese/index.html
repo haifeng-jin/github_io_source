@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Haifeng Jin's Blog</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="load()">
+	<!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top" id="nav_bar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/index.html"
+            class="navbar-brand">
+                Haifeng Jin's Blog
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/index.html">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/technology/index.html">
+                        Technology
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Competitive
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/codeforces/index.html">
+                                Codeforces
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1/codelib">
+                                Library
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/chinese/index.html">
+                        Chinese
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Search
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form class="navbar-form" style="padding-bottom:35px">
+                                <input type="text" name="search-key-words" class="form-control col-lg-8"
+                                onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/about.html">
+                        About Me
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Contact
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="https://www.linkedin.com/in/HaifengJin">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:jin@tamu.edu">
+                                E-mail
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
+                                Facebook
+                            </a>
+                        </li>
+
+                </li>
+                <li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function googlesearch() {
+        var key = document.getElementsByName("search-key-words")[0].value;
+        var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
+        window.open(link);
+        document.getElementsByName("search-key-words")[0].value = ""
+    }
+</script>
+
+	<script>
+function load() {
+    $.get( "/chinese/chinese_header.html", function( data ) {
+        $(data).insertAfter("#nav_bar");
+    });
+    $.get( "/chinese/chinese_sidebar.html", function( data ) {
+        $("#side_bar").html(data);
+    });
+}
+</script>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+			            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+		<table class="table table-striped table-hover ">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody id="articles">
+			
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2016/05/30/time.html">为什么时间管理方法对你没用</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 30 May 2016</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2016/05/21/hardworking.html">我们为什么要努力</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 21 May 2016</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2016/05/09/A-Club-without-Me.html">没有我的A协</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 09 May 2016</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2016/05/06/method.html">他想做的事情都能成功</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 06 May 2016</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2015/11/20/baba.html">爸爸要我做个好孩子</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 20 Nov 2015</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2015/10/31/disaster.html">不能装X无异于一场灾难</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 31 Oct 2015</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2015/10/01/iq.html">努力真的比智力重要吗</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 01 Oct 2015</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2015/09/22/fail-or-not.html">挂还是不挂？这是个问题</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 22 Sep 2015</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2015/07/25/study-at-bjfu.html">北京林业大学就读体验</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 25 Jul 2015</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2014/06/07/fate.html">是什么决定了我们的命运</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 07 Jun 2014</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2014/04/17/I-and-A-Club.html">我与A协</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 17 Apr 2014</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2009/08/04/primary-school.html">我不可思议的小学生活</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 04 Aug 2009</td>
+			</tr>
+				
+		<tr style="font-size:16px">
+			<td>
+				<a href="/chinese/2008/04/17/lier.html">说谎的孩子被狼吃</a>
+			</td>
+			<td><span class="glyphicon glyphicon-time"></span> Posted on 17 Apr 2008</td>
+			</tr>
+				
+			</tbody>
+		</table>
+		<div class="text-center">
+			<ul class="pagination pagination-sm" id = "pagination">
+			    <li><a>&laquo;</a></li>
+			    <li><a>&raquo;</a></li>
+			</ul>
+		</div>
+		<script src="/js/pagination.js"></script>
+           </div>
+
+
+
+
+
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4" id="side_bar">
+
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->
+    <hr>
+
+
+    <!-- Google Analytics -->
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44322747-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    
+</body>
+
+</html>

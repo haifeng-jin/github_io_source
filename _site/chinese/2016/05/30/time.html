@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>为什么时间管理方法对你没用</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="load()">
+	<!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top" id="nav_bar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/index.html"
+            class="navbar-brand">
+                Haifeng Jin's Blog
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/index.html">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/technology/index.html">
+                        Technology
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Competitive
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/codeforces/index.html">
+                                Codeforces
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1/codelib">
+                                Library
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/chinese/index.html">
+                        Chinese
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Search
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form class="navbar-form" style="padding-bottom:35px">
+                                <input type="text" name="search-key-words" class="form-control col-lg-8"
+                                onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/about.html">
+                        About Me
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Contact
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="https://www.linkedin.com/in/HaifengJin">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:jin@tamu.edu">
+                                E-mail
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
+                                Facebook
+                            </a>
+                        </li>
+
+                </li>
+                <li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function googlesearch() {
+        var key = document.getElementsByName("search-key-words")[0].value;
+        var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
+        window.open(link);
+        document.getElementsByName("search-key-words")[0].value = ""
+    }
+</script>
+
+	<script>
+function load() {
+    $.get( "/chinese/chinese_header.html", function( data ) {
+        $(data).insertAfter("#nav_bar");
+    });
+    $.get( "/chinese/chinese_sidebar.html", function( data ) {
+        $("#side_bar").html(data);
+    });
+}
+</script>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h2>为什么时间管理方法对你没用</h2>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 30 May 2016</span>
+
+		<div class="pull-right">
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+		<div style="font-size: 16px; line-height: 26px">
+		<p>现在有很多关于提高工作效率、时间管理和自我管理方面的书籍和文章。在留学生圈子里比较出名的一篇由Steve Pavlina所作的《Do it now》。这些书籍和文章中介绍了许多时间管理技巧，只要我掌握了它们，我一定能脱胎换骨，成为一个高效能人士。但是关键问题在于，我即便知道怎么做，我也从来不去做。</p>
+
+<p>我不去做的原因并不是自制力不够，而是这些技巧远超出了我的自我管理能力。打个比方，将这些书籍中的神奇技巧比喻成一些复杂的人工智能理论，懂了它就能造出AlphaGo（谷歌人工智能机器人）击败围棋世界冠军李世石。然而，我虽然掌握了这些理论，但我如果生活在一个电灯刚刚被发明出来的年代，我的这些理论是无法被付诸实践的，因为那时没有计算机的基础设施进行支持。而我们的时间管理能力也是有一个循序渐进的过程，由基础设施的层层积累而成，只有达到了一定的水平才能使用相应的方法和技巧。</p>
+
+<div class="row">
+<div class="col-lg-12">
+      <div class="thumbnail">
+          <img src="/img/time1.jpg" />
+      </div>
+</div>
+</div>
+
+<p>人与人之间由于家庭教育的差异，在时间管理和自我管理能力上有着非常大的差别。有些人从小就在父母的培养下在建立自己的自我管理基础设施，即良好的学习习惯，生活习惯，对一些事物的认知等等。我记得我读过一篇文章，讲述了图灵奖得主姚期智的得意门生——清华大神楼天成的成长历程。楼天成小时候父亲给他制定了一个英语学习计划。一次父亲出差后深夜回家得知他没有完成当天计划，硬是把他从床上折腾起来，学完了才能继续睡。这件事可能只是他家庭教育的冰山一角。这就是为什么我们身边有些人能比其他人努力无数倍。他们从小就在被训练着建立起一套自我管理体系，并在成长的过程中不断完善。并最终导致了他们后来极强的时间管理和自我管理能力。</p>
+
+<p>如果你也是在这样痛苦的家庭教育中长大的，那么你应该是可以使用那些复杂的时间管理方法的。但是我没有受过这方面的训练，也没有相对完备的自我管理体系。所以我想要达到书中描述的炉火纯青的境界，要总最早的“电气时代”循序渐进地搭建基础设施，并最终达到“信息时代”。跨越太大只能因无法之行而导致放弃。</p>
+
+<div class="row">
+<div class="col-lg-12">
+      <div class="thumbnail">
+          <img src="/img/time2.jpg" />
+      </div>
+</div>
+</div>
+
+<p>最后来点干货。那些完全没有时间管理方法的人应该如何迈出第一步呢？我的建议是用表格记录每天的学习工作时间。至于细节，怎么方便怎么来吧，能坚持做才是最重要的。之所以把这个作为第一步是因为它比较简单易行，而且意义比较重大。这实际上是在为之后使用其他时间管理方法建立一个反馈机制，通过感受不同方法导致每天的工作时间的变化，我们会逐渐发现什么情况下我们更适合工作。这样我们以后就可以知道什么行为在促进我们高效工作和什么行为在起反作用。</p>
+
+<p>我将我每天的工作时间做成了热力图的形式，是不是很好玩？</p>
+
+<div class="row">
+<div class="col-lg-12">
+      <div class="thumbnail">
+          <img src="/img/time3.png" />
+      </div>
+</div>
+</div>
+
+
+		</div>
+                <hr>
+
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4" id="side_bar">
+
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->
+    <hr>
+
+
+    <!-- Google Analytics -->
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44322747-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    
+</body>
+
+</html>

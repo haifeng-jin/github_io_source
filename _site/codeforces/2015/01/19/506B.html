@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>506B</title>
+
+    <!-- Bootstrap Core  -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="load()">
+	<!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top" id="nav_bar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/index.html"
+            class="navbar-brand">
+                Haifeng Jin's Blog
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/index.html">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/technology/index.html">
+                        Technology
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Competitive
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/codeforces/index.html">
+                                Codeforces
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1/codelib">
+                                Library
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/chinese/index.html">
+                        Chinese
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Search
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form class="navbar-form" style="padding-bottom:35px">
+                                <input type="text" name="search-key-words" class="form-control col-lg-8"
+                                onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/about.html">
+                        About Me
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Contact
+                        <b class="caret">
+                        </b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="https://www.linkedin.com/in/HaifengJin">
+                                Linkedin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jhfjhfj1">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:jin@tamu.edu">
+                                E-mail
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
+                                Facebook
+                            </a>
+                        </li>
+
+                </li>
+                <li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function googlesearch() {
+        var key = document.getElementsByName("search-key-words")[0].value;
+        var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
+        window.open(link);
+        document.getElementsByName("search-key-words")[0].value = ""
+    }
+</script>
+
+	<script>
+function load() {
+    $.get( "/codeforces/codeforces_header.html", function( data ) {
+        $(data).insertAfter("#nav_bar");
+    });
+    $.get( "/codeforces/codeforces_sidebar.html", function( data ) {
+        $("#side_bar").html(data);
+    });
+}
+</script>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+		            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+		
+                <h2>506B</h2>
+                <hr>
+
+                <!-- Date/Time -->
+		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on 19 Jan 2015</span>
+
+		<div class="pull-right">
+			
+			<span class="label label-default">dsu</span>
+			
+			<span class="label label-default">graphs</span>
+			
+		</div>
+
+                <hr>
+
+                <!-- Post Content -->
+		<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+		<div style="font-size: 16px; line-height: 26px">
+		<p>###Description<br />
+<br />
+There are <script type="math/tex">n</script> vertexes in the graph.
+Now we need to add some unidirected edges to it.
+To make sure that we can go from <script type="math/tex">a</script> to <script type="math/tex">b</script> in each pair <script type="math/tex">(a,b)</script> among the <script type="math/tex">m</script> pairs given below.
+(<script type="math/tex">1 \leq n,m \leq 10^5</script>)
+Output the minimum number of edges to be added.
+<br /></p>
+
+<p>###Tutorial<br />
+<br />
+First we add all the edges and use Disjoint Set Union to see the connected components.
+In a component without circles, we can construct the edges like this.
+We arrange all the points in a line, and connect them into a chain.
+There must exist a chain can fulfill the condition in the description.</p>
+
+<p>For those component contain circles, we just form a big circle which every vertex can go to every vertex.</p>
+
+<p>Topological order can be used for circle detection.
+If after the BFS, there still some vertex’s degree is not zero, it must contain cricle.
+<br /></p>
+
+<p>###Solution<br />
+<br /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+#define D(x) x
+
+const int MAX_N = (int)(1e5) + 10;
+
+struct DSU
+{
+	int father[MAX_N];
+
+	DSU()
+	{}
+
+	DSU(int n)
+	{
+		for (int i = 0; i &lt; n; i++)
+		{
+			father[i] = i;
+		}
+	}
+
+	int find(int a)
+	{
+		int ret = a;
+		while (father[ret] != ret)
+			ret = father[ret];
+		while (father[a] != a)
+		{
+			int b = a;
+			a = father[a];
+			father[b] = ret;
+		}
+		return ret;
+	}
+
+	void merge(int a, int b)
+	{
+		father[find(a)] = father[find(b)];
+	}
+};
+
+
+int n, m;
+bool circle[MAX_N];
+vector&lt;int&gt; edge[MAX_N];
+int degree[MAX_N];
+
+void add_edge(int a, int b)
+{
+	edge[a].push_back(b);
+	degree[b]++;
+}
+
+void bfs(int node_num, vector&lt;int&gt; edge[])
+{
+	//indexes start from 0
+	queue&lt;int&gt; q;
+	for (int i = 0; i &lt; node_num; i++)
+	{
+		if (degree[i] == 0)
+		{
+			q.push(i);
+		}
+	}
+	while (!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		//push u into an array to get the topological order sequence
+		for (int i = 0; i &lt; (int)edge[u].size(); i++)
+		{
+			int v = edge[u][i];
+			if (degree[v] == 0)
+			{
+				continue;
+			}
+			degree[v]--;
+			if (degree[v] == 0)
+			{
+				q.push(v);
+			}
+		}
+	}
+	//if degree[i] != 0 now, it means there is a circle on the connected component with vertex i.
+}
+
+int main()
+{
+	//input
+	scanf("%d%d", &amp;n, &amp;m);
+	DSU dsu = DSU(n);
+	for (int i = 0; i &lt; m; i++)
+	{
+		int a, b;
+		scanf("%d%d", &amp;a, &amp;b);
+		a--;
+		b--;
+		add_edge(a, b);
+		dsu.merge(a, b);
+	}
+	bfs(n, edge);
+	for (int i = 0; i &lt; n; i++)
+	{
+		if (degree[i])
+		{
+			circle[dsu.find(i)] = true;
+		}
+	}
+	int ans = n;
+	for (int i = 0; i &lt; n; i++)
+	{
+		if (dsu.father[i] == i &amp;&amp; !circle[i])
+		{
+			ans--;
+		}
+	}
+	printf("%d\n", ans);
+	return 0;
+}
+</code></pre>
+</div>
+
+
+		</div>
+                <hr>
+
+
+
+		<!-- Disqus -->
+		<!-- Comment -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'jhfjhfj1'; // required: replace example with your forum shortname
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<!-- End Nested Comment -->
+
+
+
+            </div>
+
+
+
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4" id="side_bar">
+
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->
+    <hr>
+
+
+    <!-- Google Analytics -->
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44322747-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    
+</body>
+
+</html>

@@ -1,3 +1,0 @@
-	<li><a href="{% include common/root.ext %}/index.html">1</a></li>
-	<li class="disabled"><a>...</a></li>
-

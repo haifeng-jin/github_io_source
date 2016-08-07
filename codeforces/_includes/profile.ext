@@ -1,8 +1,0 @@
-<!-- Side Widget Well -->
-<div class="panel panel-default">
-  <div class="panel-heading"><big>Introduction</big></div>
-  <div class="panel-body">
-    <p>Here are some write-ups for the problems I solved on Codeforces.</p>
-  </div>
-</div>
-

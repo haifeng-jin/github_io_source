@@ -1,0 +1,4 @@
+markdown: kramdown
+img: /img
+# Gems
+gems: [jekyll-paginate]
