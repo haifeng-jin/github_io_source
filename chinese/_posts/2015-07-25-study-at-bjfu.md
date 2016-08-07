@@ -1,6 +1,7 @@
 ---
 title: 北京林业大学就读体验
 layout: post
+category: chinese
 ---
 刚到北林时，心中有些愤懑；而现在，只会因毕业于北林而骄傲。——题记
 

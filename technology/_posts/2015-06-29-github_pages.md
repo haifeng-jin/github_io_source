@@ -1,5 +1,6 @@
 ---
 title: Jekyll on GitHub Pages
+category: technology
 layout: post
 ---
 

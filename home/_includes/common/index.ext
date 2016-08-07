@@ -8,7 +8,7 @@
 				</tr>
 			</thead>
 			<tbody id="articles">
-			{% for post in site.posts %}
+			{% for post in site.categories.[page.category] %}
 		<tr style="font-size:16px">
 			<td>
 				<a href="{{site.baseurl}}{{ post.url}}">{{ post.title }}</a>
