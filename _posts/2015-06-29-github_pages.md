@@ -23,7 +23,7 @@ Finally, add, commit and push using the following command after you cd to the re
 
 Now, you can check your website at "username.github.io".
 
-###Explanation
+### Explanation
 
 The steps above is to build a website using Jekyll locally and upload the necessary files to GitHub.
 The second step is to block the auto-build command of GitHub Pages. Otherwise, it would take your website as a Jekyll project and build it for you.
