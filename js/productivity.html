@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+svg {
+  font: 10px sans-serif;
+}
+
+.y.axis path {
+  display: none;
+}
+
+.y.axis line {
+  stroke: #D3D3D3;
+  stroke-opacity: .4;
+  shape-rendering: crispEdges;
+}
+
+.birthyear {
+  fill: #fff;
+}
+
+rect {
+  fill-opacity: .6;
+  fill: #52c6d7;
+}
+
+</style>
+<body>
+<!-- Bootstrap Core  -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+<script src="d3.min.js"></script>
+<script>
+
+var margin = {top: 20, right: 40, bottom: 30, left: 20},
+    width = 960 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom,
+    barWidth = Math.floor(width / 15) - 1;
+
+var x = d3.scale.linear()
+    .range([barWidth / 2, width - barWidth / 2]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("right")
+    .tickSize(-width)
+    .ticks(4)
+    .tickFormat(function(d) { return d; });
+
+// An SVG element with a bottom-right origin.
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// A sliding container to hold the bars by birthyear.
+var birthyears = svg.append("g")
+    .attr("class", "birthyears");
+
+d3.csv("/js/data.csv", function(error, data) {
+
+  // Convert strings to numbers.
+  data.forEach(function(d) {
+    d.date = +d.Date;
+    d.hour = +d.Comparison_Type;
+  });
+
+  data = data.sort(function (a, b) {
+    return b.date - a.date;
+  }).slice(0, 14);
+  data.reverse();
+
+  // Update the scale domains.
+  x.domain([0, 14]);
+  y.domain([0, 8]);
+
+  // Add an axis to show the population values.
+  svg.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(" + width + ",0)")
+      .call(yAxis);
+
+  var rects = birthyears.selectAll("rect")
+      .data(data)
+    .enter().append("rect")
+      .attr("width", barWidth)
+      .attr("height", 0)
+      .attr("transform", function(d, i) { return "translate(" + x(i) + ", " + height + ")"; })
+      .attr("data-title", function(d) { return d.hour + " hours"; });
+
+  rects.transition()
+       .duration(500)
+       .delay(function(d, i) {return (14 - i) * 50; })
+       .attr("transform", function(d, i) { return "translate(" + x(i) + "," + y(d.hour) + ")"; })
+       .attr("height", function(d) { return height - y(d.hour); })
+
+  // Add labels to show birthyear.
+  birthyears.selectAll("text")
+      .data(data)
+      .enter().append("text")
+      .text(function(birthyear) { return date_format(birthyear.date); })
+      .attr("transform", function(d, i) { return "translate(" + (x(i) + 10) + "," + (height + 20) + ")"; });
+
+  $("rect").tooltip({container: 'body', html: true, placement:'top'}); 
+
+
+});
+
+function date_format(date) {
+  var month_string = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  date = date + 0;
+  var month = Math.floor(date / 100) % 100 - 1;
+  var day = date % 100;
+  return month_string[month] + ". " + day;
+}
+
+</script>
