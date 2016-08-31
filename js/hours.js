@@ -90,7 +90,7 @@ function date_format(date) {
 var first = true;
 
 $(window).scroll(function () {
-   if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+   if ($(window).scrollTop() >= $(document).height() - $(window).height() - 100) {
       if (first) {
         first = false;
       	show();
