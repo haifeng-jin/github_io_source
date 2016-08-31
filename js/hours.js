@@ -67,7 +67,7 @@ d3.csv("/js/data.csv", function(error, data) {
       .attr("transform", function(d, i) { return "translate(" + (x(i) + 10) + "," + (height + 20) + ")"; });
 
   $("rect").tooltip({container: 'body', html: true, placement:'top'}); 
-
+  show();
 
 });
 
@@ -87,13 +87,3 @@ function date_format(date) {
   return month_string[month] + ". " + day;
 }
 
-var first = true;
-
-$(window).scroll(function () {
-   if ($(window).scrollTop() >= $(document).height() - $(window).height() - 100) {
-      if (first) {
-        first = false;
-      	show();
-      }
-   }
-});
