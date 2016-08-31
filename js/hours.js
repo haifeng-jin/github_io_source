@@ -74,7 +74,7 @@ d3.csv("/js/data.csv", function(error, data) {
 function show() {
   d3.selectAll("rect").transition()
        .duration(500)
-       .delay(function(d, i) {return (14 - i) * 50; })
+       .delay(function(d, i) {return (14 - i) * 50 + 1000; })
        .attr("transform", function(d, i) { return "translate(" + x(i) + "," + y(d.hour) + ")"; })
        .attr("height", function(d) { return height - y(d.hour); })
 }
