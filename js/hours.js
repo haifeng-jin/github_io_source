@@ -1,46 +1,4 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-svg {
-  font: 10px sans-serif;
-}
-
-.y.axis path {
-  display: none;
-}
-
-.y.axis line {
-  stroke: #D3D3D3;
-  stroke-opacity: .4;
-  shape-rendering: crispEdges;
-}
-
-.birthyear {
-  fill: #fff;
-}
-
-rect {
-  fill-opacity: .6;
-  fill: #52c6d7;
-}
-
-</style>
-<body>
-<!-- Bootstrap Core  -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="/css/clean-blog.min.css" rel="stylesheet">
-
-    <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
-<script src="d3.min.js"></script>
-<script>
-
-var margin = {top: 20, right: 40, bottom: 30, left: 20},
+var margin = {top: 20, right: 10, bottom: 30, left: 150},
     width = 960 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom,
     barWidth = Math.floor(width / 15) - 1;
@@ -59,15 +17,15 @@ var yAxis = d3.svg.axis()
     .tickFormat(function(d) { return d; });
 
 // An SVG element with a bottom-right origin.
-var svg = d3.select("body").append("svg")
+var svg = d3.select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// A sliding container to hold the bars by birthyear.
-var birthyears = svg.append("g")
-    .attr("class", "birthyears");
+// A sliding container to hold the bars by hours.
+var hours = svg.append("g")
+    .attr("class", "hours");
 
 d3.csv("/js/data.csv", function(error, data) {
 
@@ -92,7 +50,7 @@ d3.csv("/js/data.csv", function(error, data) {
       .attr("transform", "translate(" + width + ",0)")
       .call(yAxis);
 
-  var rects = birthyears.selectAll("rect")
+  var rects = hours.selectAll("rect")
       .data(data)
     .enter().append("rect")
       .attr("width", barWidth)
@@ -100,23 +58,26 @@ d3.csv("/js/data.csv", function(error, data) {
       .attr("transform", function(d, i) { return "translate(" + x(i) + ", " + height + ")"; })
       .attr("data-title", function(d) { return d.hour + " hours"; });
 
-  rects.transition()
-       .duration(500)
-       .delay(function(d, i) {return (14 - i) * 50; })
-       .attr("transform", function(d, i) { return "translate(" + x(i) + "," + y(d.hour) + ")"; })
-       .attr("height", function(d) { return height - y(d.hour); })
-
-  // Add labels to show birthyear.
-  birthyears.selectAll("text")
+  // Add labels to show hours.
+  hours.selectAll("text")
       .data(data)
       .enter().append("text")
-      .text(function(birthyear) { return date_format(birthyear.date); })
+      .attr("class", "date")
+      .text(function(hours) { return date_format(hours.date); })
       .attr("transform", function(d, i) { return "translate(" + (x(i) + 10) + "," + (height + 20) + ")"; });
 
   $("rect").tooltip({container: 'body', html: true, placement:'top'}); 
 
 
 });
+
+function show() {
+  d3.selectAll("rect").transition()
+       .duration(500)
+       .delay(function(d, i) {return (14 - i) * 50; })
+       .attr("transform", function(d, i) { return "translate(" + x(i) + "," + y(d.hour) + ")"; })
+       .attr("height", function(d) { return height - y(d.hour); })
+}
 
 function date_format(date) {
   var month_string = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -126,4 +87,13 @@ function date_format(date) {
   return month_string[month] + ". " + day;
 }
 
-</script>
+var first = true;
+
+$(window).scroll(function () {
+   if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+      if (first) {
+        first = false;
+      	show();
+      }
+   }
+});
