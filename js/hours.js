@@ -66,6 +66,8 @@ d3.csv("/js/data.csv", function(error, data) {
       .text(function(hours) { return date_format(hours.date); })
       .attr("transform", function(d, i) { return "translate(" + (x(i) + 10) + "," + (height + 20) + ")"; });
 
+$("rect").tooltip({container: 'body', html: true, placement:'top'}); 
+
   var sum = 0;
   for (var i = 7; i < 14; i++) {
 	console.log(data[i]);
