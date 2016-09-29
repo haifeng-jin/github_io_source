@@ -70,13 +70,37 @@ $("rect").tooltip({container: 'body', html: true, placement:'top'});
 
   var sum = 0;
   for (var i = 7; i < 14; i++) {
-	console.log(data[i]);
         sum += data[i].hour;
+  }
+
+  function week_count(d) {
+    var parseDate = d3.time.format("%Y%m%d").parse;
+    return d3.time.weekOfYear(parseDate(d.date.toString()));
+  }
+  var this_week = week_count(data[13]);
+  var last_week = this_week - 1;
+
+  var sum_last = 0;
+  var sum_this = 0;
+  for (var i = 0; i < 14; i++) {
+    var current_week = week_count(data[i]);
+    if (current_week == this_week)
+      sum_this += data[i].hour;
+    if (current_week == last_week)
+      sum_last += data[i].hour;
   }
 
   svg.append("text")
      .attr("transform", "translate(0,20)")
      .text("Last 7 days: " + sum + " hours.");
+
+  svg.append("text")
+     .attr("transform", "translate(0,40)")
+     .text("Last week: " + sum_last + " hours.");
+
+  svg.append("text")
+     .attr("transform", "translate(0,60)")
+     .text("This week: " + sum_this + " hours.");
 
    show();
 });
