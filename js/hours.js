@@ -42,7 +42,7 @@ d3.csv("/js/data.csv", function(error, data) {
 
   // Update the scale domains.
   x.domain([0, 14]);
-  y.domain([0, 8]);
+  y.domain([0, 10]);
 
   // Add an axis to show the population values.
   svg.append("g")
