@@ -1,4 +1,4 @@
-var margin = {top: 20, right: 10, bottom: 30, left: 150},
+var margin = {top: 20, right: 20, bottom: 30, left: 150},
     width = 960 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom,
     barWidth = Math.floor(width / 15) - 1;
