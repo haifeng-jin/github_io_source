@@ -16,7 +16,7 @@ category: chinese
 <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/study-at-bjfu.jpg">
+          <img src="/img/study-at-bjfu.jpg">
       </div>
 </div>
 </div>

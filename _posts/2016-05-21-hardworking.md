@@ -20,7 +20,7 @@ category: chinese
 <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/hardworking1.jpg">
+          <img src="/img/hardworking1.jpg">
       </div>
 </div>
 </div>
@@ -32,7 +32,7 @@ category: chinese
 <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/hardworking2.jpg">
+          <img src="/img/hardworking2.jpg">
       </div>
 </div>
 </div>
@@ -44,7 +44,7 @@ category: chinese
 <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/hardworking3.jpg">
+          <img src="/img/hardworking3.jpg">
       </div>
 </div>
 </div>

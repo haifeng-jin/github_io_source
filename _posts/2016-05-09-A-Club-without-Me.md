@@ -23,7 +23,7 @@ A协已经不只是一个以竞赛培训为目的的协会，而是发展成了�
 <div class="row">
 <div class="col-lg-12">
       <div class="thumbnail">
-          <img src="{{site.img}}/A-Club1.png">
+          <img src="/img/A-Club1.png">
       </div>
 </div>
 </div>
