@@ -1,5 +1,5 @@
-var margin = {top: 20, right: 20, bottom: 30, left: 150},
-    width = 960 - margin.left - margin.right,
+var margin = {top: 20, right: 120, bottom: 30, left: 0},
+    width = 880 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom,
     barWidth = Math.floor(width / 15) - 1;
 
@@ -17,7 +17,7 @@ var yAxis = d3.svg.axis()
     .tickFormat(function(d) { return d; });
 
 // An SVG element with a bottom-right origin.
-var svg = d3.select("svg")
+var svg = d3.select(".histo").selectAll("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
