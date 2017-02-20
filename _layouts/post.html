@@ -15,7 +15,11 @@ layout: default
                 <hr>
 
                 <!-- Date/Time -->
-		<div class="glyphicon glyphicon-time"></div><span>&nbsp;Posted on {{ page.date | date_to_string }}</span>
+		<div class="glyphicon glyphicon-time"></div>
+		<span>
+			&nbsp;
+			Posted on {{ page.date | date_to_string }}
+		</span>
 
 		<div class="pull-right">
 			{% for tag in page.tags %}
