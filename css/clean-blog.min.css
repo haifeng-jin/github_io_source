@@ -1,5 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
-@import url('https://fonts.googleapis.com/css?family=Averia+Serif+Libre');
+@font-face {
+    font-family: "a";
+    src: url(/fonts/a.ttf) format("truetype");
+}
+@font-face {
+    font-family: "b";
+    src: url(/fonts/b.ttf) format("truetype");
+}
 .intro-header {
     background-color: gray;
     background: no-repeat center center;
@@ -13,7 +19,7 @@
 .intro-header .site-heading,
 .intro-header .post-heading,
 .intro-header .page-heading {
-    font-family: 'Great Vibes';
+    font-family: 'a';
     padding: 100px 0 50px;
     color: #fff
 }
@@ -37,7 +43,7 @@
 .intro-header .page-heading .subheading {
     font-size: 18px;
     line-height: 1.1, display: block;
-    font-family: 'Averia Serif Libre';
+    font-family: 'b';
     font-weight: 300;
     margin: 10px 0 0
 }
