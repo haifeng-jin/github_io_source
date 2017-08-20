@@ -1,7 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Great+Vibes');
-@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
-@import url('https://fonts.googleapis.com/css?family=Sacramento');
-@import url('https://fonts.googleapis.com/css?family=Tangerine');
 @import url('https://fonts.googleapis.com/css?family=Averia+Serif+Libre');
 .intro-header {
     background-color: gray;
@@ -38,7 +35,7 @@
 }
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.1, display: block;
     font-family: 'Averia Serif Libre';
     font-weight: 300;
