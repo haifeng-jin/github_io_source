@@ -25,24 +25,10 @@
                         Technology
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
+                <li>
+                    <a href="/codeforces/index.html">
                         Competitive
-                        <b class="caret">
-                        </b>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="/codeforces/index.html">
-                                Tutorial
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/jhfjhfj1/codelib">
-                                Library
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li>
                     <a href="/chinese/index.html">
@@ -66,12 +52,6 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/about.html">
-                        About Me
-                    </a>
-                </li>
-
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         Contact
