@@ -33,13 +33,24 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<script>
+function load() {
+    $.get( "/{{page.category}}/header.html", function( data ) {
+        $("#header").html(data);
+    });
+    $.get( "/{{page.category}}/sidebar.html", function( data ) {
+        $("#side_bar").html(data);
+    });
+}
+</script>
+
 </head>
 
-<body onload="load()">
+<body>
 	{% include navbar.ext %}
 <header class="intro-header" id="header" style="background-image: url('/img/{{page.category}}.jpg')"> 
+	{% include {{page.category}}/header.ext %}
 </header>
-	{% include header.ext %}
 
 		{{content}}
 
