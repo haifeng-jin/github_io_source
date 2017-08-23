@@ -39,15 +39,17 @@
 <body>
 	{% include navbar.ext %}
     <div id="listener-contained" class="listener pointer">
+<style>
+#plate-contained { transform-origin: center bottom 100px; }
+#plate-contained3 { transform-origin: center top -100px; }
+</style>
 <header class="intro-header" id="header" style="background-image: url('/img/{{page.category}}.jpg')"> 
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
 
-            <div id="plate-contained" class="plate">
 		{% include {{page.category}}/header.ext %}
-            </div>
                     </div>
                 </div>
             </div>
@@ -57,9 +59,7 @@
     </div>
         <script>
             $('#listener-contained').plate({
-                element: '#plate-contained',
-		maxRotation: 20,
-		radius: 2000
+                element: ['#plate-contained', '#plate-contained2', '#plate-contained3']
             });
         </script>
 

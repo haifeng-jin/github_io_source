@@ -7,21 +7,18 @@
         this.config(options);
 
         this.$container = $element;
-        if (this.options.element) {
-            if (typeof this.options.element === 'string') {
-                this.$element = this.$container.find(this.options.element);
-            } else {
-                this.$element = $(this.options.element);
-            }
-        } else {
-            this.$element = $element;
+        this.$element = [];
+        for (var i = 0; i < this.options.element.length; i++) {
+            var temp = this.$container.find(this.options.element[i]);
+	    this.$element.push(temp);
         }
 
-        this.originalTransform = this.$element.css('transform');
+        this.originalTransform = this.$element.forEach(function(item, index) {item.css('transform')});
         this.$container
             .on('mouseenter.' + namespace, this.onMouseEnter.bind(this))
             .on('mouseleave.' + namespace, this.onMouseLeave.bind(this))
             .on('mousemove.' + namespace, this.onMouseMove.bind(this));
+        console.log('init over.');
     }
 
     Plate.prototype.config = function(options) {
@@ -30,7 +27,6 @@
             perspective: 500,
             maxRotation: 10,
             animationDuration: 200,
-            radius: -5000
         }, this.options, options);
     };
 
@@ -75,17 +71,19 @@
     };
 
     Plate.prototype.reset = function(duration) {
-        this.update(null, null, duration);
+	this.update(null, null, duration);
     };
 
     Plate.prototype.transform = function(rotateX, rotateY) {
         this.currentX = rotateX;
         this.currentY = rotateY;
-        this.$element.css('transform',
+	for (var i = 0; i < this.$element.length; i++) {
+            this.$element[i].css('transform',
             (this.originalTransform && this.originalTransform !== 'none' ? this.originalTransform + ' ' : '') +
             'perspective(' + this.options.perspective + 'px) ' +
-            'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)'
-        );
+            'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) '
+            );
+        }
     };
 
     Plate.prototype.animate = function(rotateX, rotateY, duration) {
@@ -144,15 +142,18 @@
     Plate.prototype.onMouseEnter = function(event) {
         var offset = this.offsetCoords(event);
         this.update(offset.x, offset.y, this.options.animationDuration);
+        console.log('mouse enter.');
     };
 
     Plate.prototype.onMouseLeave = function(event) {
         this.reset(this.options.animationDuration);
+        console.log('mouse leave.');
     };
 
     Plate.prototype.onMouseMove = function(event) {
         var offset = this.offsetCoords(event);
         this.update(offset.x, offset.y);
+        console.log('mouse move.');
     };
 
     $.fn.plate = function(options) {
