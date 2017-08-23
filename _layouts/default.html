@@ -24,6 +24,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.plate.js"></script>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -33,24 +34,34 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script>
-function load() {
-    $.get( "/{{page.category}}/header.html", function( data ) {
-        $("#header").html(data);
-    });
-    $.get( "/{{page.category}}/sidebar.html", function( data ) {
-        $("#side_bar").html(data);
-    });
-}
-</script>
-
 </head>
 
 <body>
 	{% include navbar.ext %}
+    <div id="listener-contained" class="listener pointer">
 <header class="intro-header" id="header" style="background-image: url('/img/{{page.category}}.jpg')"> 
-	{% include {{page.category}}/header.ext %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+
+            <div id="plate-contained" class="plate">
+		{% include {{page.category}}/header.ext %}
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </header>
+    </div>
+        <script>
+            $('#listener-contained').plate({
+                element: '#plate-contained',
+		maxRotation: 20,
+		radius: 2000
+            });
+        </script>
 
 		{{content}}
 
