@@ -25,7 +25,7 @@
         this.options = $.extend({
             inverse: false,
             perspective: 500,
-            maxRotation: 10,
+            maxRotation: 20,
             animationDuration: 200,
         }, this.options, options);
     };
