@@ -24,7 +24,7 @@
     Plate.prototype.config = function(options) {
         this.options = $.extend({
             inverse: false,
-            perspective: 500,
+            perspective: 300,
             maxRotation: 20,
             animationDuration: 200,
         }, this.options, options);
