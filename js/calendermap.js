@@ -14,7 +14,7 @@ var day = d3.time.format("%w"),
 		
    
 var svg = d3.select(".calender-map").selectAll("svg")
-    .data(d3.range(2015, 2018))
+    .data(d3.range(2015, 2019))
   .enter().append("svg")
     .attr("width", '100%')
     .attr("data-height", '0.5678')
