@@ -18,7 +18,6 @@
             .on('mouseenter.' + namespace, this.onMouseEnter.bind(this))
             .on('mouseleave.' + namespace, this.onMouseLeave.bind(this))
             .on('mousemove.' + namespace, this.onMouseMove.bind(this));
-        console.log('init over.');
     }
 
     Plate.prototype.config = function(options) {
@@ -142,18 +141,15 @@
     Plate.prototype.onMouseEnter = function(event) {
         var offset = this.offsetCoords(event);
         this.update(offset.x, offset.y, this.options.animationDuration);
-        console.log('mouse enter.');
     };
 
     Plate.prototype.onMouseLeave = function(event) {
         this.reset(this.options.animationDuration);
-        console.log('mouse leave.');
     };
 
     Plate.prototype.onMouseMove = function(event) {
         var offset = this.offsetCoords(event);
         this.update(offset.x, offset.y);
-        console.log('mouse move.');
     };
 
     $.fn.plate = function(options) {
