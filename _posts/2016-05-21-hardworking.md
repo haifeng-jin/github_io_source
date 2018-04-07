@@ -17,35 +17,16 @@ category: chinese
 答案三：为了比别人强。
 这个就不多说了，重点是别人是谁。以这个为目标的人要成为世界第一才能真的算是实现目标。这是一个不显示的目标。
 
-<div class="row">
-<div class="col-lg-12">
-      <div class="thumbnail">
-          <img src="/img/hardworking1.jpg">
-      </div>
-</div>
-</div>
+<img class="img-fluid rounded blog-img" src="/img/hardworking1.jpg">
 
 其实我努力的原因很简单，努力就是为了快乐。但这和很多同样为了快乐而努力的人不同。快乐分为两种，这是我在托福听力里面学到的。第一种叫外部的快乐（extrinsic）。比如我为了保持健康而运动，健康可以让我得到更多的快乐，但我并不喜欢运动本身。努力对于很多人来说就是这样，是为了以后能过上想过的生活，而强迫自己现在要努力奋斗。另一种叫内在的快乐（intrinsic），做一件事情本身就能给我带来快乐。我努力的原因相比于前者，更偏向于内在的快乐，努力本身就是一种快乐。
 
 努力的过程其实是一种自我提升的过程，这就是它的魅力所在。这种自我提升对人有着难以想象的驱动力。举个非常接地气的例子：为什么有些人能不厌其烦地打网游？网游其实是一个很枯燥很单一的高强度工作。而很多人却能一做一整天还热情高涨。就是因为他们在游戏里获得了自我提升的快感，人物等级越来越高，装备越来越强，或者技术越来越厉害等等。我们平时在学习、工作和生活中的努力也是一样的，每多努力一点点，就是比曾经的自己强一点点，而这件事能带来的快乐是无穷无尽的。
 
-<div class="row">
-<div class="col-lg-12">
-      <div class="thumbnail">
-          <img src="/img/hardworking2.jpg">
-      </div>
-</div>
-</div>
+<img class="img-fluid rounded blog-img" src="/img/hardworking2.jpg">
 
 在因为这个原因而努力的时候，我们很有可能会做三件事：1.出离自己的舒适区以挑战自己。2.想象自己变成了自己理想中的状态或者获得理想中的成功。3.改变了对成功的认知，因为每一次小小的提升都是在超越自己并获得快乐和满足。而这三点恰好就是《积极心理学》，一门哈佛大学人数最多的选修课，所提出的提升幸福感的三种重要方法。所以说努力是实实在在地可以提高我们的幸福感的一件事情。
 
 你问我努力是为了什么，我只能说努力其实不为了什么，只为了努力本身所带来的幸福感和快乐。
 
-<div class="row">
-<div class="col-lg-12">
-      <div class="thumbnail">
-          <img src="/img/hardworking3.jpg">
-      </div>
-</div>
-</div>
-
+<img class="img-fluid rounded blog-img" src="/img/hardworking3.jpg">

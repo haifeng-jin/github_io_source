@@ -21,11 +21,4 @@ category: chinese
 
 其实大学老师对于课程是否严格要求这件事已经进入了一个纳什平衡。大家一起作出改变，全都得利。如果只有一个人改变，那个人会死得很惨。所以不想死的人都会去继续保持这个稳态。树上该不该挂人我不知道，但我知道很多树会继续保持它不挂人的特性。最后祝福那些顽强地坚持严格要求的老师们。
 
-<div class="row">
-<div class="col-lg-12">
-      <div class="thumbnail">
-          <img src="/img/fail-or-not.jpg">
-      </div>
-</div>
-</div>
-
+<img class="img-fluid rounded blog-img" src="/img/fail-or-not.jpg">

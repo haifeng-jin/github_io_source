@@ -13,11 +13,4 @@ category: chinese
 
 现在毕业了再回头来看伴你生活四年的北林，你看到的不再是它比不上哈佛、剑桥、清华、北大；而是会看到舌尖上的呱呱小吃城、装了空调的男生宿舍、雄伟的学研大厦和美丽的银杏大道。如果让我用一句话来描述北林，我会说：虽然它不是最棒的，但它却给予了我最丰厚的收获。
 
-<div class="row">
-<div class="col-lg-12">
-      <div class="thumbnail">
-          <img src="/img/study-at-bjfu.jpg">
-      </div>
-</div>
-</div>
-
+<img class="img-fluid rounded blog-img" src="/img/study-at-bjfu.jpg">

@@ -3,49 +3,116 @@ layout: default
 title: Haifeng Jin's Blog
 category: home
 ---
-<div class="container">
-<div class="container">
-   <div class="row" style="font-size: 16px; line-height: 26px; text-align: justify">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
-            <div class="row">
-               <div class="col-md-6">
-                  <div class="thumbnail">
-                     <img src="/img/avatar.jpg">
-                  </div>
-               </div>
-               <div class="col-md-6">
-                     My name is Haifeng Jin.
-                     I am a PhD student in Computer Science at Texas A&M University. I work in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA</a> Lab with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
-                     My research area is Auto Machine Learning and Graph Classification. You can find me on <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">Google Scholar</a>.
-                     <br>
-                     <br>
+<style>
+@font-face {
+  font-family: "c";
+  src: url(/fonts/c.ttf) format("truetype");
+}
+.section-box {
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
 
-                     <div class="bs-component">
-                        <ul class="nav nav-tabs">
-                           <li class="active"><a href="#home" data-toggle="tab">Bachelor</a></li>
-                           <li><a href="#profile" data-toggle="tab">Master</a></li>
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
-                           <div class="tab-pane fade active in" id="home">
-                              <br>
-                              <p>I am interested in competitive programming. During my undergraduate life, I founded ACM-ICPC Club in Beijing Forestry University, where I had a great time with a bunch of awesome people with the same interest.
-                              </p>
-                           </div>
-                           <div class="tab-pane fade" id="profile">
-                              <br>
-                              <p>
-                                 Then I went to Beijing University of Posts and Telecommunication for my Master's degree, where I did some research on Data Mining and Security.
-                                 Driven by the deep passion to become a computer scientist, I decided to go to United States to continue my professional development.
-                              </p>
-                           </div>
-                        </div>
-                        <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div>
-                     </div>
-               </div>
-            </div>
+  width: 100%;
+}
+.section-text:hover a {
+  color: #87CEFA;
+}
+#tamu{
+  background-image:
+  linear-gradient(rgba(80,0,0,0.8),rgba(80,0,0,0.8)), url('/img/tamu.jpg');
+}
+
+#bjfu{
+  background-image:
+  linear-gradient(rgba(0,40,40,0.8),rgba(0,40,40,0.8)), url('/img/bjfu.jpg');
+}
+
+#bupt{
+  background-image:
+  linear-gradient(rgba(0,30,80,0.8),rgba(0,30,80,0.8)), url('/img/bupt.jpg');
+}
+.shadow {
+  box-shadow: 14px 14px 18px 0 rgba(0, 0, 0, 0.2), 6px 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.box-text {
+  position: absolute; top: 0; bottom: 0; left: 0; right: 0;
+  text-align: center;
+  width: 80%;
+  height: 50%;
+  margin: auto;
+  font-family: 'c';
+  font-size: 60px;
+}
+.section-text {
+  padding-left: 10%; padding-right: 10%; padding-bottom: 5%; padding-top: 5%;
+  text-align: center;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 20px;
+}
+.section-text {
+  padding-left: 10%; padding-right: 10%; padding-bottom: 5%; padding-top: 5%;
+  text-align: center;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 20px;
+  background: rgba(247,247,245,1);
+  -webkit-transition: background .2s ease-out;
+  -moz-transition: background .2s ease-out;
+  -o-transition: background .2s ease-out;
+  transition: background .2s ease-out;
+  line-height: 400%;
+}
+.section-text:hover {
+  background: rgba(247,247,245,0);
+  color: #87CEFA;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+}
+</style>
+<div style="background-color: white;">
+  <div class="row" style="padding-left: 10%; padding-right: 10%; padding-bottom: 5%;">
+    <div class="col-md-6" >
+      <img src="/img/avatar.jpg" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-6">
+      <div class="box-text">
+        Hello! <br>
+        I am Haifeng Jin.
       </div>
-      <div class="col-md-2"></div>
-   </div>
+    </div>
+  </div>
 </div>
+<div class="section-box" id="tamu">
+  <div class="section-text">
+    I am a PhD student in Computer Science at Texas A&M University.
+    <br>
+    I work in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA</a> Lab with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
+    <br>
+    My research area is Automated Machine Learning.
+    <br>
+    You can find me on <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">Google Scholar</a>.
+  </div>
+</div>
+
+<div class="section-box" id="bupt">
+  <div class="section-text">
+    I did my Master's in <a href="http://www.bupt.edu.cn">Beijing University of Posts and Telecommunication</a>,
+    <br>
+    where I did some research on Data Mining and Security.
+    <br>
+    Driven by the deep passion to become a computer scientist,
+    <br>
+    I decided to go to United States to continue my professional development.
+  </div>
+</div>
+<div class="section-box" id="bjfu">
+  <div class="section-text">
+    I am interested in competitive programming.
+    <br>
+    During my undergraduate life, I founded <a href="http://www.bjfuacm.com/bjfuacm/">BJFU ACM-ICPC Club</a>
+    <br>
+    in <a href="http://www.bjfu.edu.cn">Beijing Forestry University</a>,
+    <br>
+    where I had a great time with a bunch of awesome people with the same interest.
+  </div>
 </div>

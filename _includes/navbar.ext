@@ -1,94 +1,62 @@
 <!-- Navigation -->
-<div class="navbar navbar-default navbar-fixed-top" id="nav_bar">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/index.html"
-            class="navbar-brand">
-                Haifeng Jin's Blog
-            </a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="/index.html">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a href="/index.html" class="navbar-brand">
+            Haifeng Jin's Blog
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index.html">
                         Home
                     </a>
                 </li>
-                <li>
-                    <a href="/technology/index.html">
+                <li class="nav-item">
+                    <a class="nav-link" href="/technology/index.html">
                         Technology
                     </a>
                 </li>
-                <li>
-                    <a href="/codeforces/index.html">
+                <li class="nav-item">
+                    <a class="nav-link" href="/codeforces/index.html">
                         Competitive
                     </a>
                 </li>
-                <li>
-                    <a href="/chinese/index.html">
+                <li class="nav-item">
+                    <a class="nav-link" href="/chinese/index.html">
                         Chinese
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        Search
-                        <b class="caret">
-                        </b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <form class="navbar-form" style="padding-bottom:35px">
-                                <input type="text" name="search-key-words" class="form-control col-lg-8"
-                                onkeydown="if(event.keyCode==13) googlesearch();" placeholder="Search">
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        Contact
-                        <b class="caret">
-                        </b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="https://www.linkedin.com/in/HaifengJin">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Contact
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="https://www.linkedin.com/in/HaifengJin">
                                 Linkedin
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/jhfjhfj1">
+                </a>
+                <a class="dropdown-item" href="https://github.com/jhfjhfj1">
                                 GitHub
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mailto:jin@tamu.edu">
+                </a>
+                <a class="dropdown-item" href="mailto:jin@tamu.edu">
                                 E-mail
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
+                </a>
+                <a class="dropdown-item" href="https://www.facebook.com/people/Haifeng-Jin/100002510906960">
                                 Facebook
-                            </a>
-                        </li>
-
-                </li>
-                <li>
-                </li>
+                </a>
+              </div>
+            </li>
             </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" onkeydown="if(event.keyCode==13) googlesearch();" name="search-key-words" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" onclick="googlesearch()">Search</button>
+            </form>
         </div>
-    </div>
-</div>
+</nav>
 <script type="text/javascript">
     function googlesearch() {
+    console.log('google call');
         var key = document.getElementsByName("search-key-words")[0].value;
         var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
         window.open(link);

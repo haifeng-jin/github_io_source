@@ -29,10 +29,12 @@
 <div class="row">
 <div class="col-md-12">
 		<div class="text-center">
-			<ul class="pagination pagination-sm" id = "pagination">
-			    <li><a>&laquo;</a></li>
-			    <li><a>&raquo;</a></li>
-			</ul>
+    <nav aria-label="Page navigation example">
+    <ul class="pagination" id="pagination">
+			    <li class="page-item"><span class="page-link">&laquo;</span></li>
+			    <li class="page-item"><span class="page-link">&raquo;</span></li>
+    </ul>
+    </nav>
 		</div>
 		<script src="/js/pagination.js"></script>
 </div>
@@ -52,4 +54,3 @@
 
     </div>
     <!-- /.container -->
-

@@ -20,11 +20,4 @@ A协已经不只是一个以竞赛培训为目的的协会，而是发展成了�
 
 仅以此文献给曾经一起奋斗过的好兄弟们，感谢竹教主、犇哥、傅总、国超、吴神、高老师、蔡老师、大叔、暖男渔家傲、炜良、骏祥、健行、大帅、匡时。并感谢一直为A协争取各种资源的带队教练，王建新老师和徐艳艳老师。
 
-<div class="row">
-<div class="col-lg-12">
-      <div class="thumbnail">
-          <img src="/img/A-Club1.png">
-      </div>
-</div>
-</div>
-
+<img class="img-fluid rounded blog-img" src="/img/A-Club1.jpg">

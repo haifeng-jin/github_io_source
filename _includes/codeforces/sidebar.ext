@@ -1,15 +1,17 @@
 <div><p></p></div>
 <!-- Side Widget Well -->
-<div class="panel panel-default">
-  <div class="panel-heading"><big>Introduction</big></div>
-  <div class="panel-body">
+<div class="card">
+  <div class="card-header"><big>Introduction</big></div>
+  <div class="card-body">
     <p>Here are some write-ups for the competitive programming problems I solved.</p>
   </div>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-heading"><big>Code Library</big></div>
-  <div class="panel-body">
+<div><p></p></div>
+<div class="card">
+  <div class="card-header"><big>Code Library</big></div>
+  <div class="card-body">
+
     <p>My <a href="https://github.com/jhfjhfj1/codelib">code library link</a> on GitHub.</p>
   </div>
 </div>

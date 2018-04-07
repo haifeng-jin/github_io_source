@@ -28,7 +28,9 @@
         right_page.setAttribute("onclick", "update(current_page + 1)");
         for (var i = 0; i < page_num; i++) {
             var li = document.createElement("li");
-            var a = document.createElement("a");
+            li.setAttribute("class", "page-item")
+            var a = document.createElement("span");
+            a.setAttribute("class", "page-link")
             a.innerHTML = i + 1;
             a.setAttribute("onclick", "update(" + (i + 1) + ")");
             li.appendChild(a);
@@ -41,19 +43,20 @@
             return;
         current_page = a;
         var li = pagination.getElementsByTagName("li");
-        console.log(li);
-        for (var i = 0; i < li.length; i++) {
-            li[i].removeAttribute("class");
+        for (var i = 1; i < li.length - 1; i++) {
+          li[i].setAttribute("class", "page-item");
         }
         if (current_page === 1)
-            left_page.setAttribute("class", "disabled");
+            left_page.setAttribute("class", "page-item disabled");
         if (current_page === page_num)
-            right_page.setAttribute("class", "disabled");
-        pagination.getElementsByTagName("li")[current_page].setAttribute("class", "active");
+            right_page.setAttribute("class", "page-item disabled");
+        var span = document.createElement("span");
+        span.setAttribute("class", "sr-only");
+        pagination.getElementsByTagName("li")[current_page].setAttribute("class", "page-item active");
 
         table.innerHTML = "";
         var start = (current_page - 1) * per_page;
-        for (var i = start; i < start + per_page; i++) {
+        for (var i = start; i < Math.min(start + per_page, row_num); i++) {
             table.appendChild(rows[i]);
         }
     }

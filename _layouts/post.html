@@ -10,7 +10,7 @@ layout: default
                 <!-- Blog Post -->
 
                 <!-- Title -->
-		
+
                 <h2>{{page.title}}</h2>
                 <hr>
 
@@ -21,9 +21,9 @@ layout: default
 			Posted on {{ page.date | date_to_string }}
 		</span>
 
-		<div class="pull-right">
+		<div class="float-right">
 			{% for tag in page.tags %}
-			<span class="label label-default">{{ tag }}</span>
+			<span class="badge badge-default">{{ tag }}</span>
 			{% endfor %}
 		</div>
 
@@ -31,7 +31,7 @@ layout: default
 
                 <!-- Post Content -->
 		{% include mathjax.ext %}
-		<div style="font-size: 16px; line-height: 26px">
+		<div class="blog-content" >
 		{{content}}
 		</div>
                 <hr>
@@ -44,7 +44,7 @@ layout: default
             </div>
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4" id="side_bar">
-
+		{% include {{page.category}}/sidebar.ext %}
             </div>
 
 
@@ -54,4 +54,3 @@ layout: default
 
     </div>
     <!-- /.container -->
-
