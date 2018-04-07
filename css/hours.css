@@ -1,28 +1,28 @@
-svg {
+.histo svg {
   font: 10px sans-serif;
 }
 
-.y.axis path {
+.histo .y.axis path {
   display: none;
 }
 
-.y.axis line {
+.histo .y.axis line {
   stroke: #D3D3D3;
   stroke-opacity: .4;
   shape-rendering: crispEdges;
 }
 
-.hours {
+.histo .hours {
   fill: #fff;
 }
 
-text {
+.histo text {
   fill: grey;
   font-size: 100%;
   font-weight: 800;
 }
 
-rect {
+.histo rect {
   fill-opacity: .6;
   fill: #52c6d7;
 }
