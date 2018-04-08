@@ -14,8 +14,9 @@ category: home
   background-position:center;
 
   width: 100%;
+  height: 250px;
 }
-.section-text:hover a {
+.section-text a {
   color: #87CEFA;
 }
 #tamu{
@@ -36,83 +37,149 @@ category: home
   box-shadow: 14px 14px 18px 0 rgba(0, 0, 0, 0.2), 6px 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .box-text {
-  position: absolute; top: 0; bottom: 0; left: 0; right: 0;
   text-align: center;
   width: 80%;
-  height: 50%;
-  margin: auto;
   font-family: 'c';
   font-size: 60px;
 }
 .section-text {
-  padding-left: 10%; padding-right: 10%; padding-bottom: 5%; padding-top: 5%;
+  padding-left: 0%; padding-right: 0%; padding-bottom: 5%; padding-top: 5%;
   text-align: center;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  font-size: 20px;
-}
-.section-text {
-  padding-left: 10%; padding-right: 10%; padding-bottom: 5%; padding-top: 5%;
-  text-align: center;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  font-size: 20px;
-  background: rgba(247,247,245,1);
-  -webkit-transition: background .2s ease-out;
-  -moz-transition: background .2s ease-out;
-  -o-transition: background .2s ease-out;
-  transition: background .2s ease-out;
-  line-height: 400%;
-}
-.section-text:hover {
+  font-size: 14px;
   background: rgba(247,247,245,0);
+  line-height: 200%;
+  margin: auto;
+  max-width:1000px;
+
   color: #87CEFA;
   color: #fff;
   text-shadow: 2px 2px 4px #000000;
 }
+.half-box {
+  width: 250px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+   text-align:center;
+}
+  .half-img {
+  width: 250px;
+  }
+@media only screen and (min-width: 768px) {
+  .section-text{
+    padding-left: 5%; padding-right: 5%;  font-size: 20px;
+  }
+  .section-box {
+    height: 300px;
+  }
+  .half-box {
+    width: 400px;
+  }
+  .half-img {
+    width: 400px;
+  }
+}
+
 </style>
-<div style="background-color: white;">
-  <div class="row" style="padding-left: 10%; padding-right: 10%; padding-bottom: 5%;">
-    <div class="col-md-6" >
-      <img src="/img/avatar.jpg" class="img-fluid rounded shadow">
+
+<div class="container">
+<div class="row">
+<div class="col-md-6" >
+  <div class="half-box mx-auto">
+    <img src="/img/avatar.jpg" class="img-fluid rounded shadow half-img">
+</div>
+</div>
+<div class="col-md-6">
+  <div class="half-box mx-auto">
+  <p class="half-img" style="font-family: c; font-size: 40px; padding-top:10%;">
+    Hello!
+    <br>
+    I am Haifeng Jin.
+    <br>
+    Welcome to my website!
+  </p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <div class="section-box" id="tamu">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section-text">
+                I am a PhD student in Computer Science
+                <br>
+                at Texas A&M University.
+                <br>
+                I work in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA</a> Lab with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
+                <br>
+                My research area is Automated Machine Learning.
+                <br>
+                You can find me on <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">Google Scholar</a>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <div class="box-text">
-        Hello! <br>
-        I am Haifeng Jin.
+    <div class="carousel-item">
+      <div class="section-box" id="bupt">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section-text">
+                I did my Master's in
+                <br>
+                <a href="http://www.bupt.edu.cn">Beijing University of Posts and Telecommunication</a>,
+                <br>
+                where I did some research on Data Mining and Security.
+                <br>
+                Driven by the deep passion to become a computer scientist,
+                <br>
+                I decided to go to United States to continue my professional development.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="section-box" id="bjfu">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section-text">
+                I am interested in competitive programming.
+                <br>
+                During my undergraduate life,
+                <br>
+                I founded <a href="http://www.bjfuacm.com/bjfuacm/">BJFU ACM-ICPC Club</a>
+                <br>
+                in <a href="http://www.bjfu.edu.cn">Beijing Forestry University</a>,
+                <br>
+                where I had a great time with a bunch of awesome people with the same interest.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="section-box" id="tamu">
-  <div class="section-text">
-    I am a PhD student in Computer Science at Texas A&M University.
-    <br>
-    I work in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA</a> Lab with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
-    <br>
-    My research area is Automated Machine Learning.
-    <br>
-    You can find me on <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">Google Scholar</a>.
-  </div>
-</div>
-
-<div class="section-box" id="bupt">
-  <div class="section-text">
-    I did my Master's in <a href="http://www.bupt.edu.cn">Beijing University of Posts and Telecommunication</a>,
-    <br>
-    where I did some research on Data Mining and Security.
-    <br>
-    Driven by the deep passion to become a computer scientist,
-    <br>
-    I decided to go to United States to continue my professional development.
-  </div>
-</div>
-<div class="section-box" id="bjfu">
-  <div class="section-text">
-    I am interested in competitive programming.
-    <br>
-    During my undergraduate life, I founded <a href="http://www.bjfuacm.com/bjfuacm/">BJFU ACM-ICPC Club</a>
-    <br>
-    in <a href="http://www.bjfu.edu.cn">Beijing Forestry University</a>,
-    <br>
-    where I had a great time with a bunch of awesome people with the same interest.
-  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
