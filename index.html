@@ -8,6 +8,9 @@ category: home
   font-family: "c";
   src: url(/fonts/c.ttf) format("truetype");
 }
+.research-area{
+  visibility: hidden;
+}
 .section-box {
   background-repeat:no-repeat;
   background-size:cover;
@@ -21,18 +24,41 @@ category: home
 }
 #tamu{
   background-image:
-  linear-gradient(rgba(80,0,0,0.8),rgba(80,0,0,0.8)), url('/img/tamu.jpg');
+  url('/img/tamu.jpg');
+}
+
+#tamu .overlay {
+  background-color: rgb(110, 30, 30);
+}
+
+#bupt .overlay {
+  background-color: rgb(30,60,80);
+}
+
+#bjfu .overlay {
+  background-color: rgb(30, 70, 60);
+}
+
+.overlay {
+  opacity: 1;
+  transition: .5s ease;
+  height: 250px;
+}
+
+.overlay:hover {
+  opacity: 0.8;
 }
 
 #bjfu{
   background-image:
-  linear-gradient(rgba(0,40,40,0.8),rgba(0,40,40,0.8)), url('/img/bjfu.jpg');
+  url('/img/bjfu.jpg');
 }
 
 #bupt{
   background-image:
-  linear-gradient(rgba(0,30,80,0.8),rgba(0,30,80,0.8)), url('/img/bupt.jpg');
+  url('/img/bupt.jpg');
 }
+
 .shadow {
   box-shadow: 14px 14px 18px 0 rgba(0, 0, 0, 0.2), 6px 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -42,11 +68,15 @@ category: home
   font-family: 'c';
   font-size: 60px;
 }
+.description{
+  font-family: Abel,sans-serif;
+  font-size: 15;
+}
 .section-text {
   padding-left: 0%; padding-right: 0%; padding-bottom: 5%; padding-top: 5%;
   text-align: center;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  font-size: 14px;
+  font-family: Playfair Display;
+  font-size: 20px;
   background: rgba(247,247,245,0);
   line-height: 200%;
   margin: auto;
@@ -67,7 +97,10 @@ category: home
   }
 @media only screen and (min-width: 768px) {
   .section-text{
-    padding-left: 5%; padding-right: 5%;  font-size: 20px;
+    padding-left: 5%; padding-right: 5%;  font-size: 30px;
+  }
+  .overlay {
+    height: 300px;
   }
   .section-box {
     height: 300px;
@@ -79,107 +112,162 @@ category: home
     width: 400px;
   }
 }
+.animated { visibility: visible !important; }
 
 </style>
+
+
+<script>
+function showResearch() {
+$('.research-area').addClass('animated bounceIn');
+}
+</script>
 
 <div class="container">
 <div class="row">
 <div class="col-md-6" >
-  <div class="half-box mx-auto">
+  <div class="half-box mx-auto wow fadeIn" data-wow-delay="1s">
     <img src="/img/avatar.jpg" class="img-fluid rounded shadow half-img">
 </div>
 </div>
 <div class="col-md-6">
-  <div class="half-box mx-auto">
-  <p class="half-img" style="font-family: c; font-size: 40px; padding-top:10%;">
-    Hello!
-    <br>
-    I am Haifeng Jin.
-    <br>
-    Welcome to my website!
-  </p>
+  <div class="half-box mx-auto" data-wow-delay="1s">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 description wow fadeIn">
+        <br>
+        <br>
+        I work in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA Lab</a> with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
+        <br>
+        You can find me on <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">Google Scholar</a>.
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 description">
+        <br>
+        <button type="button" class="btn btn-light wow fadeIn" onclick="showResearch()">Research Area</button>
+        <div>
+          <br>
+          <span class="research-area badge badge-light">Machine Learning</span>
+          <br>
+          <span class="research-area badge badge-light">Deep Learning</span>
+          <br>
+          <span class="research-area badge badge-light">Automated Machine Learning</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 </div>
 </div>
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner" role="listbox">
-    <div class="carousel-item active">
-      <div class="section-box" id="tamu">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="section-text">
-                I am a PhD student in Computer Science
-                <br>
-                at Texas A&M University.
-                <br>
-                I work in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA</a> Lab with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
-                <br>
-                My research area is Automated Machine Learning.
-                <br>
-                You can find me on <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">Google Scholar</a>.
-              </div>
-            </div>
-          </div>
+<div class="section-box" id="tamu">
+  <div class="overlay">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-text">
+          <text style="font-family: Snell Roundhand, cursive">2015 - Present</text>
+          <br>
+          I am a PhD student in Computer Science
+          <br>
+          at Texas A&M University.
         </div>
       </div>
     </div>
-    <div class="carousel-item">
-      <div class="section-box" id="bupt">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="section-text">
-                I did my Master's in
-                <br>
-                <a href="http://www.bupt.edu.cn">Beijing University of Posts and Telecommunication</a>,
-                <br>
-                where I did some research on Data Mining and Security.
-                <br>
-                Driven by the deep passion to become a computer scientist,
-                <br>
-                I decided to go to United States to continue my professional development.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <div class="section-box" id="bjfu">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="section-text">
-                I am interested in competitive programming.
-                <br>
-                During my undergraduate life,
-                <br>
-                I founded <a href="http://www.bjfuacm.com/bjfuacm/">BJFU ACM-ICPC Club</a>
-                <br>
-                in <a href="http://www.bjfu.edu.cn">Beijing Forestry University</a>,
-                <br>
-                where I had a great time with a bunch of awesome people with the same interest.
-              </div>
-            </div>
+  </div>
+  </div>
+</div>
+
+
+<div class="section-box" id="bupt" data-toggle="modal" data-target="#buptModal">
+  <div class="overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-text">
+            <text style="font-family: Snell Roundhand, cursive">2013 - 2015</text>
+            <br>
+            I obtained a Master's Degree in Computer Science
+            <br>
+            at Beijing University of Posts and Telecommunication.
           </div>
         </div>
       </div>
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+</div>
+
+<div class="section-box" id="bjfu" data-toggle="modal" data-target="#bjfuModal">
+  <div class="overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-text">
+            <text style="font-family: Snell Roundhand, cursive">2009 - 2013</text>
+            <br>
+            I obtained a Bachelor's Degree in Computer Science
+            <br>
+            at Beijing Forestry University.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="buptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Life at BUPT</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="description" >
+          In BUPT, you can feel an atomsphere of EECS any where on Campus.
+          My co-workers are outstanding experts in their area,
+          from whom I really learned a lot.
+          <br>
+          I joined the Public Speaking Club in BUPT to practice my English and public speaking,
+          where I met many people from different majors and backgrounds.
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="bjfuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Life at BFU</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="description" >
+          <br>
+          I am interested in competitive programming.
+          During my undergraduate life,
+          I founded <a href="http://www.bjfuacm.com/bjfuacm/">BFU ACM-ICPC Club</a>
+          in <a href="http://www.bjfu.edu.cn">Beijing Forestry University</a>,
+          where I had a great time with a bunch of awesome people with the same interest.
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
