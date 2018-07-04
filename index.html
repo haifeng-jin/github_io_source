@@ -47,6 +47,7 @@ category: home
 
 .overlay:hover {
   opacity: 0.8;
+  box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.8);
 }
 
 #bjfu{
@@ -128,9 +129,20 @@ $('.research-area').addClass('animated bounceIn');
 <div class="row">
 <div class="col-md-6" >
   <div class="half-box mx-auto wow fadeIn" data-wow-delay="1s">
+    <div id="listener-default" class="listener pointer">
+      <div id="plate-default" class="plate pointer">
     <img src="/img/avatar.jpg" class="img-fluid rounded shadow half-img">
+      </div>
+    </div>
+  </div>
 </div>
-</div>
+        <script>
+            $('#listener-default').plate({
+                element: ['#plate-default'],
+                perspective: 800,
+                maxRotation: 10
+            });
+        </script>
 <div class="col-md-6">
   <div class="half-box mx-auto" data-wow-delay="1s">
   <div class="container">
@@ -138,7 +150,9 @@ $('.research-area').addClass('animated bounceIn');
       <div class="col-md-12 description wow fadeIn">
         <br>
         <br>
-        I work in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA Lab</a> with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
+        I am a Ph.D. student
+        <br>
+        working in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA Lab</a> with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
         <br>
         You can find me on <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">Google Scholar</a>.
       </div>
@@ -163,7 +177,7 @@ $('.research-area').addClass('animated bounceIn');
 </div>
 </div>
 
-<div class="section-box" id="tamu">
+<div class="section-box" id="tamu" data-toggle="modal" data-target="#tamuModal">
   <div class="overlay">
   <div class="container">
     <div class="row">
@@ -181,6 +195,8 @@ $('.research-area').addClass('animated bounceIn');
   </div>
 </div>
 
+<div class="section-box" style="height: 100px">
+</div>
 
 <div class="section-box" id="bupt" data-toggle="modal" data-target="#buptModal">
   <div class="overlay">
@@ -200,6 +216,9 @@ $('.research-area').addClass('animated bounceIn');
   </div>
 </div>
 
+<div class="section-box" style="height: 100px">
+</div>
+
 <div class="section-box" id="bjfu" data-toggle="modal" data-target="#bjfuModal">
   <div class="overlay">
     <div class="container">
@@ -217,6 +236,40 @@ $('.research-area').addClass('animated bounceIn');
     </div>
   </div>
 </div>
+
+<div class="section-box" style="height: 100px">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="tamuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Life at TAMU</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="description" >
+          Currently not in any student organization or club.
+          I am devoting all my energy into scientific research to prepare for a faculty position in the future.
+            <br>
+          In the long term, I expect myself to keep self-improvement and to gain more social resources for myself and my family.
+            <br>
+          In the short term, I hope to do very well in my research, which is my core value to the society.
+          I will also keep my other skills just right,
+          especially my management skill, communication skill, and physical fitness.
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="buptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -245,6 +298,7 @@ $('.research-area').addClass('animated bounceIn');
     </div>
   </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="bjfuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
