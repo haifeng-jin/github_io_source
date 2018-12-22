@@ -125,6 +125,9 @@ category: home
 function showResearch() {
 $('.research-area').addClass('animated bounceIn');
 }
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 </script>
 
 <div class="container">
@@ -152,11 +155,29 @@ $('.research-area').addClass('animated bounceIn');
       <div class="col-md-12 description wow fadeIn">
         <br>
         <br>
+        Welcome! My name is
+        <a data-toggle="tooltip" data-placement="top" title="金海峰, 김해봉">
+          Haifeng Jin
+        </a>
+        .
+        <br>
+        I am the author of <a href="https://autokeras.com">Auto-Keras</a>.
+        <br>
         I am a Ph.D. student
         <br>
-        working in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA Lab</a> with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
+        working at <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA Lab</a> with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
         <br>
-        You can find me on <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">Google Scholar</a>.
+        You can find me on
+        <br>
+                <a href="https://www.linkedin.com/in/HaifengJin">
+                                Linkedin,
+                </a>
+                <a href="https://github.com/jhfjhfj1">
+                                GitHub,
+                </a>
+                <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">
+                                Google Scholar.
+                </a>
       </div>
     </div>
     <div class="row">
@@ -169,7 +190,9 @@ $('.research-area').addClass('animated bounceIn');
           <br>
           <span class="research-area badge badge-light">Deep Learning</span>
           <br>
-          <span class="research-area badge badge-light">Automated Machine Learning</span>
+          <span class="research-area badge badge-light">Automated Machine Learning (AutoML)</span>
+          <br>
+          <span class="research-area badge badge-light">Neural Architecture Search</span>
         </div>
       </div>
     </div>
