@@ -108,8 +108,27 @@ function show() {
   document.getElementById("solution").innerHTML = currentSolution[indexSeq[currentIndex]];
 }
 
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 function randomSeq(len) {
-  return Array.from({length: len}, () => Math.floor(Math.random() * len));
+  return shuffle(Array.apply(null, {length: len}).map(Number.call, Number))
 }
 
 function initOll() {
