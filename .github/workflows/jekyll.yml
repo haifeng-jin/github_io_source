@@ -17,5 +17,5 @@ jobs:
       - name: Install
         run: sudo apt-get install ruby-full build-essential zlib1g-dev && sudo gem install jekyll bundler
         
-      - name: Build
-        run: jekyll build
+      - name: Build & Deploy to GitHub Pages
+        uses: BryanSchuetz/jekyll-deploy-gh-pages@1.0
