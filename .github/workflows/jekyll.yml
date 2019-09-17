@@ -11,5 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:      
-      - name: Build & Deploy to GitHub Pages
-        uses: BryanSchuetz/jekyll-deploy-gh-pages@1.0
+      - name: Checkout
+        uses: actions/checkout@v1
+        
+      - name: Install
+        run: gem install jekyll bundler
+        
+      - name: Build
+        run: jekyll build
