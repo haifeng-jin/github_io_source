@@ -1,21 +1,20 @@
-name: Jekyll site CI
-
-on:
-  push:
-    branches:
-      - master
-
+name: Build and Deploy
+on: [push]
 jobs:
-  build:
-
+  build-and-deploy:
     runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
 
-    steps:      
-      - name: Checkout
-        uses: actions/checkout@v1
-        
-      - name: Install
-        run: sudo apt-get install ruby-full build-essential zlib1g-dev && sudo gem install jekyll bundler
-        
-      - name: Build & Deploy to GitHub Pages
-        uses: BryanSchuetz/jekyll-deploy-gh-pages@1.0
+    - name: Install
+      run: sudo apt-get install ruby-full build-essential zlib1g-dev && sudo gem install jekyll bundler
+
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BASE_BRANCH: master # The branch the action should deploy from.
+        BRANCH: gh-pages # The branch the action should deploy to.
+        FOLDER: build # The folder the action should deploy.
+        BUILD_SCRIPT: jekyll build # The build script the action should run prior to deploying.
