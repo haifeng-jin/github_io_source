@@ -1,38 +1,26 @@
 language: ruby
 rvm:
-  - 2.6.3
-
-# Assume bundler is being used, therefore
-# the `install` step will run `bundle install` by default.
+- 2.6.3
 install: gem install jekyll
 script: jekyll build && echo "haifengjin.com" > build/CNAME
-
 env:
   global:
-  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
-
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+  - secure: kUBm7Coq4VzT1vxdj2cPkKIV8gWIgVQRvjwJLmLKIAVqiQ3Zv8y33oNYx4pRlGRDW6QM/51vlcdOaPy9Q8wosWyq5fe6+yqisArsNUVmnDifGRSbr+0GzVd98Rem32v5oqjDlxp2ANXFsR5fDXAPVZkX1PGS+gQ3Rtk6hbEGsbPB7LQVaeXcm5yTBcYK7uD4ZgNuhckJ6/6sabmH/acnSgSI2LtnfxlW57+244BTfdw9aflk6We1Sqt/ExVLIG7IQ6w1i9X6J2uzbvJVqLH4zSfrrF5W5WEePZqy4IpOv94lJLEUqcbOCGlkhTWAf2j95KHC9NxsMooettl2K2F4RS6uHfIRwvmYVnct5zye3sCLPshpGaxtDgaAMPaDze5k9ywYDFPpnGxkIGEfpYViaeurmWCgNoZvpu6HpP/AUoJAgMxZs3OPQtwjomBpvKIun9eFWAgXrpy5GKvBxDF+TOAxI7JbEi7FFbKfH3EgmoGaEIsK5+aHiWpnZK4ZxAwXMfIbhSnEt3jBcGw4R4w6pMLKSGGDsgROLkpsdeIBIOyrtuWAjf1mcytLQFQqpltQaI6Ernwqax5I3fDCiWC9qnIBz1RUSzGEnxVZEV+yoSlJ7gevr0sOtsxsU7b49L4zvp17VBt/iUmFyZchUONFgQ0YwJ8m6OAVq5aOaKVoP/Y=
 addons:
   apt:
     packages:
     - libcurl4-openssl-dev
-
-sudo: false # route your build to the container-based infrastructure for a faster build
-
-cache: bundler # caching bundler gem packages will speed up build
-
-# Optional: disable email notifications about the outcome of your builds
+sudo: false
+cache: bundler
 notifications:
   email: false
-  
 deploy:
-  - provider: pages
-    skip-cleanup: true
-    github-token: "$GITHUB_TOKEN"
-    keep-history: true
-    local-dir: build
-    target-branch: gh-pages
-    on:
-      branch: master
-env:
-  global:
-    secure: hukof0dDtKZsiD6f7t2KFuJJlX53HRZ9w54EdDod6/JpLaRNP6pHp7zNdxmwZREfZXFQgq2UxaY4vUM5vw6xHoaF0OrOaqU+dUdQxei5q/RBZCcrSaabGaztXm0zDookRSQtuo3w7g6/3mbBguMhRge1h9u021iZ5Hxdams6bDcCeK7M+2+utoB8nUI7otiwzighvuV3/8cBGHdyKHMuYs+lfQAingEGiT7PzRltoWHX1Qlw/78HURiQbcD01BpRQkzzgsznBZhlTdlWdWA2UGqhe7xu+ntg3w4+rHNIuQ0+FD0E3oRuiysKA1aZ7pDz9FlYDjx0WP4AFm6hbLBcVeJ02w7/6xAeMC8TJumrqxEDzWDas+Ybj8vS5daV2XrCvEH23+HnPnj9HGDkjhDFaIiJwFxfG5hYSZsQQnn09Bw0JnG8Qm0ytf3c+Z2ldtdD15iSlold0sE5i4YIWSkINm5WKP6nySpWfo9/S5v9rE+8sjNmua82bK010Hy6nZai/WRZgtJPRel0u0kl96FVaj7VPAaK8LqseBSoFCfUQQdtUNVPVchgWME060Pr2RHRLUfs/vXUlURU9mW9SpZFV2hMJCiuDaq7CGcY6lbmqZki7QFsY07c9yH8X8fGRn1y48UeDM7gEpnGmVCLnOD6SLoGFaulZHMdgaVX5ey/BAE=
+- provider: pages
+  skip-cleanup: true
+  github-token: "$GITHUB_TOKEN"
+  keep-history: true
+  local-dir: build
+  target-branch: gh-pages
+  on:
+    branch: master
