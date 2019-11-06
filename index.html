@@ -3,363 +3,133 @@ layout: default
 title: Haifeng Jin's Blog
 category: home
 ---
-<style>
-@font-face {
-  font-family: "c";
-  src: url(/fonts/c.ttf) format("truetype");
-}
-.research-area{
-  visibility: hidden;
-}
-.section-box {
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
-
-  width: 100%;
-  height: 150px;
-  margin-bottom: 10px;
-}
-.section-text a {
-  color: #87CEFA;
-}
-#tamu{
-  background-image:
-  url('/img/tamu.jpg');
-}
-
-#tamu .overlay {
-  background-color: rgb(110, 30, 30);
-}
-
-#bupt .overlay {
-  background-color: rgb(30,60,80);
-}
-
-#bjfu .overlay {
-  background-color: rgb(30, 70, 60);
-}
-
-.overlay {
-  opacity: 0.8;
-  transition: .5s ease;
-  height: 150px;
-  box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.2);
-}
-
-.overlay:hover {
-  opacity: 0.7;
-  box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.8);
-}
-
-#bjfu{
-  background-image:
-  url('/img/bjfu.jpg');
-}
-
-#bupt{
-  background-image:
-  url('/img/bupt.jpg');
-}
-
-.shadow {
-  box-shadow: 14px 14px 18px 0 rgba(0, 0, 0, 0.2), 6px 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.box-text {
-  text-align: center;
-  width: 80%;
-  font-family: 'c';
-  font-size: 60px;
-}
-.description{
-  font-family: Abel,sans-serif;
-  font-size: 15;
-}
-.section-text {
-  cursor: pointer;
-  padding-left: 0%; padding-right: 0%; padding-bottom: 5%; padding-top: 5%;
-  text-align: center;
-  font-family: Playfair Display;
-  font-size: 20px;
-  background: rgba(247,247,245,0);
-  line-height: 200%;
-  margin: auto;
-  max-width:1000px;
-
-  color: #87CEFA;
-  color: #fff;
-  text-shadow: 2px 2px 4px #000000;
-}
-.half-box {
-  width: 250px;
-  margin-top: 10%;
-  margin-bottom: 10%;
-   text-align:center;
-}
-  .half-img {
-  width: 250px;
-  }
-@media only screen and (min-width: 768px) {
-  .section-text{
-    padding-left: 5%; padding-right: 5%;  font-size: 30px;
-  }
-  .overlay {
-    height: 250px;
-  }
-  .section-box {
-    height: 250px;
-  }
-  .half-box {
-    width: 400px;
-  }
-  .half-img {
-    width: 400px;
-  }
-}
-.animated { visibility: visible !important; }
-
-</style>
-
-
-<script>
-function showResearch() {
-$('.research-area').addClass('animated bounceIn');
-}
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
-
 <div class="container">
-<div class="row">
-<div class="col-md-6" >
-  <div class="half-box mx-auto wow fadeIn" data-wow-delay="1s">
-    <div id="listener-default" class="listener pointer">
-    <img src="/img/avatar.jpg" class="img-fluid rounded shadow half-img">
+  <div class="row">
+    <div style="padding: 30px">
     </div>
   </div>
-</div>
-<div class="col-md-6">
-  <div class="half-box mx-auto" data-wow-delay="1s">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 description wow fadeIn">
-        <br>
-        <br>
-        Welcome! My name is
-        <a data-toggle="tooltip" data-placement="top" title="金海峰, 김해봉">
-          Haifeng Jin
-        </a>
-        .
-        <br>
-        I am the author of <a href="https://autokeras.com">AutoKeras</a>.
-        <br>
-        I am a Ph.D. student
-        <br>
-        in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA Lab</a> with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
-        <br>
-        You can find me on
-        <br>
-                <a href="https://www.linkedin.com/in/HaifengJin">Linkedin</a>,
-                <a href="https://github.com/jhfjhfj1">GitHub</a>,
-                <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">Google Scholar</a>.
+  <div class="row">
+    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 padv padh" >
+      <div class="card wow fadeIn" data-wow-delay="1s">
+        <img class="card-img shadow" src="/img/avatar.jpg" alt="Card image">
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12 description">
-        <br>
-        <button type="button" class="btn btn-light wow fadeIn" onclick="showResearch()">Research Area</button>
-        <div>
-          <br>
-          <span class="research-area badge badge-light">Machine Learning</span>
-          <br>
-          <span class="research-area badge badge-light">Deep Learning</span>
-          <br>
-          <span class="research-area badge badge-light">Automated Machine Learning (AutoML)</span>
-          <br>
-          <span class="research-area badge badge-light">Neural Architecture Search</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-
-<div class="section-box" style="height: 500px; background-color: #f8f9fa!important">
-
-  <div class="container">
-    <div class="row" style="padding:50px">
-      <div class="col-md-12">
-
-        <h3 style="text-align: center">Education</h3>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-
-        <div class="section-box" id="bjfu" data-toggle="modal" data-target="#bjfuModal">
-          <div class="overlay">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="section-text">
-                    <text style="font-family: Snell Roundhand, cursive">2009 - 2013</text>
-                    <br>
-                    B.Eng. of CS
-                    <br>
-                    BFU
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 padv padh">
+      <div class="card wow fadeIn" data-wow-delay="1s" style="border: none;">
+        <div class="card-body">
+          <h5 class="card-title">
+            Welcome! I am Haifeng Jin.
+          </h5>
+          <div class="card-text">
+            I am the author of <a href="https://autokeras.com">AutoKeras</a>.
+            I am a Ph.D. student at Texas A&M University.
+            I work as a Research Assistant in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA Lab</a> with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
+            My research interests are <a href="https://en.wikipedia.org/wiki/Automated_machine_learning">Automated Machine Learning (AutoML)</a> and <a href="https://en.wikipedia.org/wiki/Neural_architecture_search">Neural Architecture Search</a>.
+          </div>
+          <div class="card-text">
+            <br>
+            <a href="https://www.linkedin.com/in/HaifengJin"><img src="/img/linkedin.svg" class="icon"></a>
+            &nbsp &nbsp
+            <a href="https://github.com/jhfjhfj1"><img src="/img/github.svg" class="icon" ></a>
+            &nbsp &nbsp
+            <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en"><img src="/img/scholar.svg" class="icon" ></a>
+            &nbsp &nbsp
+            <a href="https://twitter.com/haifeng_jin"><img src="/img/twitter.svg" class="icon" ></a>
+            &nbsp &nbsp
+            <a href="https://www.zhihu.com/people/jin-hai-feng-68"><img src="/img/zhihu.png" class="icon" ></a>
           </div>
         </div>
-
       </div>
-
-      <div class="col-md-4">
-
-        <div class="section-box" id="bupt" data-toggle="modal" data-target="#buptModal">
-          <div class="overlay">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="section-text">
-                    <text style="font-family: Snell Roundhand, cursive">2013 - 2015</text>
-                    <br>
-                    M.S. of CS
-                    <br>
-                    BUPT
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="col-md-4">
-
-        <div class="section-box" id="tamu" data-toggle="modal" data-target="#tamuModal">
-          <div class="overlay">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="section-text">
-                    <text style="font-family: Snell Roundhand, cursive">2015 - Present</text>
-                    <br>
-                    Ph.D. of CS
-                    <br>
-                    TAMU
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-
     </div>
   </div>
+
+  <div class="row">
+    <div style="padding: 20px">
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12 section-title">
+      Education
+    </div>
+  </div>
+
+
+  <div class="row padh">
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch padv">
+      <div class="card shadow-lg wow fadeIn" data-wow-delay="1s">
+        <div class="wrapper">
+          <img class="card-img-top" src="/img/bjfu.jpg" alt="Card image cap">
+        </div>
+        <div class="card-body">
+          <p class="card-text"><small class="text-muted">2009-2013</small> <br>B.E. in Computer Science</p>
+          <h5 class="card-title">Beijing Forestry University</h5>
+          <p class="card-text">          I am interested in competitive programming.
+            During my undergraduate life in Beijing Forestry University, ,
+            I founded <a href="http://www.bjfuacm.com/bjfuacm/">BFU ACM-ICPC Club</a>
+            in <a href="http://www.bjfu.edu.cn">Beijing Forestry University</a>,
+            where I had a great time with a bunch of awesome people with the same interest.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch padv">
+      <div class="card shadow-lg wow fadeIn" data-wow-delay="1s">
+        <div class="wrapper">
+          <img class="card-img-top" src="/img/bupt.jpg" alt="Card image cap">
+        </div>
+        <div class="card-body">
+          <p class="card-text"><small class="text-muted">2013-2015</small> <br>M.S. in Computer Science</p>
+          <h5 class="card-title">Beijing University of Posts and Telecommunications</h5>
+          <p class="card-text">
+            You can feel an atomsphere of EECS any where on Campus.
+            My co-workers are outstanding experts in their area,
+            from whom I really learned a lot.
+            <br>
+            I joined the <a href="https://baike.baidu.com/item/psc/23603371">Public Speaking Club</a> in BUPT to practice my English and public speaking,
+            where I met many people from different majors and backgrounds.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch padv">
+      <div class="card shadow-lg wow fadeIn" data-wow-delay="1s">
+        <div class="wrapper">
+          <img class="card-img-top" src="/img/tamu.jpg" alt="Card image cap">
+        </div>
+        <div class="card-body">
+          <p class="card-text"><small class="text-muted">2015-Present</small> <br>Ph.D. in Computer Science</p>
+          <h5 class="card-title">Texas A&M University</h5>
+          <p class="card-text">
+            In Texas A&M University, I am not in any student organization or club.
+            I am devoting all my energy into research.
+            During my study, I developed <a href="https://autokeras.com/">AutoKeras</a>, which became the official AutoML API of <a href="https://keras.io/">Keras</a>.
+            I am getting involved in the open-source community on GitHub, and contributed code to <a href="https://www.tensorflow.org/">Tensorflow</a> and <a href="https://keras.io/">Keras</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div style="padding: 30px">
+    </div>
+  </div>
+  <!-- <hr>
+  <div class="row">
+    <div class="col-md-12 section-title">
+      Honors & Awards
+    </div>
+  </div>
+
+  <div class="row">
+    <div style="padding: 30px">
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12 section-title">
+      Selected Publications
+    </div>
+  </div> -->
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="tamuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Life at TAMU</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="description" >
-          In Texas A&M University, I am not in any student organization or club.
-          I am devoting all my energy into scientific research to prepare for a faculty position in the future.
-          <br>
-          In the long term, I expect myself to keep self-improvement and to gain more social resources for myself and my family.
-          <br>
-          In the short term, I hope to do very well in my research, which is my core value to the society.
-          I will also keep my other skills just right,
-          especially my management skill, communication skill, and physical fitness.
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="buptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Life at BUPT</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="description" >
-          In Beijing University of Posts and Telecommunications, you can feel an atomsphere of EECS any where on Campus.
-          My co-workers are outstanding experts in their area,
-          from whom I really learned a lot.
-          <br>
-          I joined the Public Speaking Club in BUPT to practice my English and public speaking,
-          where I met many people from different majors and backgrounds.
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="bjfuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Life at BFU</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="description" >
-          <br>
-          I am interested in competitive programming.
-          During my undergraduate life in Beijing Forestry University, ,
-          I founded <a href="http://www.bjfuacm.com/bjfuacm/">BFU ACM-ICPC Club</a>
-          in <a href="http://www.bjfu.edu.cn">Beijing Forestry University</a>,
-          where I had a great time with a bunch of awesome people with the same interest.
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--
-<div class="section-box" style="height: 500px;">
-  <div class="container">
-    <div class="row" style="padding:50px">
-      <div class="col-md-12">
-        <h3 style="text-align: center">Education</h3>
-      </div>
-    </div>
-  </div>
-</div> -->

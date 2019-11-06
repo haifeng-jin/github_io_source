@@ -16,8 +16,8 @@
 
     <!-- Bootstrap Core  -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="/css/clean-blog.min.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
 
     <!-- jQuery -->
@@ -27,6 +27,7 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/wow.min.js"></script>
+    <script src="/js/index.js"></script>
     <script>
               new WOW().init();
     </script>
@@ -44,37 +45,10 @@
 
 <body>
 	{% include navbar.ext %}
-    <div id="listener-contained" class="listener pointer">
-<style>
-</style>
-<header class="intro-header" id="header" style="background-image: url('/img/{{page.category}}.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="site-heading">
-
-		{% include {{page.category}}/header.ext %}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-</header>
-    </div>
-        <script>
-            $('#listener-contained').plate({
-                element: ['#plate-contained']
-            });
-        </script>
-
-		{{content}}
-
-
-    {% include footer.ext %}
-
-    <!-- Google Analytics -->
-	{% include analytics.ext %}
-
+  {{content}}
+  {% include footer.ext %}
+  <!-- Google Analytics -->
+  {% include analytics.ext %}
 </body>
 
 </html>

@@ -1,0 +1,42 @@
+.icon {
+  width: 24px;
+}
+.half-box {
+  width: 300px;
+}
+.section-title {
+  padding-top: 20px;
+  padding-bottom: 20px;
+   text-align: center;
+   font-size: 30px;
+}
+.padv {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+.padh {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.wrapper:after {
+  content: '';
+  display: block;
+  padding-top: 85%;
+}
+
+.wrapper img {
+  width: auto;
+  height: 100%;
+  max-width: none;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
