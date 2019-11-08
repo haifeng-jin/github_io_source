@@ -26,7 +26,3 @@ function alert(message, duration) {
     $("#top_alert").alert('close');
   }, duration);
 }
-
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
