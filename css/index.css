@@ -1,3 +1,13 @@
+.divider{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.alert-top{
+    position: fixed;
+    top: 5px;
+    left:2%;
+    width: 96%;
+}
 .icon {
   width: 24px;
 }
@@ -8,7 +18,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
    text-align: center;
-   font-size: 30px;
+   font-size: 24px;
 }
 .padv {
   padding-top: 20px;
