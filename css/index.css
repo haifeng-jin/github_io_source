@@ -1,3 +1,18 @@
+.bg-ak{
+  background-color: #EF5350;
+}
+.bg-noip {
+  background-color: #007396;
+}
+.bg-bfu {
+  background-color: #107C10;
+}
+.bg-keras {
+  background-color: #D00000;
+}
+.bg-tf {
+  background-color: #FF6F00;
+}
 .divider{
   margin-top: 20px;
   margin-bottom: 20px;
