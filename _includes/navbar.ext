@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <a href="/index.html" class="navbar-brand">
             Haifeng Jin's Blog
         </a>

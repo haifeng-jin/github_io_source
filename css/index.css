@@ -13,9 +13,12 @@
 .bg-tf {
   background-color: #FF6F00;
 }
-.divider{
-  margin-top: 20px;
-  margin-bottom: 20px;
+.divider {
+  margin: 0px;
+}
+.section {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 .alert-top{
     position: fixed;
@@ -30,14 +33,14 @@
   width: 300px;
 }
 .section-title {
-  padding-top: 20px;
   padding-bottom: 20px;
-   text-align: center;
-   font-size: 24px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 .padv {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 
 }
 .padh {
