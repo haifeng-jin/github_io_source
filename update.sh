@@ -1,11 +1,11 @@
+#!/usr/bin/env bash
 jekyll build
-git checkout -b build
-git add build
-git commit -m "build"
+git checkout -b gh-pages-temp
+git add -f build
+git commit -m "gh-pages update"
 git subtree split --prefix build -b gh-pages
 git push -f origin gh-pages:gh-pages
-git checkout master
 git branch -D gh-pages
-git branch -D build
-rm -rf build
+git checkout master
+git branch -D gh-pages-temp
 
