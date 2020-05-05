@@ -68,3 +68,7 @@
   top: 0;
   transform: translateX(-50%);
 }
+
+.no-border {
+  border: none;
+}
