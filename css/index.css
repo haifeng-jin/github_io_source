@@ -15,7 +15,7 @@
 }
 .section {
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 80px;
 }
 .section:nth-child(odd) {
   background-color: #F6F5FA;
@@ -33,19 +33,11 @@
   width: 300px;
 }
 .section-title {
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   text-align: center;
-  font-size: 24px;
+  font-size: 48px;
   font-weight: bold;
-}
-.padv {
-  margin-top: 20px;
-  margin-bottom: 20px;
-
-}
-.padh {
-  padding-left: 20px;
-  padding-right: 20px;
+  font-family: "Nato Sans JP", sans-serif;
 }
 
 .wrapper {
@@ -68,10 +60,28 @@
   top: 0;
   transform: translateX(-50%);
 }
-
-.no-border {
+.card-text {
+  font-family: "Nato Sans JP", sans-serif;
+  font-size: 18px;
+}
+.card-title {
+  font-size: 24px;
+  font-family: "Nato Sans JP", sans-serif;
+}
+#publication .card-title {
+  padding-top: 20px;
+}
+#publication .card {
+  background-color: transparent;
   border: none;
 }
-.card-industry {
-  background-color: transparent;
+#name {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  font-size: 48px;
+  font-weight: bold;
+  font-family: "Allura", TypeSETit;
+}
+#me .card {
+  border: none;
 }
