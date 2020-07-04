@@ -1,9 +1,0 @@
-            <!-- Blog Sidebar Widgets Column -->
-		<div><p></p></div>
-<!-- Side Widget Well -->
-<div class="card">
-  <div class="card-header"><big>Introduction</big></div>
-  <div class="card-body">
-    <p>Here are some articles and tutorials about technology.</p>
-  </div>
-</div>

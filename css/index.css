@@ -68,6 +68,11 @@
   font-size: 24px;
   font-family: "Nato Sans JP", sans-serif;
 }
+.card{
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px
+}
 #publication .card-title {
   padding-top: 20px;
 }

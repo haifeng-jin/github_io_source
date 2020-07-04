@@ -1,9 +1,0 @@
-		<div><p></p></div>
-<!-- Side Widget Well -->
-<div class="card">
-  <div class="card-header"><big>简介</big></div>
-  <div class="card-body">
-    <p>定期推送请扫描下方二维码关注微信公众号。</p>
-    <img class="img-fluid" src="/img/qrcode.jpg">
-  </div>
-</div>

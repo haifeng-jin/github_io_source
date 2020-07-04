@@ -14,18 +14,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/technology/index.html">
-                        Technology
+                    <a class="nav-link" href="/blog/index.html">
+                        Blog
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/codeforces/index.html">
-                        Competitive
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/chinese/index.html">
-                        Chinese
+                    <a class="nav-link" href="https://notes.haifengjin.com/">
+                        Notes
                     </a>
                 </li>
             </ul>

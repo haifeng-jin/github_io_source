@@ -163,6 +163,7 @@ function initPll() {
 function update() {
   var a = currentIndex + 1;
   var temp = (indexSeq[currentIndex]);
+  console.log(document.getElementById("case"))
   document.getElementById("case").src = pathPrefix + temp.toString() + ".gif";
   document.getElementById("index").innerHTML = a.toString() + " / " + maxIndex.toString();
   document.getElementById("solution").innerHTML = "";
@@ -185,6 +186,4 @@ function prev() {
 }
 
 </script>
-<br>
-<iframe src="http://hi-games.net/cube-3x3x3/embed.cgi" width="300" height="300" vspace="0" hspace="0" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" style="border: 0px;"></iframe>
 </body>
