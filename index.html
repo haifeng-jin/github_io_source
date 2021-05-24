@@ -1,242 +1,110 @@
----
-layout: default
-title: Haifeng Jin's Blog
-category: home
----
-<div style="height: 56px">
-</div>
-<div class="section" id="me">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12" >
-                <div class="card">
-                    <img class="card-img" src="/img/avatar.jpg" alt="Card image">
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div id="name">
-                            Haifeng Jin
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Haifeng Jin's Blog</title>
+
+        <!-- Google Fonts  -->
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Oswald|Roboto|Raleway|Ubuntu|Nato+Sans+JP|Allura">
+
+        <!-- Bootstrap Core  -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="./css/index.css" rel="stylesheet">
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="./js/index.js"></script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <a href="/index.html" class="navbar-brand">
+                Haifeng Jin's Personal Website
+            </a>
+        </nav>
+        <script type="text/javascript">
+            function googlesearch() {
+                            console.log('google call');
+                            var key = document.getElementsByName("search-key-words")[0].value;
+                            var link = "http://www.google.com/search?domains=haifengjin.com&sitesearch=haifengjin.com&q=" + key;
+                            window.open(link);
+                            document.getElementsByName("search-key-words")[0].value = ""
+                        }
+        </script>
+
+        <div style="height: 56px">
+        </div>
+        <div class="section" id="me">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12" >
+                        <div class="card">
+                            <img class="card-img" src="./img/avatar.jpg" alt="Card image">
                         </div>
-                        <div class="card-text">
-                            I am the author of <a href="https://autokeras.com">AutoKeras</a>.
-                            I am a Ph.D. candidate at Texas A&M University.
-                            I work as a Research Assistant in <a href="http://faculty.cs.tamu.edu/xiahu/research.html">DATA Lab</a> with <a href="http://faculty.cs.tamu.edu/xiahu/">Dr. Xia Hu</a>.
-                            My research interests are <a href="https://en.wikipedia.org/wiki/Automated_machine_learning">Automated Machine Learning (AutoML)</a> and <a href="https://en.wikipedia.org/wiki/Neural_architecture_search">Neural Architecture Search</a>.
+                    </div>
+                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="name">
+                                    Haifeng Jin
+                                </div>
+                                <div class="card-text">
+                                    I am the creator of <a href="https://autokeras.com">AutoKeras</a>, <br>
+                                    a contributor of <a href="https://keras-team.github.io/keras-tuner/">Keras Tuner</a>, <br>
+                                    a software engineer on <a href="https://keras.io/">Keras</a> team at Google, <br>
+                                    an author of the book <a href="https://www.manning.com/books/automated-machine-learning-in-action?query=automated&utm_source=jin&utm_medium=affiliate&utm_campaign=affiliate&a_aid=jin">Automated Machine Learning in Action</a>. <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                    <a href="https://www.linkedin.com/in/HaifengJin" data-toggle="tooltip" data-placement="top" title="Linkedin"><img src="./img/linkedin.svg" class="icon"></a>
+                                    &nbsp &nbsp
+                                    <a href="https://github.com/haifeng-jin" data-toggle="tooltip" data-placement="top" title="GitHub"><img src="./img/github.svg" class="icon" ></a>
+                                    &nbsp &nbsp
+                                    <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en" data-toggle="tooltip" data-placement="top" title="Google Scholar"><img src="./img/scholar.svg" class="icon" ></a>
+                                    &nbsp &nbsp
+                                    <a href="https://twitter.com/haifeng_jin" data-toggle="tooltip" data-placement="top" title="Twitter"><img src="./img/twitter.svg" class="icon" ></a>
+                                    &nbsp &nbsp
+                                    <a href="https://www.zhihu.com/people/jin-hai-feng-68" data-toggle="tooltip" data-placement="top" title="知乎"><img src="./img/zhihu.svg" class="icon" ></a>
+                                    &nbsp &nbsp
+                                    <a href="https://weibo.com/1274956371/profile" data-toggle="tooltip" data-placement="top" title="微博"><img src="./img/weibo.svg" class="icon" ></a>
+                                    &nbsp &nbsp
+                                    <a onclick="copyEmailToClipboard()" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Copy Email">
+                                        <img src="./img/mail.svg" class="icon" >
+                                        <div id = "alert_placeholder"></div>
+                                    </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-text">
-                            <br>
-                            <a href="https://www.linkedin.com/in/HaifengJin" data-toggle="tooltip" data-placement="top" title="Linkedin"><img src="/img/linkedin.svg" class="icon"></a>
-                            &nbsp &nbsp
-                            <a href="https://github.com/haifeng-jin" data-toggle="tooltip" data-placement="top" title="GitHub"><img src="/img/github.svg" class="icon" ></a>
-                            &nbsp &nbsp
-                            <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en" data-toggle="tooltip" data-placement="top" title="Google Scholar"><img src="/img/scholar.svg" class="icon" ></a>
-                            &nbsp &nbsp
-                            <a href="https://twitter.com/haifeng_jin" data-toggle="tooltip" data-placement="top" title="Twitter"><img src="/img/twitter.svg" class="icon" ></a>
-                            &nbsp &nbsp
-                            <a href="https://www.zhihu.com/people/jin-hai-feng-68" data-toggle="tooltip" data-placement="top" title="知乎"><img src="/img/zhihu.svg" class="icon" ></a>
-                            &nbsp &nbsp
-                            <a href="https://weibo.com/1274956371/profile" data-toggle="tooltip" data-placement="top" title="微博"><img src="/img/weibo.svg" class="icon" ></a>
-                            &nbsp &nbsp
-                            <a onclick="copyEmailToClipboard()" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Copy Email">
-                                <img src="/img/mail.svg" class="icon" >
-                                <div id = "alert_placeholder"></div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="section" id="education">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 section-title">
-                Education
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="wrapper">
-                        <img class="card-img-top" src="/img/bjfu.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"><small class="text-muted">2009-2013</small> <br>B.E. in Computer Science</p>
-                        <h5 class="card-title">Beijing Forestry University</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="wrapper">
-                        <img class="card-img-top" src="/img/bupt.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"><small class="text-muted">2013-2015</small> <br>M.S. in Computer Science</p>
-                        <h5 class="card-title">Beijing University of Posts and Telecommunications</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="wrapper">
-                        <img class="card-img-top" src="/img/tamu.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"><small class="text-muted">2015-Present</small> <br>Ph.D. in Computer Science</p>
-                        <h5 class="card-title">Texas A&M University</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="section" id="industry">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 section-title">
-                Industry Experience
-            </div>
-        </div>
-        <div class="row">
-            <div class="card border-0 col-md-6 card-industry">
-                <div class="card">
-                    <div class="card-body">
-                        <p class="card-text"><small class="text-muted">Mountain View, CA, Summer 2019 & Summer 2020</small> <br>Google</p>
-                        <h5 class="card-title">Research Intern</h5>
-                    <p class="card-text">New API design and implementation of AutoKeras. Implemented HyperBand and Bayesian optimization tuner in KerasTuner.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card border-0 col-md-6 card-industry">
-                <div class="card">
-                    <div class="card-body">
-                        <p class="card-text"><small class="text-muted">Santa Monica, CA, Summer 2016</small> <br>Hulu</p>
-                        <h5 class="card-title">Software Developer Intern</h5>
-                    <p class="card-text">Built a tool to automatically identify faked advertisement views. Developed a full-stack data processing pipeline rerunning tool.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <!-- Google Analytics -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<div class="section" id="publication">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 section-title">
-                Selected Publications
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 card card-industry">
-                <h5 class="card-title">
-                    <a href="https://www.kdd.org/kdd2019/accepted-papers/view/auto-keras-an-efficient-neural-architecture-search-system">Auto-Keras: an Efficient Neural Architecture Search System</a>
-                </h5>
-                <p class="card-text">
-                <b>Haifeng Jin</b>, Qingquan Song, and Xia Hu. <br>
-                <i>The 25th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining.</i> <b>KDD 2019</b>.
-                </p>
-            </div>
-            <div class="col-md-12 card card-industry">
-                <h5 class="card-title">
-                    <a href="https://ieeexplore.ieee.org/document/8588792">Discriminative Graph Autoencoder</a>
-                </h5>
-                <p class="card-text">
-                <b>Haifeng Jin</b>, Qingquan Song, and Xia Hu. <br>
-                <i>IEEE International Conference on Big Knowledge.</i> <b>ICBK 2018</b>.
-                </p>
-            </div>
-            <div class="col-md-12 card card-industry">
-                <h5 class="card-title">
-                    <a href="https://ieeexplore.ieee.org/abstract/document/8594975">Multi-Label Adversarial Perturbations</a>
-                </h5>
-                <p class="card-text">
-                Qingquan Song, <b>Haifeng Jin</b>, Xiao Huang, and Xia Hu. <br>
-                <i>IEEE International Conference on Data Mining.</i> <b>ICDM 2018</b>.
-                </p>
-            </div>
-            <div class="col-md-12 card card-industry">
-                <a href="https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en">MORE</a><br>
-            </div>
-        </div>
-    </div>
-</div>
+            ga('create', 'UA-44322747-2', 'auto');
+            ga('send', 'pageview');
 
-<div class="section" id="award">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 section-title">
-                Honors & Awards
-            </div>
-        </div>
-        <div class="row">
-            <div class="card-columns">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Bronze Medals in ACM-ICPC Regional</h5>
-                        <p class="card-text">When I was in BFU, I actively participated in ACM International Collegiate Programming Contest (ICPC) and won the very first ICPC medal in BFU history. I won three bronze medal in total.</p>
-                        <p class="card-text"><small class="text-muted">2011-2012</small> </p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Founder of BFU ACM-ICPC Club</h5>
-                        <p class="card-text">I founded a student organization with my friends for preparing for ACM-ICPC. The work includes lecturing, promoting, and collaborating with other universities.</p>
-                        <p class="card-text"><small class="text-muted">2010</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">First Prize in NOIP</h5>
-                        <p class="card-text">I started to participate in National Olympiad in Informatics in Provinces (NOIP) from high school. Won the First Prize in Jilin province in my third year.</p>
-                        <p class="card-text"><small class="text-muted">2008</small> </p>
-                    </div>
-                </div>
-                <div class="card bg-ak">
-                    <div class="card-body text-white">
-                        <h5 class="card-title">
-                            <img src="/img/ak.svg" style="width: 30px">
-                            &nbsp
-                            <span class="align-bottom">Author of AutoKeras</span>
-                        </h5>
-                        <p class="card-text">During my Ph.D. study, I created an AutoML system based on Keras. It is now the official AutoML interface for Keras.</p>
-                        <p class="card-text"><small>2017</small></p>
-                    </div>
-                </div>
-                <div class="card bg-tf">
-                    <div class="card-body text-white">
-                        <h5 class="card-title">
-                            <img src="/img/tensorflow.svg" class="icon">
-                            &nbsp
-                            <span class="align-bottom">Contributor to TensorFlow</span>
-                        </h5>
-                        <p class="card-text">I contributed to TensorFlow during my summer internship at Google. Fixed some bugs in the predict function of TensorFlow Model.</p>
-                        <p class="card-text"><small>2019</small> </p>
-                    </div>
-                </div>
-                <div class="card bg-keras">
-                    <div class="card-body text-white">
-                        <h5 class="card-title">
-                            <img src="/img/keras.svg" class="icon">
-                            &nbsp
-                            <span class="align-bottom">Member of Keras Team</span>
-                        </h5>
-                        <p class="card-text">I am a member of the organization of keras-team on GitHub. I contributed to Keras, KerasTuner.</p>
-                        <p class="card-text"><small>2019</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        </script>
+
+    </body>
+
+</html>
 

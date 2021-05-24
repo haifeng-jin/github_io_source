@@ -1,18 +1,3 @@
-.bg-ak{
-  background-color: #EF5350;
-}
-.bg-noip {
-  background-color: #007396;
-}
-.bg-bfu {
-  background-color: #107C10;
-}
-.bg-keras {
-  background-color: #D00000;
-}
-.bg-tf {
-  background-color: #FF6F00;
-}
 .section {
   padding-top: 40px;
   padding-bottom: 80px;
@@ -61,7 +46,7 @@
   transform: translateX(-50%);
 }
 .card-text {
-  font-family: "Nato Sans JP", sans-serif;
+  font-family: 'Courier', monospace;
   font-size: 18px;
 }
 .card-title {
@@ -73,19 +58,11 @@
   margin-top: 10px;
   margin-bottom: 10px
 }
-#publication .card-title {
-  padding-top: 20px;
-}
-#publication .card {
-  background-color: transparent;
-  border: none;
-}
 #name {
   padding-top: 20px;
   padding-bottom: 40px;
   font-size: 48px;
-  font-weight: bold;
-  font-family: "Allura", TypeSETit;
+  font-family: 'Courier', monospace;
 }
 #me .card {
   border: none;
