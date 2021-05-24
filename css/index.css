@@ -2,9 +2,6 @@
   padding-top: 40px;
   padding-bottom: 80px;
 }
-.section:nth-child(odd) {
-  background-color: #F6F5FA;
-}
 .alert-top{
     position: fixed;
     top: 5px;
