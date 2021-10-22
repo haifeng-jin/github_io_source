@@ -1,53 +1,102 @@
 body {
-  background: #16171d;
+    background-color: #16171d;
+}
+p {
+    line-height: 20px;
 }
 .section {
-  padding-top: 40px;
-  padding-bottom: 80px;
-  background: #2e303e;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    background: #2e303e;
 }
 .alert-top{
-  position: fixed;
-  top: 5px;
-  width: 320px;
-  font-family: arial;
+    position: fixed;
+    top: 5px;
+    width: 320px;
+    font-family: arial;
 }
 .icon {
-  width: 30px;
-  margin: 15px;
+    width: 30px;
+    padding-right: 10px;
+    padding-bottom: 15px;
 }
 .card-img {
-  border-radius: 50%;
-  width: 70%;
-  margin-top: 60px;
-  margin-bottom: 60px;
+    border-radius: 50%;
+    width: 70%;
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 .card-text {
-  font-size: 18px;
-  padding-left: 15px;
+    font-size: 15px;
 }
 .card{
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: none;
-  background-color:rgba(0, 0, 0, 0);
-  font-family: 'Courier Prime', monospace;
-  color: #dbddee;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color:rgba(0, 0, 0, 0);
+    font-family: 'Courier Prime', monospace;
+    color: #dbddee;
 }
 #name {
-  padding-left: 15px;
-  padding-top: 20px;
-  padding-bottom: 40px;
-  font-size: 48px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    font-size: 36px;
 }
 #footer-text {
-  padding: 15px;
-  padding-left: 45px;
-  color: #a6a6a9;
+    padding: 15px;
+    padding-left: 45px;
+    color: #a6a6a9;
 }
 #footer-section {
-  background: #1d1e26;
-  padding-top: 0px;
-  padding-bottom: 0px;
+    background: #1d1e26;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
+
+@media (min-width:576px){
+    #name {
+        font-size: 48px;
+    }
+    .card-text {
+        font-size: 18px;
+    }
+    .icon {
+        width: 40px;
+        padding-right: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    #name {
+        font-size: 36px;
+    }
+    .card-text {
+        font-size: 15px;
+    }
+    .icon {
+        width: 30px;
+        padding-right: 10px;
+    }
+    .card-img {
+        width: 202px;
+    }
+}
+
+@media (min-width: 992px) {
+    #name {
+        font-size: 48px;
+    }
+    .card-text {
+        font-size: 18px;
+    }
+    .icon {
+        width: 40px;
+        padding-right: 15px;
+    }
+    .card-img {
+        width: 244px;
+    }
+}
+
+@media (min-width: 1200px) {}
