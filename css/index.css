@@ -9,8 +9,8 @@ body {
 .alert-top{
   position: fixed;
   top: 5px;
-  left:2%;
-  width: 60%;
+  width: 320px;
+  font-family: arial;
 }
 .icon {
   width: 30px;
