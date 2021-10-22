@@ -6,7 +6,7 @@ function copyEmailToClipboard () {
    str += '@'
    str += 'gmail'
    str += '.com'
-   el.value =  str;
+   el.value = str;
    // Set non-editable to avoid focus and move outside of view
    el.setAttribute('readonly', '');
    el.style = {position: 'absolute', left: '-9999px'};
@@ -17,7 +17,7 @@ function copyEmailToClipboard () {
    document.execCommand('copy');
    // Remove temporary element
    document.body.removeChild(el);
-   alert('Email address copied to clipboard!', 1000);
+   alert('Email address copied to clipboard!', 3000);
 }
 
 function alert(message, duration) {

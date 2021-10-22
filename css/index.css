@@ -4,6 +4,10 @@ body {
 p {
     line-height: 25px;
 }
+.fade {
+    -webkit-transition-duration: 0.5s; /* Safari */
+    transition-duration: 0.5s;
+}
 .section {
     padding-top: 40px;
     padding-bottom: 80px;
@@ -12,7 +16,6 @@ p {
 .alert-top{
     position: fixed;
     top: 5px;
-    width: 320px;
     font-family: arial;
 }
 .icon {
