@@ -30,6 +30,9 @@ p {
 .card-text {
     font-size: 22px;
 }
+a {
+    text-decoration: none;
+}
 .card{
     width: 100%;
     margin-top: 10px;
