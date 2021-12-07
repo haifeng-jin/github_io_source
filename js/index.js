@@ -21,8 +21,9 @@ function copyEmailToClipboard () {
 }
 
 function alert(message, duration) {
-  $('#alert_placeholder').html('<div id="top_alert" class="alert alert-secondary alert-top fade show">'+message+'</div>')
+    var alertPlaceholder = document.getElementById('alert_placeholder')
+    alertPlaceholder.innerHTML = '<div id="top_alert" class="alert alert-secondary alert-top fade show" role="alert">' + message + '</div>'
   setTimeout(function(){
-    $("#top_alert").alert('close');
+    alertPlaceholder.innerHTML = ''
   }, duration);
 }
