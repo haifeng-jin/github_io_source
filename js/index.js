@@ -54,21 +54,22 @@ function shuffle(array) {
 
 messages = [
     // Knowledges
-    "Moore's law is the observation that the number of transistors in a dense integrated circuit doubles about every two years.",
-    "Andy and Bill's law is a statement that new software will always consume any increase in computing power that new hardware can provide.",
-    "Conway's law: organizations design systems mirror their own communication structure.",
-    // Thoughts
-    "Keep unit tests simple and understandable at a glance. Otherwise, the testing code itself is prune to bugs. When writing code, we always want to reduce code duplication. However, writing tests is an exception, because reducing code duplication to the extreme may harm the tests' readability. In summary, we need to balance between better readability and less duplication.",
-    "We should use the Semantic Versioning (semver.org) system for software's version numbers. It is a common way to communicate with the users about how much was the software changed comparing to its predecessors.",
-    "As working from home becoming the new norm, working from home while keeping a high productivity becomes an essential skill.",
-    "Maintain a good health and phisical condition is critical to the success in one's career in the long run. This is the ultimate Long-termism.",
-    // Experiences
-    "I learned programming during my high school study to participate in National Olympiad in Informatics in Provinces (NOIP).",
-    "I studied as an undergrad in computer science at Beijing Forestry University (BFU).",
-    "I completed my Master's Degree in computer science at Beijing University of Posts and Telecommunications (BUPT).",
-    "I completed my Ph.D. in computer science at Texas A&M University (TAMU).",
-    "I did three internships on Keras team at Google, which accumulates up to a year, before I officially joined as a full-time employee.",
-    "During my undergrad, I was so passionate about ACM-ICPC (International Collegiate Programming Contest), which was not so popular in my university (BFU) at the time. I took the training in Peking University and China University of Geosciences, and bring the things I learned back to BFU. We started a student organization to help people better prepare for ACM-ICPC. Finally, we won the first ACM-ICPC medal in BFU's history. Though, it was a bronze medal. LOL",
+    
+ "Moore's law is the observation that the number of transistors in a dense integrated circuit doubles about every two years.",
+	 "Andy and Bill's law is a statement that new software will always consume any increase in computing power that new hardware can provide.",
+	 "Conway's law: organizations design systems mirror their own communication structure.",
+	 // Thoughts
+	 "Keep unit tests simple and understandable at a glance. Otherwise, the testing code itself is prone to bugs. When writing code, we always want to reduce code duplication. However, writing tests is an exception, because reducing code duplication to the extreme may harm the tests' readability. In summary, we need to balance between better readability and less duplication.",
+	 "We should use the Semantic Versioning (semver.org) system for software's version numbers. It is a common way to communicate with the users about how much was the software changed compared to its predecessors.",
+	 "As working from home becoming the new norm, working from home while keeping a high productivity becomes an essential skill.",
+	 "Maintaining good health and physical condition is critical to the success in one's career in the long run. This is the ultimate Long-termism.",
+	 // Experiences
+	 "I learned programming during my high school study to participate in National Olympiad in Informatics in Provinces (NOIP).",
+	 "I studied as an undergrad in computer science at Beijing Forestry University (BFU).",
+	 "I completed my Master's Degree in computer science at Beijing University of Posts and Telecommunications (BUPT).",
+	 "I completed my Ph.D. in computer science at Texas A&M University (TAMU).",
+	 "I did three internships on Keras team at Google, which accumulates up to a year before I officially joined as a full-time employee.",
+	 "During my undergrad, I was so passionate about ACM-ICPC (International Collegiate Programming Contest), which was not so popular in my university (BFU) at the time. I took the training at Peking University and China University of Geosciences, and bring the things I learned back to BFU. We started a student organization to help people better prepare for ACM-ICPC. Finally, we won the first ACM-ICPC medal in BFU's history. Though, it was a bronze medal. LOL",
 ];
 shuffle(messages);
 counter = 0;
