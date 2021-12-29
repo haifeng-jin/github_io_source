@@ -47,6 +47,13 @@ a {
     padding-bottom: 40px;
     font-size: 36px;
 }
+#message-text {
+    font-family: 'Courier Prime', monospace;
+    font-size: 18px;
+    padding-top: 85px;
+    padding-bottom: 85px;
+    color: #a6a6a9;
+}
 #footer-text {
     padding: 15px;
     padding-left: 45px;
@@ -82,7 +89,7 @@ a {
         font-size: 48px;
     }
     .card-text {
-        font-size: 18px;
+        font-size: 20px;
     }
     .icon {
         width: 35px;
@@ -99,7 +106,7 @@ a {
         font-size: 36px;
     }
     .card-text {
-        font-size: 15px;
+        font-size: 18px;
     }
     .icon {
         width: 30px;
@@ -115,7 +122,7 @@ a {
         font-size: 48px;
     }
     .card-text {
-        font-size: 18px;
+        font-size: 20px;
     }
     .icon {
         width: 35px;
