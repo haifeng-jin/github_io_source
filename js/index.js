@@ -71,7 +71,7 @@ messages = [
     "I completed my Master's Degree in computer science at Beijing University of Posts and Telecommunications (BUPT).",
     "I completed my Ph.D. in computer science at Texas A&M University (TAMU). My research interest is AutoML.",
     "I did three internships on Keras team at Google, which accumulates up to a year before I officially joined as a full-time employee.",
-    "I developed the AutoKeras during my Ph.D. study and started the collaboration with Keras team from Google.",
+    "I developed AutoKeras during my Ph.D. study and started the collaboration with Keras team from Google.",
     "During my internships at Google, I was involved in the initial design and development of the KerasTuner project.",
     "During my undergrad, I was so passionate about ACM-ICPC (International Collegiate Programming Contest), which was not so popular in my university (BFU) at the time. I took the training at Peking University and China University of Geosciences, and bring the things I learned back to BFU. We started a student organization to help people better prepare for ACM-ICPC. Finally, we won the first ACM-ICPC medal in BFU's history. Though, it was a bronze medal. LOL",
 ];
