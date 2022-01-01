@@ -65,7 +65,7 @@ messages = [
     "Maintaining good health and physical condition is critical to the success in one's career in the long run. This is the ultimate Long-termism.",
     "People see AI as the new electricity. To use electricity, you simply plug your charger into the wall. To use AI, you need to learn a whole new curriculum. Still a long way to go, and full of opportunities.",
     "The prevalence of open-source software makes designing, developing and maintaining open-source software a highly demanded skill nowadays, which includes but is not limited to communicating with the open-source community, and familiarity with the open-source dev process and toolchains.",
-    "My career path is full of success so far. I have never suffered from any real failure before, which is not normal. I should expect a big failure to come in the future, and I need to be mentally and physically prepared for it.",
+    "My career path is so smooth so far. I have never suffered from any real failure before, which is not normal. I should expect a big failure to come in the future, and I need to be mentally and physically prepared for it.",
     // Experiences
     "I learned programming during my high school study to participate in National Olympiad in Informatics in Provinces (NOIP).",
     "I studied as an undergrad in computer science at Beijing Forestry University (BFU).",
