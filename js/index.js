@@ -60,7 +60,7 @@ messages = [
     "Amdahl's law helps computing the overall speedup of a task if one portion of it has a certain speedup.",
     // Thoughts
     "Keep unit tests simple and understandable at a glance. Otherwise, the testing code itself is prone to bugs. When writing code, we always want to reduce code duplication. However, writing tests is an exception, because reducing code duplication to the extreme may harm the tests' readability. In summary, we need to balance between better readability and less duplication.",
-    "We should use the Semantic Versioning (semver.org) system for software's version numbers. It is a common way to communicate with the users about how much was the software changed compared to its predecessors.",
+    "We should use the <a href='http://semver.org'>Semantic Versioning</a> system for software's version numbers. It is a common way to communicate with the users about how much was the software changed compared to its predecessors.",
     "As working from home becoming the new norm, working from home while keeping a high productivity becomes an essential skill.",
     "Maintaining good health and physical condition is critical to the success in one's career in the long run. This is the ultimate Long-termism.",
     "People see AI as the new electricity. To use electricity, you simply plug your charger into the wall. To use AI, you need to learn a whole new curriculum. Still a long way to go, and full of opportunities.",
@@ -85,9 +85,9 @@ function refresh_message() {
     message = messages[counter];
     counter = (counter + 1) % messages.length;
     transition_time = 500;
-    $('#message-text').text(message).fadeIn(transition_time);
+    $('#message-text').html(message).fadeIn(transition_time);
     timeout = message.length * 100;
-    window.setTimeout(function() {$('#message-text').text(message).fadeOut(transition_time);}, timeout + transition_time);
+    window.setTimeout(function() {$('#message-text').html(message).fadeOut(transition_time);}, timeout + transition_time);
     window.setTimeout(refresh_message, timeout + transition_time * 2);
     $('#progress').css('width', '100%');
     $('#progress').animate({width: '0%'}, timeout + transition_time);
