@@ -68,7 +68,7 @@ messages = [
     "My career path is so smooth so far. I have never suffered from any real failure before, which is not normal. I should expect a big failure to come in the future, and I need to be mentally and physically prepared for it.",
     "Learning the foundational courses in computer science, e.g., operating systems, data structures, and computer networks, is helpful for a software engineer, even if they are not used directly in the development. The core concepts in these courses are the common language of software engineers in their daily communication at work.",
     "An average open-source developer would usually worry about they should also invest time in the widely used technologies instead of solely focusing on their own open-source software. However, the best open-source developers will make their software the widely used technology that many other developers need to learn.",
-    "Learning design patterns and refactoring is more of a brain exercise than learning a collection of solutions. When facing actual projects, it is all about how to optimizing the code structure towards the principles, like low coupling and high cohesion, rather than applying predefined patterns.",
+    "Learning design patterns and refactoring is more of a brain exercise than learning a collection of solutions. When facing actual projects, it is all about how to optimize the code structure towards the principles, like low coupling and high cohesion, rather than applying predefined patterns.",
     // Experiences
     "I learned programming during my high school study to participate in National Olympiad in Informatics in Provinces (NOIP).",
     "I studied as an undergrad in computer science at Beijing Forestry University (BFU).",
