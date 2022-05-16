@@ -69,6 +69,7 @@ messages = [
     "Learning the foundational courses in computer science, e.g., operating systems, data structures, and computer networks, is helpful for a software engineer, even if they are not used directly in the development. The core concepts in these courses are the common language of software engineers in their daily communication at work.",
     "An average open-source developer would usually worry about they should also invest time in the widely used technologies instead of solely focusing on their own open-source software. However, the best open-source developers will make their software the widely used technology that many other developers need to learn.",
     "Learning design patterns and refactoring is more of a brain exercise than learning a collection of solutions. When facing actual projects, it is all about how to optimize the code structure towards the principles, like low coupling and high cohesion, rather than applying predefined patterns.",
+    "As an individual contributor, one's leadership is reflected by always thinking from the team's perspective and ready to take responsibility to solve the most important problems.",
     // Experiences
     "I learned programming during my high school study to participate in National Olympiad in Informatics in Provinces (NOIP).",
     "I studied as an undergrad in computer science at Beijing Forestry University (BFU).",
@@ -80,7 +81,6 @@ messages = [
     "During my undergrad, I was so passionate about ACM-ICPC (International Collegiate Programming Contest), which was not so popular in my university (BFU) at the time. I took the training at Peking University and China University of Geosciences, and bring the things I learned back to BFU. We started a student organization to help people better prepare for ACM-ICPC. Finally, we won the first ACM-ICPC medal in BFU's history. Though, it was a bronze medal. LOL",
     "As I join the Keras team, I started on a project to explain the Keras codebase to ramp up my work, which you can find it <a href='https://haifeng-jin.github.io/keras-source/'>here</a>.",
     "More about how I learned computer science from high school all the way to post-graduate can be found <a href='https://zhuanlan.zhihu.com/p/362678578'>here</a>. You will see a story full of good luck. It is written in Chinese BTW.",
-    "As an individual contributor, one's leadership is reflected by always thinking from the team's perspective and ready to take responsibility to solve the most important problems.",
 ];
 shuffle(messages);
 counter = 0;
