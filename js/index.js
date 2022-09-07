@@ -2,10 +2,10 @@ function copyEmailToClipboard () {
    // Create new element
    var el = document.createElement('textarea');
    // Set value (string to be copied)
-   str = 'jhfjhfj1'
+   str = 'haifeng.jin'
    str += '@'
-   str += 'gmail'
-   str += '.com'
+   str += 'pm'
+   str += '.me'
    el.value = str;
    // Set non-editable to avoid focus and move outside of view
    el.setAttribute('readonly', '');
