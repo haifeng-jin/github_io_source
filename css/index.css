@@ -30,6 +30,10 @@ p {
 .card-text {
     font-size: 22px;
 }
+a:hover {
+    color: #97b4f2;
+    text-decoration: none;
+}
 a {
     color: #7C99D8;
     text-decoration: none;
