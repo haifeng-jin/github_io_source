@@ -1,8 +1,8 @@
 body {
-    background-color: #16171d;
+    background-color: rgb(251, 251, 252);
 }
 .dark-mode {
-    background-color: rgb(251, 251, 252);
+    background-color: #16171d;
 }
 p {
     line-height: 25px;
@@ -14,10 +14,10 @@ p {
 .section {
     padding-top: 40px;
     padding-bottom: 80px;
-    background-color: #2e303e;
+    background-color: rgb(242, 244, 248);
 }
 .dark-mode .section {
-    background-color: rgb(242, 244, 248);
+    background-color: #2e303e;
 }
 .alert-top{
     position: fixed;
@@ -38,17 +38,17 @@ p {
 }
 a:hover {
     color: #97b4f2;
-    text-decoration: none;
-}
-.dark-mode a:hover {
     color: rgb(136, 192, 208);
 }
+.dark-mode a:hover {
+    text-decoration: none;
+}
 a {
-    color: #7C99D8;
+    color: #5E81AC;
     text-decoration: none;
 }
 .dark-mode a {
-    color: #5E81AC;
+    color: #7C99D8;
 }
 .card{
     width: 100%;
@@ -57,10 +57,10 @@ a {
     border: none;
     background-color:rgba(0, 0, 0, 0);
     font-family: 'Courier Prime', monospace;
-    color: #dbddee;
+    color: rgb(76, 86, 106);
 }
 .dark-mode .card {
-    color: rgb(76, 86, 106);
+    color: #dbddee;
 }
 #name {
     padding-top: 20px;
@@ -72,10 +72,10 @@ a {
     font-size: 18px;
     padding-top: 85px;
     padding-bottom: 85px;
-    color: #a6a6a9;
+    color: rgb(123, 136, 161);
 }
 .dark-mode #message-text {
-    color: rgb(123, 136, 161);
+    color: #a6a6a9;
 }
 #footer-text {
     padding: 15px;
@@ -83,14 +83,23 @@ a {
     color: #a6a6a9;
 }
 #footer-section {
-    background-color: #1d1e26;
+    background-color: white;
     padding-top: 0px;
     padding-bottom: 0px;
 }
 .dark-mode #footer-section {
-    background-color: white;
+    background-color: #1d1e26;
 }
 
+#progress {
+    margin: auto;
+    background: #D8DEE9;
+    height: 5px;
+    width: 0%
+}
+.dark-mode #progress {
+    background: #5b5c60;
+}
 @media (min-width: 389px) {
     p {
         line-height: 15px;
