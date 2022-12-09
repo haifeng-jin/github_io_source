@@ -1,4 +1,7 @@
 body {
+    background-color: rgb(251, 251, 252);
+}
+.dark-mode {
     background-color: #16171d;
 }
 p {
@@ -11,7 +14,10 @@ p {
 .section {
     padding-top: 40px;
     padding-bottom: 80px;
-    background: #2e303e;
+    background-color: rgb(242, 244, 248);
+}
+.dark-mode .section {
+    background-color: #2e303e;
 }
 .alert-top{
     position: fixed;
@@ -32,11 +38,17 @@ p {
 }
 a:hover {
     color: #97b4f2;
+    color: rgb(136, 192, 208);
+}
+.dark-mode a:hover {
     text-decoration: none;
 }
 a {
-    color: #7C99D8;
+    color: #5E81AC;
     text-decoration: none;
+}
+.dark-mode a {
+    color: #7C99D8;
 }
 .card{
     width: 100%;
@@ -45,6 +57,9 @@ a {
     border: none;
     background-color:rgba(0, 0, 0, 0);
     font-family: 'Courier Prime', monospace;
+    color: rgb(76, 86, 106);
+}
+.dark-mode .card {
     color: #dbddee;
 }
 #name {
@@ -57,6 +72,9 @@ a {
     font-size: 18px;
     padding-top: 85px;
     padding-bottom: 85px;
+    color: rgb(123, 136, 161);
+}
+.dark-mode #message-text {
     color: #a6a6a9;
 }
 #footer-text {
@@ -65,11 +83,23 @@ a {
     color: #a6a6a9;
 }
 #footer-section {
-    background: #1d1e26;
+    background-color: white;
     padding-top: 0px;
     padding-bottom: 0px;
 }
+.dark-mode #footer-section {
+    background-color: #1d1e26;
+}
 
+#progress {
+    margin: auto;
+    background: #D8DEE9;
+    height: 5px;
+    width: 0%
+}
+.dark-mode #progress {
+    background: #5b5c60;
+}
 @media (min-width: 389px) {
     p {
         line-height: 15px;
@@ -130,7 +160,7 @@ a {
         font-size: 20px;
     }
     .icon {
-        width: 35px;
+        height: 35px;
         margin-right: 25px;
     }
     .card-img {

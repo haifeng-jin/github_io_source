@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" >
                         <div class="card">
-                            <img class="card-img mx-auto" src="./img/avatar.jpg" alt="Card image" data-bs-toggle="tooltip" data-bs-placement="top" title="金海峰 김해봉">
+                            <img class="card-img mx-auto" id="avatar" src="./img/avatar-light.jpg" alt="Card image" data-bs-toggle="tooltip" data-bs-placement="top" title="金海峰 김해봉">
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -58,13 +58,14 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                    <a href="https://twitter.com/haifeng_jin"><img src="./img/twitter.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"></a>
-                                    <a href="https://github.com/haifeng-jin"><img src="./img/github.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="GitHub"></a>
-                                    <a href="https://medium.com/@haifeng-jin"><img src="./img/medium.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Medium"></a>
-                                    <a onclick="copyEmailToClipboard()" style="cursor: pointer;">
-                                        <img src="./img/mail.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Email">
-                                        <div id = "alert_placeholder"></div>
+                                    <a href="https://twitter.com/haifeng_jin"><img src="./img/twitter-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"></a>
+                                    <a href="https://github.com/haifeng-jin"><img src="./img/github-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="GitHub"></a>
+                                    <a href="https://medium.com/@haifeng-jin"><img src="./img/medium-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Medium"></a>
+                                    <a onclick="copyEmailToClipboard()">
+                                        <img src="./img/mail-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Email">
+                                        <span id = "alert_placeholder"></span>
                                     </a>
+                                    <a onclick="toggleDark()"><img src="./img/theme-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Theme"></a>
                             </div>
                         </div>
                     </div>
@@ -77,7 +78,7 @@
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" >
-                        <div id='progress' style='margin:auto; background:#5b5c60; height:5px;width:0%'></div>
+                        <div id='progress' style=''></div>
                         <div class="card">
                             <div class="card-body" id="message-text">
                             </div>
