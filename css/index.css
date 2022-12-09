@@ -1,6 +1,9 @@
 body {
     background-color: #16171d;
 }
+.dark-mode {
+    background-color: white;
+}
 p {
     line-height: 25px;
 }
