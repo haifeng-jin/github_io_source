@@ -100,3 +100,18 @@ function refresh_message() {
 window.onload = (event) => {
     refresh_message()
 };
+
+function toggleDark() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+   Array.from(document.getElementsByClassName('icon')).forEach(toggleIcon);
+}
+function toggleIcon(element) {
+    console.log(element.src);
+    if (element.src.includes("light")) {
+        element.src = element.src.replace("light", "dark");
+    } else {
+        element.src = element.src.replace("dark", "light");
+    }
+    console.log(element.src);
+};

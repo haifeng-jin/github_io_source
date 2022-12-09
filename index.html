@@ -35,14 +35,6 @@
     </head>
 
     <body>
-        <button onclick="myFunction()">Toggle dark mode</button>
-
-<script>
-function myFunction() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
-}
-</script>
         <div class="section" id="me">
             <div class="container">
                 <div class="row">
@@ -66,13 +58,14 @@ function myFunction() {
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                    <a href="https://twitter.com/haifeng_jin"><img src="./img/twitter.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"></a>
-                                    <a href="https://github.com/haifeng-jin"><img src="./img/github.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="GitHub"></a>
-                                    <a href="https://medium.com/@haifeng-jin"><img src="./img/medium.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Medium"></a>
-                                    <a onclick="copyEmailToClipboard()" style="cursor: pointer;">
-                                        <img src="./img/mail.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Email">
-                                        <div id = "alert_placeholder"></div>
+                                    <a href="https://twitter.com/haifeng_jin"><img src="./img/twitter-dark.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"></a>
+                                    <a href="https://github.com/haifeng-jin"><img src="./img/github-dark.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="GitHub"></a>
+                                    <a href="https://medium.com/@haifeng-jin"><img src="./img/medium-dark.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Medium"></a>
+                                    <a onclick="copyEmailToClipboard()">
+                                        <img src="./img/mail-dark.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Email">
+                                        <span id = "alert_placeholder"></span>
                                     </a>
+                                    <a onclick="toggleDark()"><img src="./img/theme-dark.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Theme"></a>
                             </div>
                         </div>
                     </div>
