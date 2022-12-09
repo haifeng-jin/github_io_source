@@ -102,16 +102,15 @@ window.onload = (event) => {
 };
 
 function toggleDark() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
-   Array.from(document.getElementsByClassName('icon')).forEach(toggleIcon);
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    Array.from(document.getElementsByClassName('icon')).forEach(toggleIcon);
+    toggleIcon(document.getElementById('avatar'));
 }
 function toggleIcon(element) {
-    console.log(element.src);
     if (element.src.includes("light")) {
         element.src = element.src.replace("light", "dark");
     } else {
         element.src = element.src.replace("dark", "light");
     }
-    console.log(element.src);
 };

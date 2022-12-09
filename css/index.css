@@ -2,7 +2,7 @@ body {
     background-color: #16171d;
 }
 .dark-mode {
-    background-color: white;
+    background-color: rgb(251, 251, 252);
 }
 p {
     line-height: 25px;
@@ -17,7 +17,7 @@ p {
     background-color: #2e303e;
 }
 .dark-mode .section {
-    background-color: white;
+    background-color: rgb(242, 244, 248);
 }
 .alert-top{
     position: fixed;
@@ -41,14 +41,14 @@ a:hover {
     text-decoration: none;
 }
 .dark-mode a:hover {
-    color: yellow;
+    color: rgb(136, 192, 208);
 }
 a {
     color: #7C99D8;
     text-decoration: none;
 }
 .dark-mode a {
-    color: blue;
+    color: #5E81AC;
 }
 .card{
     width: 100%;
@@ -60,7 +60,7 @@ a {
     color: #dbddee;
 }
 .dark-mode .card {
-    color: black;
+    color: rgb(76, 86, 106);
 }
 #name {
     padding-top: 20px;
@@ -75,7 +75,7 @@ a {
     color: #a6a6a9;
 }
 .dark-mode #message-text {
-    color: black;
+    color: rgb(123, 136, 161);
 }
 #footer-text {
     padding: 15px;
