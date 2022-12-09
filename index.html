@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" >
                         <div class="card">
-                            <img class="card-img mx-auto" id="avatar" src="./img/avatar-light.jpg" alt="Card image" data-bs-toggle="tooltip" data-bs-placement="top" title="金海峰 김해봉">
+                            <img class="card-img mx-auto" id="avatar" src="./img/avatar.png" alt="Card image" data-bs-toggle="tooltip" data-bs-placement="top" title="金海峰 김해봉">
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -62,7 +62,7 @@
                                     <a href="https://github.com/haifeng-jin"><img src="./img/github-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="GitHub"></a>
                                     <a href="https://medium.com/@haifeng-jin"><img src="./img/medium-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Medium"></a>
                                     <a onclick="copyEmailToClipboard()">
-                                        <img src="./img/mail-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Email">
+                                        <img src="./img/mail-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy Email">
                                         <span id = "alert_placeholder"></span>
                                     </a>
                                     <a onclick="toggleDark()"><img src="./img/theme-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Theme"></a>
@@ -78,7 +78,7 @@
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" >
-                        <div id='progress' style=''></div>
+                        <div id='progress'></div>
                         <div class="card">
                             <div class="card-body" id="message-text">
                             </div>
@@ -89,11 +89,6 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container" id="footer-text">
-                Haifeng Jin's <a style="color: #5b5c60">Personal Website</a>
-            </div>
-        </footer>
         <script>
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
