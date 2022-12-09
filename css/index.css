@@ -11,7 +11,10 @@ p {
 .section {
     padding-top: 40px;
     padding-bottom: 80px;
-    background: #2e303e;
+    background-color: #2e303e;
+}
+.dark-mode .section {
+    background-color: white;
 }
 .alert-top{
     position: fixed;
@@ -34,9 +37,15 @@ a:hover {
     color: #97b4f2;
     text-decoration: none;
 }
+.dark-mode a:hover {
+    color: yellow;
+}
 a {
     color: #7C99D8;
     text-decoration: none;
+}
+.dark-mode a {
+    color: blue;
 }
 .card{
     width: 100%;
@@ -46,6 +55,9 @@ a {
     background-color:rgba(0, 0, 0, 0);
     font-family: 'Courier Prime', monospace;
     color: #dbddee;
+}
+.dark-mode .card {
+    color: black;
 }
 #name {
     padding-top: 20px;
@@ -59,15 +71,21 @@ a {
     padding-bottom: 85px;
     color: #a6a6a9;
 }
+.dark-mode #message-text {
+    color: black;
+}
 #footer-text {
     padding: 15px;
     padding-left: 45px;
     color: #a6a6a9;
 }
 #footer-section {
-    background: #1d1e26;
+    background-color: #1d1e26;
     padding-top: 0px;
     padding-bottom: 0px;
+}
+.dark-mode #footer-section {
+    background-color: white;
 }
 
 @media (min-width: 389px) {
@@ -130,7 +148,7 @@ a {
         font-size: 20px;
     }
     .icon {
-        width: 35px;
+        height: 35px;
         margin-right: 25px;
     }
     .card-img {
