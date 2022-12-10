@@ -58,14 +58,37 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                    <a href="https://twitter.com/haifeng_jin"><img src="./img/twitter-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"></a>
-                                    <a href="https://github.com/haifeng-jin"><img src="./img/github-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="GitHub"></a>
-                                    <a href="https://medium.com/@haifeng-jin"><img src="./img/medium-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Medium"></a>
+                                    <a href="https://twitter.com/haifeng_jin">
+                                        <span class="icon-span">
+                                            <img src="./img/twitter-dark.svg" class="icon bottom-img" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter">
+                                            <img src="./img/twitter-light.svg" class="icon top-img" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter">
+                                        </span>
+                                    </a>
+                                    <a href="https://github.com/haifeng-jin">
+                                        <span class="icon-span">
+                                            <img src="./img/github-dark.svg" class="icon bottom-img" data-bs-toggle="tooltip" data-bs-placement="top" title="GitHub">
+                                            <img src="./img/github-light.svg" class="icon top-img" data-bs-toggle="tooltip" data-bs-placement="top" title="GitHub">
+                                        </span>
+                                    </a>
+                                    <a href="https://medium.com/@haifeng-jin">
+                                        <span class="icon-span">
+                                            <img src="./img/medium-dark.svg" class="icon bottom-img" data-bs-toggle="tooltip" data-bs-placement="top" title="Medium">
+                                            <img src="./img/medium-light.svg" class="icon top-img" data-bs-toggle="tooltip" data-bs-placement="top" title="Medium">
+                                        </span>
+                                    </a>
                                     <a onclick="copyEmailToClipboard()">
-                                        <img src="./img/mail-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy Email">
+                                        <span class="icon-span">
+                                            <img src="./img/mail-dark.svg" class="icon bottom-img" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy Email">
+                                            <img src="./img/mail-light.svg" class="icon top-img" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy Email">
+                                        </span>
                                         <span id = "alert_placeholder"></span>
                                     </a>
-                                    <a onclick="toggleDark()"><img src="./img/theme-light.svg" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Theme"></a>
+                                    <a onclick="toggleDark()">
+                                        <span class="icon-span">
+                                            <img src="./img/theme-dark.svg" class="icon bottom-img" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Theme">
+                                            <img src="./img/theme-light.svg" class="icon top-img" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Theme">
+                                        </span>
+                                    </a>
                             </div>
                         </div>
                     </div>
@@ -94,6 +117,9 @@
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             })
+            if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                toggleDark();
+            }
         </script>
 
     </body>

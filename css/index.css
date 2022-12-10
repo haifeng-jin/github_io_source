@@ -1,6 +1,11 @@
 @import url(./nord.css);
 
+:root {
+    --seconds: 0.5s;
+    --trans-time: background-color var(--seconds) ease, color var(--seconds) ease, opacity var(--seconds) ease;
+}
 body {
+    transition: var(--trans-time);
     background-color: white;
 }
 .dark-mode {
@@ -10,18 +15,19 @@ p {
     line-height: 25px;
 }
 #avatar {
+    transition: var(--trans-time);
     background-color: var(--nord6);
 }
 .dark-mode #avatar {
     background-color: var(--nord1);
 }
 .fade {
-    -webkit-transition-duration: 0.5s; /* Safari */
-    transition-duration: 0.5s;
+    transition: var(--trans-time);
 }
 .section {
     padding-top: 40px;
     padding-bottom: 80px;
+    transition: var(--trans-time);
     background-color: rgb(242, 244, 248);
     background-color: white;
 }
@@ -60,6 +66,7 @@ a {
     color: #7C99D8;
 }
 .card{
+    transition: var(--trans-time);
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -82,12 +89,8 @@ a {
     padding-top: 85px;
     padding-bottom: 85px;
 }
-#footer-text {
-    padding: 15px;
-    padding-left: 45px;
-    color: var(--nord3);
-}
 #footer-section {
+    transition: var(--trans-time);
     background-color: var(--nord6);
     padding-top: 0px;
     padding-bottom: 0px;
@@ -97,14 +100,43 @@ a {
 }
 
 #progress {
+    transition: var(--trans-time);
     margin: auto;
-    background: var(--nord4);
+    background-color: var(--nord4);
     height: 5px;
     width: 0%
 }
 .dark-mode #progress {
-    background: var(--nord2)
+    background-color: var(--nord2)
 }
+
+.icon {
+    transition: var(--trans-time);
+}
+
+.bottom-img {
+  position:absolute;
+  left:0;
+  opacity:0;
+}
+
+.dark-mode .bottom-img {
+  opacity:1;
+}
+
+.top-img {
+  position:relative;
+  opacity:1;
+}
+
+.dark-mode .top-img {
+  opacity:0;
+}
+
+.icon-span {
+    position:relative;
+}
+
 @media (min-width: 389px) {
     p {
         line-height: 15px;
@@ -165,7 +197,7 @@ a {
         font-size: 20px;
     }
     .icon {
-        height: 35px;
+        width: 35px;
         margin-right: 25px;
     }
     .card-img {
