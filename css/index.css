@@ -16,10 +16,10 @@ p {
 }
 #avatar {
     transition: var(--trans-time);
-    background-color: var(--nord6);
+    background-color: var(--nord1);
 }
 .dark-mode #avatar {
-    background-color: var(--nord1);
+    background-color: var(--nord6);
 }
 .fade {
     transition: var(--trans-time);
