@@ -14,12 +14,25 @@ body {
 p {
     line-height: 25px;
 }
+#avatar:hover {
+  opacity:0.1;
+}
 #avatar {
     transition: var(--trans-time);
     background-color: var(--nord1);
+    z-index: 3;
 }
 .dark-mode #avatar {
     background-color: var(--nord6);
+}
+.names {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    z-index: 1;
+    font-weight: bold;
 }
 .fade {
     transition: var(--trans-time);
