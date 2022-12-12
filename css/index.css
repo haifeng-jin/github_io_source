@@ -43,6 +43,7 @@ p {
     width: 25px;
     margin-right: 15px;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 .card-img {
     border-radius: 50%;
