@@ -99,7 +99,7 @@ a {
 }
 #message-text {
     font-family: 'Courier Prime', monospace;
-    padding-top: 110px;
+    padding-top: 85px;
     padding-bottom: 85px;
 }
 #footer-section {
@@ -107,7 +107,6 @@ a {
     background-color: var(--nord6);
     padding-top: 0px;
     padding-bottom: 0px;
-    height: 1000px;
     overflow-y: scroll;
 }
 .dark-mode #footer-section {
@@ -169,9 +168,6 @@ a {
     .card-img {
         width: 202px;
     }
-    #footer-section {
-        height: 500px;
-    }
 }
 
 @media (min-width:576px){
@@ -184,9 +180,6 @@ a {
     .icon {
         width: 35px;
         margin-right: 25px;
-    }
-    #footer-section {
-        height: 800px;
     }
 }
 
@@ -208,9 +201,6 @@ a {
     .card-img {
         width: 202px;
     }
-    #footer-section {
-        height: 500px;
-    }
 }
 
 @media (min-width: 992px) {
@@ -226,9 +216,6 @@ a {
     }
     .card-img {
         width: 244px;
-    }
-    #footer-section {
-        height: 800px;
     }
 }
 
