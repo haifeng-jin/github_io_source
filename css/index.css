@@ -4,27 +4,34 @@
     --seconds: 0.5s;
     --trans-time: background-color var(--seconds) ease, color var(--seconds) ease, opacity var(--seconds) ease;
 }
+
 body {
     transition: var(--trans-time);
     background-color: white;
 }
+
 .dark-mode {
     background-color: var(--nord0);
 }
+
 p {
     line-height: 25px;
 }
+
 #avatar:hover {
-  opacity:0.1;
+    opacity: 0.1;
 }
+
 #avatar {
     transition: var(--trans-time);
     background-color: var(--nord1);
     z-index: 3;
 }
+
 .dark-mode #avatar {
     background-color: var(--nord6);
 }
+
 .names {
     position: absolute;
     top: 50%;
@@ -34,6 +41,7 @@ p {
     z-index: 1;
     font-weight: bold;
 }
+
 .section {
     padding-top: 40px;
     padding-bottom: 80px;
@@ -41,64 +49,78 @@ p {
     background-color: rgb(242, 244, 248);
     background-color: white;
 }
+
 .dark-mode .section {
     background-color: var(--nord0);
 }
-.alert-top{
+
+.alert-top {
     position: fixed;
     top: 5px;
     font-family: arial;
 }
+
 .icon {
     width: 25px;
     margin-right: 15px;
     margin-bottom: 15px;
     cursor: pointer;
 }
+
 .card-img {
     border-radius: 50%;
     width: 70%;
 }
+
 .card-text {
     font-size: 22px;
 }
+
 a:hover {
     color: rgb(136, 192, 208);
 }
+
 .dark-mode a:hover {
     text-decoration: none;
     color: #97b4f2;
 }
+
 a {
     color: #5E81AC;
     text-decoration: none;
 }
+
 .dark-mode a {
     color: #7C99D8;
 }
-.card{
+
+.card {
     transition: var(--trans-time);
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
     border: none;
-    background-color:rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
     font-family: 'Courier Prime', monospace;
     color: var(--nord3);
 }
+
 .dark-mode .card {
     color: var(--nord4);
 }
+
 #name {
     padding-top: 20px;
     padding-bottom: 40px;
     font-size: 36px;
 }
+
 #message-text {
     font-family: 'Courier Prime', monospace;
     padding-top: 0px;
     padding-bottom: 85px;
 }
+
 #footer-section {
     transition: var(--trans-time);
     background-color: var(--nord6);
@@ -106,6 +128,7 @@ a {
     padding-bottom: 0px;
     overflow-y: scroll;
 }
+
 .dark-mode #footer-section {
     background-color: var(--nord1);
 }
@@ -117,6 +140,7 @@ a {
     height: 5px;
     width: 0%
 }
+
 .dark-mode #progress {
     background-color: var(--nord2)
 }
@@ -126,26 +150,26 @@ a {
 }
 
 .bottom-img {
-  position:absolute;
-  left:0;
-  opacity:0;
+    position: absolute;
+    left: 0;
+    opacity: 0;
 }
 
 .dark-mode .bottom-img {
-  opacity:1;
+    opacity: 1;
 }
 
 .top-img {
-  position:relative;
-  opacity:1;
+    position: relative;
+    opacity: 1;
 }
 
 .dark-mode .top-img {
-  opacity:0;
+    opacity: 0;
 }
 
 .icon-span {
-    position:relative;
+    position: relative;
 }
 
 .message-button-container {
@@ -154,53 +178,85 @@ a {
     justify-content: center;
     align-items: center;
 }
-#footer-section .message-button{
-    opacity: 1;
+
+#footer-section .message-button {
+    opacity: 0;
+    animation: blinker 10s linear infinite;
 }
-#footer-section:hover .message-button{
+
+#footer-section:hover .message-button {
     opacity: 1;
+    animation: none;
 }
+
+@keyframes blinker {
+    30% {
+        opacity: 0;
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 .message-button {
     margin-left: 25px;
     margin-right: 25px;
-    background-color: var(--nord4);
-    height:50px;
-    width:50px;
-    border-radius: 50%;
-    transition: var(--trans-time);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--nord4);
 }
 
 .dark-mode .message-button {
-    background-color: var(--nord2);
+    color: var(--nord2);
 }
 
 @media (min-width: 389px) {
     p {
         line-height: 15px;
     }
+
     #name {
         font-size: 36px;
     }
+
     .card-text {
         font-size: 14px;
     }
+
     .icon {
         width: 25px;
         margin-right: 15px;
     }
+
     .card-img {
         width: 202px;
     }
 }
 
-@media (min-width:576px){
+@media (min-width:576px) {
     #name {
         font-size: 48px;
     }
+
     .card-text {
         font-size: 20px;
     }
+
     .icon {
         width: 35px;
         margin-right: 25px;
@@ -208,20 +264,24 @@ a {
 }
 
 @media (min-width: 768px) {
-    .card-img{
+    .card-img {
         margin-top: 60px;
         margin-bottom: 60px;
     }
+
     #name {
         font-size: 36px;
     }
+
     .card-text {
         font-size: 18px;
     }
+
     .icon {
         width: 30px;
         margin-right: 20px;
     }
+
     .card-img {
         width: 202px;
     }
@@ -231,18 +291,18 @@ a {
     #name {
         font-size: 48px;
     }
+
     .card-text {
         font-size: 20px;
     }
+
     .icon {
         width: 35px;
         margin-right: 25px;
     }
+
     .card-img {
         width: 244px;
-    }
-    #footer-section .message-button{
-        opacity: 0;
     }
 }
 
