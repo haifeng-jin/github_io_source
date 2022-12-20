@@ -52,7 +52,7 @@ function shuffle(array) {
   return array;
 }
 
-messages = [
+var messages = [
     "I learned programming during my high school study to participate in National Olympiad in Informatics in Provinces (NOIP).",
     "I studied as an undergrad in computer science at Beijing Forestry University (BFU).",
     "During my undergrad, I was so passionate about ACM-ICPC (International Collegiate Programming Contest), which was not so popular in my university (BFU) at the time. I took the training at Peking University and China University of Geosciences, and bring the things I learned back to BFU. We started a student organization to help people better prepare for the competition. Finally, we won the first ACM-ICPC medal in BFU's history. The student organization keeps functioning and winning medals every year afterwards.",
@@ -67,22 +67,54 @@ messages = [
     "As the Keras code moving out of the TensorFlow repo into its own repo, I helped optimized the open-source contributing experience of Keras from various aspects, which significantly efficiency for creating and accepting pull requests from external contributors."
 ];
 shuffle(messages);
-counter = 0;
+var counter = -1;
+var transition_time = 500;
+var timeout_handler = null;
+
+function get_message() {
+    return messages[counter];
+}
+
+function get_timeout() {
+    return get_message().length * 100;
+}
+
+function load_message() {
+    $('#message-text').html(get_message()).fadeIn(transition_time);
+}
+
+function remove_message() {
+    $('#message-text').html(get_message()).fadeOut(transition_time);
+}
+
+function reset_progress_bar() {
+    $('#progress').stop();
+    $('#progress').css('width', '100%');
+    $('#progress').animate({width: '0%'}, get_timeout() + transition_time);
+}
+
+function next_message() {
+    window.clearTimeout(timeout_handler);
+    remove_message();
+    counter = (counter + 1) % messages.length;
+    window.setTimeout(refresh_message, transition_time);
+}
+
+function previous_message() {
+    window.clearTimeout(timeout_handler);
+    remove_message();
+    counter = (counter - 1 + messages.length) % messages.length;
+    window.setTimeout(refresh_message, transition_time);
+}
 
 function refresh_message() {
-    message = messages[counter];
-    counter = (counter + 1) % messages.length;
-    transition_time = 500;
-    $('#message-text').html(message).fadeIn(transition_time);
-    timeout = message.length * 100;
-    window.setTimeout(function() {$('#message-text').html(message).fadeOut(transition_time);}, timeout + transition_time);
-    window.setTimeout(refresh_message, timeout + transition_time * 2);
-    $('#progress').css('width', '100%');
-    $('#progress').animate({width: '0%'}, timeout + transition_time);
+    load_message();
+    reset_progress_bar();
+    timeout_handler = window.setTimeout(next_message, get_timeout() + transition_time * 2);
 }
 
 window.onload = (event) => {
-    refresh_message()
+    next_message()
 };
 
 function toggleDark() {
