@@ -96,7 +96,7 @@ a {
 }
 #message-text {
     font-family: 'Courier Prime', monospace;
-    padding-top: 15px;
+    padding-top: 0px;
     padding-bottom: 85px;
 }
 #footer-section {
@@ -150,14 +150,14 @@ a {
 
 .message-button-container {
     display: flex;
-    padding-top: 35px;
+    padding-top: 30px;
     justify-content: center;
     align-items: center;
 }
-.message-button-container:hover .message-button{
+#footer-section .message-button{
     opacity: 1;
 }
-.message-button-container .message-button{
+#footer-section:hover .message-button{
     opacity: 1;
 }
 .message-button {
@@ -241,7 +241,7 @@ a {
     .card-img {
         width: 244px;
     }
-    .message-button-container .message-button{
+    #footer-section .message-button{
         opacity: 0;
     }
 }
