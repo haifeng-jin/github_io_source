@@ -69,11 +69,16 @@ function get_timeout() {
 }
 
 function load_message() {
-    $('#message-text').html(get_message()).fadeIn(transition_time);
+    document.querySelector('#message-text').innerHTML = get_message();
+    var element = document.querySelector('#footer-section');
+    element.classList.add('fadein');
+    element.classList.remove('fadeout');
 }
 
 function remove_message() {
-    $('#message-text').html(get_message()).fadeOut(transition_time);
+    var element = document.querySelector('#footer-section');
+    element.classList.remove('fadein');
+    element.classList.add('fadeout');
 }
 
 function reset_progress_bar() {
