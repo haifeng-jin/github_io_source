@@ -96,7 +96,7 @@ a {
 }
 #message-text {
     font-family: 'Courier Prime', monospace;
-    padding-top: 85px;
+    padding-top: 15px;
     padding-bottom: 85px;
 }
 #footer-section {
@@ -146,6 +146,33 @@ a {
 
 .icon-span {
     position:relative;
+}
+
+.message-button-container {
+    display: flex;
+    padding-top: 35px;
+    justify-content: center;
+    align-items: center;
+}
+.message-button-container:hover .message-button{
+    opacity: 1;
+}
+.message-button-container .message-button{
+    opacity: 1;
+}
+.message-button {
+    margin-left: 25px;
+    margin-right: 25px;
+    background-color: var(--nord4);
+    height:50px;
+    width:50px;
+    border-radius: 50%;
+    transition: var(--trans-time);
+    cursor: pointer;
+}
+
+.dark-mode .message-button {
+    background-color: var(--nord2);
 }
 
 @media (min-width: 389px) {
@@ -213,6 +240,9 @@ a {
     }
     .card-img {
         width: 244px;
+    }
+    .message-button-container .message-button{
+        opacity: 0;
     }
 }
 
