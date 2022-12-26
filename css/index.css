@@ -134,11 +134,10 @@ a {
 }
 
 #progress {
-    transition: var(--trans-time);
     margin: auto;
     background-color: var(--nord4);
     height: 5px;
-    width: 0%
+    width: 0%;
 }
 
 .dark-mode #progress {

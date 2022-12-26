@@ -83,15 +83,23 @@ function remove_message() {
 }
 
 function reset_progress_bar() {
-    $('#progress').stop();
-    $('#progress').css('width', '100%');
-    $('#progress').animate({ width: '0%' }, get_timeout() + transition_time);
+    elem = document.querySelector("#progress");
+    elem.getAnimations().forEach(function (animation) { animation.cancel(); });
+    progress_animation = elem.animate({
+        width: ['100%', '0%'],
+    }, {
+        // Count time from fadeout finish to fadeout start.
+        duration: get_timeout() + transition_time,
+        iterations: 1,
+        endDelay: 1000,
+    });
 }
 
 function next_message() {
     window.clearTimeout(timeout_handler);
     remove_message();
     counter = (counter + 1) % messages.length;
+    // Count the fadeout time.
     window.setTimeout(refresh_message, transition_time);
 }
 
@@ -99,13 +107,15 @@ function previous_message() {
     window.clearTimeout(timeout_handler);
     remove_message();
     counter = (counter - 1 + messages.length) % messages.length;
+    // Count the fadeout time.
     window.setTimeout(refresh_message, transition_time);
 }
 
 function refresh_message() {
     load_message();
     reset_progress_bar();
-    timeout_handler = window.setTimeout(next_message, get_timeout() + transition_time * 2);
+    // Count time from fadeout finish to fadeout start.
+    timeout_handler = window.setTimeout(next_message, get_timeout() + transition_time);
 }
 
 window.onload = (event) => {
