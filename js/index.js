@@ -58,7 +58,7 @@ var messages = [
 ];
 shuffle(messages);
 var counter = -1;
-var transition_time = 500;
+var transition_time = 250;
 var timeout_handler = null;
 
 function get_message() {
@@ -72,26 +72,23 @@ function get_timeout() {
 function load_message() {
     document.querySelector('#message-text').innerHTML = get_message();
     var element = document.querySelector('#footer-section');
-    element.classList.add('fadein');
-    element.classList.remove('fadeout');
+    element.animate({ opacity: ['0', '1'] }, { duration: transition_time, iterations: 1 });
 }
 
 function remove_message() {
     var element = document.querySelector('#footer-section');
-    element.classList.remove('fadein');
-    element.classList.add('fadeout');
+    element.animate({ opacity: ['1', '0'] }, { duration: transition_time, iterations: 1 });
 }
 
 function reset_progress_bar() {
     elem = document.querySelector("#progress");
     elem.getAnimations().forEach(function (animation) { animation.cancel(); });
-    progress_animation = elem.animate({
+    elem.animate({
         width: ['100%', '0%'],
     }, {
         // Count time from fadeout finish to fadeout start.
         duration: get_timeout() + transition_time,
         iterations: 1,
-        endDelay: 1000,
     });
 }
 
@@ -119,7 +116,7 @@ function refresh_message() {
 }
 
 window.onload = (event) => {
-    next_message()
+    next_message();
 };
 
 function toggleDark() {
