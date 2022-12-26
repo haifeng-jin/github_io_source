@@ -221,36 +221,6 @@ a {
     color: var(--nord2);
 }
 
-@keyframes fadeout {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-.fadeout {
-    animation: fadeout 0.5s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.fadein {
-    animation: fadein 0.5s;
-    animation-fill-mode: forwards;
-}
-
 @media (min-width: 389px) {
     p {
         line-height: 15px;
