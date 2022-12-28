@@ -41,22 +41,7 @@ function shuffle(array) {
     return array;
 }
 
-var messages = [
-    "I learned programming in high school for the <a href='https://en.wikipedia.org/wiki/National_Olympiad_in_Informatics'>National Olympiad in Informatics in Provinces (NOIP)</a>.",
-    "I have completed my Bachelor's Degree in Computer Science at <a href='https://www.usnews.com/education/best-global-universities/beijing-forestry-university-528815'>Beijing Forestry University (BFU)</a>.",
-    "During my undergrad, I was so passionate about the <a href='https://icpc.global/'>International Collegiate Programming Contest (ACM-ICPC)</a>, which was not so popular in my university at the time. I took the training at Peking University and China University of Geosciences and brought the knowledge back to BFU. We started a student organization to help people better prepare for the competition. Finally, we won the first ACM-ICPC medal in BFU's history. The student organization keeps functioning and winning medals every year afterward.",
-    "I completed my Master's Degree in Computer Science at <a href='https://www.usnews.com/education/best-global-universities/beijing-university-of-posts-telecommunications-502130'>Beijing University of Posts and Telecommunications (BUPT)</a>.",
-    "I completed my Doctoral Degree in Computer Science at <a href='https://www.tamu.edu/'>Texas A&M University (TAMU)</a>. My research interest is <a href='https://en.wikipedia.org/wiki/Automated_machine_learning'>Automated Machine Learning (AutoML)</a>.",
-    "You can find a list of my publications on <a href='https://scholar.google.com/citations?user=OAj0lr0AAAAJ&hl=en'>Google Scholar</a>.",
-    "I developed <a href='https://autokeras.com/'>AutoKeras</a> and started to collaborate with the Keras team from Google during my PhD study. AutoKeras is an AutoML library for deep learning. To use it, the user only need to provide the training data and to define the task.",
-    "During my internships at Google, I was involved in the initial design and development of <a href='https://github.com/keras-team/keras-tuner'>KerasTuner</a>, which is a hyperparameter tuning library for Keras and more.",
-    "I did three internships on the Keras team at Google, the spans of which adds up to a year before I officially joined as a full-time employee.",
-    "As a software engineer on the Keras team, I lead the AutoML-related software (<a href='https://github.com/keras-team/keras-tuner'>KerasTuner</a> and <a href='https://autokeras.com/'>AutoKeras</a>) in the Keras/TensorFlow Ecosystem.",
-    "We published a book on AutoML, titled <a href='https://www.manning.com/books/automated-machine-learning-in-action?query=automated&utm_source=jin&utm_medium=affiliate&utm_campaign=affiliate&a_aid=jin'>Automated Machine Learning in Action</a>, with Manning Publications.",
-    "To ramp up my work when I first joined the Keras team, I did a project to explain the Keras codebase, which you can find it <a href='https://haifeng-jin.github.io/keras-source/'>here</a>.",
-    "As the <a href='https://keras.io/'>Keras</a> code moved out of the <a href='https://tensorflow.org/'>TensorFlow</a> repo into a separate repo, I helped optimized the open-source contributing experience of Keras from various aspects, which significantly improved the efficiency for creating and accepting pull requests from external contributors."
-];
-shuffle(messages);
+var messages = [];
 var counter = -1;
 var transition_time = 250;
 var timeout_handler = null;
@@ -116,6 +101,9 @@ function refresh_message() {
 }
 
 window.onload = (event) => {
+    document.querySelector('#messages').childNodes.forEach(function (elem) {messages.push(elem.innerHTML);});
+    messages = messages.filter(x => x !== undefined);
+    shuffle(messages);
     next_message();
 };
 
